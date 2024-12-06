@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.Netcode;
 
-public class Light_Find_Enemy : MonoBehaviour
+public class Light_Find_Enemy : NetworkBehaviour
 {
     public Light2D light2D; // Light2D 컴포넌트
     public LayerMask enemyLayer; // 적이 포함된 레이어
@@ -16,6 +17,8 @@ public class Light_Find_Enemy : MonoBehaviour
 
     private void Start()
     {
+        if (!IsOwner)
+            return;
         StartCoroutine("find_Enemy");
     }
 
@@ -26,7 +29,7 @@ public class Light_Find_Enemy : MonoBehaviour
     }
     IEnumerator find_Enemy()
     {
-        print("startCo");
+       // print("startCo");
         is_E = false;
         Vector2 lightPosition = light2D.transform.position;
         float outerRadius = light2D.pointLightOuterRadius;

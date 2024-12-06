@@ -1,12 +1,14 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : NetworkBehaviour
 {
     float horizontalInput;
     float VerticalInput;
 
     Rigidbody2D rb;
+    public Light2D player_light;
     public float moveSpeed = 5f;
     public Transform rayPos;
     public float rayDisance;
@@ -21,24 +23,30 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if(!IsOwner)
+            player_light.enabled = false;
     }
 
     void LateUpdate()
     {
-        Debug.Log("LateUpdate 실행 중");
+       // Debug.Log("LateUpdate 실행 중");
     }
 
     void FixedUpdate()
     {
-        Debug.Log("FixedUpdate 실행 중"); 
+        // Debug.Log("FixedUpdate 실행 중"); 
+        if (!IsOwner)
+            return;
+
         HandleMovement();
     }
     void Update()
     {
+        if (!IsOwner)
+            return;
 
-      
         Light_Raycast();
-        print("1");
+       // print("1");
     }
 
     private void HandleMovement()

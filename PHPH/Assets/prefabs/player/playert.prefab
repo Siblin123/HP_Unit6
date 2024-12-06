@@ -50,7 +50,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0
   m_Color: {r: 1, g: 0.78363883, b: 0.6698113, a: 1}
-  m_Intensity: 0.48
+  m_Intensity: 4.66
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000
@@ -97,10 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0b2b885c0ee0b459e4834e72e68d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   light2D: {fileID: 406624963807834356}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 0
   rayLength: 10
   rayCount: 36
   outerAngle: 180
@@ -270,6 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66be68ad4b27bed48a21e2bd14a446f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  player_light: {fileID: 406624963807834356}
   moveSpeed: 5
   rayPos: {fileID: 1870507736789482689}
   rayDisance: 5
