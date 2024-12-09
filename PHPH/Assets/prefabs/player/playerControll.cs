@@ -45,6 +45,10 @@ public class PlayerControl : NetworkBehaviour
             return;
 
         HandleMovement();
+        if(Input.GetKeyDown(KeyCode.Alpha1)) 
+        {
+            csTable.Instance.gameManager.SendSound(transform.position);
+        }
     }
     void Update()
     {
