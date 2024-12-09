@@ -4,6 +4,8 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerControl : NetworkBehaviour
 {
+    public AudioListener Listener;
+
     float horizontalInput;
     float VerticalInput;
 
@@ -23,8 +25,12 @@ public class PlayerControl : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        if(!IsOwner)
+        if (!IsOwner)
+        {
+            Listener.enabled = false;
             player_light.enabled = false;
+        }   
+
     }
 
     void LateUpdate()

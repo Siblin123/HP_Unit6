@@ -46,7 +46,7 @@ public class stair_Box : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
 
-        if(ison)
+        //if(ison)
 
         if (collision.transform.CompareTag("Player"))
         {

@@ -6,6 +6,8 @@ using Unity.Netcode;
 
 public class Light_Find_Enemy : NetworkBehaviour
 {
+    public Light2D afternoon_light2D; // Light2D 컴포넌트
+    public Light2D night_light2D; // Light2D 컴포넌트
     public Light2D light2D; // Light2D 컴포넌트
     public LayerMask enemyLayer; // 적이 포함된 레이어
     public float rayLength = 10f; // 레이의 길이
@@ -19,17 +21,37 @@ public class Light_Find_Enemy : NetworkBehaviour
     {
         if (!IsOwner)
             return;
-        StartCoroutine("find_Enemy");
+      
     }
 
 
-    private void FixedUpdate()
+    private void OnDisable()
     {
-        
+        if (gameObject.name.Contains("night_light2D"))
+            StopCoroutine("find_Enemy");
+    }
+
+    private void OnEnable()
+    {
+
+        if(gameObject.name.Contains("night_light2D"))
+            StartCoroutine("find_Enemy");
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Change_Light(true);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            Change_Light(false);
+        }
     }
     IEnumerator find_Enemy()
     {
-       // print("startCo");
+        //print("startCo");
         is_E = false;
         Vector2 lightPosition = light2D.transform.position;
         float outerRadius = light2D.pointLightOuterRadius;
@@ -87,5 +109,31 @@ public class Light_Find_Enemy : NetworkBehaviour
             checkEnemy.Clear();
         }
         StartCoroutine("find_Enemy");
+    }
+
+
+
+
+    //밤 낮 라이트 변경
+    public void Change_Light(bool isSun)
+    {
+      
+        if (isSun)//낮일때
+        {
+            afternoon_light2D.gameObject.SetActive(true);
+            night_light2D.gameObject.SetActive(false);
+         
+
+            light2D = afternoon_light2D;
+         
+        }
+        else
+        {
+            night_light2D.gameObject.SetActive(true);
+            afternoon_light2D.gameObject.SetActive(false);
+            light2D = night_light2D;
+        }
+
+
     }
 }
