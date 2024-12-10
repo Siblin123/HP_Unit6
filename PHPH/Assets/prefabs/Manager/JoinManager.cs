@@ -4,6 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 public class JoinManager : NetworkBehaviour
 {
+    public GameObject MainMenuCanvas;
     void Start()
     {
         if (NetworkManager.Singleton != null)
@@ -17,7 +18,7 @@ public class JoinManager : NetworkBehaviour
     private void OnClientConnected(ulong clientId)
     {
         Debug.Log($"클라이언트 {clientId} 접속");
- 
+        MainMenuCanvas.SetActive(false);
     }
 
 
