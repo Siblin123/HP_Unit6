@@ -1,10 +1,13 @@
+using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class PlayerControl : NetworkBehaviour
 {
+    public CinemachineVirtualCamera VirtualCamera;
     public AudioListener Listener;
+
 
     float horizontalInput;
     float VerticalInput;
@@ -29,7 +32,15 @@ public class PlayerControl : NetworkBehaviour
         {
             Listener.enabled = false;
             player_light.enabled = false;
-        }   
+        }
+        else
+        {
+            //朝五虞 持失
+            CinemachineVirtualCamera virtualCamera = Instantiate(VirtualCamera);
+            virtualCamera.Follow = transform;
+            Camera.main.GetComponent<CinemachineBrain>().IsLive(virtualCamera);
+
+        }
 
     }
 
@@ -113,7 +124,17 @@ public class PlayerControl : NetworkBehaviour
        
     }
 
-
+    public bool isOner_Game()
+    {
+        if(IsOwner)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("Wall"))
