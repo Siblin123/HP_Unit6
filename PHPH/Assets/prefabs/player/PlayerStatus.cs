@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class PlayerStatus : PlayerGadget
 {
+    public Light2D player_light;
     Rigidbody2D rb;
 
     //Attack()
@@ -151,16 +152,20 @@ public class PlayerStatus : PlayerGadget
         Vector2 direction = (mousePos - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         AttackPos.transform.rotation = Quaternion.Euler(new Vector3(1, 0, angle));
+        player_light.transform.rotation = Quaternion.Euler(new Vector3(1, 0, angle - 90));
 
         if (transform.position.x > mousePos.x) // 왼쪽을 바라볼 때
         {
             transform.localScale = new Vector3(-1, 1f, 1f);
-            AttackPos.transform.transform.localScale = new Vector3(-1, -1f, 1f);
+            AttackPos.transform.localScale = new Vector3(-1, -1f, 1f);
+            player_light.transform.localScale = new Vector3(-1, -1f, 1f);
+
         }
         else // 오른쪽을 바라볼 때
         {
             transform.localScale = new Vector3(1, 1f, 1f);
             AttackPos.transform.transform.localScale = new Vector3(1, 1f, 1f);
+            player_light.transform.localScale = new Vector3(1, 1f, 1f);
         }
 
        

@@ -7,11 +7,6 @@ public class PlayerControl : PlayerStatus
 {
     public CinemachineVirtualCamera VirtualCamera;
     public AudioListener Listener;
-
-
-
-   
-    public Light2D player_light;
     
     public Transform rayPos;
 
@@ -22,6 +17,13 @@ public class PlayerControl : PlayerStatus
 
     public GameObject lastWall;
 
+
+
+    //light_View
+    public Light2D afternoon_light2D; // Light2D 컴포넌트
+    public Light2D night_light2D; // Light2D 컴포넌트
+    public Light2D curlight; // Light2D 컴포넌트
+    public LayerMask enemyLayer; // 적이 포함된 레이어
 
     public override void Start()
     {
@@ -49,6 +51,7 @@ public class PlayerControl : PlayerStatus
             return;
         base.Update();
         Light_Raycast();
+        //list_View();
        // print("1");
     }
 
@@ -82,6 +85,14 @@ public class PlayerControl : PlayerStatus
 
         Debug.DrawRay(rayPos.position, rayDirection * rayDisance, Color.black);
        
+    }
+
+    void list_View()
+    {
+        if (!IsOwner) return;
+
+        RaycastHit2D hit = Physics2D.Raycast(curlight.transform.position, Vector2.right, rayDisance, wallLayer);
+        Debug.DrawRay(curlight.transform.position, Vector2.right* rayDisance);
     }
 
     public bool isOner_Game()

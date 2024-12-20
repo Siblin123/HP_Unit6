@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerGadget : NetworkBehaviour
 {
+
     public Item_Info curWeapon;
 
     public virtual void Start()
@@ -26,7 +27,8 @@ public class PlayerGadget : NetworkBehaviour
 
     public void UseCurItem()
     {
-        curWeapon.UseItem();
+        if(curWeapon!=null)
+            curWeapon.UseItem();
     }
 
 }
