@@ -146,7 +146,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3851086969873331440}
   - {fileID: 3028713430194114463}
   - {fileID: 614866909775635670}
   - {fileID: 4955500373012959072}
@@ -273,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  curWeapon: {fileID: 0}
   mousePos: {x: 0, y: 0, z: 0}
   AttackPos: {fileID: 9022638514675875189}
   maxHp: 120
@@ -355,9 +355,9 @@ MonoBehaviour:
   SyncRotAngleX: 1
   SyncRotAngleY: 1
   SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
   ScaleThreshold: 0.01
@@ -427,7 +427,8 @@ Transform:
   m_LocalPosition: {x: 0.05, y: 0.095, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3851086969873331440}
   m_Father: {fileID: 3211353327670863738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2401586606345509083
@@ -543,11 +544,11 @@ Transform:
   m_GameObject: {fileID: 8574778803435112183}
   serializedVersion: 2
   m_LocalRotation: {x: -0.02245749, y: 0.02245749, z: -0.7067501, w: 0.7067501}
-  m_LocalPosition: {x: -0.02, y: 0.085, z: 0}
-  m_LocalScale: {x: -0.23129945, y: -0.23129945, z: -0.23129942}
+  m_LocalPosition: {x: -0.070000455, y: -0.009999961, z: 0}
+  m_LocalScale: {x: -0.23129945, y: -0.23129947, z: -0.23129945}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3211353327670863738}
+  m_Father: {fileID: 9022638514675875189}
   m_LocalEulerAnglesHint: {x: 0, y: 3.64, z: -90}
 --- !u!114 &9026596277976412956
 MonoBehaviour:

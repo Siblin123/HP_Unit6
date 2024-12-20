@@ -15,28 +15,17 @@ public class Light_Find_Enemy : NetworkBehaviour
     public float outerAngle = 180f; // 빛의 외부 각도
 
     public List<Enemy> checkEnemy; // 발견된 적들을 저장할 리스트
-    public bool is_E;
+    public List<Enemy> lastCheckEnemy; // 발견된 적들을 저장할 리스트
+    public bool isE;
+
 
     private void Start()
     {
         if (!IsOwner)
             return;
-      
     }
 
 
-    private void OnDisable()
-    {
-        if (gameObject.name.Contains("night_light2D"))
-            StopCoroutine("find_Enemy");
-    }
-
-    private void OnEnable()
-    {
-
-        if(gameObject.name.Contains("night_light2D"))
-            StartCoroutine("find_Enemy");
-    }
 
     public void Update()
     {
@@ -48,70 +37,76 @@ public class Light_Find_Enemy : NetworkBehaviour
         {
             Change_Light(false);
         }
+
+        FindEnemy();
     }
-    IEnumerator find_Enemy()
+
+    void FindEnemy()
     {
-        //print("startCo");
-        is_E = false;
+
         Vector2 lightPosition = light2D.transform.position;
         float outerRadius = light2D.pointLightOuterRadius;
-        float innerRadius = light2D.pointLightInnerRadius;
+        float outerAngle = light2D.pointLightOuterAngle; // 라이트의 외부 각도
+        Vector2 lightDirection = light2D.transform.up;  // 빛의 방향 (Y축 기준)
+        lastCheckEnemy.Clear();
 
- 
-
-        // Light2D의 방향을 기준으로, 왼쪽 혹은 오른쪽으로 레이 쏘기
-        Vector2 lightDirection = light2D.transform.up; // 빛이 바라보는 방향
-       
-        // 빛의 반원 형태로 레이 그리기
-        for (int i = 0; i < rayCount; i++)
+        int i = 0;
+        for (; i < rayCount; i++)
         {
-           
-            // 각도를 계산하여 레이의 방향을 결정
-            float angle = Mathf.Lerp(-outerAngle / 2, outerAngle / 2, i / (float)(rayCount - 1));
+            // Light2D의 Outer Angle을 기반으로 레이 방향 계산 (노란색 영역)
+            float angle = Mathf.Lerp(-outerAngle / 2, outerAngle / 2, i / (float)(rayCount - 1)); // -OuterAngle/2 ~ OuterAngle/2
             Vector2 direction = new Vector2(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
 
-            // 현재 빛의 방향을 기준으로 반대 방향도 처리
-            direction = Quaternion.FromToRotation(Vector2.right, lightDirection) * direction; // 방향 회전
+            // 빛의 현재 방향(lightDirection)을 기준으로 레이 방향 회전
+            direction = Quaternion.FromToRotation(Vector2.right, lightDirection) * direction;
 
-            // 레이를 외부 반지름 길이로 발사
+            // Outer 반지름 거리까지 레이 발사
             RaycastHit2D hit = Physics2D.Raycast(lightPosition, direction, outerRadius, enemyLayer);
 
-            // 레이 그리기 (디버깅용)
+            // 디버그용 레이 시각화
             Debug.DrawRay(lightPosition, direction * outerRadius, Color.green);
 
+            // 적 감지
             if (hit.collider != null)
             {
-                if (hit.transform.GetComponent<Enemy>())
+                Enemy enemy = hit.transform.GetComponent<Enemy>();
+             
+                if (enemy != null && !lastCheckEnemy.Contains(enemy))
                 {
-                    Enemy enemy = hit.transform.GetComponent<Enemy>();
-                    if (!checkEnemy.Contains(enemy)) // 중복을 피하기 위해 체크
-                    {
-                        checkEnemy.Add(enemy);
-                        enemy.GetComponent<SpriteRenderer>().enabled = true;
-                        is_E = true;
-                        break;
-                    }
+                    lastCheckEnemy.Add(enemy);
+
+                }
+                if (enemy != null && !checkEnemy.Contains(enemy))
+                {
+                    checkEnemy.Add(enemy); // 새로 감지된 적 추가
+                    
+                    enemy.GetComponent<SpriteRenderer>().enabled = true; // 현재 적 활성화
+                    print("적을 감지함");
+                    isE = true;
+
                 }
             }
 
-            
-         
         }
 
-        yield return new WaitForSeconds(0.08f);
-
-        if (is_E == false && checkEnemy.Count != 0)
+        if(checkEnemy.Count != lastCheckEnemy.Count)
         {
-            for(int i=0;i< checkEnemy.Count; i++)
+            foreach (Enemy e in checkEnemy)
             {
-                checkEnemy[i].GetComponent<SpriteRenderer>().enabled = false;
+                e.GetComponent<SpriteRenderer>().enabled = false; // 현재 적 활성화
             }
+
             checkEnemy.Clear();
+            checkEnemy = new List<Enemy>(lastCheckEnemy);
+
         }
-        StartCoroutine("find_Enemy");
+        
+       
+        foreach (Enemy e in checkEnemy)
+        {
+            e.GetComponent<SpriteRenderer>().enabled = true; // 현재 적 활성화
+        }
     }
-
-
 
 
     //밤 낮 라이트 변경
