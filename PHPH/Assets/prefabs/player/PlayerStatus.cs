@@ -28,6 +28,7 @@ public class PlayerStatus : PlayerGadget
     public float runSpeed = 5f;
     float curSpeed;
     public Vector3 movedir;
+    Vector2 enterStairPos;//계단을 들어온 위치(왼,오)
 
 
     protected Vector2 rayDirection;
@@ -45,13 +46,13 @@ public class PlayerStatus : PlayerGadget
     //UI모음
     [SerializeField] Slider hpBar;
     [SerializeField] Slider staminaBar;
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
        
         if (!IsOwner)
             return;
+       
 
-      
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             csTable.Instance.gameManager.SendSound(transform.position);
@@ -60,6 +61,8 @@ public class PlayerStatus : PlayerGadget
 
     public override void Update()
     {
+        if (!IsOwner)
+            return;
         base.Update();
         Move();
         Jump();
@@ -83,7 +86,7 @@ public class PlayerStatus : PlayerGadget
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            if (horizontalInput != 0)
+            if (horizontalInput != 0 && stamina >1)
             {
                 curSpeed = runSpeed;
                 stamina -= stamina_useSpeed * Time.deltaTime;
@@ -102,19 +105,30 @@ public class PlayerStatus : PlayerGadget
 
         if (horizontalInput != 0)
         {
-            
+
             rayDirection = horizontalInput < 0 ? Vector2.left : Vector2.right;
 
-            if (horizontalInput < 0)
+            if(enterStairPos==Vector2.zero)
             {
-                transform.Translate(new Vector2(horizontalInput, -movedir.normalized.y) * curSpeed * Time.deltaTime);
+                enterStairPos = rayDirection;
+            }
+
+            if (movedir == Vector3.zero)
+            {
+                transform.Translate(new Vector2(horizontalInput, 0) * curSpeed * Time.deltaTime);
+
             }
             else
             {
-                transform.Translate(new Vector2(horizontalInput, movedir.normalized.y) * curSpeed * Time.deltaTime);
+                transform.Translate(new Vector2(movedir.normalized.x, movedir.normalized.y) * curSpeed * Time.deltaTime);
+                print("계단 이용중");
             }
 
-           
+            if(enterStairPos.x!= horizontalInput)
+            {
+                enterStairPos.x = horizontalInput;
+                movedir *= -1;
+            }
 
         }
 
@@ -180,7 +194,8 @@ public class PlayerStatus : PlayerGadget
             Vector3 moveDir = new Vector3(horizontalInput, 0, 0);
 
             movedir = Vector3.ProjectOnPlane(moveDir, wallNormal);
-            movedir = new Vector3(Mathf.Abs(movedir.x), Mathf.Abs(movedir.y), Mathf.Abs(movedir.z));
+            movedir = movedir.normalized;
+            //movedir = new Vector3(Mathf.Abs(movedir.x), Mathf.Abs(movedir.y), Mathf.Abs(movedir.z));
             Debug.DrawRay(transform.position, movedir, Color.red, 2f); // 충돌 지점에서 법선 벡터를 빨간색으로 그립니다.
         }
     }

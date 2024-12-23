@@ -46,9 +46,6 @@ public class stair_Box : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
 
-       
-
-
         if (collision.transform.CompareTag("Player"))
         {
             if (!collision.GetComponent<PlayerControl>().isOner_Game())
@@ -56,11 +53,12 @@ public class stair_Box : MonoBehaviour
 
             if (main_stair.Collider2D.isTrigger == false)
             {
+                
+
                 main_stair.Collider2D.isTrigger = true;
-                collision.transform.GetComponent<PlayerControl>().movedir = Vector3.zero;
                 up_Ground.surfaceArc = 180;
             }
-
+            collision.transform.GetComponent<PlayerControl>().movedir = Vector3.zero;
         }
 
 
