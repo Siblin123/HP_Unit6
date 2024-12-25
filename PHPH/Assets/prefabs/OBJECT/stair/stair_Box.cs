@@ -1,8 +1,9 @@
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class stair_Box : MonoBehaviour
+public class stair_Box : NetworkBehaviour
 {
     public LayerMask ground;
     public stair main_stair;
@@ -20,6 +21,9 @@ public class stair_Box : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.GetComponent<NetworkBehaviour>())
+            if (!collision.GetComponent<NetworkBehaviour>().IsOwner)
+                return;
 
         float VerticalInput = Input.GetAxisRaw("Vertical");
         if (VerticalInput > 0)
@@ -39,6 +43,10 @@ public class stair_Box : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.GetComponent<NetworkBehaviour>())
+            if (!collision.GetComponent<NetworkBehaviour>().IsOwner)
+                return;
+
 
         if (collision.transform.CompareTag("Player"))
         {

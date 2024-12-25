@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4147144535
+  GlobalObjectIdHash: 3481336251
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -297,12 +297,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   lastWall: {fileID: 0}
+  lastWallL: {fileID: 0}
+  lastWallR: {fileID: 0}
   afternoon_light2D: {fileID: 0}
   night_light2D: {fileID: 0}
   curlight: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  interactable: {fileID: 0}
+  interaction_Layer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!70 &2803067680968702620
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

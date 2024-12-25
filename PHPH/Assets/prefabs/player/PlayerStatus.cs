@@ -52,8 +52,8 @@ public class PlayerStatus : PlayerGadget
        
         if (!IsOwner)
             return;
-       
 
+        Move();
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             csTable.Instance.gameManager.SendSound(transform.position);
@@ -65,7 +65,7 @@ public class PlayerStatus : PlayerGadget
         if (!IsOwner)
             return;
         base.Update();
-        Move();
+       
         Jump();
         LookMouse();
     }

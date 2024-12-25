@@ -27,6 +27,9 @@ public class PlayerControl : PlayerStatus
     public Light2D curlight; // Light2D 컴포넌트
     public LayerMask enemyLayer; // 적이 포함된 레이어
 
+    //interact()
+    public interaction interactable;
+    public LayerMask interaction_Layer;
     public override void Start()
     {
         base.Start();
@@ -53,8 +56,9 @@ public class PlayerControl : PlayerStatus
             return;
         base.Update();
         Light_Raycast();
+        interact_Object();
         //list_View();
-       // print("1");
+        // print("1");
     }
 
 
@@ -118,5 +122,28 @@ public class PlayerControl : PlayerStatus
         }
     }
 
+    public void interact_Object()
+    {
+        // 레이를 쏴서 내 앞에 있는 오브젝트를 찾아줌
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1, interaction_Layer);
+
+        // 레이가 오브젝트에 맞았는지 확인
+        if (hit.collider != null)
+        {
+            // 상호작용 가능한 오브젝트인지 확인
+            interactable = hit.collider.GetComponent<interaction>();
+            if (interactable != null)
+            {
+                // E 키를 누르면 상호작용 실행
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    interactable.interact();
+                }
+            }
+        }
+
+        // 디버그용 레이 그리기
+        Debug.DrawRay(transform.position, rayDirection * rayDisance, Color.red);
+    }
 
 }

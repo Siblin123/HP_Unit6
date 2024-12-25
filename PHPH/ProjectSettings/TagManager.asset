@@ -19,7 +19,7 @@ TagManager:
   - wall
   - Ground
   - enemy
-  - MapObject
+  - interaction
   - 
   - 
   - 

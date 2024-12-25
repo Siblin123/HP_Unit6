@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class MapObject : MonoBehaviour
+public class MapObject : interaction
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Item_Info reword_Item;
+    int jumpingItem_Value = 2;
+
+
+    public void getItem()
     {
-        
+        if (reword_Item != null)
+        {
+            GameObject item = Instantiate(reword_Item.gameObject, transform.position, Quaternion.identity);
+            item.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpingItem_Value), ForceMode2D.Impulse); // jumpingItem_Value를 사용하여 위로 힘을 가함
+       
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void interact()
     {
-        
+        getItem();
     }
 }
