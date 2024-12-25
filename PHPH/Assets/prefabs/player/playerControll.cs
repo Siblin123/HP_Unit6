@@ -16,6 +16,8 @@ public class PlayerControl : PlayerStatus
 
 
     public GameObject lastWall;
+    public GameObject lastWallL;
+    public GameObject lastWallR;
 
 
 
@@ -60,28 +62,37 @@ public class PlayerControl : PlayerStatus
     //빛을 건너편이 보이게  하는 레이케스트
     private void Light_Raycast()
     {
-        RaycastHit2D hit = Physics2D.Raycast(rayPos.position, rayDirection, rayDisance, wallLayer);
+       
 
-        if (hit.collider != null)
+
+
+        if(csTable.Instance.gameManager.is_afterNoonNight==1)//밤에만 작동
         {
+            RaycastHit2D hit = Physics2D.Raycast(rayPos.position, rayDirection, rayDisance, wallLayer);
 
-            if (hit.collider.gameObject)
+            if (hit.collider != null)
+            {
+
+                if (hit.collider.gameObject)
+                {
+                    if (lastWall != null)
+                        lastWall.GetComponent<ShadowCaster2D>().trimEdge = 0f;
+
+                    lastWall = hit.collider.gameObject;
+                    lastWall.GetComponent<ShadowCaster2D>().trimEdge = 1f;
+                }
+            }
+            else
             {
                 if (lastWall != null)
+                {
                     lastWall.GetComponent<ShadowCaster2D>().trimEdge = 0f;
+                    lastWall = null;
+                }
+            }
+        }
 
-                lastWall = hit.collider.gameObject;
-                lastWall.GetComponent<ShadowCaster2D>().trimEdge = 1f;
-            }
-        }
-        else
-        {
-            if (lastWall != null)
-            {
-                lastWall.GetComponent<ShadowCaster2D>().trimEdge = 0f;
-                lastWall = null;    
-            }
-        }
+
 
         Debug.DrawRay(rayPos.position, rayDirection * rayDisance, Color.black);
        

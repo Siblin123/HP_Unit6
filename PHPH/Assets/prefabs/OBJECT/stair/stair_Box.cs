@@ -1,31 +1,25 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class stair_Box : MonoBehaviour
 {
+    public LayerMask ground;
     public stair main_stair;
     public PlatformEffector2D up_Ground;
+
 
     bool Is_playerIn;
 
     void Start()
     {
         main_stair = transform.parent.GetComponent<stair>();
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<PlatformEffector2D>() && collision.transform.position.y>transform.position.y)
-        {
-            up_Ground = collision.GetComponent<PlatformEffector2D>();
-        }
-       
-
 
         float VerticalInput = Input.GetAxisRaw("Vertical");
         if (VerticalInput > 0)
@@ -59,6 +53,7 @@ public class stair_Box : MonoBehaviour
                 up_Ground.surfaceArc = 180;
             }
             collision.transform.GetComponent<PlayerControl>().movedir = Vector3.zero;
+            collision.transform.GetComponent<Rigidbody2D>().linearVelocityY =0;
         }
 
 

@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     //라이트
     public Light2D sun;
+
+    public int is_afterNoonNight;
+
     public float curTime;
     public float daySpeed;//하루 시간의 속도
 
@@ -22,21 +25,35 @@ public class GameManager : MonoBehaviour
 
     public void Day()
     {
+
+       
+
         // 시간 증가
         curTime += Time.deltaTime * daySpeed;
 
-        // 6시~18시: 낮 / 18시~6시: 밤
-        if (curTime >= 6 && curTime <= 18)
+        if (curTime > 18 && curTime <= 19)
         {
-            // 낮 동안(6~18): 정오(12시)에서 가장 밝음
-            float normalizedTime = (curTime - 6) / 12f; // 6~18시를 0~1로 정규화
-            sun.intensity = Mathf.Lerp(0.02f, 1f, (1 - Mathf.Cos(normalizedTime * Mathf.PI)) / 2f); // Cosine으로 곡선 전환
+            if (is_afterNoonNight == 0)
+            {
+                is_afterNoonNight = 1; 
+                All_Stair_trimEdge_RESET(is_afterNoonNight);
+            }
+                
+            // 18시~19시: 점점 어두워짐
+            float transitionTime = (curTime - 18); // 18~19시를 0~1로 정규화
+            sun.intensity = Mathf.Lerp(1f, 0.02f, transitionTime);
         }
-        else
+        else if (curTime >= 5 && curTime < 6)
         {
-            // 밤 동안(18~6): 새벽 1시에서 가장 어둠
-            float nightTime = (curTime > 18) ? (curTime - 18) / 12f : (curTime + 6) / 12f; // 18~6시를 0~1로 정규화
-            sun.intensity = Mathf.Lerp(1f, 0.02f, (1 - Mathf.Cos(nightTime * Mathf.PI)) / 2f); // Cosine으로 곡선 전환
+            if (is_afterNoonNight == 1)
+            {
+                is_afterNoonNight = 0;
+                All_Stair_trimEdge_RESET(is_afterNoonNight);
+            }
+                
+            // 5시~6시: 점점 밝아짐
+            float transitionTime = (curTime - 5); // 5~6시를 0~1로 정규화
+            sun.intensity = Mathf.Lerp(0.02f, 1f, transitionTime);
         }
 
         // 하루가 끝나면 초기화
@@ -56,6 +73,31 @@ public class GameManager : MonoBehaviour
             if(enemy.GetComponent<GoSoundMonster>())
             {
                 enemy.GetComponent<GoSoundMonster>().OnHearNoise(soundPos);
+            }
+        }
+    }
+
+    void All_Stair_trimEdge_RESET(int isAfterNoon_Night)//밤낮이 바뀔때 계단의 trimEdge를 초기화
+    {
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+
+        foreach (GameObject wall in walls)
+        {
+            ShadowCaster2D shadowCaster = wall.GetComponent<ShadowCaster2D>();
+            if (shadowCaster != null)
+            {
+
+                if(isAfterNoon_Night==0)
+                {
+                    shadowCaster.trimEdge = 1f;
+                }
+                else if (isAfterNoon_Night == 1)
+                {
+                    shadowCaster.trimEdge = 0f;
+                }
+
+
+               
             }
         }
     }

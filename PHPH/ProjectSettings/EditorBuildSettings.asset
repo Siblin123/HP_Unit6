@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UmjiInGame.unity
     guid: 1bd05d7b0a592fe4ca295e5648badd2b
+  - enabled: 1
+    path: Assets/Scenes/JihoInGame.unity
+    guid: b8b07a0f9fb4f224cbc31df5bc35c4e7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

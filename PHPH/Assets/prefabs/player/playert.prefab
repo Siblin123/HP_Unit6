@@ -223,7 +223,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: d09a79318cdb2694c909bd73b42bfe49, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3590255339
+  GlobalObjectIdHash: 4147144535
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -285,6 +285,7 @@ MonoBehaviour:
   stamina_useSpeed: 1
   moveSpeed: 1
   runSpeed: 1.2
+  jumpPower: 2
   movedir: {x: 0, y: 0, z: 0}
   hpBar: {fileID: 4874497644925622408}
   staminaBar: {fileID: 5066051042400682364}

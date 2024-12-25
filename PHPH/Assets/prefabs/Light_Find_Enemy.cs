@@ -29,14 +29,16 @@ public class Light_Find_Enemy : NetworkBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (csTable.Instance.gameManager.is_afterNoonNight == 0 && afternoon_light2D.gameObject.activeSelf==false)
         {
             Change_Light(true);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (csTable.Instance.gameManager.is_afterNoonNight == 1 && night_light2D.gameObject.activeSelf == false)
         {
             Change_Light(false);
         }
+
 
         FindEnemy();
     }

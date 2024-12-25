@@ -26,6 +26,7 @@ public class PlayerStatus : PlayerGadget
     //Move()
     public float moveSpeed = 5f;
     public float runSpeed = 5f;
+    public float jumpPower = 5f;
     float curSpeed;
     public Vector3 movedir;
     Vector2 enterStairPos;//계단을 들어온 위치(왼,오)
@@ -82,6 +83,13 @@ public class PlayerStatus : PlayerGadget
 
     private void Move()
     {
+        if (mousePos.x > transform.position.x)//벽 찾는 레이가 마우스 기준
+            rayDirection = Vector2.right;
+        else
+            rayDirection = Vector2.left;
+
+
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -103,11 +111,9 @@ public class PlayerStatus : PlayerGadget
         }
 
 
+
         if (horizontalInput != 0)
         {
-
-            rayDirection = horizontalInput < 0 ? Vector2.left : Vector2.right;
-
             if(enterStairPos==Vector2.zero)
             {
                 enterStairPos = rayDirection;
@@ -140,7 +146,8 @@ public class PlayerStatus : PlayerGadget
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocityY += 5;
+            rb.linearVelocityY = 0;
+            rb.linearVelocityY += jumpPower;
         }
     }
 
@@ -197,6 +204,11 @@ public class PlayerStatus : PlayerGadget
             movedir = movedir.normalized;
             //movedir = new Vector3(Mathf.Abs(movedir.x), Mathf.Abs(movedir.y), Mathf.Abs(movedir.z));
             Debug.DrawRay(transform.position, movedir, Color.red, 2f); // 충돌 지점에서 법선 벡터를 빨간색으로 그립니다.
+        }
+
+        if(collision.transform.CompareTag("Ground"))
+        {
+            movedir = Vector3.zero;
         }
     }
 
