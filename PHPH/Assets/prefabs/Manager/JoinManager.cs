@@ -37,6 +37,11 @@ public class JoinManager : NetworkBehaviour
         {
             Debug.Log($"클라이언트 ID: {client.ClientId}");
         }
+
+        //오브젝트가 생성될 때
+        csTable.Instance.gameManager.isStartGame = true;
+
+
     }
 
 

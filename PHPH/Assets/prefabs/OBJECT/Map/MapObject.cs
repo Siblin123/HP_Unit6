@@ -5,7 +5,6 @@ using static UnityEditor.Progress;
 public class MapObject : interaction
 {
     public Item_Info reward_Item; // 획득할 아이템 정보
-    int jumpingItem_Value = 2;    // 점프 값
 
     public override void interact()
     {
@@ -51,11 +50,6 @@ public class MapObject : interaction
             if (networkObject != null)
             {
                 networkObject.Spawn(); // 네트워크 객체로 생성
-            }
-            var rb = item.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.AddForce(new Vector2(0, jumpingItem_Value), ForceMode2D.Impulse);
             }
 
 

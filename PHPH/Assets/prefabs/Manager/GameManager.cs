@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 public class GameManager : MonoBehaviour
 {
+    public bool isStartGame=false;
+
+
     //∂Û¿Ã∆Æ
     public Light2D sun;
 
@@ -19,7 +22,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        Day();
+        if(isStartGame)
+        {
+            Day();
+
+        }
 
     }
 
