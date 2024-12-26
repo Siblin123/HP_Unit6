@@ -31,6 +31,18 @@ public class Shop_Manager : MonoBehaviour
         }
     }
 
+    public Item_Info find_Item(string name)
+    {
+        for(int i = 0; i < all_Item_List.Count; i++)
+        {
+            if (all_Item_List[i].name == name)
+            {
+                return all_Item_List[i];
+            }
+        }
+        return null;
+    }
+
     public void Update_Slot()
     {
         int base_N = 0, combi_N = 0;
@@ -47,17 +59,12 @@ public class Shop_Manager : MonoBehaviour
             }
             else if (base_N < 2)
             {
-                /*select_N = Random.Range(0, combination_Item_List.Count);
-                slot_List[i].Update_Slot(combination_Item_List[select_N]);*/
                 select_N = CheckDuplicate(base_Item_List, select_N);
                 slot_List[i].Update_Slot(base_Item_List[select_N]);
                 base_N++;
             }
             else
             {
-                /* select_N = Random.Range(0, all_Item_List.Count);
-                 slot_List[i].Update_Slot(all_Item_List[select_N]);*/
-
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
                 select_N = CheckDuplicate(all_Item_List, select_N);
             }
