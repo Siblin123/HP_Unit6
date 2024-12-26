@@ -1,13 +1,16 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using UnityEngine.WSA;
 
-public class Map_stairCreaterManager : MonoBehaviour
+public class Map_stairCreaterManager : NetworkBehaviour
 {
+    public static Map_stairCreaterManager instance; // 싱글톤 인스턴스
+
     Tilemap tilemap; // 타일맵 컴포넌트 참조
 
     public List<stair> stairPrefab;
@@ -21,20 +24,26 @@ public class Map_stairCreaterManager : MonoBehaviour
 
     private void Start()
     {
-        tilemap=GetComponent<Tilemap>();
-        Random_StairSpawn();
+        tilemap = GetComponent<Tilemap>();
+        instance = this;
+
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (NetworkManager.Singleton.IsListening)
         {
-
-            foreach (GameObject s in spawned_Stair)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                s.transform.position = s.transform.position + offset_Prefab;
+                Random_StairSpawn();
+
+                foreach (GameObject s in spawned_Stair)
+                {
+                    s.transform.position = s.transform.position + offset_Prefab;
+                }
             }
         }
+            
     }
 
 
@@ -75,7 +84,9 @@ public class Map_stairCreaterManager : MonoBehaviour
 
             // 프리팹 생성 (첫 번째 프리팹 사용)
             GameObject spawnedObject = Instantiate(stairPrefab[0].gameObject, worldPosition + offset_Prefab, stairPrefab[0].transform.rotation);
-            spawnedObject.transform.GetChild(0).GetComponent<stair_Box>().up_Ground = tilemap.transform.GetComponent<PlatformEffector2D>();
+          
+
+            
             randomRotate = Random.Range(0, 2); // 랜덤 회전 결정
             if (randomRotate == 0)
             {
@@ -84,6 +95,7 @@ public class Map_stairCreaterManager : MonoBehaviour
                 spawnedObject.transform.rotation = rotation; // 회전값 적용
             }
             spawnedStairs.Add(spawnedObject); // 생성된 오브젝트 리스트에 추가
+            spawnedObject.GetComponent<NetworkObject>().Spawn();
             j += randomNum; // 랜덤 간격으로 인덱스 이동
         }
 

@@ -32,6 +32,7 @@ public class Item_Info : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         f_ItemPos= transform.position;
+        rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse);
     }
 
     private void Update()
