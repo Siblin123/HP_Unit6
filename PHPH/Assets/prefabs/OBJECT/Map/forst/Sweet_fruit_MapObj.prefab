@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8000180766091262397}
   - component: {fileID: 7821401934221729677}
+  - component: {fileID: 2098727842302104243}
   - component: {fileID: 6980790949409658468}
   - component: {fileID: 1863922234977978497}
   - component: {fileID: 3630217328461557532}
@@ -90,6 +91,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2098727842302104243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182834518597647964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1172209740
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &6980790949409658468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915df98c2c011284eb8ff0a4ee04fe92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reword_Item: {fileID: 8429358086097254568, guid: 737dcdb65b27852499a1343bde76b37d, type: 3}
+  ShowTopMostFoldoutHeaderGroup: 1
+  reward_Item: {fileID: 8429358086097254568, guid: 737dcdb65b27852499a1343bde76b37d, type: 3}
 --- !u!50 &1863922234977978497
 Rigidbody2D:
   serializedVersion: 5

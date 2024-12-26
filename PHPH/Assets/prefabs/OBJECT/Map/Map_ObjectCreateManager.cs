@@ -1,26 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
-public class Map_ObjectCreateManager : MonoBehaviour
+using Unity.Netcode;
+public class Map_ObjectCreateManager : NetworkBehaviour
 {
-
-
     public MapObject[] mapObjects;
     public Vector3 offset_Prefab;
 
-    PlatformEffector2D [] all_MapGround;
+    PlatformEffector2D[] all_MapGround;
 
     [Header("생성될 오브젝트수 x ~ y사이")]
     public Vector2Int spawn_Countinterval;
-
 
     private List<Vector3Int> tilePositions = new List<Vector3Int>(); // 타일 위치 리스트
     private List<GameObject> spawnedMapObject = new List<GameObject>(); // 생성된 오브젝트 리스트
 
     private void Start()
     {
-
         all_MapGround = GetComponentsInChildren<PlatformEffector2D>();
     }
 
@@ -70,9 +66,11 @@ public class Map_ObjectCreateManager : MonoBehaviour
 
                 // 프리팹 생성
                 GameObject spawnedObject = Instantiate(mapObjects[randomMapObject].gameObject, worldPosition + offset_Prefab, mapObjects[randomMapObject].transform.rotation);
+                spawnedObject.GetComponent<NetworkObject>().Spawn(); // 네트워크 오브젝트로 스폰
                 spawnedMapObject.Add(spawnedObject); // 생성된 오브젝트 리스트에 추가
+
+
             }
         }
     }
-
 }
