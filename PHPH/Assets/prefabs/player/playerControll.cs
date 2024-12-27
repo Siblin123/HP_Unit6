@@ -33,7 +33,7 @@ public class PlayerControl : PlayerStatus
     public override void Start()
     {
         base.Start();
-       
+
         if (!IsOwner)
         {
             Listener.enabled = false;
@@ -45,7 +45,7 @@ public class PlayerControl : PlayerStatus
             CinemachineVirtualCamera virtualCamera = Instantiate(VirtualCamera);
             virtualCamera.Follow = transform;
             Camera.main.GetComponent<CinemachineBrain>().IsLive(virtualCamera);
-
+            csTable.Instance.gameManager.player = this;
         }
 
     }

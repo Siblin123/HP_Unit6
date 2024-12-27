@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using static UnityEditor.VersionControl.Asset;
@@ -10,7 +11,7 @@ public class Item_Info : NetworkBehaviour
     public string explan; // 설명
     public int price; // 가격
     public int max_Have_Count; // 최대 소지 개수
-
+    public float colTime;
 
     //아이템  위치 고정 플레이어가 아래로 내려갈때 아이템도 같이 떨어지는거 막는 용도
     Vector3 f_ItemPos;
@@ -37,11 +38,24 @@ public class Item_Info : NetworkBehaviour
     }
 
 
+    private void Update()
+    {
+        if(colTime>=0)
+        {
+            colTime -= Time.deltaTime;
+        }
+       
+    }
 
     public virtual void UseItem()//각 아이템의 기능
     {
-
+        if(colTime<=0)
+        {
+            return;
+        }
     }
+
+    
 
     [ServerRpc(RequireOwnership = false)]
     public void GetItem_ServerRpc()

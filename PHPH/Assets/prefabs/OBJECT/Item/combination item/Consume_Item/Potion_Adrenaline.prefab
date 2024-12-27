@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 151934798875519453}
-  - component: {fileID: 2170201500642330428}
+  - component: {fileID: 602224392020591326}
   - component: {fileID: -3235178557650929680}
+  - component: {fileID: -4669158904703267216}
   m_Layer: 0
   m_Name: Potion_Adrenaline
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2170201500642330428
+--- !u!114 &602224392020591326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,16 +43,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 5407361801439254651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uC544\uB4DC\uB808\uB0A0\uB9B0"
-  id: 0
-  explan: "\uCCB4\uB825\uC774 \uC904\uACE0 \uAE30\uB825\uC774 \uC99D\uAC00\uD558\uB294
-    \uC544\uC774\uD15C\uC774\uB2E4."
-  price: 148
-  max_Have_Count: 5
-  curItemType: 5
+  GlobalObjectIdHash: 3291900479
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!212 &-3235178557650929680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -107,3 +114,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4669158904703267216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407361801439254651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63ac39d1df39f84aa48dbaef93099a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uC544\uB4DC\uB808\uB0A0\uB9B0"
+  id: 0
+  explan: "\uCCB4\uB825\uC774 \uC904\uACE0 \uAE30\uB825\uC774 \uC99D\uAC00\uD558\uB294
+    \uC544\uC774\uD15C\uC774\uB2E4."
+  price: 148
+  max_Have_Count: 5
+  curItemType: 5

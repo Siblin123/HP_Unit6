@@ -8,6 +8,7 @@ public class PlayerGadget : NetworkBehaviour
 
     public virtual void Start()
     {
+    
         
     }
 
