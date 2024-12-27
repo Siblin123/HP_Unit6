@@ -7,7 +7,7 @@ public class Map_ObjectCreateManager : NetworkBehaviour
     public MapObject[] mapObjects;
     public Vector3 offset_Prefab;
 
-    PlatformEffector2D[] all_MapGround;
+    Tilemap[] all_MapGround;
 
     [Header("생성될 오브젝트수 x ~ y사이")]
     public Vector2Int spawn_Countinterval;
@@ -17,7 +17,7 @@ public class Map_ObjectCreateManager : NetworkBehaviour
 
     private void Start()
     {
-        all_MapGround = GetComponentsInChildren<PlatformEffector2D>();
+        all_MapGround = GetComponentsInChildren<Tilemap>();
     }
 
     private void Update()

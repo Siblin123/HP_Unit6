@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3915006660649171584}
-  - component: {fileID: 1183899359133493507}
+  - component: {fileID: 2553670828296806142}
   - component: {fileID: -9139507904987912911}
+  - component: {fileID: 3343359683763685426}
   m_Layer: 0
   m_Name: Potion_Stamina
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1183899359133493507
+--- !u!114 &2553670828296806142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,15 +43,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8235651302514643724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uAE30\uB825 \uD68C\uBCF5 \uD3EC\uC158"
-  id: 0
-  explan: "\uAE30\uB825\uC744 \uD68C\uBCF5\uD560 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
-  price: 80
-  max_Have_Count: 5
-  curItemType: 5
+  GlobalObjectIdHash: 1143154636
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!212 &-9139507904987912911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -106,3 +114,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3343359683763685426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8235651302514643724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4749498c2865b4847843a47ba604f83c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uAE30\uB825 \uD68C\uBCF5 \uD3EC\uC158"
+  id: 0
+  explan: "\uAE30\uB825\uC744 \uD68C\uBCF5\uD560 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
+  price: 80
+  max_Have_Count: 5
+  colTime: 0
+  curItemType: 5
+  hp_value: 0
+  stamina_value: 0
+  potoin_colTime: 0

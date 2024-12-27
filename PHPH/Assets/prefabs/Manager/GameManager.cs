@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 public class GameManager : MonoBehaviour
 {
+    public PlayerControl player;
     public bool isStartGame=false;
 
 

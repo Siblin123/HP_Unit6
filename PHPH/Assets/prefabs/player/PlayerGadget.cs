@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlayerGadget : NetworkBehaviour
 {
 
-    public Item_Info curWeapon;
+    public Item_Info curItem;
 
     public virtual void Start()
     {
+    
         
     }
 
@@ -19,10 +20,12 @@ public class PlayerGadget : NetworkBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            UseCurItem();
-        }
+        if (IsOwner)
+            if (Input.GetMouseButtonDown(0))
+            {
+
+                UseCurItem();
+            }
     }
 
     public virtual void init()
@@ -32,8 +35,8 @@ public class PlayerGadget : NetworkBehaviour
 
     public void UseCurItem()
     {
-        if(curWeapon!=null)
-            curWeapon.UseItem();
+        if(curItem != null)
+            curItem.UseItem();
     }
 
 }

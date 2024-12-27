@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3694822062377922022}
+  - component: {fileID: -170917621021985733}
   - component: {fileID: 3923620479907480404}
   - component: {fileID: 7054046552988373564}
   m_Layer: 0
@@ -33,6 +34,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-170917621021985733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490947321465827100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 4203249273
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &3923620479907480404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,16 +71,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8efbc8744005f5648a88828f441f381f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   name: "\uCD1D"
   id: 0
   explan: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uB2E4."
   price: 192
   max_Have_Count: 1
+  colTime: 0
   curItemType: 3
   damege: 0
-  colTime: 0
   attack_rage: 0
   CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}
 --- !u!212 &7054046552988373564
 SpriteRenderer:
   m_ObjectHideFlags: 0

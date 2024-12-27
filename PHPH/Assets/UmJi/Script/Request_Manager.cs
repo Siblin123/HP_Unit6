@@ -27,11 +27,16 @@ public class Request_Manager : MonoBehaviour
     public Image reward_I; // 보상 아이템 이미지
     public TextMeshProUGUI reward_Count_T; // 보상 개수
 
-    public Sprite money_I;
+    public int request_DeadLine;
+    public TextMeshProUGUI request_DeadLine_T; // 미션 기한
 
+    
+    public Sprite money_I;
+    
     private void Awake()
     {
-        
+        request_DeadLine = 2;
+
         string[] rows = request_File.text.Split('\n'); // CSV의 각 줄을 분리
         for (int i = 1; i < rows.Length; i++) // 헤더를 건너뛰고 데이터 읽기
         {
@@ -54,6 +59,19 @@ public class Request_Manager : MonoBehaviour
         Request_Selset();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            request_DeadLine--;
+            if(request_DeadLine == 0)
+            {
+                request_DeadLine = 2;
+                Request_Selset();
+            }
+            request_DeadLine_T.text = "기한: " + request_DeadLine.ToString() + "일";
+        }
+    }
     public void Request_Selset() // 의뢰 뽑기
     {
         int num = Random.Range(0, request_L.Count);

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2465530720884096136}
-  - component: {fileID: 8734771304937219413}
+  - component: {fileID: 6450884110121351494}
   - component: {fileID: 2583343448499009049}
+  - component: {fileID: 108644520250116566}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8734771304937219413
+--- !u!114 &6450884110121351494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,15 +43,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 6377692145449701443}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uC18C\uB4DC"
-  id: 0
-  explan: "\uADFC\uC811 \uACF5\uACA9 \uBB34\uAE30\uC774\uB2E4."
-  price: 96
-  max_Have_Count: 1
-  curItemType: 3
+  GlobalObjectIdHash: 840118965
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!212 &2583343448499009049
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -106,3 +114,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &108644520250116566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6377692145449701443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7758c75b2a84aec4e82eb939fd9014fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uC18C\uB4DC"
+  id: 0
+  explan: "\uADFC\uC811 \uACF5\uACA9 \uBB34\uAE30\uC774\uB2E4."
+  price: 96
+  max_Have_Count: 1
+  colTime: 0
+  curItemType: 3
+  damege: 0
+  attack_rage: 0
+  CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}

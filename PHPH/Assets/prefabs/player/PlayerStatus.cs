@@ -21,6 +21,8 @@ public class PlayerStatus : PlayerGadget
     public float stamina_RegenSpeed;
     public float stamina_useSpeed;
 
+    public int stamina_percent;
+
     float horizontalInput;
     float VerticalInput;
     //Move()
@@ -32,10 +34,12 @@ public class PlayerStatus : PlayerGadget
     Vector2 enterStairPos;//계단을 들어온 위치(왼,오)
 
 
-    protected Vector2 rayDirection;
+    public Vector2 rayDirection;
 
     public override void Start()
     {
+        if (!IsOwner)
+            return;
         base.Start();
         init();
         rb = GetComponent<Rigidbody2D>();
@@ -68,6 +72,8 @@ public class PlayerStatus : PlayerGadget
        
         Jump();
         LookMouse();
+        UI_View();
+
     }
 
     public override void init()
@@ -79,6 +85,12 @@ public class PlayerStatus : PlayerGadget
         hpBar.maxValue = maxHp;
         staminaBar.maxValue = maxStamina;
 
+    }
+
+    void UI_View()
+    {
+        hpBar.value = hp;
+        staminaBar.value = stamina;
     }
 
     private void Move()
@@ -138,8 +150,7 @@ public class PlayerStatus : PlayerGadget
 
         }
 
-        //UI
-        staminaBar.value = stamina;
+      
     }
 
     void Jump()
@@ -160,8 +171,7 @@ public class PlayerStatus : PlayerGadget
         
         }
 
-        //UI
-        hpBar.value = hp;
+      
 
     }
 
