@@ -6,7 +6,6 @@ using Unity.Netcode;
 
 public class Light_Find_Enemy : NetworkBehaviour
 {
-    public Light2D afternoon_light2D; // Light2D ÄÄÆ÷³ÍÆ®
     public Light2D night_light2D; // Light2D ÄÄÆ÷³ÍÆ®
     public Light2D light2D; // Light2D ÄÄÆ÷³ÍÆ®
     public LayerMask enemyLayer; // ÀûÀÌ Æ÷ÇÔµÈ ·¹ÀÌ¾î
@@ -29,18 +28,21 @@ public class Light_Find_Enemy : NetworkBehaviour
 
     public void Update()
     {
-
-        if (csTable.Instance.gameManager.is_afterNoonNight == 0 && afternoon_light2D.gameObject.activeSelf==false)
-        {
-            Change_Light(true);
-        }
-        else if (csTable.Instance.gameManager.is_afterNoonNight == 1 && night_light2D.gameObject.activeSelf == false)
+        //0 ³· 1 ¹ã
+        if (csTable.Instance.gameManager.is_afterNoonNight == 1 && night_light2D.GetComponent<Light2D>().enabled == false)
         {
             Change_Light(false);
         }
+        else if(csTable.Instance.gameManager.is_afterNoonNight == 0 && night_light2D.GetComponent<Light2D>().enabled == true)
+        {
+            Change_Light(true);
+        }
 
+        if (IsOwner)
+        {
 
-        FindEnemy();
+            FindEnemy();
+        }
     }
 
     void FindEnemy()
@@ -117,18 +119,11 @@ public class Light_Find_Enemy : NetworkBehaviour
       
         if (isSun)//³·ÀÏ¶§
         {
-            afternoon_light2D.gameObject.SetActive(true);
-            night_light2D.gameObject.SetActive(false);
-         
-
-            light2D = afternoon_light2D;
-         
+            night_light2D.GetComponent<Light2D>().enabled = false;
         }
         else
         {
-            night_light2D.gameObject.SetActive(true);
-            afternoon_light2D.gameObject.SetActive(false);
-            light2D = night_light2D;
+            night_light2D.GetComponent<Light2D>().enabled = true;
         }
 
 
