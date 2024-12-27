@@ -132,4 +132,8 @@ MonoBehaviour:
   explan: "\uD68C\uBCF5 \uAC00\uB2A5\uD55C \uC544\uC774\uD15C\uC774\uB2E4."
   price: 80
   max_Have_Count: 5
+  colTime: 0
   curItemType: 5
+  hp_value: 0
+  stamina_value: 0
+  potoin_colTime: 0

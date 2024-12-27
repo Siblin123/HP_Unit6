@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7096683807268591484}
   - component: {fileID: 6929101740032606585}
-  - component: {fileID: 1447683573699815596}
   - component: {fileID: -831894175543371445}
+  - component: {fileID: -4250333463294110546}
   m_Layer: 0
   m_Name: Bat
   m_TagString: Untagged
@@ -59,25 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &1447683573699815596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8099840305296239607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uBC29\uB9DD\uC774"
-  id: 0
-  explan: "\uADFC\uC811 \uACF5\uACA9 \uBB34\uAE30\uC774\uB2E4."
-  price: 32
-  max_Have_Count: 1
-  curItemType: 3
 --- !u!212 &-831894175543371445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -133,3 +114,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4250333463294110546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8099840305296239607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7758c75b2a84aec4e82eb939fd9014fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uBC29\uB9DD\uC774"
+  id: 0
+  explan: "\uADFC\uC811 \uACF5\uACA9 \uBB34\uAE30\uC774\uB2E4."
+  price: 32
+  max_Have_Count: 1
+  colTime: 0
+  curItemType: 3
+  damege: 1
+  attack_rage: 2
+  CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}
