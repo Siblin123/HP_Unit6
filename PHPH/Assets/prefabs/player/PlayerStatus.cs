@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class PlayerStatus : PlayerGadget
 {
@@ -44,17 +45,18 @@ public class PlayerStatus : PlayerGadget
     //애니메이션
     public enum AnimationType
     {
-        IDLE,
-        WALK,
-        RUN,
-        JUMP,
-        JUMPDown,
-        GETDAMEGE
+        stand,
+        walk,
+        run,
+        jump_up,
+        jump_down,
+
+        get_damage
     }
     public AnimationType animationType;
 
     public Animator anim;
-    public AnimationClip[] animationClips;//0 기본 1 걷기 2 뛰기 3 점프 4피격
+
 
     public override void Start()
     {
@@ -126,9 +128,9 @@ public class PlayerStatus : PlayerGadget
         {
             if (horizontalInput != 0 && stamina >1)
             {
-                if (animationType != AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+                if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
                 {
-                    animationType = AnimationType.RUN;
+                    animationType = AnimationType.run;
                 }
                 curSpeed = runSpeed;
                 stamina -= stamina_useSpeed * Time.deltaTime;
@@ -139,9 +141,9 @@ public class PlayerStatus : PlayerGadget
         {
             if(stamina<=maxStamina)
                 stamina += stamina_RegenSpeed * Time.deltaTime;
-            if (animationType != AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+            if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
             {
-                animationType = AnimationType.WALK;
+                animationType = AnimationType.walk;
             }
             curSpeed = moveSpeed;
 
@@ -176,9 +178,9 @@ public class PlayerStatus : PlayerGadget
         }
         else
         {
-            if(animationType!=AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+            if(animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
             {
-                animationType = AnimationType.IDLE;
+                animationType = AnimationType.stand;
             }
           
         }
@@ -192,19 +194,19 @@ public class PlayerStatus : PlayerGadget
         {
             rb.linearVelocityY = 0;
             rb.linearVelocityY += jumpPower;
-            animationType = AnimationType.JUMP;
+            animationType = AnimationType.jump_up;
         }
 
             
         if (rb.linearVelocityY <= -0.1f)
         {
-            animationType = AnimationType.JUMPDown;
+            animationType = AnimationType.jump_down;
         }
     }
 
     public void GetDamege(float value)
     {
-        animationType = AnimationType.GETDAMEGE;
+        animationType = AnimationType.get_damage;
         hp -= value;
 
         if (hp <= 0)
@@ -243,27 +245,24 @@ public class PlayerStatus : PlayerGadget
        
     }
 
-    public void Change_Ani()
+    public void Change_Ani(AnimationClip clip =null)
     {
-        switch(animationType)
+        if (clip)
         {
-            case AnimationType.IDLE:
-                anim.Play(animationClips[0].name);
-                break;
-            case AnimationType.WALK:
-                anim.Play(animationClips[1].name);
-                break;
-            case AnimationType.RUN:
-                anim.Play(animationClips[2].name);
-                break;
-            case AnimationType.JUMP:
-                anim.Play(animationClips[3].name);
-                break;
-            case AnimationType.GETDAMEGE:
-                anim.Play(animationClips[4].name);
-                break;
+            anim.Play(clip.name); 
+            if (Enum.TryParse(typeof(AnimationType), clip.name, out var result))
+            {
+                animationType = (AnimationType)result;
+            }
         }
+            
+        else
+            anim.Play(animationType.ToString());
+
+
     }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
