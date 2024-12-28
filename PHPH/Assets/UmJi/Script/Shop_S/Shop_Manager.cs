@@ -2,11 +2,11 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Shop_Manager : MonoBehaviour
+public class Shop_Manager : interaction
 {
-    public GameObject shop_Ob;
+    public GameObject shop_Panel;
+
     public List<Shop_Slot> slot_List; // 상점 슬롯 리스트
-    public bool on_Off_C = false;
 
     [Header("기본 아이템 리스트")]
     public List<Item_Info> base_Item_List;
@@ -19,15 +19,22 @@ public class Shop_Manager : MonoBehaviour
     {
         Update_Slot();
     }
+
+    public override void interact()
+    {
+        base.interact();
+        On_Off();
+    }
+
     public void On_Off()
     {
-        if (on_Off_C)
+        if (shop_Panel.activeSelf == true)
         {
-            shop_Ob.SetActive(false);
+            shop_Panel.SetActive(false);
         }
         else
         {
-            shop_Ob.SetActive(true);
+            shop_Panel.SetActive(true);
         }
     }
 
