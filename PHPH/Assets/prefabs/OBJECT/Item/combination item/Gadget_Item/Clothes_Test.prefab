@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1850743953188320391}
   - component: {fileID: -9222777465434686703}
   m_Layer: 0
-  m_Name: Clothes
+  m_Name: Clothes_Test
   m_TagString: Cloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 695187176
+  GlobalObjectIdHash: 4101292113
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -123,7 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6385033214085854226, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  m_Sprite: {fileID: -7768503562284599293, guid: 78c94a923ad58584bbb83c93c79dd775, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
