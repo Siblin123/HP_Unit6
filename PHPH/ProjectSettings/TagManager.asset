@@ -8,6 +8,10 @@ TagManager:
   - enemy
   - Ground
   - MapObject
+  - Cloth
+  - JumpPack
+  - Shoes
+  - FlashLigth
   layers:
   - Default
   - TransparentFX
