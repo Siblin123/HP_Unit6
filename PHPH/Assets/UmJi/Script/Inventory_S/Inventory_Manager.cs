@@ -92,10 +92,28 @@ public class Inventory_Manager : MonoBehaviour
         {
             Update_Slots(slot1, slot2);
         }
+        else if(slot2.item != null)
+        {
+            if (slot1.item.gameObject.CompareTag(slot2.item.gameObject.tag))
+            {
+                Update_Slots(slot1, slot2);
+            }
+        }
         // 장착 해제
         else if (slot2.item == null)
         {
-            Update_Slots(slot1, slot2);
+            // 태그 없음 -> 일반 인벤토리
+            if (slot2.gameObject.tag == "Untagged")
+            {
+                Update_Slots(slot1, slot2);
+            }
+            else
+            {
+                if (slot1.item.gameObject.CompareTag(slot2.gameObject.tag))
+                {
+                    Update_Slots(slot1, slot2);
+                }
+            }
         }
     }
 
