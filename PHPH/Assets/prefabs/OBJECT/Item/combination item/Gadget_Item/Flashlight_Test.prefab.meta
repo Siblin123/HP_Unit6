@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:PHPH/Assets/Imgae/item.meta
+guid: 1776a4638537d0140a4b5cbc4b3f2c19
+folderAsset: yes
+DefaultImporter:
+========
 guid: 24a62ef97d57d1b4db96af9f3c07b1ec
 PrefabImporter:
+>>>>>>>> origin/Umji_B:PHPH/Assets/prefabs/OBJECT/Item/combination item/Gadget_Item/Flashlight_Test.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

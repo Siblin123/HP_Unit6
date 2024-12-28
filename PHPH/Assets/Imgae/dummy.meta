@@ -1,11 +1,12 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:PHPH/Assets/UmJi/Script/Inventory_S.meta
-guid: 31044d35b53a9a9459ab034eee45ba7a
-========
+<<<<<<<< HEAD:PHPH/Assets/Imgae/dummy.meta
 guid: 6e74802c165ed44409b607d608a2e4d6
->>>>>>>> origin/HI:PHPH/Assets/Imgae/dummy.meta
 folderAsset: yes
 DefaultImporter:
+========
+guid: 197e2944707c0e143a866340acd2a6f2
+PrefabImporter:
+>>>>>>>> origin/Umji_B:PHPH/Assets/prefabs/OBJECT/Item/combination item/Gadget_Item/Clothes_Test.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

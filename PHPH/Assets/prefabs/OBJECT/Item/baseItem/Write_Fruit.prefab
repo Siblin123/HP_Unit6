@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   name: "\uC4F4 \uC5F4\uB9E4"
   id: 0
   explan: "\uC4F0\uB2E4."
   price: 1
   max_Have_Count: 16
+  colTime: 0
   curItemType: 0
 --- !u!212 &1457758255672986991
 SpriteRenderer:
@@ -194,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1798756691
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
