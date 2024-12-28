@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3366028037192990926}
   - component: {fileID: -3719629819987477539}
-  - component: {fileID: 517806733211735312}
   - component: {fileID: 4460739503410209482}
+  - component: {fileID: 8568143852502949164}
   m_Layer: 0
   m_Name: Fishing_Rod
   m_TagString: Untagged
@@ -59,26 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &517806733211735312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2340297583841686563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB09A\uC2DC\uB300"
-  id: 0
-  explan: "\uBB3C\uC774 \uCDA9\uBD84\uD788 \uC788\uB294 \uACF3\uC5D0\uC11C \uB09A\uC2DC\uB97C
-    \uD560 \uC218 \uC788\uAC8C \uD574\uC8FC\uB294 \uB3C4\uAD6C\uC774\uB2E4."
-  price: 112
-  max_Have_Count: 1
-  curItemType: 3
 --- !u!212 &4460739503410209482
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -134,3 +114,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8568143852502949164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340297583841686563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7758c75b2a84aec4e82eb939fd9014fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uB09A\uC2DC\uB300"
+  id: 0
+  explan: "\uBB3C\uC774 \uCDA9\uBD84\uD788 \uC788\uB294 \uACF3\uC5D0\uC11C \uB09A\uC2DC\uB97C
+    \uD560 \uC218 \uC788\uAC8C \uD574\uC8FC\uB294 \uB3C4\uAD6C\uC774\uB2E4."
+  price: 112
+  max_Have_Count: 1
+  colTime: 0
+  curItemType: 3
+  damege: 0
+  attack_rage: 0
+  CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}

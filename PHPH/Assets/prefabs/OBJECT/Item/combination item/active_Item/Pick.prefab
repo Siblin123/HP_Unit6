@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 191519597309353851}
   - component: {fileID: -8109159150605944660}
-  - component: {fileID: 6698877373672609201}
   - component: {fileID: -1774339777376597785}
+  - component: {fileID: -4691557683668003307}
   m_Layer: 0
   m_Name: Pick
   m_TagString: Untagged
@@ -59,25 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &6698877373672609201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187328901359359890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uACE1\uAD2D\uC774"
-  id: 0
-  explan: "\uAD11\uC11D\uC744 \uC27D\uAC8C \uCE98 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
-  price: 144
-  max_Have_Count: 1
-  curItemType: 3
 --- !u!212 &-1774339777376597785
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -133,3 +114,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4691557683668003307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187328901359359890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7758c75b2a84aec4e82eb939fd9014fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uACE1\uAD2D\uC774"
+  id: 0
+  explan: "\uAD11\uC11D\uC744 \uC27D\uAC8C \uCE98 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
+  price: 144
+  max_Have_Count: 1
+  colTime: 0
+  curItemType: 3
+  damege: 0
+  attack_rage: 0
+  CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}

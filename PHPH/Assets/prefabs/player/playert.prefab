@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  curWeapon: {fileID: 0}
+  curItem: {fileID: 0}
   player_light: {fileID: 9026596277976412956}
   mousePos: {x: 0, y: 0, z: 0}
   AttackPos: {fileID: 9022638514675875189}
@@ -172,10 +172,12 @@ MonoBehaviour:
   stamina: 1
   stamina_RegenSpeed: 1
   stamina_useSpeed: 1
+  stamina_percent: 0
   moveSpeed: 1
   runSpeed: 1.2
   jumpPower: 2
   movedir: {x: 0, y: 0, z: 0}
+  rayDirection: {x: 0, y: 0}
   hpBar: {fileID: 4874497644925622408}
   staminaBar: {fileID: 5066051042400682364}
   animationType: 0
@@ -194,10 +196,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   lastWall: {fileID: 0}
-  lastWallL: {fileID: 0}
-  lastWallR: {fileID: 0}
-  afternoon_light2D: {fileID: 0}
-  night_light2D: {fileID: 0}
   curlight: {fileID: 0}
   enemyLayer:
     serializedVersion: 2

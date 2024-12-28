@@ -34,7 +34,7 @@ public class PlayerStatus : PlayerGadget
     Vector2 enterStairPos;//계단을 들어온 위치(왼,오)
 
 
-    protected Vector2 rayDirection;
+    public Vector2 rayDirection;
 
     //UI모음
     [SerializeField] Slider hpBar;

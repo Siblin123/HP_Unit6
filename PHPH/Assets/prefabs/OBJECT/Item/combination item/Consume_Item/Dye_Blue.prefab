@@ -77,6 +77,7 @@ MonoBehaviour:
   explan: "\uD30C\uB780\uC5FC\uC0C9\uC57D"
   price: 50
   max_Have_Count: 1
+  colTime: 0
   curItemType: 5
 --- !u!212 &6066712021181978367
 SpriteRenderer:

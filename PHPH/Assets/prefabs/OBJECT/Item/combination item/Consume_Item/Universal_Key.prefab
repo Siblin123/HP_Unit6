@@ -79,6 +79,7 @@ MonoBehaviour:
     \uB354 \uC26C\uC6CC\uC9C4\uB2E4"
   price: 208
   max_Have_Count: 1
+  colTime: 0
   curItemType: 5
 --- !u!212 &-5396130896790715482
 SpriteRenderer:

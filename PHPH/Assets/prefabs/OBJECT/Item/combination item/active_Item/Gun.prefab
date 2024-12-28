@@ -77,11 +77,15 @@ MonoBehaviour:
   explan: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uB2E4."
   price: 192
   max_Have_Count: 1
+  colTime: 0
   curItemType: 3
   damege: 0
-  colTime: 0
   attack_rage: 0
   CrowdControl_Time: 0
+  active_rayMask:
+    serializedVersion: 2
+    m_Bits: 512
+  target: {fileID: 0}
 --- !u!212 &7054046552988373564
 SpriteRenderer:
   m_ObjectHideFlags: 0

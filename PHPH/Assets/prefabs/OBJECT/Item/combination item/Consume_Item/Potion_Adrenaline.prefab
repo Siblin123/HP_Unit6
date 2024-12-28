@@ -133,4 +133,9 @@ MonoBehaviour:
     \uC544\uC774\uD15C\uC774\uB2E4."
   price: 148
   max_Have_Count: 5
+  colTime: 0
   curItemType: 5
+  hp_value: 0
+  stamina_value: 0
+  potoin_colTime: 0
+  duration: 0

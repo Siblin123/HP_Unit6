@@ -14,16 +14,9 @@ public class PlayerControl : PlayerStatus
     public LayerMask wallLayer;
 
 
-
     public GameObject lastWall;
-    public GameObject lastWallL;
-    public GameObject lastWallR;
-
-
 
     //light_View
-    public Light2D afternoon_light2D; // Light2D 컴포넌트
-    public Light2D night_light2D; // Light2D 컴포넌트
     public Light2D curlight; // Light2D 컴포넌트
     public LayerMask enemyLayer; // 적이 포함된 레이어
 
@@ -66,10 +59,6 @@ public class PlayerControl : PlayerStatus
     //빛을 건너편이 보이게  하는 레이케스트
     private void Light_Raycast()
     {
-       
-
-
-
         if(csTable.Instance.gameManager.is_afterNoonNight==1)//밤에만 작동
         {
             RaycastHit2D hit = Physics2D.Raycast(rayPos.position, rayDirection, rayDisance, wallLayer);
