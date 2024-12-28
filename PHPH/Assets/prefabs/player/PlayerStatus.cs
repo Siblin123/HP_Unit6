@@ -36,6 +36,26 @@ public class PlayerStatus : PlayerGadget
 
     protected Vector2 rayDirection;
 
+    //UI모음
+    [SerializeField] Slider hpBar;
+    [SerializeField] Slider staminaBar;
+
+
+    //애니메이션
+    public enum AnimationType
+    {
+        IDLE,
+        WALK,
+        RUN,
+        JUMP,
+        JUMPDown,
+        GETDAMEGE
+    }
+    public AnimationType animationType;
+
+    public Animator anim;
+    public AnimationClip[] animationClips;//0 기본 1 걷기 2 뛰기 3 점프 4피격
+
     public override void Start()
     {
         if (!IsOwner)
@@ -48,9 +68,6 @@ public class PlayerStatus : PlayerGadget
 
 
 
-    //UI모음
-    [SerializeField] Slider hpBar;
-    [SerializeField] Slider staminaBar;
     public override void FixedUpdate()
     {
        
@@ -73,6 +90,7 @@ public class PlayerStatus : PlayerGadget
         Jump();
         LookMouse();
         UI_View();
+        Change_Ani();   
 
     }
 
@@ -108,6 +126,10 @@ public class PlayerStatus : PlayerGadget
         {
             if (horizontalInput != 0 && stamina >1)
             {
+                if (animationType != AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+                {
+                    animationType = AnimationType.RUN;
+                }
                 curSpeed = runSpeed;
                 stamina -= stamina_useSpeed * Time.deltaTime;
             }
@@ -117,7 +139,10 @@ public class PlayerStatus : PlayerGadget
         {
             if(stamina<=maxStamina)
                 stamina += stamina_RegenSpeed * Time.deltaTime;
-
+            if (animationType != AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+            {
+                animationType = AnimationType.WALK;
+            }
             curSpeed = moveSpeed;
 
         }
@@ -149,6 +174,14 @@ public class PlayerStatus : PlayerGadget
             }
 
         }
+        else
+        {
+            if(animationType!=AnimationType.JUMP || animationType != AnimationType.JUMPDown)
+            {
+                animationType = AnimationType.IDLE;
+            }
+          
+        }
 
       
     }
@@ -159,11 +192,19 @@ public class PlayerStatus : PlayerGadget
         {
             rb.linearVelocityY = 0;
             rb.linearVelocityY += jumpPower;
+            animationType = AnimationType.JUMP;
+        }
+
+            
+        if (rb.linearVelocityY <= -0.1f)
+        {
+            animationType = AnimationType.JUMPDown;
         }
     }
 
     public void GetDamege(float value)
     {
+        animationType = AnimationType.GETDAMEGE;
         hp -= value;
 
         if (hp <= 0)
@@ -200,6 +241,28 @@ public class PlayerStatus : PlayerGadget
         }
 
        
+    }
+
+    public void Change_Ani()
+    {
+        switch(animationType)
+        {
+            case AnimationType.IDLE:
+                anim.Play(animationClips[0].name);
+                break;
+            case AnimationType.WALK:
+                anim.Play(animationClips[1].name);
+                break;
+            case AnimationType.RUN:
+                anim.Play(animationClips[2].name);
+                break;
+            case AnimationType.JUMP:
+                anim.Play(animationClips[3].name);
+                break;
+            case AnimationType.GETDAMEGE:
+                anim.Play(animationClips[4].name);
+                break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

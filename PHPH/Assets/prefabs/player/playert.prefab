@@ -86,15 +86,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1552095800209509355, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  m_Sprite: {fileID: 3500965180899214381, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
   m_Color: {r: 0.4490565, g: 0.4490565, b: 0.4490565, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.13, y: 0.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &6224860591417124091
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481336251
+  GlobalObjectIdHash: 4147144535
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -178,6 +178,14 @@ MonoBehaviour:
   movedir: {x: 0, y: 0, z: 0}
   hpBar: {fileID: 4874497644925622408}
   staminaBar: {fileID: 5066051042400682364}
+  animationType: 0
+  anim: {fileID: 2909174151205997224}
+  animationClips:
+  - {fileID: 6786142354665394581, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  - {fileID: -3419257869308726280, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  - {fileID: 6200578666267062213, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  - {fileID: -2993534804863918692, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
+  - {fileID: -6794766126111622265, guid: bc64c30cc86e1dd4fba28cde9db3a934, type: 3}
   VirtualCamera: {fileID: 753394858916089596, guid: 86b130719997f404d981f1858e56a5bf, type: 3}
   Listener: {fileID: 6139488963890321423}
   rayPos: {fileID: 614866909775635670}
