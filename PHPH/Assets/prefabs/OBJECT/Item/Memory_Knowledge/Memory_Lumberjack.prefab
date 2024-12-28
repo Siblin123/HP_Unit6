@@ -47,11 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   name: "\uB098\uBB34\uAFBC\uC758 \uAE30\uC5B5"
   id: 0
   explan: "\uB3C4\uB07C\uC5D0 \uC775\uC219\uD574\uC9D1\uB2C8\uB2E4."
   price: 1
   max_Have_Count: 1
+  colTime: 0
   curItemType: 6
 --- !u!212 &5299309209105745176
 SpriteRenderer:
