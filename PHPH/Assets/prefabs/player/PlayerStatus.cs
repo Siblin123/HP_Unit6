@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System;
+using Unity.Netcode.Components;
+using static PlayerStatus;
 
 public class PlayerStatus : PlayerGadget
 {
     public Light2D player_light;
     Rigidbody2D rb;
 
-    //Attack()
+    // Attack()
     public Vector3 mousePos;
     public Transform AttackPos;
-    //status
+
+    // status
     public float maxHp;
     public float hp;
-    
     public float maxStamina;
     public float stamina;
     public float stamina_RegenSpeed;
@@ -26,23 +28,23 @@ public class PlayerStatus : PlayerGadget
 
     float horizontalInput;
     float VerticalInput;
-    //Move()
+
+    // Move()
     public float moveSpeed = 5f;
     public float runSpeed = 5f;
     public float jumpPower = 5f;
     float curSpeed;
-    public Vector3 movedir;
-    Vector2 enterStairPos;//°è´ÜÀ» µé¾î¿Â À§Ä¡(¿Ş,¿À)
 
+    public Vector3 movedir;
+    Vector2 enterStairPos;
 
     public Vector2 rayDirection;
 
-    //UI¸ğÀ½
+    // UI ê´€ë ¨
     [SerializeField] Slider hpBar;
     [SerializeField] Slider staminaBar;
 
-
-    //¾Ö´Ï¸ŞÀÌ¼Ç
+    // ì• ë‹ˆë©”ì´ì…˜
     public enum AnimationType
     {
         stand,
@@ -50,29 +52,34 @@ public class PlayerStatus : PlayerGadget
         run,
         jump_up,
         jump_down,
-
         get_damage
     }
-    public AnimationType animationType;
 
-    public Animator anim;
+    public AnimationType AnimationState;
 
+    public NetworkAnimator anim;
 
     public override void Start()
-    {
+    {   
+
         if (!IsOwner)
             return;
+
         base.Start();
         init();
         rb = GetComponent<Rigidbody2D>();
 
+      
     }
 
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
 
+    }
 
     public override void FixedUpdate()
     {
-       
         if (!IsOwner)
             return;
 
@@ -87,13 +94,12 @@ public class PlayerStatus : PlayerGadget
     {
         if (!IsOwner)
             return;
+
         base.Update();
-       
+
         Jump();
         LookMouse();
         UI_View();
-        Change_Ani();   
-
     }
 
     public override void init()
@@ -104,7 +110,6 @@ public class PlayerStatus : PlayerGadget
 
         hpBar.maxValue = maxHp;
         staminaBar.maxValue = maxStamina;
-
     }
 
     void UI_View()
@@ -115,107 +120,73 @@ public class PlayerStatus : PlayerGadget
 
     private void Move()
     {
-        if (mousePos.x > transform.position.x)//º® Ã£´Â ·¹ÀÌ°¡ ¸¶¿ì½º ±âÁØ
-            rayDirection = Vector2.right;
-        else
-            rayDirection = Vector2.left;
-
-
-
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && stamina > 1)
         {
-            if (horizontalInput != 0 && stamina >1)
+            if (rb.linearVelocityY == 0 && (AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
             {
-                if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
-                {
-                    animationType = AnimationType.run;
-                }
-                curSpeed = runSpeed;
-                stamina -= stamina_useSpeed * Time.deltaTime;
+                ChangeAnim(AnimationType.run);
             }
-               
+            curSpeed = runSpeed;
+            stamina -= stamina_useSpeed * Time.deltaTime;
         }
         else
         {
-            if(stamina<=maxStamina)
+            if (stamina <= maxStamina)
                 stamina += stamina_RegenSpeed * Time.deltaTime;
-            if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
+
+            if (horizontalInput != 0)
             {
-                animationType = AnimationType.walk;
+                if (rb.linearVelocityY == 0 &&  (AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
+                {
+                    ChangeAnim(AnimationType.walk);
+                }
+            }
+            else if (rb.linearVelocityY==0&&(AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
+            {
+                print("aaa");
+                ChangeAnim(AnimationType.stand);
+                print("ccc");
             }
             curSpeed = moveSpeed;
-
         }
 
-
-
-        if (horizontalInput != 0)
-        {
-            if(enterStairPos==Vector2.zero)
-            {
-                enterStairPos = rayDirection;
-            }
-
-            if (movedir == Vector3.zero)
-            {
-                transform.Translate(new Vector2(horizontalInput, 0) * curSpeed * Time.deltaTime);
-
-            }
-            else
-            {
-                transform.Translate(new Vector2(movedir.normalized.x, movedir.normalized.y) * curSpeed * Time.deltaTime);
-                print("°è´Ü ÀÌ¿ëÁß");
-            }
-
-            if(enterStairPos.x!= horizontalInput)
-            {
-                enterStairPos.x = horizontalInput;
-                movedir *= -1;
-            }
-
-        }
-        else
-        {
-            if(animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
-            {
-                animationType = AnimationType.stand;
-            }
-          
-        }
-
-      
+        transform.Translate(new Vector2(horizontalInput, 0) * curSpeed * Time.deltaTime);
     }
 
-    void Jump()
+    private void Jump()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.linearVelocityY = 0;
-            rb.linearVelocityY += jumpPower;
-            animationType = AnimationType.jump_up;
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            ChangeAnim(AnimationType.jump_up);
         }
 
-            
-        if (rb.linearVelocityY <= -0.1f)
+        if (rb.linearVelocity.y < -0.1f && AnimationState != AnimationType.jump_down)
         {
-            animationType = AnimationType.jump_down;
+            print("cur1 : " + AnimationState);
+            ChangeAnim(AnimationType.jump_down);
+            print("cur2 : " + AnimationState);
         }
+
+        if(rb.linearVelocity.y ==0 && AnimationState == AnimationType.jump_down)
+        {
+            print("cur3 : " + AnimationState);
+            ChangeAnim(AnimationType.stand);
+            print("cur4 : " + AnimationState);
+        }
+       
     }
 
     public void GetDamege(float value)
     {
-        animationType = AnimationType.get_damage;
         hp -= value;
 
         if (hp <= 0)
-        { //ÇÃ·¹ÀÌ¾î »ç¸Á
-        
+        {
+            // í”Œë ˆì´ì–´ ì‚¬ë§ ì²˜ë¦¬
         }
-
-      
-
     }
 
     public void LookMouse()
@@ -228,41 +199,64 @@ public class PlayerStatus : PlayerGadget
         AttackPos.transform.rotation = Quaternion.Euler(new Vector3(1, 0, angle));
         player_light.transform.rotation = Quaternion.Euler(new Vector3(1, 0, angle - 90));
 
-        if (transform.position.x > mousePos.x) // ¿ŞÂÊÀ» ¹Ù¶óº¼ ¶§
+        if (transform.position.x > mousePos.x)
         {
             transform.localScale = new Vector3(-1, 1f, 1f);
             AttackPos.transform.localScale = new Vector3(-1, -1f, 1f);
             player_light.transform.localScale = new Vector3(-1, -1f, 1f);
-
         }
-        else // ¿À¸¥ÂÊÀ» ¹Ù¶óº¼ ¶§
+        else
         {
             transform.localScale = new Vector3(1, 1f, 1f);
-            AttackPos.transform.transform.localScale = new Vector3(1, 1f, 1f);
+            AttackPos.transform.localScale = new Vector3(1, 1f, 1f);
             player_light.transform.localScale = new Vector3(1, 1f, 1f);
         }
-
-       
     }
 
-    public void Change_Ani(AnimationClip clip =null)
+    // í´ë¼ì´ì–¸íŠ¸ì—ì„œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
+    void ChangeAnim(AnimationType newanim)
     {
-        if (clip)
+        if (IsClient)
         {
-            anim.Play(clip.name); 
-            if (Enum.TryParse(typeof(AnimationType), clip.name, out var result))
-            {
-                animationType = (AnimationType)result;
-            }
+            // ì„œë²„ì— ì• ë‹ˆë©”ì´ì…˜ ë³€ê²½ ìš”ì²­
+            ChangeAnim_ServerRpc(newanim);
         }
-            
-        else
-            anim.Play(animationType.ToString());
 
+        // í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+        anim.Animator.Play(newanim.ToString());
+        print(newanim.ToString() + "@@@@@@");
 
+        // clip.nameì„ AnimationTypeìœ¼ë¡œ ë³€í™˜
+        if (Enum.TryParse(typeof(AnimationType), newanim.ToString(), out var result))
+        {
+            AnimationState = (AnimationType)result;
+            print(newanim.ToString() + "!!!!!!");
+        }
     }
 
+    // ì„œë²„ì—ì„œ í˜¸ì¶œë˜ëŠ” ë©”ì„œë“œ
+    [ServerRpc(RequireOwnership = false)]
+    public void ChangeAnim_ServerRpc(AnimationType newanim)
+    {
+        // ì„œë²„ëŠ” í´ë¼ì´ì–¸íŠ¸ì—ê²Œ ì• ë‹ˆë©”ì´ì…˜ ë³€ê²½ì„ ìš”ì²­
+        ChangeAnim_ClientRpc(newanim);
+    }
 
+    // ì„œë²„ -> í´ë¼ì´ì–¸íŠ¸ë¡œ ì• ë‹ˆë©”ì´ì…˜ ë³€ê²½ ìš”ì²­
+    [ClientRpc]
+    public void ChangeAnim_ClientRpc(AnimationType newanim)
+    {
+        // í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì• ë‹ˆë©”ì´ì…˜ ì‹¤í–‰
+        anim.Animator.Play(newanim.ToString());
+        print(newanim.ToString() + " (ClientRpc)!!!!!!");
+
+        // clip.nameì„ AnimationTypeìœ¼ë¡œ ë³€í™˜
+        if (Enum.TryParse(typeof(AnimationType), newanim.ToString(), out var result))
+        {
+            AnimationState = (AnimationType)result;
+            print(newanim.ToString() + "!!!!!!");
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -271,17 +265,14 @@ public class PlayerStatus : PlayerGadget
             Vector3 wallNormal = collision.contacts[0].normal;
 
             Vector3 moveDir = new Vector3(horizontalInput, 0, 0);
+            movedir = Vector3.ProjectOnPlane(moveDir, wallNormal).normalized;
 
-            movedir = Vector3.ProjectOnPlane(moveDir, wallNormal);
-            movedir = movedir.normalized;
-            //movedir = new Vector3(Mathf.Abs(movedir.x), Mathf.Abs(movedir.y), Mathf.Abs(movedir.z));
-            Debug.DrawRay(transform.position, movedir, Color.red, 2f); // Ãæµ¹ ÁöÁ¡¿¡¼­ ¹ı¼± º¤ÅÍ¸¦ »¡°£»öÀ¸·Î ±×¸³´Ï´Ù.
+            Debug.DrawRay(transform.position, movedir, Color.red, 2f);
         }
 
-        if(collision.transform.CompareTag("Ground"))
+        if (collision.transform.CompareTag("Ground"))
         {
             movedir = Vector3.zero;
         }
     }
-
 }
