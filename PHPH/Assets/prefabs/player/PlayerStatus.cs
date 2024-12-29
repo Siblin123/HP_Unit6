@@ -3,6 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
+using System;
 
 public class PlayerStatus : PlayerGadget
 {
@@ -36,6 +37,27 @@ public class PlayerStatus : PlayerGadget
 
     public Vector2 rayDirection;
 
+    //UI모음
+    [SerializeField] Slider hpBar;
+    [SerializeField] Slider staminaBar;
+
+
+    //애니메이션
+    public enum AnimationType
+    {
+        stand,
+        walk,
+        run,
+        jump_up,
+        jump_down,
+
+        get_damage
+    }
+    public AnimationType animationType;
+
+    public Animator anim;
+
+
     public override void Start()
     {
         if (!IsOwner)
@@ -48,9 +70,6 @@ public class PlayerStatus : PlayerGadget
 
 
 
-    //UI모음
-    [SerializeField] Slider hpBar;
-    [SerializeField] Slider staminaBar;
     public override void FixedUpdate()
     {
        
@@ -73,6 +92,7 @@ public class PlayerStatus : PlayerGadget
         Jump();
         LookMouse();
         UI_View();
+        Change_Ani();   
 
     }
 
@@ -108,6 +128,10 @@ public class PlayerStatus : PlayerGadget
         {
             if (horizontalInput != 0 && stamina >1)
             {
+                if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
+                {
+                    animationType = AnimationType.run;
+                }
                 curSpeed = runSpeed;
                 stamina -= stamina_useSpeed * Time.deltaTime;
             }
@@ -117,7 +141,10 @@ public class PlayerStatus : PlayerGadget
         {
             if(stamina<=maxStamina)
                 stamina += stamina_RegenSpeed * Time.deltaTime;
-
+            if (animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
+            {
+                animationType = AnimationType.walk;
+            }
             curSpeed = moveSpeed;
 
         }
@@ -149,6 +176,14 @@ public class PlayerStatus : PlayerGadget
             }
 
         }
+        else
+        {
+            if(animationType != AnimationType.jump_up || animationType != AnimationType.jump_down)
+            {
+                animationType = AnimationType.stand;
+            }
+          
+        }
 
       
     }
@@ -159,11 +194,19 @@ public class PlayerStatus : PlayerGadget
         {
             rb.linearVelocityY = 0;
             rb.linearVelocityY += jumpPower;
+            animationType = AnimationType.jump_up;
+        }
+
+            
+        if (rb.linearVelocityY <= -0.1f)
+        {
+            animationType = AnimationType.jump_down;
         }
     }
 
     public void GetDamege(float value)
     {
+        animationType = AnimationType.get_damage;
         hp -= value;
 
         if (hp <= 0)
@@ -201,6 +244,25 @@ public class PlayerStatus : PlayerGadget
 
        
     }
+
+    public void Change_Ani(AnimationClip clip =null)
+    {
+        if (clip)
+        {
+            anim.Play(clip.name); 
+            if (Enum.TryParse(typeof(AnimationType), clip.name, out var result))
+            {
+                animationType = (AnimationType)result;
+            }
+        }
+            
+        else
+            anim.Play(animationType.ToString());
+
+
+    }
+
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
