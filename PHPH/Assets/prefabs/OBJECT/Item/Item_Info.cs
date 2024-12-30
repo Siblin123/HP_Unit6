@@ -72,7 +72,7 @@ public class Item_Info : NetworkBehaviour
             var playerInventory = playerNetworkObject.GetComponent<Player_Inventory>();
             if (playerInventory != null)
             {
-                //playerInventory.Get_Item(this, 1);
+                playerInventory.Get_Item(this, 1);
             }
         }
 
