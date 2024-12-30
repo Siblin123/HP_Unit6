@@ -29,11 +29,11 @@ public class Light_Find_Enemy : NetworkBehaviour
     public void Update()
     {
         //0 ³· 1 ¹ã
-        if (csTable.Instance.gameManager.is_afterNoonNight == 1 && night_light2D.GetComponent<Light2D>().enabled == false)
+        if (csTable.Instance.gameManager.is_afterNoonNight.Value == 1 && night_light2D.GetComponent<Light2D>().enabled == false)
         {
             Change_Light(false);
         }
-        else if(csTable.Instance.gameManager.is_afterNoonNight == 0 && night_light2D.GetComponent<Light2D>().enabled == true)
+        else if(csTable.Instance.gameManager.is_afterNoonNight.Value == 0 && night_light2D.GetComponent<Light2D>().enabled == true)
         {
             Change_Light(true);
         }
