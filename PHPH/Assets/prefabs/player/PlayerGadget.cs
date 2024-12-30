@@ -1,10 +1,13 @@
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class PlayerGadget : NetworkBehaviour
 {
 
     public Item_Info curItem;
+    public NetworkAnimator Arm_Anim;
+
 
     public virtual void Start()
     {

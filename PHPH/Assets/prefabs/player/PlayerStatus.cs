@@ -68,8 +68,8 @@ public class PlayerStatus : PlayerGadget
         base.Start();
         init();
         rb = GetComponent<Rigidbody2D>();
+        csTable.Instance.gameManager.isStartGame = true;
 
-      
     }
 
     public override void OnDestroy()
