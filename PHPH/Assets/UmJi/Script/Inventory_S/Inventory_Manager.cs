@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Inventory_Manager : MonoBehaviour
 {
     public List<Item_Info> test_L;
+
     // 아이템 습득 및 구매
     public void Get_Item(Item_Info item, int count)
     {

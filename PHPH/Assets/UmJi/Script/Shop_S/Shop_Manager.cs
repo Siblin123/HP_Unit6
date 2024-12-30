@@ -15,6 +15,8 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
+    public List<Inven_Slot> inven_Slot_List; // 인벤토리 슬롯
+
     private void Start()
     {
         Update_Slot();
@@ -26,6 +28,17 @@ public class Shop_Manager : interaction
         On_Off();
     }
 
+    private void OnEnable()
+    {
+        inven_Slot_List = new List<Inven_Slot>();
+
+        for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+        {
+            inven_Slot_List.Add(Player_Inventory.instance.slot_List[i]);
+            inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+        }
+    }
+
     public void On_Off()
     {
         if (shop_Panel.activeSelf == true)
@@ -35,6 +48,11 @@ public class Shop_Manager : interaction
         else
         {
             shop_Panel.SetActive(true);
+            inven_Slot_List = Player_Inventory.instance.slot_List;
+            for (int i = 0; i < inven_Slot_List.Count; i++) 
+            {
+                inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            }
         }
     }
 
