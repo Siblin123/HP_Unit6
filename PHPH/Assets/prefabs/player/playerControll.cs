@@ -59,7 +59,7 @@ public class PlayerControl : PlayerStatus
     //빛을 건너편이 보이게  하는 레이케스트
     private void Light_Raycast()
     {
-        if(csTable.Instance.gameManager.is_afterNoonNight==1)//밤에만 작동
+        if(csTable.Instance.gameManager.is_afterNoonNight.Value ==1)//밤에만 작동
         {
             RaycastHit2D hit = Physics2D.Raycast(rayPos.position, rayDirection, rayDisance, wallLayer);
 

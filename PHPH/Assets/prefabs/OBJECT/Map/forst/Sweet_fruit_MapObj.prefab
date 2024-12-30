@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1172209740
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 2216369249
+  InScenePlacedSourceGlobalObjectIdHash: 1172209740
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
     m_InternalValue: 100
   health:
     m_InternalValue: 0
-  tagType: 0
+  tagType: 1
   reward_Item: {fileID: 8429358086097254568, guid: 737dcdb65b27852499a1343bde76b37d, type: 3}
 --- !u!50 &1863922234977978497
 Rigidbody2D:
