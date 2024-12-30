@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 719532210000534796}
   - component: {fileID: 983295206477778460}
   - component: {fileID: 1279258954442085774}
+  - component: {fileID: 8520634015462718894}
+  - component: {fileID: 8881582589962923554}
   m_Layer: 6
   m_Name: Arm_Anim
   m_TagString: Untagged
@@ -43,7 +45,7 @@ Animator:
   m_GameObject: {fileID: 590750374679327889}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9066100434545850418, guid: 78c94a923ad58584bbb83c93c79dd775, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1881748267c092c44a008dace53c68aa, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -110,6 +112,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8520634015462718894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590750374679327889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 983295206477778460}
+--- !u!114 &8881582589962923554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590750374679327889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e67b670aacdc54bb22d2c222994190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  _anim: 0
+  arm_NetWorkAnimator: {fileID: 8520634015462718894}
 --- !u!1 &1980552357415299172
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +160,7 @@ GameObject:
   - component: {fileID: 6139488963890321423}
   - component: {fileID: 2909174151205997224}
   - component: {fileID: -7901038586680655187}
+  - component: {fileID: 434301953864431923}
   m_Layer: 6
   m_Name: playert
   m_TagString: Player
@@ -248,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4147144535
+  GlobalObjectIdHash: 3481336251
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -275,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   curItem: {fileID: 0}
+  arm_Anim: {fileID: 8881582589962923554}
   player_light: {fileID: 9026596277976412956}
   mousePos: {x: 0, y: 0, z: 0}
   AttackPos: {fileID: 9022638514675875189}
@@ -292,7 +326,7 @@ MonoBehaviour:
   rayDirection: {x: 0, y: 0}
   hpBar: {fileID: 4874497644925622408}
   staminaBar: {fileID: 5066051042400682364}
-  animationType: 0
+  AnimationState: 0
   anim: {fileID: -7901038586680655187}
   VirtualCamera: {fileID: 753394858916089596, guid: 86b130719997f404d981f1858e56a5bf, type: 3}
   Listener: {fileID: 6139488963890321423}
@@ -428,6 +462,21 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   TransitionStateInfoList: []
   m_Animator: {fileID: 2909174151205997224}
+--- !u!114 &434301953864431923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980552357415299172}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bebf96f6719b4e4eba787992c1d1ab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test_L: []
+  slot_List: []
+  godGet_List: []
 --- !u!1 &5116266193173006959
 GameObject:
   m_ObjectHideFlags: 0

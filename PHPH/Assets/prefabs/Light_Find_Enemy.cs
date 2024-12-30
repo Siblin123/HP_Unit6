@@ -28,6 +28,8 @@ public class Light_Find_Enemy : NetworkBehaviour
 
     public void Update()
     {
+        if (!IsOwner)
+            return;
         //0 ³· 1 ¹ã
         if (csTable.Instance.gameManager.is_afterNoonNight.Value == 1 && night_light2D.GetComponent<Light2D>().enabled == false)
         {
@@ -40,7 +42,6 @@ public class Light_Find_Enemy : NetworkBehaviour
 
         if (IsOwner)
         {
-
             FindEnemy();
         }
     }

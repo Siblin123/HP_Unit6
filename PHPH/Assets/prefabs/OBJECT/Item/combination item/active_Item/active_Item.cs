@@ -10,6 +10,7 @@ public class active_Item : combination_item
     RaycastHit2D [] hits;
     public baseStatus target;
 
+    
     public override void UseItem()
     {
         base.UseItem();

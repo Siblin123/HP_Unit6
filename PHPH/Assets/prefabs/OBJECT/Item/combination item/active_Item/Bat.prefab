@@ -134,6 +134,9 @@ MonoBehaviour:
   max_Have_Count: 1
   colTime: 0
   curItemType: 3
+  anim: {fileID: 0}
+  clip: {fileID: 0}
+  ArmType: 11
   damege: 1
   attack_rage: 2
   CrowdControl_Time: 0

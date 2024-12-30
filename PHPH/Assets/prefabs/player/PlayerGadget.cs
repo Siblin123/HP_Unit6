@@ -6,13 +6,13 @@ public class PlayerGadget : NetworkBehaviour
 {
 
     public Item_Info curItem;
-    public NetworkAnimator Arm_Anim;
-
+    public Arm_Anim arm_Anim;
 
     public virtual void Start()
     {
-    
-        
+        csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();
+        init();
+
     }
 
     public virtual void FixedUpdate()
@@ -41,5 +41,7 @@ public class PlayerGadget : NetworkBehaviour
         if(curItem != null)
             curItem.UseItem();
     }
+
+
 
 }
