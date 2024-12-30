@@ -1,13 +1,17 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Inventory_Manager : MonoBehaviour
 {
+    public List<Item_Info> test_L;
     // 아이템 습득 및 구매
     public void Get_Item(Item_Info item, int count)
     {
         Player_Inventory p_I = GetComponent<Player_Inventory>();
 
-        for (int i = 0; i < p_I.slot_List.Count; i++)
+        int i = 0;
+        for (i = 0; i < p_I.slot_List.Count; i++)
         {
             // 획득한 아이템이 인벤토리에 있으면
             if (p_I.slot_List[i].item == item)
@@ -15,48 +19,31 @@ public class Inventory_Manager : MonoBehaviour
                 // 총 아이템 개수가 최대 소지개수보다 많으면
                 if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)
                 {
-                    for (int j = 0; j < p_I.slot_List.Count; i++)
-                    {
-                        if(p_I.slot_List[j].item == null)
-                        {
-                            // num => 최대 소지 개수 - 현재 보유개수
-                            int num = p_I.slot_List[i].have_Count + count;
-                            num = num - p_I.slot_List[i].item.max_Have_Count;
+                    // 일단 한계치까지 할당
+                    p_I.slot_List[i].Update_Slot(p_I.slot_List[i].item, p_I.slot_List[i].item.max_Have_Count);
 
-                            // 인벤토리에 최대 값을 뺀 나머지지 개수를 할당
-                            p_I.slot_List[j].Update_Slot(p_I.slot_List[i].item, num);
-                            p_I.slot_List[i].have_Count = p_I.slot_List[i].item.max_Have_Count;
-                            break;
-                        }
-                    }
-                    break;
+                    count += p_I.slot_List[i].have_Count;
+                    count -= p_I.slot_List[i].item.max_Have_Count;
                 }
-                else { p_I.slot_List[i].have_Count += count; break; }
+                else 
+                {
+                    p_I.slot_List[i].Pluse_Item(count);
+                    break; 
+                }
             }
         }
-        /* for(int i = 0;  i < Player_Inventory.instance.slot_List.Count; i++)
-         {
-             // 획득한 아이템이 인벤토리에 있으면
-             if(Player_Inventory.instance.slot_List[i].item == item)
-             {
-                 // 총 아이템 개수가 최대 소지개수보다 많으면
-                 if(Player_Inventory.instance.slot_List[i].have_Count + count > Player_Inventory.instance.slot_List[i].item.max_Have_Count)
-                 {
-                     for(int j = 0; j < Player_Inventory.instance.slot_List.Count; i++)
-                     {
-
-                     }
-                     // num => 최대 소지 개수 - 현재 보유개수
-                     int num = Player_Inventory.instance.slot_List[i].have_Count + count;
-                     num = num - Player_Inventory.instance.slot_List[i].item.max_Have_Count;
-
-
-                     Player_Inventory.instance.slot_List[i].have_Count = Player_Inventory.instance.slot_List[i].item.max_Have_Count;
-
-                 }
-                 else { Player_Inventory.instance.slot_List[i].have_Count += count; }
-             }
-         }*/
+        //획득한 아이템이 인벤토리에 없을 때
+        if(i == p_I.slot_List.Count)
+        {
+            for (int j = 0; j < p_I.slot_List.Count; j++)
+            {
+                if (p_I.slot_List[j].item == null)
+                {
+                    p_I.slot_List[j].Update_Slot(item, count);
+                    break;
+                }
+            }
+        }
     }
 
     // 아이템 판매
