@@ -72,6 +72,17 @@ public class Inven_Slot : Inventory_Manager
         }
     }
 
+    public void Pluse_Item(int num)
+    {
+        have_Count += num;
+
+        if (count_T != null) // 장비는 개수 표시 없음
+        {
+            count_T.enabled = true;
+            count_T.text = have_Count.ToString();
+        }
+    }
+
     public void Click_Slot() // 버튼 클릭했을때
     {
         if (follow_Slot.GetComponent<Inven_Slot>().clikc_S == null)
