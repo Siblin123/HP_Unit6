@@ -132,15 +132,16 @@ MonoBehaviour:
   explan: "\uAD11\uC11D\uC744 \uC27D\uAC8C \uCE98 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
   price: 144
   max_Have_Count: 1
-  colTime: 0
+  colTime: 3
   curItemType: 3
   anim: {fileID: 0}
   clip: {fileID: 0}
   ArmType: 4
-  damege: 0
-  attack_rage: 0
+  damege: 1
+  attack_rage: 0.3
   CrowdControl_Time: 0
   active_rayMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4608
   target: {fileID: 0}
+  offset: {x: 0, y: 0.1, z: 0}

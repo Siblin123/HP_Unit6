@@ -13,7 +13,8 @@ public class combination_item : Item_Info
         Arm_Anim();
     }
 
-    public void Arm_Anim()
+
+    public virtual void Arm_Anim()
     {
         csTable.Instance.gameManager.player.arm_Anim.Anim = ArmType;
         print("µµ³¢µµ³¢");

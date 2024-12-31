@@ -128,6 +128,9 @@ public class PlayerStatus : PlayerGadget
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
+            
+
+
         if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && stamina > 1)
         {
             if (rb.linearVelocityY == 0 && (AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
@@ -155,6 +158,9 @@ public class PlayerStatus : PlayerGadget
             }
             curSpeed = moveSpeed;
         }
+
+      
+
 
         transform.Translate(new Vector2(horizontalInput, 0) * curSpeed * Time.deltaTime);
     }
@@ -206,6 +212,7 @@ public class PlayerStatus : PlayerGadget
             transform.localScale = new Vector3(-1, 1f, 1f);
             AttackPos.transform.localScale = new Vector3(-1, -1f, 1f);
             player_light.transform.localScale = new Vector3(-1, -1f, 1f);
+            
         }
         else
         {
@@ -213,6 +220,8 @@ public class PlayerStatus : PlayerGadget
             AttackPos.transform.localScale = new Vector3(1, 1f, 1f);
             player_light.transform.localScale = new Vector3(1, 1f, 1f);
         }
+
+        rayDirection = new Vector3(transform.localScale.x, 0, 0);
     }
 
     // 클라이언트에서 호출되는 메서드

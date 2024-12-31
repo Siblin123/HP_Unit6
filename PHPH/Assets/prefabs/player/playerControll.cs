@@ -87,7 +87,7 @@ public class PlayerControl : PlayerStatus
 
 
 
-        Debug.DrawRay(rayPos.position, rayDirection * rayDisance, Color.black);
+      //  Debug.DrawRay(rayPos.position, rayDirection * rayDisance, Color.black);
        
     }
 
@@ -132,7 +132,7 @@ public class PlayerControl : PlayerStatus
         }
 
         // 디버그용 레이 그리기
-        Debug.DrawRay(transform.position, rayDirection * rayDisance, Color.red);
+       // Debug.DrawRay(transform.position, rayDirection * rayDisance, Color.red);
     }
 
 }

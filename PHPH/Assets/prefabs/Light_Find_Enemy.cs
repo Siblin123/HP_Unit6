@@ -69,7 +69,7 @@ public class Light_Find_Enemy : NetworkBehaviour
             RaycastHit2D hit = Physics2D.Raycast(lightPosition, direction, outerRadius, enemyLayer);
 
             // 디버그용 레이 시각화
-            Debug.DrawRay(lightPosition, direction * outerRadius, Color.green);
+           // Debug.DrawRay(lightPosition, direction * outerRadius, Color.green);
 
             // 적 감지
             if (hit.collider != null)
@@ -86,7 +86,7 @@ public class Light_Find_Enemy : NetworkBehaviour
                     checkEnemy.Add(enemy); // 새로 감지된 적 추가
                     
                     enemy.GetComponent<SpriteRenderer>().enabled = true; // 현재 적 활성화
-                    print("적을 감지함");
+            
                     isE = true;
 
                 }

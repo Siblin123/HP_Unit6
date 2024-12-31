@@ -34,6 +34,15 @@ public class Arm_Anim : NetworkBehaviour
     public NetworkAnimator arm_NetWorkAnimator;
 
 
+    PlayerControl player;
+
+
+    private void Start()
+    {
+        if(!IsOwner)
+            return;
+        player = csTable.Instance.gameManager.player.GetComponent<PlayerControl>();
+    }
     public ArmType Anim
     {
         get => _anim;
@@ -50,11 +59,19 @@ public class Arm_Anim : NetworkBehaviour
 
     public void Chage_Anim_Event(Arm_Anim.ArmType newStatue)//애니메이션 트리거로 상태변경
     {
+        if(!IsOwner)
+            return;
+
         csTable.Instance.gameManager.player.arm_Anim.Anim = newStatue;
     }
 
 
-    
+    public void UseItem_Event()
+    {
+        if (!IsOwner)
+            return;
+        player.UseCurItem_Attack();
+    }
 
 
     // 클라이언트에서 호출되는 메서드
