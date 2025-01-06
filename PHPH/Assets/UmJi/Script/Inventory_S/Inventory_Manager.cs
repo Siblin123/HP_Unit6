@@ -16,6 +16,7 @@ public class Inventory_Manager : MonoBehaviour
         {
             // 획득한 아이템이 인벤토리에 있으면
             if (p_I.slot_List[i].item == item)
+            //if (p_I.slot_List[i].id == item.id)
             {
                 // 총 아이템 개수가 최대 소지개수보다 많으면
                 if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)

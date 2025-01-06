@@ -21,11 +21,10 @@ public class Inven_Slot : Inventory_Manager
     private void Start()
     {
         follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
+        //money_View = GameObject.Find("Price_View"); // 카메라 따라다닐 오브젝트
         rectTransform = GetComponent<RectTransform>();
 
-
         Update_Slot(item, have_Count);
-
     }
 
     private void Update()

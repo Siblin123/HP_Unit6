@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class Shop_Manager : interaction
 {
@@ -17,6 +19,9 @@ public class Shop_Manager : interaction
 
     public List<Inven_Slot> inven_Slot_List; // 인벤토리 슬롯
 
+    // 돈 표시 UI
+    public GameObject money_View;
+
     private void Start()
     {
         Update_Slot();
@@ -30,12 +35,21 @@ public class Shop_Manager : interaction
 
     private void OnEnable()
     {
-        inven_Slot_List = new List<Inven_Slot>();
-
         for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
         {
-            inven_Slot_List.Add(Player_Inventory.instance.slot_List[i]);
-            inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, Player_Inventory.instance.slot_List[i].have_Count);
+            if (inven_Slot_List[i].item.id == 100)
+            {
+                money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = inven_Slot_List[i].have_Count.ToString("N0");
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+        {
+            Player_Inventory.instance.slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
         }
     }
 
@@ -43,12 +57,19 @@ public class Shop_Manager : interaction
     {
         if (shop_Panel.activeSelf == true)
         {
+            // 상점에서 판매 또는 구매한걸 인벤토리에 적용
+            for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+            {
+                Player_Inventory.instance.slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            }
+
             shop_Panel.SetActive(false);
         }
         else
         {
             shop_Panel.SetActive(true);
-            inven_Slot_List = Player_Inventory.instance.slot_List;
+            
+            // 인벤토레를 상점 인벤토리에 적용
             for (int i = 0; i < inven_Slot_List.Count; i++) 
             {
                 inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
