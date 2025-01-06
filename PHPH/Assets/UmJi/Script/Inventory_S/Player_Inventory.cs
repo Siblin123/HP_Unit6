@@ -9,6 +9,8 @@ public class Player_Inventory : Inventory_Manager
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
 
+    public int money;
+
     private void Awake()
     {
         instance = this;
@@ -35,7 +37,7 @@ public class Player_Inventory : Inventory_Manager
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             print("4");
-            Get_Item(test_L[3], 1);
+            Get_Item(test_L[3], 100);
         }
     }
 
