@@ -124,7 +124,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: monster_2
     originalName: 
-    pivot: {x: 0.5116279, y: -0.43243244}
+    pivot: {x: 0.48, y: -0.55172414}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,8 +132,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 43
-      height: 37
+      width: 25
+      height: 29
     spriteID: b5c48025910f35041bc88871cc3d934f
     spriteBone: []
     spriteOutline: []
@@ -156,10 +156,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 10
+        x: 20
         y: 16
-        width: 43
-        height: 37
+        width: 25
+        height: 29
       spriteId: b5c48025910f35041bc88871cc3d934f
     linkedCells: []
     parentIndex: -1
