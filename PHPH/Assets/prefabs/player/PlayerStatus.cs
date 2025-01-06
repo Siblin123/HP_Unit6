@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System;
 using Unity.Netcode.Components;
-using static PlayerStatus;
 
 public class PlayerStatus : PlayerGadget
 {
@@ -47,6 +46,7 @@ public class PlayerStatus : PlayerGadget
     // 애니메이션
     public enum AnimationType
     {
+        //이동
         stand,
         walk,
         run,
@@ -55,9 +55,11 @@ public class PlayerStatus : PlayerGadget
         get_damage
     }
 
+
     public AnimationType AnimationState;
 
     public NetworkAnimator anim;
+
 
     public override void Start()
     {   
@@ -114,13 +116,20 @@ public class PlayerStatus : PlayerGadget
 
     void UI_View()
     {
-        hpBar.value = hp;
-        staminaBar.value = stamina;
+        if (IsOwner) 
+        {
+            hpBar.value = hp;
+            staminaBar.value = stamina;
+        }
+
     }
 
     private void Move()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+            
+
 
         if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && stamina > 1)
         {
@@ -140,17 +149,18 @@ public class PlayerStatus : PlayerGadget
             {
                 if (rb.linearVelocityY == 0 &&  (AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
                 {
-                    ChangeAnim(AnimationType.walk);
+                    ChangeAnim(AnimationType.walk   );
                 }
             }
             else if (rb.linearVelocityY==0&&(AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
             {
-                print("aaa");
                 ChangeAnim(AnimationType.stand);
-                print("ccc");
             }
             curSpeed = moveSpeed;
         }
+
+      
+
 
         transform.Translate(new Vector2(horizontalInput, 0) * curSpeed * Time.deltaTime);
     }
@@ -165,16 +175,12 @@ public class PlayerStatus : PlayerGadget
 
         if (rb.linearVelocity.y < -0.1f && AnimationState != AnimationType.jump_down)
         {
-            print("cur1 : " + AnimationState);
             ChangeAnim(AnimationType.jump_down);
-            print("cur2 : " + AnimationState);
         }
 
         if(rb.linearVelocity.y ==0 && AnimationState == AnimationType.jump_down)
         {
-            print("cur3 : " + AnimationState);
             ChangeAnim(AnimationType.stand);
-            print("cur4 : " + AnimationState);
         }
        
     }
@@ -191,6 +197,8 @@ public class PlayerStatus : PlayerGadget
 
     public void LookMouse()
     {
+        if(!IsOwner)
+            return;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = transform.position.z;
 
@@ -204,6 +212,7 @@ public class PlayerStatus : PlayerGadget
             transform.localScale = new Vector3(-1, 1f, 1f);
             AttackPos.transform.localScale = new Vector3(-1, -1f, 1f);
             player_light.transform.localScale = new Vector3(-1, -1f, 1f);
+            
         }
         else
         {
@@ -211,6 +220,8 @@ public class PlayerStatus : PlayerGadget
             AttackPos.transform.localScale = new Vector3(1, 1f, 1f);
             player_light.transform.localScale = new Vector3(1, 1f, 1f);
         }
+
+        rayDirection = new Vector3(transform.localScale.x, 0, 0);
     }
 
     // 클라이언트에서 호출되는 메서드
@@ -224,16 +235,13 @@ public class PlayerStatus : PlayerGadget
 
         // 클라이언트에서 애니메이션 실행
         anim.Animator.Play(newanim.ToString());
-        print(newanim.ToString() + "@@@@@@");
 
         // clip.name을 AnimationType으로 변환
         if (Enum.TryParse(typeof(AnimationType), newanim.ToString(), out var result))
         {
             AnimationState = (AnimationType)result;
-            print(newanim.ToString() + "!!!!!!");
         }
     }
-
     // 서버에서 호출되는 메서드
     [ServerRpc(RequireOwnership = false)]
     public void ChangeAnim_ServerRpc(AnimationType newanim)
@@ -242,21 +250,21 @@ public class PlayerStatus : PlayerGadget
         ChangeAnim_ClientRpc(newanim);
     }
 
+
     // 서버 -> 클라이언트로 애니메이션 변경 요청
     [ClientRpc]
     public void ChangeAnim_ClientRpc(AnimationType newanim)
     {
         // 클라이언트에서 애니메이션 실행
         anim.Animator.Play(newanim.ToString());
-        print(newanim.ToString() + " (ClientRpc)!!!!!!");
 
         // clip.name을 AnimationType으로 변환
         if (Enum.TryParse(typeof(AnimationType), newanim.ToString(), out var result))
         {
             AnimationState = (AnimationType)result;
-            print(newanim.ToString() + "!!!!!!");
         }
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

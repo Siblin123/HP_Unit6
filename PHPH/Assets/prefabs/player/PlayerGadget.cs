@@ -6,13 +6,14 @@ public class PlayerGadget : NetworkBehaviour
 {
 
     public Item_Info curItem;
-    public NetworkAnimator Arm_Anim;
+    public Arm_Anim arm_Anim;
 
-
+    public float behaviourColTimme;//Çàµ¿ ÄðÅ¸ÀÓ
     public virtual void Start()
     {
-    
-        
+        csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();
+        init();
+
     }
 
     public virtual void FixedUpdate()
@@ -23,12 +24,15 @@ public class PlayerGadget : NetworkBehaviour
     // Update is called once per frame
     public virtual void Update()
     {
-        if (IsOwner)
-            if (Input.GetMouseButtonDown(0))
-            {
+        if (!IsOwner)
+            return;
+        if(behaviourColTimme>=0)
+            behaviourColTimme-= Time.deltaTime;
 
-                UseCurItem();
-            }
+        if (Input.GetMouseButtonDown(0) && behaviourColTimme <= 0 )
+        {
+            UseCurItem();
+        }
     }
 
     public virtual void init()
@@ -38,8 +42,19 @@ public class PlayerGadget : NetworkBehaviour
 
     public void UseCurItem()
     {
-        if(curItem != null)
+        if (!IsOwner)
+            return;
+
+        if (curItem != null )
             curItem.UseItem();
+    }
+
+    public void UseCurItem_Attack()
+    {
+        if (!IsOwner)
+            return;
+        if (curItem != null)
+            curItem.Attack();
     }
 
 }

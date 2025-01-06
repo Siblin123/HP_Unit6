@@ -36,16 +36,10 @@ public class baseStatus : interaction
 
         if (health.Value <= 0)
         {
-           if(IsServer)
-            {
-                Die();
-                Die_ClientRpc();
-            }
-            else
-            {
-                Die();
-                Die_ServerRpc();
-            }
+        
+                objDestory_ServerRpc();
+            
+
         }
     }
     [ServerRpc(RequireOwnership = false)]
@@ -55,20 +49,15 @@ public class baseStatus : interaction
     }
 
 
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
 
     [ServerRpc(RequireOwnership = false)]
-    public void Die_ServerRpc()
+    public void objDestory_ServerRpc()
     {
-        Die();
+        if (!IsServer)
+            return;
+
+        GetComponent<NetworkObject>().Despawn(true);
+
     }
 
-    [ClientRpc]
-    public void Die_ClientRpc()
-    {
-        Die();
-    }
 }

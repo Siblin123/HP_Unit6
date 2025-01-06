@@ -41,25 +41,30 @@ public class Item_Info : NetworkBehaviour
       
     }
 
-
-    private void Update()
+    public virtual void Update()
     {
-        if(colTime>=0)
-        {
-            colTime -= Time.deltaTime;
-        }
-       
+
     }
+
 
     public virtual void UseItem()//각 아이템의 기능
     {
-        if(colTime<=0)
+        if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
+            csTable.Instance.gameManager.player.behaviourColTimme= colTime;
+
             return;
         }
     }
 
-
+    public virtual void Attack()
+    {
+        if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
+        {
+            csTable.Instance.gameManager.player.behaviourColTimme = colTime;
+            return;
+        }
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void GetItem_ServerRpc(NetworkObjectReference playerRef)
@@ -72,7 +77,7 @@ public class Item_Info : NetworkBehaviour
             var playerInventory = playerNetworkObject.GetComponent<Player_Inventory>();
             if (playerInventory != null)
             {
-                //playerInventory.Get_Item(this, 1);
+                playerInventory.Get_Item(this, 1);
             }
         }
 
