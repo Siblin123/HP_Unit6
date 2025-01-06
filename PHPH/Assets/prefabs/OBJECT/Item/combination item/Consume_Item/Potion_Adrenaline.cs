@@ -10,11 +10,6 @@ public class Potion_Adrenaline : Potion
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void UseItem()
     {

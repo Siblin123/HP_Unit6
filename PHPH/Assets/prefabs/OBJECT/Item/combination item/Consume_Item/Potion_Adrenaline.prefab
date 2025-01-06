@@ -135,7 +135,7 @@ MonoBehaviour:
   max_Have_Count: 5
   colTime: 0
   curItemType: 5
-  hp_value: 0
+  hp_value: -10
   stamina_value: 0
-  potoin_colTime: 0
-  duration: 0
+  potoin_colTime: 10
+  duration: 10
