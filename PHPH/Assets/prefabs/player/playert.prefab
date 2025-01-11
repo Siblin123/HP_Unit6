@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test_L: []
-  inventory: {fileID: 0}
+  inventory: {fileID: 6943900456857647065}
   inven_Slot_Ob: {fileID: 7006311260172369619}
   godGet_Ob: {fileID: 3415624004628919133}
   slot_List: []
@@ -826,6 +826,11 @@ GameObject:
 --- !u!224 &5049778743031378276 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9058836947535932705, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
+  m_PrefabInstance: {fileID: 4297312787516103749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6943900456857647065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6628928780079999900, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
   m_PrefabInstance: {fileID: 4297312787516103749}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7006311260172369619 stripped
