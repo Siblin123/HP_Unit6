@@ -14,8 +14,10 @@ public class Player_Inventory : Inventory_Manager
 
     public int money;
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         instance = this;
         for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
         {

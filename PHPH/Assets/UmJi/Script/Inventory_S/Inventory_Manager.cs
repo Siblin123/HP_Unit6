@@ -3,12 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.IO.LowLevel.Unsafe;
 
 public class Inventory_Manager : MonoBehaviour
 {
     public List<Item_Info> test_L;
     public GameObject inventory;
 
+    public virtual void Awake()
+    {
+        inventory = GameObject.Find("Inventory_Panel");
+    }
 
     public virtual void Update()
     {
