@@ -13,6 +13,8 @@ public class Item_Info : NetworkBehaviour
     public int max_Have_Count; // 최대 소지 개수
     public float colTime;
 
+    public int have_Count; // 현재 소지 개수
+
     //아이템  위치 고정 플레이어가 아래로 내려갈때 아이템도 같이 떨어지는거 막는 용도
     Vector3 f_ItemPos;
 
