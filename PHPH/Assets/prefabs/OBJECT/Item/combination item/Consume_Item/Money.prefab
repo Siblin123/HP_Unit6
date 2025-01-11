@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uB3C8"
-  id: 0
+  id: 100
   explan: "\uBB3C\uAC74\uC744 \uC0AC\uACE0 \uD314 \uC218 \uC788\uB2E4."
   price: 0
   max_Have_Count: 1000000

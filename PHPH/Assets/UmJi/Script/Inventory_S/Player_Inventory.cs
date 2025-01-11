@@ -6,6 +6,9 @@ public class Player_Inventory : Inventory_Manager
 {
     public static Player_Inventory instance;
 
+    public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
+    public GameObject godGet_Ob; // 장비 슬롯 부모
+
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
 
@@ -14,6 +17,14 @@ public class Player_Inventory : Inventory_Manager
     private void Awake()
     {
         instance = this;
+        for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
+        {
+            slot_List.Add(inven_Slot_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
+        for (int i = 0; i < godGet_Ob.transform.childCount; i++)
+        {
+            godGet_List.Add(godGet_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
     }
 
     public void Update()
