@@ -26,8 +26,9 @@ public class Inven_Slot : Inventory_Manager
         Update_Slot(item, have_Count);
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (follow_C)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -35,6 +36,7 @@ public class Inven_Slot : Inventory_Manager
             // RectTransform의 위치를 마우스 위치로 설정합니다.
             rectTransform.position = new Vector2(mousePosition.x + 50f, mousePosition.y + 30f);
         }
+        
     }
 
     public void Update_Slot(Item_Info item, int count) // 슬롯 초기화

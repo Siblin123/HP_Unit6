@@ -1,11 +1,33 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.Mathematics;
 
 public class Inventory_Manager : MonoBehaviour
 {
     public List<Item_Info> test_L;
+    public GameObject inventory;
+
+    private void Awake()
+    {
+        inventory = GameObject.Find("Inventory_Panel");
+    }
+
+    public virtual void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if(inventory.GetComponent<RectTransform>().localScale.x == 0)
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            }
+        }
+    }
 
     // 아이템 습득 및 구매
     public bool Get_Item(Item_Info item, int count)
