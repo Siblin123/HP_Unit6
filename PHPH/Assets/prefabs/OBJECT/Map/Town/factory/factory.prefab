@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 0.17, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5913876332852824946
@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4256156237
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  GlobalObjectIdHash: 1950758277
+  InScenePlacedSourceGlobalObjectIdHash: 4256156237
   DeferredDespawnTick: 0
   Ownership: 1
   AlwaysReplicateAsRoot: 0

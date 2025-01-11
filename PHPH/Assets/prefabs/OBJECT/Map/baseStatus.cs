@@ -28,7 +28,7 @@ public class baseStatus : interaction
     public void TakeDamage(int damege)
     {
         print("TakeDamage");
-        if(IsServer)
+        if (IsServer)
             health.Value -= damege;
         else
             TakeDamage_ServerRpc(damege);
@@ -36,9 +36,7 @@ public class baseStatus : interaction
 
         if (health.Value <= 0)
         {
-        
-                objDestory_ServerRpc();
-            
+            objDestory_ServerRpc();
 
         }
     }
@@ -55,6 +53,8 @@ public class baseStatus : interaction
     {
         if (!IsServer)
             return;
+
+
 
         GetComponent<NetworkObject>().Despawn(true);
 

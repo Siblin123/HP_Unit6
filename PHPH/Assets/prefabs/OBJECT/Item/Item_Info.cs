@@ -32,6 +32,9 @@ public class Item_Info : NetworkBehaviour
 
     private void Start()
     {
+        if (!IsOwner)
+            return;
+
         if (!GetComponent<Rigidbody2D>())
         {
             rb = GetComponent<Rigidbody2D>();

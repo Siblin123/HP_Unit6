@@ -156,3 +156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3207eb85c6dde14488ef22dcd8bfce7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgrounds: []
+  parallaxScales:
+  - 0
+  - 0
+  - 0
+  - 0
+  smoothing: 1
