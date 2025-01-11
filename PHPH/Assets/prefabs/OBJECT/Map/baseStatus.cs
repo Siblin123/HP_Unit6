@@ -20,10 +20,6 @@ public class baseStatus : interaction
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TakeDamage(int damege)
     {

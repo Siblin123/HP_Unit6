@@ -3,6 +3,10 @@ using UnityEngine.Rendering.Universal;
 
 public class Enemy : baseStatus
 {
+    public Transform wallCheck;
+
+     
+
     enum Enemy_Type
     {
         Random_movement,//랜덤 이동
@@ -12,47 +16,44 @@ public class Enemy : baseStatus
 
     Enemy_Type enemy_Type;
 
-    //1.특정 구역 반복
-
-    //2.시각만 존재하는 몬스터. 들키면 직직으로 빠르게 달려온다.
-
-    //3.가로 방향으로만 따라오는 몬스터. 
-
-    //4. 날아다니면서 플레이어 방향으로 이동
-
-    //5. 찾는 범위안에 플레이어있으면 플레이어 방향으로 순간이동 , 순간이동 범위내에 플레이어 있으면 몸박
-
-    //6. 원거리 공격 , 조준 후 발싸 , 조준 시 공격방향이 보임  공격시 움직이지 않음  2초후 공격 
 
     //공통: 특정 구역 반복,  플레이어 추적 , 
 
-
-    float randomMove_Num;
-    float randomMove_Time;
-    int randomMove_Direction;
-
-
-    public void Random_movement()
+    [Header("움직이는 시간")]
+    [SerializeField] float randomMove_Num;
+    [SerializeField] float randomMove_Time;
+    [Header("0 정지 1 왼쪽 2 오른쪽")]
+    [SerializeField] int randomMove_Direction;
+    [SerializeField] float speed;
+    Vector2 view_dir;
+    public LayerMask layerMask;
+    public void Random_movement()//1.특정 구역 반복
     {
-      
-        if(randomMove_Time<= randomMove_Num)
+
+        if (randomMove_Time <= randomMove_Num)
         {
             randomMove_Time = Random.Range(1, 3);
             randomMove_Direction = Random.Range(0, 3);
+            randomMove_Num = 0;
         }
         else
         {
             randomMove_Num += Time.deltaTime;
             switch (randomMove_Direction)
             {
+               
                 case 0:
                     //움직이지 않고 정지
                     break;
                 case 1:
-                    transform.Translate(Vector3.back * Time.deltaTime);
+                    view_dir = Vector2.right;
+                    transform.Translate(view_dir * Time.deltaTime);
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2:
-                    transform.Translate(Vector3.left * Time.deltaTime);
+                    view_dir = Vector2.left;
+                    transform.Translate(view_dir * Time.deltaTime);
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
 
             }
@@ -62,13 +63,32 @@ public class Enemy : baseStatus
 
     public void WallCheck2D()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.up, 0.5f, LayerMask.GetMask("Wall"));
-        Debug.DrawRay(transform.position, Vector2.up * 0.5f, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.up, 0.5f);
+        Debug.DrawRay(wallCheck.position, Vector2.up * 0.5f, Color.red);
         if (hit.collider != null)
         {
-            randomMove_Direction = 0;
+            randomMove_Direction = Random.Range(0, 3); 
         }
     }
-    
 
+    public float find_range;
+    public PlayerControl tart_player;
+    public void Find_Player()//유닛의 시야 범위
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, view_dir, find_range, ~layerMask);
+        Debug.DrawRay(wallCheck.position, view_dir * find_range, Color.blue);
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                tart_player = hit.collider.GetComponent<PlayerControl>();
+            }
+        }
+        else
+        {
+            tart_player = null;
+        }
+    }
 }
