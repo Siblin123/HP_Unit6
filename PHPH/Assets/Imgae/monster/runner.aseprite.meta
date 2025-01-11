@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f7069290c5c9384fbad11fd3ba4462c
+guid: a028ed4c2be369f4281a66d35c96da4d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,9 +122,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: monster_1
+  - name: runner
     originalName: 
-    pivot: {x: 0.64705884, y: -0.72727275}
+    pivot: {x: 0.55833334, y: -0.2244898}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 17
-      height: 22
-    spriteID: 07de65b69b653d74cb8e9fc522d86c6c
+      width: 300
+      height: 49
+    spriteID: 8f89b405ca17b8740a6be888ae28e688
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,21 +146,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1369488288
-    name: monster_1
+    guid: 728388472
+    name: runner
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: monster_1
+    - name: runner
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 21
-        y: 16
-        width: 17
-        height: 22
-      spriteId: 07de65b69b653d74cb8e9fc522d86c6c
+        x: 16
+        y: 11
+        width: 300
+        height: 49
+      spriteId: 8f89b405ca17b8740a6be888ae28e688
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -179,4 +179,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 367, y: 64}

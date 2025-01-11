@@ -9,6 +9,9 @@ public class interaction : NetworkBehaviour
         
     }
 
-
+    public void Open_UI(GameObject UI)
+    {
+        //UI 열어주기
+    }
 
 }

@@ -25,14 +25,14 @@ public class PlayerStatus : PlayerGadget
 
     public int stamina_percent;
 
-    float horizontalInput;
+    [HideInInspector]public float horizontalInput;
     float VerticalInput;
 
     // Move()
     public float moveSpeed = 5f;
     public float runSpeed = 5f;
     public float jumpPower = 5f;
-    float curSpeed;
+    public float curSpeed;
 
     public Vector3 movedir;
     Vector2 enterStairPos;

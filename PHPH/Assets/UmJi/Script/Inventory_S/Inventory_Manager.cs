@@ -1,50 +1,67 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 public class Inventory_Manager : MonoBehaviour
 {
     public List<Item_Info> test_L;
 
     // 아이템 습득 및 구매
-    public void Get_Item(Item_Info item, int count)
+    public bool Get_Item(Item_Info item, int count)
     {
         Player_Inventory p_I = GetComponent<Player_Inventory>();
 
         int i = 0;
+        int j = 0;
         for (i = 0; i < p_I.slot_List.Count; i++)
         {
-            // 획득한 아이템이 인벤토리에 있으면
-            if (p_I.slot_List[i].item == item)
+            // 비교할 아이템이 있으면 -> 인벤토리에 아이템이 있으면
+            if (p_I.slot_List[i].item != null)
             {
-                // 총 아이템 개수가 최대 소지개수보다 많으면
-                if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)
+                // 획득한 아이템이 이미 인벤토리에 있으면
+                if (p_I.slot_List[i].item.id == item.id)
                 {
-                    // 일단 한계치까지 할당
-                    p_I.slot_List[i].Update_Slot(p_I.slot_List[i].item, p_I.slot_List[i].item.max_Have_Count);
+                    // 총 아이템 개수가 최대 소지개수보다 많으면
+                    if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)
+                    {
+                        // 일단 한계치까지 할당
+                        p_I.slot_List[i].Update_Slot(p_I.slot_List[i].item, p_I.slot_List[i].item.max_Have_Count);
 
-                    count += p_I.slot_List[i].have_Count;
-                    count -= p_I.slot_List[i].item.max_Have_Count;
-                }
-                else 
-                {
-                    p_I.slot_List[i].Pluse_Item(count);
-                    break; 
+                        count += p_I.slot_List[i].have_Count;
+                        count -= p_I.slot_List[i].item.max_Have_Count;
+                    }
+                    else
+                    {
+                        p_I.slot_List[i].Pluse_Item(count);
+                        return true;
+                        //break;
+                    }
                 }
             }
         }
+
         //획득한 아이템이 인벤토리에 없을 때
         if(i == p_I.slot_List.Count)
         {
-            for (int j = 0; j < p_I.slot_List.Count; j++)
+            for (j = 0; j < p_I.slot_List.Count; j++) // 새로 넣어줌
             {
                 if (p_I.slot_List[j].item == null)
                 {
                     p_I.slot_List[j].Update_Slot(item, count);
-                    break;
+                    return true;
+                    //break;
                 }
             }
         }
+
+        // 인벤토리가 꽉 찼을 때
+        if(j == p_I.slot_List.Count)
+        {
+            print("그만먹어 돼지얌");
+            return false;
+        }
+        return false;
     }
 
     // 아이템 판매
@@ -73,18 +90,23 @@ public class Inventory_Manager : MonoBehaviour
         // 인벤토리 이동일때
         if (slot1.gameObject.CompareTag(slot2.gameObject.tag))
         {
-            Update_Slots(slot1, slot2);
+            Change_Slots(slot1, slot2);
         }
         // 인벤토리 -> 장비칸에 장착할때
         else if (slot1.item.gameObject.CompareTag(slot2.gameObject.tag))
         {
-            Update_Slots(slot1, slot2);
+            Change_Slots(slot1, slot2);
         }
         else if(slot2.item != null)
         {
+            // 이동 가능
             if (slot1.item.gameObject.CompareTag(slot2.item.gameObject.tag))
             {
-                Update_Slots(slot1, slot2);
+                Change_Slots(slot1, slot2);
+            }
+            else // 이동 불가
+            {
+                Update_Slot(slot1, slot2);
             }
         }
         // 장착 해제
@@ -93,19 +115,24 @@ public class Inventory_Manager : MonoBehaviour
             // 태그 없음 -> 일반 인벤토리
             if (slot2.gameObject.tag == "Untagged")
             {
-                Update_Slots(slot1, slot2);
+                Change_Slots(slot1, slot2);
             }
             else
             {
+                // 이동 가능한 슬롯일때
                 if (slot1.item.gameObject.CompareTag(slot2.gameObject.tag))
                 {
-                    Update_Slots(slot1, slot2);
+                    Change_Slots(slot1, slot2);
+                }
+                else // 이동 불가능일때
+                {
+                    Update_Slot(slot1, slot2);
                 }
             }
         }
     }
 
-    private void Update_Slots(Inven_Slot slot1, Inven_Slot slot2)
+    private void Change_Slots(Inven_Slot slot1, Inven_Slot slot2)  // 슬롯 교환 함수
     {
         Inven_Slot temp = new Inven_Slot();
 
@@ -114,13 +141,17 @@ public class Inventory_Manager : MonoBehaviour
         slot2.Update_Slot(temp.item, temp.have_Count);
     }
 
+    private void Update_Slot(Inven_Slot slot1, Inven_Slot slot2)
+    {
+        slot1.Update_Slot(slot1.item, slot1.have_Count);
+        slot2.Update_Slot(slot2.item, slot2.have_Count);
+    }
+
     // 아이템 버리기
     public void Throw_Slot(Inven_Slot slot)
     {
-        slot.have_Count = 0;
-        slot.item = null;
+        // 버린 아이템 플레이어 위치에 떨어짐
 
-        slot.count_T.text = "0";
-        slot.item_I.sprite = null;
+        slot.Update_Slot(null, 0); // 슬롯 비우기
     }
 }
