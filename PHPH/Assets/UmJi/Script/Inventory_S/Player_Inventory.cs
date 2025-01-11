@@ -14,9 +14,9 @@ public class Player_Inventory : Inventory_Manager
 
     public int money;
 
-    public override void Awake()
+    private void Start()
     {
-        base.Awake();
+
 
         instance = this;
         for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
@@ -29,8 +29,11 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
-    public void Update()
+    public override void Update()
     {
+        if (!IsOwner)
+            return;
+
         print("업데이트");
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -52,6 +55,27 @@ public class Player_Inventory : Inventory_Manager
             print("4");
             Get_Item(test_L[3], 100);
         }
+
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (inventory.GetComponent<RectTransform>().localScale.x == 0)
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            }
+        }
     }
 
+
+
 }
+
+
+
+
+
+

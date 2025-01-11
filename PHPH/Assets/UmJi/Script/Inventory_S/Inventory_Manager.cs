@@ -4,30 +4,16 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.Netcode;
 
-public class Inventory_Manager : MonoBehaviour
+public class Inventory_Manager : NetworkBehaviour
 {
     public List<Item_Info> test_L;
     public GameObject inventory;
 
-    public virtual void Awake()
-    {
-        inventory = GameObject.Find("Inventory_Panel");
-    }
-
     public virtual void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            if(inventory.GetComponent<RectTransform>().localScale.x == 0)
-            {
-                inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            }
-            else
-            {
-                inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
-            }
-        }
+
     }
 
     // 아이템 습득 및 구매

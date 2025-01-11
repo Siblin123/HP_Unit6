@@ -71,53 +71,38 @@ public class Item_Info : NetworkBehaviour
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void GetItem_ServerRpc(NetworkObjectReference playerRef)
+   [ServerRpc(RequireOwnership = false)]
+    public void GetItem_ServerRpc()
     {
-        // 충돌 시 인벤토리에 아이템을 넣는다. 해당 오브젝트는 비활성화
-        print("GetItem_ServerRpc");
 
-        if (playerRef.TryGet(out NetworkObject playerNetworkObject))
-        {
-            var playerInventory = playerNetworkObject.GetComponent<Player_Inventory>();
-            if (playerInventory != null)
-            {
-                playerInventory.Get_Item(this, 1);
-            }
-        }
-
-        // 모든 클라이언트에서 이 아이템을 비활성화
         GetItem_ClientRpc();
+
     }
 
     [ClientRpc]
-    public void GetItem_ClientRpc()
+    public void GetItem_ClientRpc( )
     {
-        print("GetItem_ClientRpc");
-        // 아이템 비활성화 처리
+       
         gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.transform.GetComponent<NetworkObject>())
-            return;
+       /* if (!collision.transform.GetComponent<NetworkObject>())
+            return;*/
 
         if (collision.transform.CompareTag("Player"))
         {
-            var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
-
+            //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
+            collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);
+           
             if (IsServer)
             {
-                print("IsServer");
-                // 서버에서 아이템 획득 처리
-                GetItem_ServerRpc(playerNetworkObject);
+                GetItem_ClientRpc();
             }
             else
             {
-                print("IsClient");
-                // 클라이언트에서 서버로 아이템 획득 요청
-                GetItem_ServerRpc(new NetworkObjectReference(playerNetworkObject));
+                GetItem_ServerRpc();
             }
         }
     }
