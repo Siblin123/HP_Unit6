@@ -6,6 +6,8 @@ public class baseStatus : interaction
     public NetworkVariable<int> maxHealth = new NetworkVariable<int>(100);
     public NetworkVariable<int> health;
 
+    public float damege;
+
     public enum tag_Type
     {
         Enemy,
@@ -20,15 +22,11 @@ public class baseStatus : interaction
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TakeDamage(int damege)
     {
         print("TakeDamage");
-        if(IsServer)
+        if (IsServer)
             health.Value -= damege;
         else
             TakeDamage_ServerRpc(damege);
@@ -36,9 +34,7 @@ public class baseStatus : interaction
 
         if (health.Value <= 0)
         {
-        
-                objDestory_ServerRpc();
-            
+            objDestory_ServerRpc();
 
         }
     }
@@ -55,6 +51,8 @@ public class baseStatus : interaction
     {
         if (!IsServer)
             return;
+
+
 
         GetComponent<NetworkObject>().Despawn(true);
 

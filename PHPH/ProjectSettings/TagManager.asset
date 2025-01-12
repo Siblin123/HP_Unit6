@@ -26,7 +26,7 @@ TagManager:
   - interaction
   - Tree
   - Ore
-  - 
+  - Player_NoneCol
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: MapObject
     uniqueID: 4146205037
+    locked: 0
+  - name: BG
+    uniqueID: 274873783
     locked: 0
   m_RenderingLayers:
   - Default

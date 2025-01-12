@@ -129,7 +129,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2498500624398858173}
-  inventory_Manager: {fileID: 0}
+  rPCmanager: {fileID: 8400125500689276277}
+  Player_Inventory: {fileID: 0}
+--- !u!1 &6376169236887414924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3204086964591740178}
+  - component: {fileID: 8400125500689276277}
+  m_Layer: 0
+  m_Name: RPCmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3204086964591740178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376169236887414924}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3463162220896700181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8400125500689276277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376169236887414924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc820cfd586b9449f313bf639b8b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &6556376558566286780
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +253,7 @@ MonoBehaviour:
   is_afterNoonNight:
     m_InternalValue: 0
   curTime: 0
-  daySpeed: 0.9
+  daySpeed: 0
   survivalDay:
     m_InternalValue: 0
   all_SpawnMonster:
@@ -246,6 +292,7 @@ Transform:
   - {fileID: 9218953708600499209}
   - {fileID: 8108038811454436954}
   - {fileID: 8709085952172780670}
+  - {fileID: 3204086964591740178}
   - {fileID: 9018280165095847494}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

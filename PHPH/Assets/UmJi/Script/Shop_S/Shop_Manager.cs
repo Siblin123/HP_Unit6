@@ -1,12 +1,18 @@
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class Shop_Manager : interaction
 {
     public GameObject shop_Panel;
 
+    public GameObject shop_Slot_Ob; // 상점 슬롯 부모
+    public GameObject shop_inven_Ob; // 상점 슬롯 부모
+
     public List<Shop_Slot> slot_List; // 상점 슬롯 리스트
+    public List<Inven_Slot> inven_Slot_List; // 인벤토리 슬롯
 
     [Header("기본 아이템 리스트")]
     public List<Item_Info> base_Item_List;
@@ -15,11 +21,22 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
-    public List<Inven_Slot> inven_Slot_List; // 인벤토리 슬롯
+    // 돈 표시 UI
+    public GameObject money_View;
+
+
 
     private void Start()
     {
         Update_Slot();
+        for (int i = 0; i < shop_Slot_Ob.transform.childCount; i++)
+        {
+            slot_List.Add(shop_Slot_Ob.transform.GetChild(i).GetComponent<Shop_Slot>());
+        }
+        for (int i = 0; i < shop_inven_Ob.transform.childCount; i++)
+        {
+            inven_Slot_List.Add(shop_inven_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
     }
 
     public override void interact()
@@ -28,30 +45,57 @@ public class Shop_Manager : interaction
         On_Off();
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        inven_Slot_List = new List<Inven_Slot>();
-
-        for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            inven_Slot_List.Add(Player_Inventory.instance.slot_List[i]);
-            inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            On_Off();
         }
     }
 
-    public void On_Off()
+    private void OnEnable()
     {
+        for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+        {
+            inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, Player_Inventory.instance.slot_List[i].have_Count);
+
+            // id가 100은 돈
+            if (inven_Slot_List[i].item.id == 100)
+            {
+                money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = inven_Slot_List[i].have_Count.ToString("N0");
+            }
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+        {
+            Player_Inventory.instance.slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+        }
+    }
+
+    public void On_Off() // 상점 끄고 켜기
+    {
+        // 인벤토리 끄기
         if (shop_Panel.activeSelf == true)
         {
+            // 상점에서 판매 또는 구매한걸 인벤토리에 적용
+            for (int i = 0; i < Player_Inventory.instance.slot_List.Count; i++)
+            {
+                Player_Inventory.instance.slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            }
+
             shop_Panel.SetActive(false);
         }
-        else
+        else if (shop_Panel.activeSelf == false) // 켜기
         {
             shop_Panel.SetActive(true);
-            inven_Slot_List = Player_Inventory.instance.slot_List;
-            for (int i = 0; i < inven_Slot_List.Count; i++) 
+
+            // 인벤토리를 상점 인벤토리에 적용
+            for (int i = 0; i < inven_Slot_List.Count; i++)
             {
-                inven_Slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+                inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, Player_Inventory.instance.slot_List[i].have_Count);
             }
         }
     }

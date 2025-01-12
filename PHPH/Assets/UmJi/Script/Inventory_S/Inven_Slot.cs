@@ -20,16 +20,16 @@ public class Inven_Slot : Inventory_Manager
 
     private void Start()
     {
+        
         follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
         rectTransform = GetComponent<RectTransform>();
 
-
         Update_Slot(item, have_Count);
-
     }
 
-    private void Update()
+    public override void Update()
     {
+        base.Update();
         if (follow_C)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -37,6 +37,7 @@ public class Inven_Slot : Inventory_Manager
             // RectTransform의 위치를 마우스 위치로 설정합니다.
             rectTransform.position = new Vector2(mousePosition.x + 50f, mousePosition.y + 30f);
         }
+        
     }
 
     public void Update_Slot(Item_Info item, int count) // 슬롯 초기화
@@ -62,7 +63,7 @@ public class Inven_Slot : Inventory_Manager
             if (count_T != null) // 장비는 개수 표시 없음
             {
                 count_T.enabled = true;
-                count_T.text = count.ToString();
+                count_T.text = count.ToString("N0");
             }
             if (item_I != null)
             {
@@ -79,26 +80,34 @@ public class Inven_Slot : Inventory_Manager
         if (count_T != null) // 장비는 개수 표시 없음
         {
             count_T.enabled = true;
-            count_T.text = have_Count.ToString();
+            count_T.text = have_Count.ToString("N0");
         }
     }
 
     public void Click_Slot() // 버튼 클릭했을때
     {
-        if (follow_Slot.GetComponent<Inven_Slot>().clikc_S == null)
+        // 아무것도 클릭 안했으면 본인을 넣어줌
+        if (follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
         {
-            if(item != null) 
+            if(item != null) // 아이템이 있을때
             {
+                Inventory_Button.slot = this;
+
                 follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
 
                 follow_Slot.GetComponent<Image>().enabled = true;
                 follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+
+                item_I.enabled = false;
+                count_T.enabled = false;
             }
         }
+        // 이미 선택한게 있으면 서로 위치 교환
         else
         {
             Change_Slot(follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
             follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
+            Inventory_Button.slot = null;
 
             follow_Slot.GetComponent<Image>().enabled = false;
         }

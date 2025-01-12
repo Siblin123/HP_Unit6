@@ -6,16 +6,34 @@ public class Player_Inventory : Inventory_Manager
 {
     public static Player_Inventory instance;
 
+    public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
+    public GameObject godGet_Ob; // 장비 슬롯 부모
+
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
 
-    private void Awake()
+    public int money;
+
+    private void Start()
     {
+
+
         instance = this;
+        for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
+        {
+            slot_List.Add(inven_Slot_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
+        for (int i = 0; i < godGet_Ob.transform.childCount; i++)
+        {
+            godGet_List.Add(godGet_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
     }
 
-    public void Update()
+    public override void Update()
     {
+        if (!IsOwner)
+            return;
+
         print("업데이트");
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -35,8 +53,29 @@ public class Player_Inventory : Inventory_Manager
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             print("4");
-            Get_Item(test_L[3], 1);
+            Get_Item(test_L[3], 100);
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (inventory.GetComponent<RectTransform>().localScale.x == 0)
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            }
         }
     }
 
+
+
 }
+
+
+
+
+
+
