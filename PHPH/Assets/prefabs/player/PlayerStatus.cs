@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 using System;
 using Unity.Netcode.Components;
+using System.Collections;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerStatus : PlayerGadget
 {
@@ -60,6 +62,10 @@ public class PlayerStatus : PlayerGadget
 
     public NetworkAnimator anim;
 
+    //getDamage()
+    [Header("무적")]
+    public float invincibility_Time;//무적 시간
+    [SerializeField] float invincibility_Time_Cur;
 
     public override void Start()
     {   
@@ -126,9 +132,12 @@ public class PlayerStatus : PlayerGadget
 
     private void Move()
     {
+
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
 
-            
+        if (AnimationState == AnimationType.get_damage)
+            return;
 
 
         if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && stamina > 1)
@@ -185,15 +194,67 @@ public class PlayerStatus : PlayerGadget
        
     }
 
-    public void GetDamege(float value)
+    public void Get_damage(float value , Transform getPos )
     {
-        hp -= value;
+        //무적일 경우
+        if(AnimationState == AnimationType.get_damage)
+            return;
 
+        NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[NetworkObjectId];
+        if (networkObject != null && networkObject.TryGetComponent<Rigidbody2D>(out var rb))
+        {
+            Vector3 KnockbackDir = (transform.position - getPos.position).normalized;
+                
+            rb.AddForce(new Vector2(KnockbackDir.x ,1) , ForceMode2D.Impulse);
+        }
+
+        //무적으로 만들어주기
+        int layer = LayerMask.NameToLayer("Player_NoneCol");
+        gameObject.layer = layer;
+
+        hp -= value;
+        ChangeAnim(AnimationType.get_damage);
         if (hp <= 0)
         {
             // 플레이어 사망 처리
         }
+        else
+        {
+            StartCoroutine(invincibility());
+        }
+
+        
     }
+
+    IEnumerator invincibility()
+    {
+        invincibility_Time_Cur = invincibility_Time;
+
+        while (invincibility_Time_Cur > 0)
+        {
+            AnimatorStateInfo stateInfo = anim.Animator.GetCurrentAnimatorStateInfo(0);
+
+            // 현재 실행 중인 애니메이션인지 확인
+            if (stateInfo.IsName("get_damage"))
+            {
+                if (stateInfo.normalizedTime >= 0.9f)
+                {
+                    // 히트 애니메이션 종료 후에는 대기 상태로 변경
+                    AnimationState = AnimationType.stand;
+                }
+            }
+            invincibility_Time_Cur -= Time.deltaTime;
+            yield return null;
+        }
+
+        // 무적 상태 종료
+        int layer = LayerMask.NameToLayer("Player");
+        gameObject.layer = layer;
+    }
+
+
+
+
 
     public void LookMouse()
     {
@@ -234,6 +295,8 @@ public class PlayerStatus : PlayerGadget
         }
 
         // 클라이언트에서 애니메이션 실행
+        if (AnimationState == AnimationType.get_damage)
+            return;
         anim.Animator.Play(newanim.ToString());
 
         // clip.name을 AnimationType으로 변환
@@ -255,6 +318,8 @@ public class PlayerStatus : PlayerGadget
     [ClientRpc]
     public void ChangeAnim_ClientRpc(AnimationType newanim)
     {
+        if (AnimationState == AnimationType.get_damage)
+            return;
         // 클라이언트에서 애니메이션 실행
         anim.Animator.Play(newanim.ToString());
 

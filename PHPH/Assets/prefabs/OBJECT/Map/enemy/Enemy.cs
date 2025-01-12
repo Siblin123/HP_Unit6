@@ -4,8 +4,8 @@ using UnityEngine.Rendering.Universal;
 public class Enemy : baseStatus
 {
     public Transform wallCheck;
+    public LayerMask wallLayer;
 
-     
 
     enum Enemy_Type
     {
@@ -63,10 +63,14 @@ public class Enemy : baseStatus
 
     public void WallCheck2D()
     {
-        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.up, 0.5f);
+        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.up, 0.5f, ~wallLayer);
         Debug.DrawRay(wallCheck.position, Vector2.up * 0.5f, Color.red);
         if (hit.collider != null)
         {
+
+            if (hit.transform.name.Contains("Plater"))
+                print("find_PLayer");
+
             randomMove_Direction = Random.Range(0, 3); 
         }
     }
@@ -89,6 +93,15 @@ public class Enemy : baseStatus
         else
         {
             tart_player = null;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.transform.GetComponent<PlayerControl>().Get_damage(damege,transform);
+            
         }
     }
 }

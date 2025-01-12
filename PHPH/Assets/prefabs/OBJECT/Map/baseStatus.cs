@@ -6,6 +6,8 @@ public class baseStatus : interaction
     public NetworkVariable<int> maxHealth = new NetworkVariable<int>(100);
     public NetworkVariable<int> health;
 
+    public float damege;
+
     public enum tag_Type
     {
         Enemy,
