@@ -196,6 +196,9 @@ public class PlayerStatus : PlayerGadget
 
     public void Get_damage(float value , Transform getPos )
     {
+        if (!IsOwner)
+            return;
+
         //무적일 경우
         if(AnimationState == AnimationType.get_damage)
             return;
@@ -241,7 +244,7 @@ public class PlayerStatus : PlayerGadget
                 {
                     // 히트 애니메이션 종료 후에는 대기 상태로 변경
                     AnimationState = AnimationType.stand;
-                    ChangeAnim(AnimationState);
+                    anim.Animator.Play(AnimationState.ToString());
                 }
             }
             invincibility_Time_Cur -= Time.deltaTime;
@@ -289,6 +292,9 @@ public class PlayerStatus : PlayerGadget
     // 클라이언트에서 호출되는 메서드
     void ChangeAnim(AnimationType newanim)
     {
+        if (!IsOwner)
+            return;
+
         if (IsClient)
         {
             // 서버에 애니메이션 변경 요청
@@ -319,6 +325,9 @@ public class PlayerStatus : PlayerGadget
     [ClientRpc]
     public void ChangeAnim_ClientRpc(AnimationType newanim)
     {
+        if (!IsOwner)
+            return;
+
         if (AnimationState == AnimationType.get_damage)
             return;
         // 클라이언트에서 애니메이션 실행
