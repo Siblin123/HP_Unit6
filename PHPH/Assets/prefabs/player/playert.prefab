@@ -332,7 +332,7 @@ MonoBehaviour:
   staminaBar: {fileID: 5066051042400682364}
   AnimationState: 0
   anim: {fileID: -7901038586680655187}
-  invincibility_Time: 0.5
+  invincibility_Time: 3
   invincibility_Time_Cur: 0
   VirtualCamera: {fileID: 753394858916089596, guid: 86b130719997f404d981f1858e56a5bf, type: 3}
   Listener: {fileID: 6139488963890321423}

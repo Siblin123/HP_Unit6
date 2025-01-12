@@ -241,6 +241,7 @@ public class PlayerStatus : PlayerGadget
                 {
                     // 히트 애니메이션 종료 후에는 대기 상태로 변경
                     AnimationState = AnimationType.stand;
+                    ChangeAnim(AnimationState);
                 }
             }
             invincibility_Time_Cur -= Time.deltaTime;
