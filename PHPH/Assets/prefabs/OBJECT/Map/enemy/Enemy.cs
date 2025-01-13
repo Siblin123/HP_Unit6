@@ -78,7 +78,7 @@ public class Enemy : baseStatus
         if (hit.collider != null)
         {
 
-            if (hit.transform.name.Contains("Player"))
+            if (hit.transform.name.Contains("Plater"))
                 print("find_PLayer");
 
             randomMove_Direction = Random.Range(0, 3);
