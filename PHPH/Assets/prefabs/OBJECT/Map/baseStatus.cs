@@ -16,7 +16,7 @@ public class baseStatus : interaction
 
     public tag_Type tagType;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         maxHealth = health;
     }
