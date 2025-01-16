@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
@@ -25,6 +26,11 @@ public class shooter : Enemy
 
     [Header("쏘는 애니메이션이 나왔을 때 때려지는 플레이어")]
     public GameObject attack_tartget;
+
+
+
+    bool absRun;
+
     public override void Start()
     {
         lineRenderer= shooter_obj.GetComponent<LineRenderer>();
@@ -69,6 +75,9 @@ public class shooter : Enemy
                     linrendererPos = new Vector2(linrendererPosX.Value, linrendererPosY.Value);
 
                     curAttackTime += Time.deltaTime;
+
+                    if (!absRun)
+                        StartCoroutine(asd());
                 }
                 else
                 {
@@ -92,6 +101,21 @@ public class shooter : Enemy
             curShootTime += Time.deltaTime;
         }
 
+    }
+
+
+    public IEnumerator asd()
+    {
+        absRun = true;
+        while (true)
+        {
+            lineRenderer.enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            lineRenderer.enabled = true;
+            yield return new WaitForSeconds(0.5f);
+
+        }
+      
     }
 
     void shoot_ratcast()
