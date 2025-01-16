@@ -1,7 +1,4 @@
-using System.Collections;
-using Unity.Netcode;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class shooter : Enemy
 {
@@ -14,23 +11,13 @@ public class shooter : Enemy
 
     [Header("공격 딜레이 및 공격시간")]
     Vector3 attackOffset= new Vector3(0,0.1f,0);
-    public NetworkVariable<float> dirx;
-    public NetworkVariable<float> diry;
     public Vector2 dir;
     public float attackTime;
     [SerializeField] float curAttackTime;
     public LineRenderer lineRenderer;
-    public NetworkVariable<float> linrendererPosX;//플레이어가 범위를 벗어나면 멈춰지는 부분
-    public NetworkVariable<float> linrendererPosY;//플레이어가 범위를 벗어나면 멈춰지는 부분
-    public Vector2 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
-
+    Vector3 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
     [Header("쏘는 애니메이션이 나왔을 때 때려지는 플레이어")]
     public GameObject attack_tartget;
-
-
-
-    bool absRun;
-
     public override void Start()
     {
         lineRenderer= shooter_obj.GetComponent<LineRenderer>();
@@ -38,7 +25,6 @@ public class shooter : Enemy
 
     void Update()
     {
-
         Find_Player();
         shoot_ratcast();
     }
@@ -49,35 +35,46 @@ public class shooter : Enemy
 
         if (ShootTimer <= curShootTime)//공격을 하고 나서의 쿨타임
         {
-            Collider2D hit = Physics2D.OverlapCircle(transform.position, find_range, find_layerMask);
+            Collider2D [] hit = Physics2D.OverlapCircleAll(transform.position, find_range, find_layerMask);
+
+            if(hit.Length!=0 && !tart_player)
+            {
+                print("222222222222222");
+                float distance=99f;
+          
+                for (int i=0; i<hit.Length; i++)
+                {
+                    print("44444444444");
+
+                    if (distance > Vector2.Distance(transform.position, hit[i].transform.position))
+                    {
+                        distance = Vector2.Distance(transform.position, hit[i].transform.position);
+                        tart_player = hit[i].transform.GetComponent<PlayerControl>();
+                        print("33333333333333333333");
+                    }
+                    float a = Vector2.Distance(transform.position, hit[i].transform.position);
+                        print(Vector2.Distance(transform.position, hit[i].transform.position));
+
+
+                }
+
+            }
+            else
+            {
+                print("NONONONO");
+            }
 
             if (curAttackTime <= attackTime) //공격 충전?시간
             {
-                if (hit)
+                if (tart_player)
                 {
-                    if (IsServer)
-                    {
-                        dirx.Value = (hit.transform.position - transform.position + attackOffset).x;
-                        diry.Value = (hit.transform.position - transform.position + attackOffset).y;
-                    }
-                   
-                    dir = new Vector2(dirx.Value, diry.Value);
-
-                    tart_player = hit.gameObject.GetComponent<PlayerControl>();
-
-                    if (IsServer)
-                    {
-                        linrendererPosX.Value = (hit.transform.position + attackOffset).x;
-                        linrendererPosY.Value = (hit.transform.position + attackOffset).y;
-
-                    }
-                   
-                    linrendererPos = new Vector2(linrendererPosX.Value, linrendererPosY.Value);
+                    dir = tart_player.transform.position - transform.position + attackOffset;
+                    dir = dir.normalized;
+                    tart_player = tart_player.gameObject.GetComponent<PlayerControl>();
+                    linrendererPos = tart_player.transform.position + attackOffset;
 
                     curAttackTime += Time.deltaTime;
-
-                    if (!absRun)
-                        StartCoroutine(asd());
+                    print("5555555555555555");
                 }
                 else
                 {
@@ -103,26 +100,11 @@ public class shooter : Enemy
 
     }
 
-
-    public IEnumerator asd()
-    {
-        absRun = true;
-        while (true)
-        {
-            lineRenderer.enabled = false;
-            yield return new WaitForSeconds(0.5f);
-            lineRenderer.enabled = true;
-            yield return new WaitForSeconds(0.5f);
-
-        }
-      
-    }
-
     void shoot_ratcast()
     {
         if (dir != Vector2.zero && curAttackTime <= attackTime)
         {
-            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
             // z축만 회전하도록 설정
             shooter_obj.transform.rotation = Quaternion.Euler(0, 0, angle);
