@@ -1,8 +1,10 @@
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Enemy : baseStatus
 {
+    public NetworkAnimator NetworkAnimator;
     public Transform wallCheck;
     [Header("~Player체크")]
     public LayerMask wallLayer;
@@ -92,9 +94,12 @@ public class Enemy : baseStatus
       
     }
 
+    [Header("플레이어 찾기")]
     public Transform findCehck;
     public float find_range;
+    [Header("공격 범위에 있는 플레이어")]
     public PlayerControl tart_player;
+    [Header("박스 캐스트일때 사용")]
     public Vector2 find_size;
     public virtual void Find_Player() // 유닛의 시야 범위
     {
