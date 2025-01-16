@@ -1,4 +1,6 @@
+using Unity.Netcode;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class shooter : Enemy
 {
@@ -11,11 +13,16 @@ public class shooter : Enemy
 
     [Header("공격 딜레이 및 공격시간")]
     Vector3 attackOffset= new Vector3(0,0.1f,0);
+    public NetworkVariable<float> dirx;
+    public NetworkVariable<float> diry;
     public Vector2 dir;
     public float attackTime;
     [SerializeField] float curAttackTime;
     public LineRenderer lineRenderer;
-    Vector3 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
+    public NetworkVariable<float> linrendererPosX;//플레이어가 범위를 벗어나면 멈춰지는 부분
+    public NetworkVariable<float> linrendererPosY;//플레이어가 범위를 벗어나면 멈춰지는 부분
+    public Vector2 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
+
     [Header("쏘는 애니메이션이 나왔을 때 때려지는 플레이어")]
     public GameObject attack_tartget;
     public override void Start()
@@ -25,6 +32,7 @@ public class shooter : Enemy
 
     void Update()
     {
+
         Find_Player();
         shoot_ratcast();
     }
@@ -41,10 +49,24 @@ public class shooter : Enemy
             {
                 if (hit)
                 {
-                    dir = hit.transform.position - transform.position + attackOffset;
-                    dir = dir.normalized;
+                    if (IsServer)
+                    {
+                        dirx.Value = (hit.transform.position - transform.position + attackOffset).x;
+                        diry.Value = (hit.transform.position - transform.position + attackOffset).y;
+                    }
+                   
+                    dir = new Vector2(dirx.Value, diry.Value);
+
                     tart_player = hit.gameObject.GetComponent<PlayerControl>();
-                    linrendererPos = hit.transform.position + attackOffset;
+
+                    if (IsServer)
+                    {
+                        linrendererPosX.Value = (hit.transform.position + attackOffset).x;
+                        linrendererPosY.Value = (hit.transform.position + attackOffset).y;
+
+                    }
+                   
+                    linrendererPos = new Vector2(linrendererPosX.Value, linrendererPosY.Value);
 
                     curAttackTime += Time.deltaTime;
                 }
@@ -76,7 +98,7 @@ public class shooter : Enemy
     {
         if (dir != Vector2.zero && curAttackTime <= attackTime)
         {
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
 
             // z축만 회전하도록 설정
             shooter_obj.transform.rotation = Quaternion.Euler(0, 0, angle);
