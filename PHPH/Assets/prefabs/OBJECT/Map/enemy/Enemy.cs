@@ -96,7 +96,7 @@ public class Enemy : baseStatus
     public float find_range;
     public PlayerControl tart_player;
     public Vector2 find_size;
-    public void Find_Player() // 유닛의 시야 범위
+    public virtual void Find_Player() // 유닛의 시야 범위
     {
         Vector2 origin = (Vector2)findCehck.position;
         RaycastHit2D hit = Physics2D.BoxCast(origin, find_size, 0, Vector2.zero, find_range, find_layerMask);
