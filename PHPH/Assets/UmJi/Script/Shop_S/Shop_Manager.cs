@@ -9,7 +9,7 @@ public class Shop_Manager : interaction
 {
     public static Shop_Manager instance;
 
-   public GameObject shop_Panel;
+    public GameObject shop_Panel;
 
     public GameObject shop_Slot_Ob; // 상점 슬롯 부모
     public GameObject inven_Slot_Ob; // 상점 인벤토리
