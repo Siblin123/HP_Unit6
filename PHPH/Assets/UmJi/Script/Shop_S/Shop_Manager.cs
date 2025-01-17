@@ -145,13 +145,6 @@ public class Shop_Manager : interaction
 
     public void Update_Slot() // 판매할 아이템 표시
     {
-        if (!IsServer)
-        {
-            return;
-        }
-
-
-
         select_Item_List = new List<Item_Info>();
 
         // 기본 이아팀, 완성 아이템
@@ -180,20 +173,21 @@ public class Shop_Manager : interaction
             }
             select_Item_List.Add(slot_List[i].item);
         }
+
+        Update_Slot_ClientRpc();
     }
 
     // 서버 -> 클라이언트한테 보내주는거인데 서버도 실행이 됨
     [ClientRpc]
     public void Update_Slot_ClientRpc()
     {
-        List<int> item_ID = new List<int>();
+     //   List<int> item_ID = new List<int>();
 
         for (int i = 0; i < slot_List.Count; i++)
         {
-            item_ID.Add(select_Item_List[i].id);
-        } 
-       
-
+            //item_ID.Add(select_Item_List[i].id);
+            GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(select_Item_List[i]);
+        }
     }
 
     //===========================================================================
