@@ -22,7 +22,7 @@ public class shooter : Enemy
 
     public NetworkVariable<float> dirx = new NetworkVariable<float>();
     public NetworkVariable<float> diry = new NetworkVariable<float>();
-
+    Vector2 attackdir;
     public override void Start()
     {
         lineRenderer= shooter_obj.GetComponent<LineRenderer>();
@@ -89,11 +89,18 @@ public class shooter : Enemy
 
                     if(IsServer)
                     {
+                        if (attackdir == Vector2.zero)
+                            attackdir = new Vector2(dirx.Value, diry.Value);
+
                         dirx.Value = tart_player.transform.position.x;
                         diry.Value = tart_player.transform.position.y + attackOffset.y;
-                    }
 
-                    linrendererPos = Vector2.Lerp(linrendererPos, new Vector2(dirx.Value, diry.Value), 0.1f);
+
+
+                    }
+                    attackdir = Vector2.Lerp(new Vector2(dirx.Value, diry.Value), new Vector2(dirx.Value, diry.Value), 0.5f);
+
+                    linrendererPos = Vector2.Lerp(linrendererPos, attackdir, 0.5f);
                     curAttackTime += Time.deltaTime;
                     print("5555555555555555");
                 }
