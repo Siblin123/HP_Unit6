@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using Unity.Netcode;
+using static UnityEditor.Progress;
 
 public class Shop_Manager : interaction
 {
@@ -25,8 +26,6 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
-    //public NetworkList<int> select_Item_List; // 상점에서 판매할 아이템 리스트
-
     // 돈 표시 UI
     public GameObject money_View;
     public int money;
@@ -34,17 +33,13 @@ public class Shop_Manager : interaction
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
+    //네트워크를 위한 id리스트
+    public List<int> itemid;
 
     private void Awake()
     {
-       /* if (IsServer)
-        {
-            select_Item_List = new NetworkList<int>();
-        }*/
-      
         instance = this;
     }
-
     private void Start()
     {
         for (int i = 0; i < shop_Slot_Ob.transform.childCount; i++)
@@ -71,7 +66,6 @@ public class Shop_Manager : interaction
         }
         else if (Input.GetKeyDown(KeyCode.D)) // 상점 판매 아이템 리롤
         {
-
             Update_Slot();
         }
     }
@@ -144,20 +138,9 @@ public class Shop_Manager : interaction
         return null;
     }
 
-
-
-    //============================ 상점 물품 동기화 ============================
-
-
     public void Update_Slot() // 판매할 아이템 표시
     {
-        if (!IsServer)
-        {
-            return;
-        }
-
-        //select_Item_List.Clear();
-
+        itemid.Clear();
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
 
@@ -169,58 +152,49 @@ public class Shop_Manager : interaction
             {
                 select_N = CheckDuplicate(combination_Item_List, select_N);
                 slot_List[i].Update_Slot(combination_Item_List[select_N]);
-                combi_N++;
+                itemid.Add(combination_Item_List[select_N].id);
+                 combi_N++;
             }
             else if (base_N < 2)
             {
                 select_N = CheckDuplicate(base_Item_List, select_N);
                 slot_List[i].Update_Slot(base_Item_List[select_N]);
+                itemid.Add(base_Item_List[select_N].id);
                 base_N++;
             }
             else
             {
                 select_N = CheckDuplicate(all_Item_List, select_N);
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
+                itemid.Add(all_Item_List[select_N].id);
             }
-           // select_Item_List.Add(slot_List[i].item.id);
-         //   print(select_Item_List);
         }
 
-        Update_Slot_ClientRpc();
+        for(int i=0; i< itemid.Count; i++)
+            Update_Slot_ClientRpc(itemid[i]);
+
     }
 
-    // 서버 -> 클라이언트한테 보내주는거인데 서버도 실행이 됨
     [ClientRpc]
-    public void Update_Slot_ClientRpc()
+    void Update_Slot_ClientRpc(int id)
     {
+
         if (IsServer)
             return;
-        
 
-        print("클라실행");
-     //   List<int> item_ID = new List<int>();
-
-       /* // 판매할 아이템 품목 개수만큼 반복
-        for (int i = 0; i < slot_List.Count; i++)
+        print("클라만");
+        for(int i=0; i<all_Item_List.Count; i++)
         {
-            // 전체 품목중 비교
-            foreach (var item in all_Item_List)
-            {
-                // 서버에서 선정한 판매할 아이템 찾기
-                foreach (var selet_ID in select_Item_List)
-                {
-                    if (item.id == selet_ID)
-                    {
-                        GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(all_Item_List[selet_ID]);
-                        break;
-                    }
-                }
+            if (all_Item_List[i].id == id)
+            { 
+                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(all_Item_List[id]);
                 break;
             }
-        }*/
+
+        }
+
     }
 
-    //===========================================================================
     public int CheckDuplicate(List<Item_Info> list, int select_N) // 중복 체크
     {
         int checkDuplicate = Random.Range(0, list.Count);
@@ -232,7 +206,7 @@ public class Shop_Manager : interaction
         {
             if (slot.item != null)
             {
-                if (slot.item.name == list[checkDuplicate].name)
+                if (slot.item.id == list[checkDuplicate].id)
                 {
                     isDuplicate = true; // 중복 발견
                     break;
@@ -252,7 +226,7 @@ public class Shop_Manager : interaction
         }
         else
         {
-            return 0;
+           return CheckDuplicate(list, select_N);
         }
     }
 }
