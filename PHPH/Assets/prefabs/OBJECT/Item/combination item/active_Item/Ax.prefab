@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2155996287
+  GlobalObjectIdHash: 1041286398
   InScenePlacedSourceGlobalObjectIdHash: 1041286398
   DeferredDespawnTick: 0
   Ownership: 1
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uB3C4\uB07C"
-  id: 0
+  id: 8
   explan: "\uB098\uBB34\uB97C \uC27D\uAC8C \uCE98 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
   price: 112
   max_Have_Count: 1

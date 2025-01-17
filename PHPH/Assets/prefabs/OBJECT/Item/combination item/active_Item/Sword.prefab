@@ -129,11 +129,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uC18C\uB4DC"
-  id: 0
+  id: 15
   explan: "\uADFC\uC811 \uACF5\uACA9 \uBB34\uAE30\uC774\uB2E4."
   price: 96
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 3
   anim: {fileID: 0}
   clip: {fileID: 0}

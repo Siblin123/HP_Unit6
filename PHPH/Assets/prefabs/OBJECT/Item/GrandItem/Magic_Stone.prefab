@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 0
+  GlobalObjectIdHash: 794184353
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -75,11 +75,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uB9C8\uBC95\uC11D"
-  id: 0
+  id: 54
   explan: "\uC800\uB294 \uB9C8\uBC95\uC11D\uC785\uB2C8\uB2E4."
   price: 128
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 1
 --- !u!212 &-4871649294117765032
 SpriteRenderer:
