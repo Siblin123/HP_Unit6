@@ -36,8 +36,6 @@ public class Player_Inventory : Inventory_Manager
 
     public override void Update()
     {
-/*        if (!IsOwner)
-            return;*/
 
         print("업데이트");
         if (Input.GetKeyDown(KeyCode.Alpha1))

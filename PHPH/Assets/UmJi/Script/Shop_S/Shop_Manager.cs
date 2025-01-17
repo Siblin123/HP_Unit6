@@ -25,7 +25,7 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
-    public List<Item_Info> select_Item_List; // 상점에서 판매할 아이템 리스트
+    public NetworkVariable<List<int>> select_Item_List; // 상점에서 판매할 아이템 리스트
 
     // 돈 표시 UI
     public GameObject money_View;
@@ -145,7 +145,12 @@ public class Shop_Manager : interaction
 
     public void Update_Slot() // 판매할 아이템 표시
     {
-        select_Item_List = new List<Item_Info>();
+        if (!IsServer)
+        {
+            return;
+        }
+
+        select_Item_List.Value.Clear();
 
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
@@ -171,7 +176,7 @@ public class Shop_Manager : interaction
                 select_N = CheckDuplicate(all_Item_List, select_N);
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
             }
-            select_Item_List.Add(slot_List[i].item);
+            select_Item_List.Value.Add(slot_List[i].item.id);
         }
 
         Update_Slot_ClientRpc();
@@ -183,10 +188,21 @@ public class Shop_Manager : interaction
     {
      //   List<int> item_ID = new List<int>();
 
+        // 판매할 아이템 품목 개수만큼 반복
         for (int i = 0; i < slot_List.Count; i++)
         {
-            //item_ID.Add(select_Item_List[i].id);
-            GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(select_Item_List[i]);
+            // 전체 품목중 비교
+            foreach (var item in all_Item_List)
+            {
+                // 서버에서 선정한 판매할 아이템 찾기
+                foreach (var selet_ID in select_Item_List.Value)
+                {
+                    if (item.id == selet_ID)
+                    {
+                        GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(all_Item_List[selet_ID]);
+                    }
+                }
+            }
         }
     }
 
