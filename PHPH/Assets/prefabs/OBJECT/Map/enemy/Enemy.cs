@@ -1,9 +1,12 @@
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Enemy : baseStatus
 {
+    public NetworkAnimator NetworkAnimator;
     public Transform wallCheck;
+    [Header("~Player체크")]
     public LayerMask wallLayer;
 
 
@@ -23,11 +26,20 @@ public class Enemy : baseStatus
     [SerializeField] float randomMove_Num;
     [SerializeField] float randomMove_Time;
     [Header("0 정지 1 왼쪽 2 오른쪽")]
-    [SerializeField] int randomMove_Direction;
-    [SerializeField] float speed;
-    Vector2 view_dir;
-    public LayerMask layerMask;
-    public void Random_movement()//1.특정 구역 반복
+    [HideInInspector] public int randomMove_Direction;
+    public float f_speed;
+    protected float curSpeed;
+    protected Vector2 view_dir;
+    [Header("playerCheck")]
+    public LayerMask find_layerMask;
+
+    public override void Start()
+    {
+        base.Start();
+        curSpeed = f_speed;
+    }
+
+    public virtual void Random_movement()//1.특정 구역 반복
     {
 
         if (randomMove_Time <= randomMove_Num)
@@ -47,12 +59,12 @@ public class Enemy : baseStatus
                     break;
                 case 1:
                     view_dir = Vector2.right;
-                    transform.Translate(view_dir * Time.deltaTime);
+                    transform.Translate(curSpeed * view_dir * Time.deltaTime);
                     transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2:
                     view_dir = Vector2.left;
-                    transform.Translate(view_dir * Time.deltaTime);
+                    transform.Translate(curSpeed * view_dir * Time.deltaTime);
                     transform.localScale = new Vector3(1, 1, 1);
                     break;
 
@@ -61,7 +73,7 @@ public class Enemy : baseStatus
 
     }
 
-    public void WallCheck2D()
+    public virtual bool WallCheck2D()
     {
         RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, Vector2.up, 0.5f, ~wallLayer);
         Debug.DrawRay(wallCheck.position, Vector2.up * 0.5f, Color.red);
@@ -71,17 +83,28 @@ public class Enemy : baseStatus
             if (hit.transform.name.Contains("Plater"))
                 print("find_PLayer");
 
-            randomMove_Direction = Random.Range(0, 3); 
+            randomMove_Direction = Random.Range(0, 3);
+            return true;
         }
+        else
+        {
+            return false;
+        }
+
+      
     }
 
+    [Header("플레이어 찾기")]
+    public Transform findCehck;
     public float find_range;
+    [Header("공격 범위에 있는 플레이어")]
     public PlayerControl tart_player;
-    public void Find_Player()//유닛의 시야 범위
+    [Header("박스 캐스트일때 사용")]
+    public Vector2 find_size;
+    public virtual void Find_Player() // 유닛의 시야 범위
     {
-
-        RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, view_dir, find_range, ~layerMask);
-        Debug.DrawRay(wallCheck.position, view_dir * find_range, Color.blue);
+        Vector2 origin = (Vector2)findCehck.position;
+        RaycastHit2D hit = Physics2D.BoxCast(origin, find_size, 0, Vector2.zero, find_range, find_layerMask);
 
         if (hit.collider != null)
         {
@@ -104,4 +127,19 @@ public class Enemy : baseStatus
             
         }
     }
+
+
+    // 에디터에서 시각화
+    private void OnDrawGizmosSelected()
+    {
+        if (findCehck == null) return;
+
+        Vector2 origin = (Vector2)findCehck.position;
+        Gizmos.color = Color.blue;
+
+        // 박스 캐스트 영역 시각화
+        Gizmos.DrawWireCube(origin, find_size);
+    }
+
+
 }
