@@ -79,6 +79,7 @@ MonoBehaviour:
   price: 96
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 4
 --- !u!212 &-90481070799669932
 SpriteRenderer:
@@ -124,12 +125,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8708187760698427289, guid: 8de504626766a294fb3c5d90ecaab7c9, type: 3}
+  m_Sprite: {fileID: 6343788220679744253, guid: 78c94a923ad58584bbb83c93c79dd775, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.13, y: 0.22}
+  m_Size: {x: 0.04, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
-public class Shop_Slot : MonoBehaviour
+public class Shop_Slot : Shop_Manager
 {
     public Item_Info item;
     public TextMeshProUGUI price_T;
@@ -24,5 +24,27 @@ public class Shop_Slot : MonoBehaviour
 
         price = item_Count * item.price;
         price_T.text = price.ToString();
+    }
+
+    public void buy_Slot() // 아이템 구매
+    {
+         if(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Get_Item(item, item.max_Have_Count))
+         {
+            // 인벤토리 -> 상점 인벤토리 동기화
+            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+            {
+                inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+
+                // id가 100은 돈
+                if (inven_Slot_List[i].item.id == 100)
+                {
+                    money = inven_Slot_List[i].item.have_Count;
+
+                    money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = inven_Slot_List[i].have_Count.ToString("N0");
+                }
+            }
+            print("구매");
+         }
+        
     }
 }
