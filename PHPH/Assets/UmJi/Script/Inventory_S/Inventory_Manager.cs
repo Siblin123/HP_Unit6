@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 public class Inventory_Manager : NetworkBehaviour
 {
@@ -74,18 +75,19 @@ public class Inventory_Manager : NetworkBehaviour
     }
 
     // 아이템 판매
-    public void Sell_Item(Inven_Slot slot)
+    public bool Sell_Item(Inven_Slot slot)
     {
         // 최대 소지 개수여야 판매가 가능하게 합니다.
         if(slot.have_Count == slot.item.max_Have_Count)
         {
             // 판매 가격
-            int price = slot.item.price * slot.have_Count; 
+            int price = slot.item.price * slot.have_Count;
             // 금액 증가 코드 작성
 
-            slot.item = null;
-            slot.have_Count = 0;
+            slot.Update_Slot(null, 0);
+            return true;
         }
+        return false;
     }
 
     // 슬롯 서로 값 교환 -> 위치 교환
