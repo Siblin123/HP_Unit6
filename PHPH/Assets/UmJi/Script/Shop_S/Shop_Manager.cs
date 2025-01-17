@@ -25,6 +25,8 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
+    public List<Item_Info> select_Item_List; // 상점에서 판매할 아이템 리스트
+
     // 돈 표시 UI
     public GameObject money_View;
     public int money;
@@ -63,6 +65,7 @@ public class Shop_Manager : interaction
         }
         else if (Input.GetKeyDown(KeyCode.D)) // 상점 판매 아이템 리롤
         {
+
             Update_Slot();
         }
     }
@@ -135,8 +138,22 @@ public class Shop_Manager : interaction
         return null;
     }
 
+
+
+    //============================ 상점 물품 동기화 ============================
+
+
     public void Update_Slot() // 판매할 아이템 표시
     {
+        if (!IsServer)
+        {
+            return;
+        }
+
+
+
+        select_Item_List = new List<Item_Info>();
+
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
 
@@ -161,9 +178,25 @@ public class Shop_Manager : interaction
                 select_N = CheckDuplicate(all_Item_List, select_N);
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
             }
+            select_Item_List.Add(slot_List[i].item);
         }
     }
 
+    // 서버 -> 클라이언트한테 보내주는거인데 서버도 실행이 됨
+    [ClientRpc]
+    public void Update_Slot_ClientRpc()
+    {
+        List<int> item_ID = new List<int>();
+
+        for (int i = 0; i < slot_List.Count; i++)
+        {
+            item_ID.Add(select_Item_List[i].id);
+        } 
+       
+
+    }
+
+    //===========================================================================
     public int CheckDuplicate(List<Item_Info> list, int select_N) // 중복 체크
     {
         int checkDuplicate = Random.Range(0, list.Count);
