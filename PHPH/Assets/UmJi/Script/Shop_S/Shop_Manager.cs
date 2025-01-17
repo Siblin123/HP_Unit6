@@ -32,7 +32,6 @@ public class Shop_Manager : interaction
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
-    public NetworkVariable<string> item_Name;
 
     private void Awake()
     {
@@ -66,13 +65,6 @@ public class Shop_Manager : interaction
         {
             Update_Slot();
         }
-
-        if (IsServer)
-        {
-            item_Name.Value = "Jiho guiyuwa";
-        }
-      
-        
     }
 
     private void OnEnable()
