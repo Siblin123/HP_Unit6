@@ -73,13 +73,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uB9CC\uB2A5\uD0A4"
-  id: 0
+  id: 27
   explan: "\uC5F4\uC1E0\uC640 \uAC19\uC740 \uAE30\uB2A5\uC744 \uAC00\uC9C0\uACE0
     \uC788\uB2E4. \uB2E8, \uC5F4\uC1E0\uBCF4\uB2E4 \uAC8C\uC784 \uB09C\uC774\uB3C4\uAC00
     \uB354 \uC26C\uC6CC\uC9C4\uB2E4"
   price: 208
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 5
 --- !u!212 &-5396130896790715482
 SpriteRenderer:

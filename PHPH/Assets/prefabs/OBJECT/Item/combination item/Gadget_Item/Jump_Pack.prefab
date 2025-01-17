@@ -73,11 +73,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uC810\uD504\uD329"
-  id: 0
+  id: 32
   explan: "\uC810\uD504 \uB192\uC774\uAC00 \uC62C\uB77C\uAC04\uB2E4."
   price: 240
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 2
 --- !u!212 &-589547527627991159
 SpriteRenderer:

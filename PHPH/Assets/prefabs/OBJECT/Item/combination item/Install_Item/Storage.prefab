@@ -74,12 +74,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uBCF4\uAD00\uD568"
-  id: 0
+  id: 41
   explan: "\uBC14\uB2E5\uC5D0 \uC124\uCE58\uD560 \uC218 \uC788\uC73C\uBA70, \uC544\uC774\uD15C\uC744
     \uB123\uC744 \uC218 \uC788\uB2E4."
   price: 64
   max_Have_Count: 1
   colTime: 0
+  have_Count: 0
   curItemType: 4
 --- !u!212 &-5608459010683715697
 SpriteRenderer:
@@ -133,7 +134,7 @@ SpriteRenderer:
   m_Size: {x: 0.13, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &-7838783645653855060

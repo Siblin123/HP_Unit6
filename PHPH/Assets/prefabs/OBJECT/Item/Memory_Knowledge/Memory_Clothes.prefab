@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   name: "\uC637\uC758 \uAE30\uC5B5"
-  id: 0
+  id: 60
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1
   max_Have_Count: 1

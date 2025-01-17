@@ -16,12 +16,10 @@ public class shooter : Enemy
     public float attackTime;
     [SerializeField] float curAttackTime;
     public LineRenderer lineRenderer;
-    Vector3 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
+    
     [Header("쏘는 애니메이션이 나왔을 때 때려지는 플레이어")]
     public GameObject attack_tartget;
 
-    public NetworkVariable<float> dirx = new NetworkVariable<float>();
-    public NetworkVariable<float> diry = new NetworkVariable<float>();
     Vector2 attackdir;
     public override void Start()
     {
@@ -87,20 +85,8 @@ public class shooter : Enemy
                     tart_player = tart_player.gameObject.GetComponent<PlayerControl>();
 
 
-                    if(IsServer)
-                    {
-                        if (attackdir == Vector2.zero)
-                            attackdir = new Vector2(dirx.Value, diry.Value);
-
-                        dirx.Value = tart_player.transform.position.x;
-                        diry.Value = tart_player.transform.position.y + attackOffset.y;
 
 
-
-                    }
-                    attackdir = Vector2.Lerp(new Vector2(dirx.Value, diry.Value), new Vector2(dirx.Value, diry.Value), 0.5f);
-
-                    linrendererPos = Vector2.Lerp(linrendererPos, attackdir, 0.5f);
                     curAttackTime += Time.deltaTime;
                     print("5555555555555555");
                 }
@@ -109,7 +95,7 @@ public class shooter : Enemy
                     tart_player = null;
 
                     dir = Vector2.zero;
-                    lineRenderer.SetPosition(1, linrendererPos);
+                    lineRenderer.SetPosition(1, shooter_obj.transform.position);
                 }
             }
             else
@@ -165,7 +151,7 @@ public class shooter : Enemy
                 if (tart_player != null)
                 {
                     // 레이가 충돌한 지점까지 라인 그리기
-                    lineRenderer.SetPosition(1, linrendererPos);
+                    lineRenderer.SetPosition(1, tart_player.transform.position);
                 }
 
 
