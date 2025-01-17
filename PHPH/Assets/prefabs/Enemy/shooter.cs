@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 
 public class shooter : Enemy
@@ -18,6 +19,10 @@ public class shooter : Enemy
     Vector3 linrendererPos;//플레이어가 범위를 벗어나면 멈춰지는 부분
     [Header("쏘는 애니메이션이 나왔을 때 때려지는 플레이어")]
     public GameObject attack_tartget;
+
+    public NetworkVariable<float> dirx = new NetworkVariable<float>();
+    public NetworkVariable<float> diry = new NetworkVariable<float>();
+
     public override void Start()
     {
         lineRenderer= shooter_obj.GetComponent<LineRenderer>();
@@ -37,23 +42,32 @@ public class shooter : Enemy
         {
             Collider2D [] hit = Physics2D.OverlapCircleAll(transform.position, find_range, find_layerMask);
 
-            if(hit.Length!=0 && !tart_player)
+            if(hit.Length!=0)
             {
-                print("222222222222222");
-                float distance=99f;
+               
           
-                for (int i=0; i<hit.Length; i++)
+                for (int i=1; i<hit.Length; i++)
                 {
-                    print("44444444444");
-
-                    if (distance > Vector2.Distance(transform.position, hit[i].transform.position))
+                    if (hit.Length == 1)
                     {
-                        distance = Vector2.Distance(transform.position, hit[i].transform.position);
-                        tart_player = hit[i].transform.GetComponent<PlayerControl>();
-                        print("33333333333333333333");
+                        tart_player = hit[0].transform.GetComponent<PlayerControl>();
                     }
-                    float a = Vector2.Distance(transform.position, hit[i].transform.position);
-                        print(Vector2.Distance(transform.position, hit[i].transform.position));
+                    else
+                    {
+                        if (Vector2.Distance(transform.position, hit[i].transform.position) > Vector2.Distance(transform.position, hit[i - 1].transform.position))
+                        {
+                            tart_player = hit[i-1].transform.GetComponent<PlayerControl>();
+                           
+                        }
+                        else
+                        {
+                            tart_player = hit[i].transform.GetComponent<PlayerControl>();
+
+                        }
+                    }
+
+                   
+
 
 
                 }
@@ -71,8 +85,15 @@ public class shooter : Enemy
                     dir = tart_player.transform.position - transform.position + attackOffset;
                     dir = dir.normalized;
                     tart_player = tart_player.gameObject.GetComponent<PlayerControl>();
-                    linrendererPos = tart_player.transform.position + attackOffset;
 
+
+                    if(IsServer)
+                    {
+                        dirx.Value = tart_player.transform.position.x;
+                        diry.Value = tart_player.transform.position.y + attackOffset.y;
+                    }
+
+                    linrendererPos = Vector2.Lerp(linrendererPos, new Vector2(dirx.Value, diry.Value), 0.1f);
                     curAttackTime += Time.deltaTime;
                     print("5555555555555555");
                 }
