@@ -17,10 +17,16 @@ public class Inven_Slot : Inventory_Manager
     public bool follow_C;
     public Inven_Slot clikc_S;
 
+    // 상점에서 가격 미리보기
+    public GameObject price_Ui;
+    public GameObject price_T;
+
+    // 더블클릭은 1초 이내에
+    private float doubleC = 1f;
+    public bool click_C = false;
 
     private void Start()
     {
-        
         follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
         rectTransform = GetComponent<RectTransform>();
 
@@ -37,7 +43,19 @@ public class Inven_Slot : Inventory_Manager
             // RectTransform의 위치를 마우스 위치로 설정합니다.
             rectTransform.position = new Vector2(mousePosition.x + 50f, mousePosition.y + 30f);
         }
-        
+
+        if (click_C)
+        {
+            if(doubleC <= 0)
+            {
+                doubleC = 1f;
+                click_C = false;
+            }
+            else
+            {
+                doubleC -= Time.deltaTime;
+            }
+        }
     }
 
     public void Update_Slot(Item_Info item, int count) // 슬롯 초기화
@@ -110,6 +128,36 @@ public class Inven_Slot : Inventory_Manager
             Inventory_Button.slot = null;
 
             follow_Slot.GetComponent<Image>().enabled = false;
+        }
+    }
+
+    public void Show_Price() // 가격 보여주는 함수
+    {
+        Shop_Manager.instance.All_Off();
+
+        // 아이템이 있을때만 보여줌
+        if (item != null)
+        {
+            price_Ui.SetActive(true);
+            price_Ui.GetComponent<RectTransform>().position = new Vector2(transform.position.x, transform.position.y + 100f);
+
+            price_T.GetComponent<TextMeshProUGUI>().text = (have_Count * item.price).ToString();
+
+            if (click_C) // 더블클릭하면 판매
+            {
+                if (Sell_Item(this))
+                {
+                    print("판매 성공");
+                }
+                else
+                {
+                    print("판매 불가능");
+                }
+            }
+            else
+            {
+                click_C = true;
+            }
         }
     }
 }

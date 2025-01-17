@@ -72,6 +72,7 @@ public class Request_Manager : MonoBehaviour
             request_DeadLine_T.text = "±âÇÑ: " + request_DeadLine.ToString() + "ÀÏ";
         }
     }
+
     public void Request_Selset() // ÀÇ·Ú »Ì±â
     {
         int num = Random.Range(0, request_L.Count);
