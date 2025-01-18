@@ -56,7 +56,7 @@ public class Item_Info : NetworkBehaviour
     {
         if (IsServer)
         {
-            GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(this.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
             obj.GetComponent<NetworkObject>().Spawn();
         }
         else
@@ -71,7 +71,7 @@ public class Item_Info : NetworkBehaviour
 
         if (IsClient)
             return;
-        GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(this.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
         obj.GetComponent<NetworkObject>().Spawn();
 
     }                  
