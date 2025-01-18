@@ -27,7 +27,7 @@ public class Shop_Manager : interaction
     public List<Item_Info> all_Item_List;
 
     // 돈 표시 UI
-    public GameObject money_View;
+    public TextMeshProUGUI money_T;
     public int money;
 
     // 전부 꺼줄 이미지
@@ -67,7 +67,7 @@ public class Shop_Manager : interaction
         }
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         // 인벤토리 -> 상점 인벤토리 동기화
         for (int i = 0; i < slot_List.Count; i++)
@@ -79,7 +79,7 @@ public class Shop_Manager : interaction
             {
                 money = inven_Slot_List[i].item.have_Count;
 
-                money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = inven_Slot_List[i].have_Count.ToString("N0");
+                money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
             }
         }
     }
@@ -91,7 +91,7 @@ public class Shop_Manager : interaction
         {
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
         }
-    }
+    }*/
 
     public void All_Off()
     {
@@ -119,6 +119,17 @@ public class Shop_Manager : interaction
             for (int i = 0; i < inven_Slot_List.Count; i++)
             {
                 inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+
+                if (inven_Slot_List[i].item != null)
+                {
+                    // id가 100은 돈
+                    if (inven_Slot_List[i].item.id == 100)
+                    {
+                        money = inven_Slot_List[i].item.have_Count;
+
+                        money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
+                    }
+                }
             }
         }
     }

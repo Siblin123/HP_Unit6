@@ -56,7 +56,7 @@ public class Request_Manager : MonoBehaviour
                 item_Name = cols[1],
                 item = GetComponent<Shop_Manager>().find_Item(cols[1]),
             };
-            //request.item_Count = request.item.max_Have_Count;
+            request.item_Count = request.item.max_Have_Count;
             request_L.Add(request);
         }
     }
