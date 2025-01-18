@@ -34,7 +34,8 @@ public class Shop_Manager : interaction
     public GameObject price_Ui;
 
     //네트워크를 위한 id리스트
-    public List<int> itemid;
+    public int itemid;
+   // public List<int> itemid;
 
     private void Awake()
     {
@@ -140,7 +141,7 @@ public class Shop_Manager : interaction
 
     public void Update_Slot() // 판매할 아이템 표시
     {
-        itemid.Clear();
+        //itemid.Clear();
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
 
@@ -152,45 +153,45 @@ public class Shop_Manager : interaction
             {
                 select_N = CheckDuplicate(combination_Item_List, select_N);
                 slot_List[i].Update_Slot(combination_Item_List[select_N]);
-                itemid.Add(combination_Item_List[select_N].id);
-                 combi_N++;
+                Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
+                combi_N++;
             }
             else if (base_N < 2)
             {
                 select_N = CheckDuplicate(base_Item_List, select_N);
                 slot_List[i].Update_Slot(base_Item_List[select_N]);
-                itemid.Add(base_Item_List[select_N].id);
+                Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
                 base_N++;
             }
             else
             {
                 select_N = CheckDuplicate(all_Item_List, select_N);
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
-                itemid.Add(all_Item_List[select_N].id);
+                Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
             }
         }
 
-        for(int i=0; i< itemid.Count; i++)
-            Update_Slot_ClientRpc(itemid[i]);
+   /*     for(int i=0; i< itemid.Count; i++)
+            Update_Slot_ClientRpc(itemid[i]);*/
 
     }
 
     [ClientRpc]
-    void Update_Slot_ClientRpc(int id)
+    void Update_Slot_ClientRpc(int id, int index)
     {
-
         if (IsServer)
             return;
 
         print("클라만");
-        for(int i=0; i<all_Item_List.Count; i++)
+
+
+        for (int j = 0; j < all_Item_List.Count; j++)
         {
-            if (all_Item_List[i].id == id)
-            { 
-                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(all_Item_List[id]);
+            if (all_Item_List[j].id == id)
+            {
+                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].Update_Slot(all_Item_List[j]);
                 break;
             }
-
         }
 
     }

@@ -62,13 +62,13 @@ public class Player_Inventory : Inventory_Manager
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (inventory.GetComponent<RectTransform>().localScale.x == 0)
+            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale.x == 0)
             {
-                inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
             }
             else
             {
-                inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             }
         }
     }
