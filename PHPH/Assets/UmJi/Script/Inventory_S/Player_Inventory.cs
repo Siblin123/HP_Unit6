@@ -6,18 +6,14 @@ public class Player_Inventory : Inventory_Manager
 {
     public static Player_Inventory instance;
 
-    /*[Header("상점")]
-    public GameObject shop_Panel;
-
-    public GameObject shop_Slot_Ob; // 상점 슬롯 부모
-    public GameObject shop_inven_Ob; // 상점 슬롯 부모*/
-
     [Header("인벤토리")]
     public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
     public GameObject godGet_Ob; // 장비 슬롯 부모
 
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
+
+    public GameObject follow_Slot;
 
     public int money;
 
@@ -36,6 +32,10 @@ public class Player_Inventory : Inventory_Manager
 
     public override void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
 
         print("업데이트");
         if (Input.GetKeyDown(KeyCode.Alpha1))

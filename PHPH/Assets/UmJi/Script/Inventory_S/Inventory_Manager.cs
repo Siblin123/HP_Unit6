@@ -20,6 +20,11 @@ public class Inventory_Manager : NetworkBehaviour
     // 아이템 습득 및 구매
     public bool Get_Item(Item_Info item, int count)
     {
+        if(item.have_Count != 0) // 버린 아이템일경우 have_Count가 있음
+        {
+            count = item.have_Count;
+        }
+
         Player_Inventory p_I = GetComponent<Player_Inventory>();
 
         int i = 0;
