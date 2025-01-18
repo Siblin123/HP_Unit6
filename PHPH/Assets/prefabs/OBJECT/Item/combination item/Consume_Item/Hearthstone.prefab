@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5699236437082825186}
   - component: {fileID: -7286138727791240936}
-  - component: {fileID: 4528664035567057021}
   - component: {fileID: 4171349655350866485}
+  - component: {fileID: 5729833292720841805}
   m_Layer: 0
   m_Name: Hearthstone
   m_TagString: Untagged
@@ -59,28 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &4528664035567057021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3665614915300564947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uADC0\uD658\uC11D"
-  id: 20
-  explan: "\uB4E4\uACE0 \uC788\uC744 \uB54C \uC0C1\uD638\uC791\uC6A9\uC744 \uD558\uBA74
-    \uC81C\uC791 \uAD6C\uC5ED\uC73C\uB85C \uAC15\uC81C \uADC0\uD658\uB41C\uB2E4."
-  price: 272
-  max_Have_Count: 1
-  colTime: 0
-  have_Count: 0
-  curItemType: 5
 --- !u!212 &4171349655350866485
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -136,3 +114,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5729833292720841805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3665614915300564947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5469c7be3a50e548b2807abd9ea898e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  name: "\uADC0\uD658\uC11D"
+  id: 20
+  explan: "\uB4E4\uACE0 \uC788\uC744 \uB54C \uC0C1\uD638\uC791\uC6A9\uC744 \uD558\uBA74
+    \uC81C\uC791 \uAD6C\uC5ED\uC73C\uB85C \uAC15\uC81C \uADC0\uD658\uB41C\uB2E4."
+  price: 272
+  max_Have_Count: 1
+  colTime: 0
+  have_Count: 0
+  curItemType: 5
