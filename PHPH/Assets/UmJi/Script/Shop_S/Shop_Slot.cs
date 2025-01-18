@@ -35,7 +35,7 @@ public class Shop_Slot : MonoBehaviour
             {
                 Shop_Manager.instance.inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
 
-                if(Shop_Manager.instance.inven_Slot_List[i].item!=null)
+                if(Shop_Manager.instance.inven_Slot_List[i].item != null)
                 {
                     // id°¡ 100Àº µ·
                     if (Shop_Manager.instance.inven_Slot_List[i].item.id == 100)
@@ -45,8 +45,6 @@ public class Shop_Slot : MonoBehaviour
                         Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
                     }
                 }
-
-             
             }
             print("±¸¸Å");
          }
