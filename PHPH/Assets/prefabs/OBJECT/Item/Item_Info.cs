@@ -52,6 +52,31 @@ public class Item_Info : NetworkBehaviour
     }
 
 
+    public void Obj_Installable()//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    {
+        if (IsServer)
+        {
+            GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+            obj.GetComponent<NetworkObject>().Spawn();
+        }
+        else
+        {
+            Obj_Installable_ServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    public void Obj_Installable_ServerRpc()
+    {
+
+        if (IsClient)
+            return;
+        GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+        obj.GetComponent<NetworkObject>().Spawn();
+
+    }                  
+                //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
     public virtual void UseItem()//각 아이템의 기능
     {
         if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
@@ -85,6 +110,7 @@ public class Item_Info : NetworkBehaviour
        
         gameObject.SetActive(false);
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

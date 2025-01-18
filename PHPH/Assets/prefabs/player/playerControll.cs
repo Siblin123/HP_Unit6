@@ -34,6 +34,8 @@ public class PlayerControl : PlayerStatus
         }
         else
         {
+            //플레이어 위치 초기화
+            transform.position=csTable.Instance.unitSopn_Pos.position;
             //카메라 생성
             CinemachineVirtualCamera virtualCamera = Instantiate(VirtualCamera);
             virtualCamera.Follow = transform;
