@@ -33,14 +33,17 @@ public class Shop_Slot : MonoBehaviour
             // 인벤토리 -> 상점 인벤토리 동기화
             for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
             {
-                Shop_Manager.instance.inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+                Shop_Manager.instance.inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
 
-                // id가 100은 돈
-                if (Shop_Manager.instance.inven_Slot_List[i].item.id == 100)
+                if(Shop_Manager.instance.inven_Slot_List[i].item != null)
                 {
-                    Shop_Manager.instance.money = Shop_Manager.instance.inven_Slot_List[i].item.have_Count;
+                    // id가 100은 돈
+                    if (Shop_Manager.instance.inven_Slot_List[i].item.id == 100)
+                    {
+                        Shop_Manager.instance.money = Shop_Manager.instance.inven_Slot_List[i].item.have_Count;
 
-                    Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
+                        Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
+                    }
                 }
             }
             print("구매");

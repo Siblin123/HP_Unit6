@@ -189,7 +189,7 @@ public class Shop_Manager : interaction
         {
             if (all_Item_List[j].id == id)
             {
-                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].Update_Slot(all_Item_List[id]);
+                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].Update_Slot(all_Item_List[j]);
                 break;
             }
         }
