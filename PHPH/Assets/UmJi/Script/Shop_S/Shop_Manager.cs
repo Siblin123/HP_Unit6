@@ -33,10 +33,6 @@ public class Shop_Manager : interaction
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
-    //네트워크를 위한 id리스트
-    public int itemid;
-   // public List<int> itemid;
-
     private void Awake()
     {
         instance = this;
@@ -65,7 +61,7 @@ public class Shop_Manager : interaction
         {
             On_Off();
         }
-        else if (Input.GetKeyDown(KeyCode.D)) // 상점 판매 아이템 리롤
+        else if (Input.GetKeyDown(KeyCode.K)) // 상점 판매 아이템 리롤
         {
             Update_Slot();
         }
@@ -141,7 +137,6 @@ public class Shop_Manager : interaction
 
     public void Update_Slot() // 판매할 아이템 표시
     {
-        //itemid.Clear();
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
 
@@ -170,10 +165,6 @@ public class Shop_Manager : interaction
                 Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
             }
         }
-
-   /*     for(int i=0; i< itemid.Count; i++)
-            Update_Slot_ClientRpc(itemid[i]);*/
-
     }
 
     [ClientRpc]
@@ -193,7 +184,6 @@ public class Shop_Manager : interaction
                 break;
             }
         }
-
     }
 
     public int CheckDuplicate(List<Item_Info> list, int select_N) // 중복 체크

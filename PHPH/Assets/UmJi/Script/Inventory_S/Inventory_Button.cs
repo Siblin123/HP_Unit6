@@ -1,3 +1,4 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,14 +9,38 @@ public class Inventory_Button : MonoBehaviour
 
     public void Throw_Button() // 아이템 버리기
     {
+     
         if(slot != null)
         {
+            // 버릴때 개수를 넣어줌
             slot.item.have_Count = slot.have_Count;
-            slot.follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
-            slot.follow_Slot.GetComponent<Image>().enabled = false;
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
+
+            if (csTable.Instance.gameManager.player.IsClient)
+            {
+                Throw_Item_ServerRpc();
+            }
+            else if (csTable.Instance.gameManager.player.IsServer)
+            {
+                GameObject clone = Instantiate(slot.item.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+                clone.GetComponent<NetworkObject>().Spawn();
+            }
 
             slot.Update_Slot(null, 0);
             slot = null;
         }
+    }
+
+    [ServerRpc]
+    public void Throw_Item_ServerRpc()
+    {
+        if (csTable.Instance.gameManager.player.IsClient)
+        {
+            return;
+        }
+
+        GameObject clone = Instantiate(slot.item.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+        clone.GetComponent<NetworkObject>().Spawn();
     }
 }
