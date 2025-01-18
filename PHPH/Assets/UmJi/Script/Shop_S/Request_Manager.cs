@@ -22,17 +22,19 @@ public class Request_Manager : MonoBehaviour
     public Item_Info reward_Item; // 보상 아이템
 
     public Image request_I; // 필요한 아이템 이미지
-    public TextMeshProUGUI request_Count_T; // 필요한 아이템 개수
+    //public TextMeshProUGUI request_Count_T; // 필요한 아이템 개수
 
-    public Image reward_I; // 보상 아이템 이미지
+    //public Image reward_I; // 보상 아이템 이미지
+    public int reward_Count;
     public TextMeshProUGUI reward_Count_T; // 보상 개수
+
 
     public int request_DeadLine;
     public TextMeshProUGUI request_DeadLine_T; // 미션 기한
 
-    
+
     public Sprite money_I;
-    
+
     private void Awake()
     {
         request_DeadLine = 2;
@@ -64,7 +66,7 @@ public class Request_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             request_DeadLine--;
-            if(request_DeadLine == 0)
+            if (request_DeadLine == 0)
             {
                 request_DeadLine = 2;
                 Request_Selset();
@@ -81,10 +83,12 @@ public class Request_Manager : MonoBehaviour
         // 필요한 아이템 이미지
         request_I.sprite = select_R.item.gameObject.GetComponent<SpriteRenderer>().sprite;
         // 필요한 아이템 개수
-        request_Count_T.text = select_R.item_Count.ToString();
-        
+        //request_Count_T.text = select_R.item_Count.ToString();
 
-        if (GetComponent<Shop_Manager>().find_Item(select_R.reward) == null) // 없으면 돈인거임
+        //reward_Count = int.Parse(select_R.reward);
+        reward_Count_T.text = select_R.reward;
+
+        /*if (GetComponent<Shop_Manager>().find_Item(select_R.reward) == null) // 없으면 돈인거임
         {
             reward_Item = null;
 
@@ -103,6 +107,6 @@ public class Request_Manager : MonoBehaviour
 
             // 보상 개수 -> 최대 소지 개수
             reward_Count_T.text = reward_Item.max_Have_Count.ToString();
-        }
+        }*/
     }
 }
