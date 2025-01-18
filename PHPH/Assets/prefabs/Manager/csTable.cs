@@ -6,7 +6,7 @@ public class csTable : MonoBehaviour
 {
     public static csTable Instance;
     public GameManager gameManager;
-    public RPCmanager rPCmanager;
+    public Transform unitSopn_Pos;
 
     [HideInInspector]
     public Player_Inventory Player_Inventory;
