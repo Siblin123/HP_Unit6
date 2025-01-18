@@ -491,6 +491,7 @@ MonoBehaviour:
   godGet_Ob: {fileID: 3315040279197468473}
   slot_List: []
   godGet_List: []
+  follow_Slot: {fileID: 3569894914260024582}
   money: 0
 --- !u!1 &5116266193173006959
 GameObject:
@@ -865,6 +866,11 @@ RectTransform:
 --- !u!1 &3315040279197468473 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8399407909470957446, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
+  m_PrefabInstance: {fileID: 6526229796621527231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3569894914260024582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7717766709444285881, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
   m_PrefabInstance: {fileID: 6526229796621527231}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4737019477064595992 stripped

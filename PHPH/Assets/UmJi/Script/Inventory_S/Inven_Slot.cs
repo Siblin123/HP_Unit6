@@ -11,7 +11,7 @@ public class Inven_Slot : Inventory_Manager
     public TextMeshProUGUI count_T;
 
     // 마우스 따라다니는 슬롯 관련
-    public GameObject follow_Slot; // 마우스를 따라다닐 오브젝트
+    //public GameObject follow_Slot; // 마우스를 따라다닐 오브젝트
 
     private RectTransform rectTransform;
     public bool follow_C;
@@ -27,7 +27,7 @@ public class Inven_Slot : Inventory_Manager
 
     private void Start()
     {
-        follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
+        //follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
         rectTransform = GetComponent<RectTransform>();
 
         Update_Slot(item, have_Count);
@@ -105,16 +105,16 @@ public class Inven_Slot : Inventory_Manager
     public void Click_Slot() // 버튼 클릭했을때
     {
         // 아무것도 클릭 안했으면 본인을 넣어줌
-        if (follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
+        if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
         {
             if(item != null) // 아이템이 있을때
             {
                 Inventory_Button.slot = this;
 
-                follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
 
-                follow_Slot.GetComponent<Image>().enabled = true;
-                follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
                 item_I.enabled = false;
                 count_T.enabled = false;
@@ -123,11 +123,11 @@ public class Inven_Slot : Inventory_Manager
         // 이미 선택한게 있으면 서로 위치 교환
         else
         {
-            Change_Slot(follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
-            follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
+            Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
             Inventory_Button.slot = null;
 
-            follow_Slot.GetComponent<Image>().enabled = false;
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
         }
     }
 

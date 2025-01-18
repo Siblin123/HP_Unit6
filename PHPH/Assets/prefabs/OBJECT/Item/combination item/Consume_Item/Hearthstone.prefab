@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5699236437082825186}
   - component: {fileID: -7286138727791240936}
   - component: {fileID: 4171349655350866485}
-  - component: {fileID: 4695292710780055970}
+  - component: {fileID: 5729833292720841805}
   m_Layer: 0
   m_Name: Hearthstone
   m_TagString: Untagged
@@ -114,7 +114,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4695292710780055970
+--- !u!114 &5729833292720841805
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
