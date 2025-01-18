@@ -85,7 +85,7 @@ public class Request_Manager : MonoBehaviour
         // 필요한 아이템 개수
         //request_Count_T.text = select_R.item_Count.ToString();
 
-        //reward_Count = int.Parse(select_R.reward);
+        reward_Count = int.Parse(select_R.reward);
         reward_Count_T.text = select_R.reward;
 
         /*if (GetComponent<Shop_Manager>().find_Item(select_R.reward) == null) // 없으면 돈인거임
