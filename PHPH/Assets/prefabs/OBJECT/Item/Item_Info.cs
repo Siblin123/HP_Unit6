@@ -67,7 +67,7 @@ public class Item_Info : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void Obj_Installable_ServerRpc(int id)
     {
 
