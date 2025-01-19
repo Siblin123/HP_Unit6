@@ -52,34 +52,51 @@ public class Item_Info : NetworkBehaviour
     }
 
 
-    public void Obj_Installable()//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    public void Obj_Installable(GameObject netobj)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
+
+
         if (IsServer)
         {
-            GameObject obj = Instantiate(this.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
             obj.GetComponent<NetworkObject>().Spawn();
         }
         else
         {
-            Obj_Installable_ServerRpc();
+            Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id);
         }
     }
 
     [ServerRpc]
-    public void Obj_Installable_ServerRpc()
+    public void Obj_Installable_ServerRpc(int id)
     {
 
         if (IsClient)
             return;
-        GameObject obj = Instantiate(this.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-        obj.GetComponent<NetworkObject>().Spawn();
+
+        foreach(var spawn_Obj in csTable.Instance.allItem_List)
+        {
+            if(spawn_Obj.id == id)
+            {
+                GameObject obj = Instantiate(spawn_Obj.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+                obj.GetComponent<NetworkObject>().Spawn();
+                break;
+            }
+        }
+
+    
 
     }                  
                 //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
     public virtual void UseItem()//각 아이템의 기능
     {
-        if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
+        if (!IsOwner)
+        {
+            return;
+        }
+
+        if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
 

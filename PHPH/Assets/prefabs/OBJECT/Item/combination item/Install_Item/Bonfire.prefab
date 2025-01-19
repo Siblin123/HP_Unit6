@@ -202,7 +202,8 @@ MonoBehaviour:
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
-  curItemType: 0
+  curItemType: 4
+  networkPrefab: {fileID: 9065546377984402549}
 --- !u!212 &-90481070799669932
 SpriteRenderer:
   m_ObjectHideFlags: 0
