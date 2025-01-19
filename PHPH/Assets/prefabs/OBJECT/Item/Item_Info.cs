@@ -54,14 +54,10 @@ public class Item_Info : NetworkBehaviour
 
     public void Obj_Installable(GameObject netobj)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
+        GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+        obj.GetComponent<NetworkObject>().Spawn();
 
-
-        if (IsServer)
-        {
-            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-            obj.GetComponent<NetworkObject>().Spawn();
-        }
-        else
+        if(IsClient)
         {
             Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id);
         }
