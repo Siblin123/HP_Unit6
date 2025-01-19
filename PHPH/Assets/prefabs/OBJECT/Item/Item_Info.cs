@@ -72,7 +72,7 @@ public class Item_Info : NetworkBehaviour
             {
                 GameObject obj = Instantiate(spawn_Obj.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
                 obj.GetComponent<NetworkObject>().Spawn();
-a                 break;
+                 break;
             }
         }
 
