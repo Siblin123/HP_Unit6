@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  namee: 
+  namee: a
   id: 36
   explan: "\uC5B4\uB450\uC6B4 \uACF3\uC744 \uBC1D\uAC8C \uD574\uC8FC\uB294 \uACF3\uC774\uB2E4."
   price: 96
@@ -203,7 +203,6 @@ MonoBehaviour:
   colTime: 0
   have_Count: 0
   curItemType: 4
-  networkPrefab: {fileID: 9065546377984402549}
 --- !u!212 &-90481070799669932
 SpriteRenderer:
   m_ObjectHideFlags: 0
