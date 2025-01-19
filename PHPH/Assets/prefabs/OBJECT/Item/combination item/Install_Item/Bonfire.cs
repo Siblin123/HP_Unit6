@@ -7,7 +7,7 @@ public class Bonfire : Item_Info
     private GameObject networkPrefab;
     public override void UseItem()
     {
-        if (!IsOwner)
+        if (!csTable.Instance.gameManager.player.IsOwner)
             return;
 
         base.UseItem();
