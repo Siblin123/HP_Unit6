@@ -41,6 +41,8 @@ public class Parallax_Auto : MonoBehaviour
             // 플레이어가 존재하는 경우 player 객체를 가져옵니다.
             if (csTable.Instance.gameManager.player != null)
                 player = csTable.Instance.gameManager.player;
+
+            return;
         }
 
         // 플레이어의 입력과 속도에 따라 이동
