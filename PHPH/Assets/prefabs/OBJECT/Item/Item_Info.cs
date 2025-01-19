@@ -50,10 +50,10 @@ public class Item_Info : NetworkBehaviour
     }
 
 
-    public void Obj_Installable(GameObject netobj)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    public void Obj_Installable(int id)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
 
-        Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id, csTable.Instance.gameManager.player.transform.position);
+        Obj_Installable_ServerRpc(id, csTable.Instance.gameManager.player.transform.position);
 
         /*            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
                     obj.GetComponent<NetworkObject>().Spawn();*/
