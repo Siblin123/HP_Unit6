@@ -50,37 +50,7 @@ public class Item_Info : NetworkBehaviour
     }
 
 
-    public void Obj_Installable(int id)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    {
-
-        Obj_Installable_ServerRpc(id, csTable.Instance.gameManager.player.transform.position);
-
-        /*            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-                    obj.GetComponent<NetworkObject>().Spawn();*/
-
-
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void Obj_Installable_ServerRpc(int id , Vector3 pos)
-    {
-        print("find obj");
-
-        foreach(var spawn_Obj in csTable.Instance.allItem_List)
-        {
-            if(spawn_Obj.id == id)
-            {
-                GameObject obj = Instantiate(spawn_Obj.gameObject, pos, Quaternion.identity);
-                obj.GetComponent<NetworkObject>().Spawn();
-                break;
-            }
-        }
-
-    
-
-    }                  
-                //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
+   
     public virtual void UseItem()//각 아이템의 기능
     {
  
