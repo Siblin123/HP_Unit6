@@ -53,7 +53,7 @@ public class Item_Info : NetworkBehaviour
     public void Obj_Installable(GameObject netobj)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
 
-        Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id);
+        Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id, csTable.Instance.gameManager.player.transform.position);
 
         /*            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
                     obj.GetComponent<NetworkObject>().Spawn();*/
@@ -62,7 +62,7 @@ public class Item_Info : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void Obj_Installable_ServerRpc(int id)
+    public void Obj_Installable_ServerRpc(int id , Vector3 pos)
     {
         print("find obj");
 
@@ -70,9 +70,9 @@ public class Item_Info : NetworkBehaviour
         {
             if(spawn_Obj.id == id)
             {
-                GameObject obj = Instantiate(spawn_Obj.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+                GameObject obj = Instantiate(spawn_Obj.gameObject, pos, Quaternion.identity);
                 obj.GetComponent<NetworkObject>().Spawn();
-                 break;
+                break;
             }
         }
 
