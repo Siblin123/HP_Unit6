@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572717769029319490}
-  - component: {fileID: -2972989468624698315}
+  - component: {fileID: -431151900192507920}
   - component: {fileID: -2170975511241727335}
   - component: {fileID: -90481070799669932}
   - component: {fileID: -1249233402241694985}
@@ -157,7 +157,7 @@ Transform:
   - {fileID: 1740867091531927353}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2972989468624698315
+--- !u!114 &-431151900192507920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 22013616
+  GlobalObjectIdHash: 2761452291
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uD69F\uBD88"
+  namee: 
   id: 36
   explan: "\uC5B4\uB450\uC6B4 \uACF3\uC744 \uBC1D\uAC8C \uD574\uC8FC\uB294 \uACF3\uC774\uB2E4."
   price: 96

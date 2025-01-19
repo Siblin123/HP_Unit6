@@ -6,7 +6,7 @@ using static UnityEditor.VersionControl.Asset;
 public class Item_Info : NetworkBehaviour
 {
     Rigidbody2D rb;
-    public string name; // 아이템 이름
+    public string namee; // 아이템 이름
     public int id; // 아이템 아이디
     public string explan; // 설명
     public int price; // 가격
@@ -34,8 +34,6 @@ public class Item_Info : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner)
-            return;
 
         if (!GetComponent<Rigidbody2D>())
         {
@@ -54,21 +52,19 @@ public class Item_Info : NetworkBehaviour
 
     public void Obj_Installable(GameObject netobj)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
-        //GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-        //obj.GetComponent<NetworkObject>().Spawn();
 
-        if(NetworkManager.Singleton.IsClient)
-        {
-            Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id);
-        }
+        Obj_Installable_ServerRpc(netobj.GetComponent<Item_Info>().id);
+
+        /*            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
+                    obj.GetComponent<NetworkObject>().Spawn();*/
+
+
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void Obj_Installable_ServerRpc(int id)
     {
-
-        if (IsClient)
-            return;
+        print("find obj");
 
         foreach(var spawn_Obj in csTable.Instance.allItem_List)
         {
@@ -76,7 +72,7 @@ public class Item_Info : NetworkBehaviour
             {
                 GameObject obj = Instantiate(spawn_Obj.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
                 obj.GetComponent<NetworkObject>().Spawn();
-                break;
+a                 break;
             }
         }
 
@@ -87,10 +83,7 @@ public class Item_Info : NetworkBehaviour
 
     public virtual void UseItem()//각 아이템의 기능
     {
-        if (!IsOwner)
-        {
-            return;
-        }
+ 
 
         if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
