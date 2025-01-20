@@ -90,10 +90,10 @@ public class Item_Info : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       /* if (!collision.transform.GetComponent<NetworkObject>())
-            return;*/
+        if (curItemType == itemType.combination_Item_Installable)
+            return;
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") )
         {
             //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
             collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);

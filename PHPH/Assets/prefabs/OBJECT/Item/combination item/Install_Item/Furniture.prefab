@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uAC00\uAD6C"
+  namee: 
   id: 38
   explan: "\uBC14\uB2E5\uC5D0 \uC124\uCE58 \uAC00\uB2A5\uD55C \uAC00\uAD6C\uC774\uB2E4."
   price: 112
@@ -125,15 +125,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8708187760698427289, guid: 8de504626766a294fb3c5d90ecaab7c9, type: 3}
+  m_Sprite: {fileID: -7920119791734115574, guid: eb839b90331c0284e86517ffa4e21a8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.13, y: 0.22}
+  m_Size: {x: 0.2, y: 0.18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &-7779474473747264480

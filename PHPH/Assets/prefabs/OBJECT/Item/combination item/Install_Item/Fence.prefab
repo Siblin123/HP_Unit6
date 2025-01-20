@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1158065171348391551}
   - component: {fileID: 9200295191100010751}
-  - component: {fileID: 2604302645531443786}
+  - component: {fileID: 5670736612730456296}
+  - component: {fileID: 4994646939529677701}
   - component: {fileID: 8107081058829816771}
   - component: {fileID: 2090573125638379574}
   m_Layer: 0
@@ -60,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &2604302645531443786
+--- !u!114 &5670736612730456296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,15 +74,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC6B8\uD0C0\uB9AC"
+  namee: 
   id: 37
   explan: "\uBC14\uB2E5\uC5D0 \uC124\uCE58\uD560 \uC218 \uC788\uC73C\uBA70, \uBAAC\uC2A4\uD130\uC758
     \uC811\uADFC\uC744 \uB9C9\uC544\uC900\uB2E4."
-  price: 144
-  max_Have_Count: 1
-  colTime: 0
+  price: 0
+  max_Have_Count: 0
+  colTime: 1
   have_Count: 0
   curItemType: 4
+--- !u!114 &4994646939529677701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493123721764761683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bcc66814cf417a4fba303ae92975209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  maxHealth:
+    m_InternalValue: 100
+  health:
+    m_InternalValue: 0
+  damege: 0
+  tagType: 1
+  isOpen: 0
 --- !u!212 &8107081058829816771
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,15 +147,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8708187760698427289, guid: 8de504626766a294fb3c5d90ecaab7c9, type: 3}
+  m_Sprite: {fileID: 7461366405836601494, guid: c2020ea4dcdd474468acdfc790f089a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.13, y: 0.22}
+  m_Size: {x: 0.28, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2090573125638379574

@@ -21,6 +21,7 @@ public class PlayerControl : PlayerStatus
     public LayerMask enemyLayer; // 적이 포함된 레이어
 
     //interact()
+    public Vector3 interactableOffset;
     public interaction interactable;
     public LayerMask interaction_Layer;
     public override void Start()
@@ -116,7 +117,7 @@ public class PlayerControl : PlayerStatus
     public void interact_Object()
     {
         // 레이를 쏴서 내 앞에 있는 오브젝트를 찾아줌
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1, interaction_Layer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + interactableOffset, rayDirection, 1, interaction_Layer);
 
         // 레이가 오브젝트에 맞았는지 확인
         if (hit.collider != null)
@@ -132,9 +133,13 @@ public class PlayerControl : PlayerStatus
                 }
             }
         }
+        else
+        {
+            interactable = null;
+        }
 
         // 디버그용 레이 그리기
-       // Debug.DrawRay(transform.position, rayDirection * rayDisance, Color.red);
+         Debug.DrawRay(transform.position + interactableOffset, rayDirection * rayDisance, Color.red);
     }
 
 }
