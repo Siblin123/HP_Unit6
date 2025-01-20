@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using static UnityEditor.Progress;
+using System;
 
 [System.Serializable]
-
+/*보상 이름, 요구 아이템 이름, 요구 아이템 개수
+200, 상어,1
+100, 쓴 열매,3
+100, 황동,2*/
 public class Request
 {
     public string reward; // 보상 -> 돈일수도 있고 아이템일수도 있음
@@ -22,22 +27,25 @@ public class Request_Manager : MonoBehaviour
     public Item_Info reward_Item; // 보상 아이템
 
     public Image request_I; // 필요한 아이템 이미지
-    public TextMeshProUGUI request_Count_T; // 필요한 아이템 개수
+    //public TextMeshProUGUI request_Count_T; // 필요한 아이템 개수
 
-    public Image reward_I; // 보상 아이템 이미지
+    //public Image reward_I; // 보상 아이템 이미지
+    public int reward_Count;
     public TextMeshProUGUI reward_Count_T; // 보상 개수
+
 
     public int request_DeadLine;
     public TextMeshProUGUI request_DeadLine_T; // 미션 기한
 
-    
+
     public Sprite money_I;
-    
+
     private void Awake()
     {
         request_DeadLine = 2;
 
-        string[] rows = request_File.text.Split('\n'); // CSV의 각 줄을 분리
+        //string[] rows = request_File.text.Split('\n'); // CSV의 각 줄을 분리
+        string[] rows = request_File.text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         for (int i = 1; i < rows.Length; i++) // 헤더를 건너뛰고 데이터 읽기
         {
             if (string.IsNullOrWhiteSpace(rows[i])) continue; // 빈 줄 무시
@@ -47,9 +55,8 @@ public class Request_Manager : MonoBehaviour
                 reward = cols[0],
                 item_Name = cols[1],
                 item = GetComponent<Shop_Manager>().find_Item(cols[1]),
-                item_Count = int.Parse(cols[2])
             };
-
+            request.item_Count = request.item.max_Have_Count;
             request_L.Add(request);
         }
     }
@@ -64,7 +71,7 @@ public class Request_Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             request_DeadLine--;
-            if(request_DeadLine == 0)
+            if (request_DeadLine == 0)
             {
                 request_DeadLine = 2;
                 Request_Selset();
@@ -75,16 +82,18 @@ public class Request_Manager : MonoBehaviour
 
     public void Request_Selset() // 의뢰 뽑기
     {
-        int num = Random.Range(0, request_L.Count);
+        int num = UnityEngine.Random.Range(0, request_L.Count );
         select_R = request_L[num];
 
         // 필요한 아이템 이미지
         request_I.sprite = select_R.item.gameObject.GetComponent<SpriteRenderer>().sprite;
         // 필요한 아이템 개수
-        request_Count_T.text = select_R.item_Count.ToString();
-        
+        //request_Count_T.text = select_R.item_Count.ToString();
 
-        if (GetComponent<Shop_Manager>().find_Item(select_R.reward) == null) // 없으면 돈인거임
+        reward_Count = int.Parse(select_R.reward);
+        reward_Count_T.text = select_R.reward;
+
+        /*if (GetComponent<Shop_Manager>().find_Item(select_R.reward) == null) // 없으면 돈인거임
         {
             reward_Item = null;
 
@@ -103,6 +112,6 @@ public class Request_Manager : MonoBehaviour
 
             // 보상 개수 -> 최대 소지 개수
             reward_Count_T.text = reward_Item.max_Have_Count.ToString();
-        }
+        }*/
     }
 }

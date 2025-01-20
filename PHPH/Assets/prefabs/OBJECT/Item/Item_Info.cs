@@ -6,7 +6,7 @@ using static UnityEditor.VersionControl.Asset;
 public class Item_Info : NetworkBehaviour
 {
     Rigidbody2D rb;
-    public string name; // 아이템 이름
+    public string namee; // 아이템 이름
     public int id; // 아이템 아이디
     public string explan; // 설명
     public int price; // 가격
@@ -34,8 +34,6 @@ public class Item_Info : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner)
-            return;
 
         if (!GetComponent<Rigidbody2D>())
         {
@@ -52,34 +50,12 @@ public class Item_Info : NetworkBehaviour
     }
 
 
-    public void Obj_Installable()//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    {
-        if (IsServer)
-        {
-            GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
-            obj.GetComponent<NetworkObject>().Spawn();
-        }
-        else
-        {
-            Obj_Installable_ServerRpc();
-        }
-    }
-
-    [ServerRpc]
-    public void Obj_Installable_ServerRpc()
-    {
-
-        if (IsClient)
-            return;
-        GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
-        obj.GetComponent<NetworkObject>().Spawn();
-
-    }                  
-                //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
+   
     public virtual void UseItem()//각 아이템의 기능
     {
-        if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
+ 
+
+        if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
 
@@ -114,10 +90,10 @@ public class Item_Info : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       /* if (!collision.transform.GetComponent<NetworkObject>())
-            return;*/
+        if (curItemType == itemType.combination_Item_Installable)
+            return;
 
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") )
         {
             //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
             collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);

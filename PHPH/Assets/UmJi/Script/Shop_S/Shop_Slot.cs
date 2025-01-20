@@ -42,7 +42,7 @@ public class Shop_Slot : MonoBehaviour
                     {
                         Shop_Manager.instance.money = Shop_Manager.instance.inven_Slot_List[i].item.have_Count;
 
-                        Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
+                        Shop_Manager.instance.money_T.text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
                     }
                 }
             }
