@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -947893072184863440}
   - component: {fileID: 2199269580890861655}
   - component: {fileID: 1017724457315178788}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Dye_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB178\uB780 \uC5FC\uC0C9\uC57D"
+  namee: 
   id: 19
   explan: "\uB178\uB780 \uC5FC\uC0C9\uC57D"
   price: 50

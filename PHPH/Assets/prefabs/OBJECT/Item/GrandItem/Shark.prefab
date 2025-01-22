@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8334524764512689928}
   - component: {fileID: 6146543008118102351}
   - component: {fileID: 4280270303468746596}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Shark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC0C1\uC5B4"
+  namee: 
   id: 55
   explan: "\uC800\uB294 \uC0C1\uC5B4\uC785\uB2C8\uB2E4."
   price: 100

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4460739503410209482}
   - component: {fileID: 8568143852502949164}
   - component: {fileID: -3914162969153846921}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Fishing_Rod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB09A\uC2DC\uB300"
+  namee: 
   id: 11
   explan: "\uBB3C\uC774 \uCDA9\uBD84\uD788 \uC788\uB294 \uACF3\uC5D0\uC11C \uB09A\uC2DC\uB97C
     \uD560 \uC218 \uC788\uAC8C \uD574\uC8FC\uB294 \uB3C4\uAD6C\uC774\uB2E4."

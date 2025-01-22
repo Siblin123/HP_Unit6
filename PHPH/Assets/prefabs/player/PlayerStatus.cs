@@ -7,6 +7,8 @@ using System;
 using Unity.Netcode.Components;
 using System.Collections;
 using UnityEngine.InputSystem.LowLevel;
+using Unity.Services.Vivox;
+using static Item_Info;
 
 public class PlayerStatus : PlayerGadget
 {
@@ -62,6 +64,10 @@ public class PlayerStatus : PlayerGadget
 
     public NetworkAnimator anim;
 
+    //getItem()
+    RaycastHit2D hit_Item;
+    [SerializeField] Item_Info itemmmmm;
+
     //getDamage()
     [Header("무적")]
     public float invincibility_Time;//무적 시간
@@ -108,6 +114,9 @@ public class PlayerStatus : PlayerGadget
         Jump();
         LookMouse();
         UI_View();
+        GetItem();
+
+
     }
 
     public override void init()
@@ -193,6 +202,56 @@ public class PlayerStatus : PlayerGadget
         }
        
     }
+    //===================================================
+    public void GetItem()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Vector2 boxSize = GetComponent<Collider2D>().bounds.size;
+            hit_Item = Physics2D.BoxCast(transform.position + new Vector3(0, 0.16f, 0), boxSize, 0f, Vector2.zero, 0f, LayerMask.GetMask("Item"));
+
+            if(hit_Item)
+            {
+                Item_Info info = hit_Item.transform.GetComponent<Item_Info>();
+                itemmmmm = info;
+                if (info.curItemType == itemType.combination_Item_Installable)
+                    return;
+
+
+                transform.GetComponent<Player_Inventory>().Get_Item(info, 1);
+
+                if (IsServer)
+                {
+                    GetItem_ClientRpc();
+                }
+                else
+                {
+                    GetItem_ServerRpc();
+                }
+            }
+
+
+
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void GetItem_ServerRpc()
+    {
+
+        GetItem_ClientRpc();
+
+    }
+
+    [ClientRpc]
+    public void GetItem_ClientRpc()
+    {
+
+        hit_Item.transform.gameObject.SetActive(false);
+    }
+
+
+    //==========================================
 
     public void Get_damage(float value , Transform getPos )
     {
@@ -357,5 +416,16 @@ public class PlayerStatus : PlayerGadget
         {
             movedir = Vector3.zero;
         }
+    }
+
+
+
+
+    void OnDrawGizmos()
+    {
+        
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(transform.position + new Vector3(0,0.16f,0), transform.GetComponent<Collider2D>().bounds.size);
+        
     }
 }

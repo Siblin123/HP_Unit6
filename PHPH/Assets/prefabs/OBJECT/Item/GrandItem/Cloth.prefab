@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5224351017369622383}
   - component: {fileID: -3680526983406269341}
   - component: {fileID: 6691674089054203636}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cloth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCC9C"
+  namee: 
   id: 48
   explan: "\uC800\uB294 \uCC9C\uC785\uB2C8\uB2E4."
   price: 80

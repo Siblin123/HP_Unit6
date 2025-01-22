@@ -75,7 +75,7 @@ public class PlayerGadget : NetworkBehaviour
         if (curItem != null )
         {
 
-            if(curItem.curItemType== itemType.combination_Item_Installable)
+            if(curItem.curItemType == itemType.combination_Item_Installable)
             {
                 Obj_Installable(curItem.id);
             }
@@ -104,9 +104,6 @@ public class PlayerGadget : NetworkBehaviour
     {
 
         Obj_Installable_ServerRpc(id, csTable.Instance.gameManager.player.transform.position);
-
-        /*            GameObject obj = Instantiate(netobj, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-                    obj.GetComponent<NetworkObject>().Spawn();*/
 
 
     }

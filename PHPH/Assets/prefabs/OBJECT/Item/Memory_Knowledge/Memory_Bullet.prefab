@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1369345406523532906}
   - component: {fileID: 8932660483413320805}
   - component: {fileID: -2478591893786442962}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCD1D\uC54C\uC758 \uAE30\uC5B5"
+  namee: 
   id: 59
   explan: "\uCD1D\uC54C\uC744 \uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1

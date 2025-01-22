@@ -72,41 +72,6 @@ public class Item_Info : NetworkBehaviour
         }
     }
 
-   [ServerRpc(RequireOwnership = false)]
-    public void GetItem_ServerRpc()
-    {
-
-        GetItem_ClientRpc();
-
-    }
-
-    [ClientRpc]
-    public void GetItem_ClientRpc( )
-    {
-       
-        gameObject.SetActive(false);
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (curItemType == itemType.combination_Item_Installable)
-            return;
-
-        if (collision.transform.CompareTag("Player") )
-        {
-            //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
-            collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);
-           
-            if (IsServer)
-            {
-                GetItem_ClientRpc();
-            }
-            else
-            {
-                GetItem_ServerRpc();
-            }
-        }
-    }
+   
 
 }

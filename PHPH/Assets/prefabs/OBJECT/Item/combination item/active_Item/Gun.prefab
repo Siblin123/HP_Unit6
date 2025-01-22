@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3923620479907480404}
   - component: {fileID: 7054046552988373564}
   - component: {fileID: -6311769310321642292}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCD1D"
+  namee: 
   id: 12
   explan: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uB2E4."
   price: 192

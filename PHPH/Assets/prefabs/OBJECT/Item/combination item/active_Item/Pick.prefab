@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -1774339777376597785}
   - component: {fileID: -4691557683668003307}
   - component: {fileID: 6865350823621840561}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Pick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uACE1\uAD2D\uC774"
+  namee: 
   id: 14
   explan: "\uAD11\uC11D\uC744 \uC27D\uAC8C \uCE98 \uC218 \uC788\uB294 \uB3C4\uAD6C\uC774\uB2E4."
   price: 144
