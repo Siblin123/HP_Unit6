@@ -218,15 +218,17 @@ public class PlayerStatus : PlayerGadget
                     return;
 
 
-                transform.GetComponent<Player_Inventory>().Get_Item(info, 1);
+                transform.GetComponent<Player_Inventory>().Get_Item(info, info.have_Count);
+
+            
 
                 if (IsServer)
                 {
-                    GetItem_ClientRpc();
+                    GetItem_ClientRpc(itemmmmm.GetComponent<NetworkObject>().NetworkObjectId);
                 }
                 else
                 {
-                    GetItem_ServerRpc();
+                    GetItem_ServerRpc(itemmmmm.GetComponent<NetworkObject>().NetworkObjectId);
                 }
             }
 
@@ -236,18 +238,25 @@ public class PlayerStatus : PlayerGadget
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void GetItem_ServerRpc()
+    public void GetItem_ServerRpc(ulong id)
     {
-
-        GetItem_ClientRpc();
+        
+        GetItem_ClientRpc(id);
 
     }
 
     [ClientRpc]
-    public void GetItem_ClientRpc()
+    public void GetItem_ClientRpc(ulong id)
     {
+       
 
-        hit_Item.transform.gameObject.SetActive(false);
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
+        {
+            networkObject.transform.gameObject.SetActive(false);
+
+        }
+
+
     }
 
 

@@ -9,8 +9,8 @@ public class Inventory_Button : MonoBehaviour
 
     public void Throw_Button() // 아이템 버리기
     {
-     
-        if(slot != null)
+
+        if (slot != null)
         {
             print("아무거나");
             // 버릴때 개수를 넣어줌
@@ -18,16 +18,10 @@ public class Inventory_Button : MonoBehaviour
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
 
-            csTable.Instance.gameManager.player.Obj_Installable(slot.item.id);
-            /*if (csTable.Instance.gameManager.player.IsClient)
-            {
-                Throw_Item_ServerRpc();
-            }
-            else if (csTable.Instance.gameManager.player.IsServer)
-            {
-                GameObject clone = Instantiate(slot.item.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-                clone.GetComponent<NetworkObject>().Spawn();
-            }*/
+            //csTable.Instance.gameManager.player.Obj_Installable(slot.item.id);
+
+
+            Throw_Item_ServerRpc(slot.item.NetworkObjectId);
 
             slot.Update_Slot(null, 0);
             slot = null;
@@ -35,14 +29,19 @@ public class Inventory_Button : MonoBehaviour
     }
 
     [ServerRpc]
-    public void Throw_Item_ServerRpc()
+    public void Throw_Item_ServerRpc(ulong id)
     {
-        if (csTable.Instance.gameManager.player.IsClient)
-        {
-            return;
-        }
+        Throw_Item_ClientRpc(id);
+    }
 
-        GameObject clone = Instantiate(slot.item.gameObject, csTable.Instance.gameManager.player.transform.position, Quaternion.identity);
-        clone.GetComponent<NetworkObject>().Spawn();
+    [ClientRpc]
+    public void Throw_Item_ClientRpc(ulong id)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
+        {
+            print("클라 서버 모두 실행");
+            networkObject.transform.gameObject.SetActive(true);
+            networkObject.transform.position = csTable.Instance.gameManager.player.transform.position;
+        }
     }
 }

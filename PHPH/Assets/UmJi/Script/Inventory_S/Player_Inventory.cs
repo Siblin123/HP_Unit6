@@ -66,7 +66,7 @@ public class Player_Inventory : Inventory_Manager
             return;
         }
 
-        print("업데이트");
+     
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             print("1");
