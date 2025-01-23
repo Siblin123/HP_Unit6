@@ -27,6 +27,7 @@ public class Shop_Manager : interaction
     public List<Item_Info> all_Item_List;
 
     // 돈 표시 UI
+    public Inven_Slot money_Slot;
     public TextMeshProUGUI money_T;
     public int money;
 
@@ -66,33 +67,6 @@ public class Shop_Manager : interaction
             Update_Slot();
         }
     }
-
-    /*private void OnEnable()
-    {
-        // 인벤토리 -> 상점 인벤토리 동기화
-        for (int i = 0; i < slot_List.Count; i++)
-        {
-            inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, Player_Inventory.instance.slot_List[i].have_Count);
-
-            // id가 100은 돈
-            if (inven_Slot_List[i].item.id == 100)
-            {
-                money = inven_Slot_List[i].item.have_Count;
-
-                money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
-            }
-        }
-    }
-
-    private void OnDisable()
-    {
-        // 상점 인벤토리 -> 인벤토리 동기화
-        for (int i = 0; i < slot_List.Count; i++)
-        {
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
-        }
-    }*/
-
     public void All_Off()
     {
         price_Ui.SetActive(false);
@@ -103,32 +77,47 @@ public class Shop_Manager : interaction
         // 인벤토리 끄기
         if (shop_Panel.activeSelf == true)
         {
-            // 상점에서 판매 또는 구매한걸 인벤토리에 적용
-            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
-            {
-                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
-            }
+            // 상점 인벤토리 -> 인벤토리에 적용
+            Shop_Invent();
 
+            money_Slot = null;
             shop_Panel.SetActive(false);
         }
         else if (shop_Panel.activeSelf == false) // 켜기
         {
             shop_Panel.SetActive(true);
 
-            // 인벤토리를 상점 인벤토리에 적용
-            for (int i = 0; i < inven_Slot_List.Count; i++)
+            // 인벤토리 -> 상점 인벤토리에 적용
+            Invent_Shop();
+        }
+    }
+
+    public void Shop_Invent()
+    {
+        // 상점 인벤토리 -> 인벤토리에 적용
+        for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+        {
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+        }
+    }
+
+    public void Invent_Shop()
+    {
+        // 인벤토리 -> 상점 인벤토리에 적용
+        for (int i = 0; i < inven_Slot_List.Count; i++)
+        {
+            inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+
+            if (inven_Slot_List[i].item != null)
             {
-                inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
-
-                if (inven_Slot_List[i].item != null)
+                // id가 100은 돈
+                if (inven_Slot_List[i].item.id == 100)
                 {
-                    // id가 100은 돈
-                    if (inven_Slot_List[i].item.id == 100)
-                    {
-                        money = inven_Slot_List[i].item.have_Count;
+                    money_Slot = inven_Slot_List[i];
 
-                        money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
-                    }
+                    money = inven_Slot_List[i].have_Count;
+
+                    money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
                 }
             }
         }
@@ -179,7 +168,7 @@ public class Shop_Manager : interaction
     }
 
     [ClientRpc]
-    void Update_Slot_ClientRpc(int id, int index)
+    void Update_Slot_ClientRpc(int id, int index) // 아이템 서버, 클라이언트 동기화
     {
         if (IsServer)
             return;

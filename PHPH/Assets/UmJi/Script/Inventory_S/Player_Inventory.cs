@@ -17,7 +17,10 @@ public class Player_Inventory : Inventory_Manager
     public GameObject follow_Slot;
 
     public TextMeshProUGUI money_T;
-    public int money;
+    public int money; // 플레이어 소지금
+
+    public Inven_Slot money_Slot;
+    public GameObject money_Ob;
 
     private void Start()
     {
@@ -31,6 +34,30 @@ public class Player_Inventory : Inventory_Manager
             godGet_List.Add(godGet_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
         }
     }
+
+    public bool Buy_Item(Item_Info item) // 아이템 구매
+    {
+        // 소지금액이 구매할 아이템의 금액보다 많으면
+        if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
+        {
+            if(Get_Item(item, item.max_Have_Count))
+            {
+                money -= item.max_Have_Count * item.price;
+                money_T.text = money.ToString();
+                money_Slot.Update_Slot(money_Slot.item, money);
+                return true;
+            }
+            else // 인벤토리에 칸 없음
+            {
+                return false;
+            }
+        }
+        else // 돈 부족
+        {
+            return false;
+        }
+    }
+
 
     public override void Update()
     {
@@ -76,7 +103,9 @@ public class Player_Inventory : Inventory_Manager
                         // id가 100은 돈
                         if (slot_List[i].item.id == 100)
                         {
-                            money = slot_List[i].item.have_Count;
+                            money_Slot = slot_List[i];
+
+                            money = slot_List[i].have_Count;
 
                             money_T.text = slot_List[i].have_Count.ToString("N0");
                         }
@@ -86,6 +115,8 @@ public class Player_Inventory : Inventory_Manager
             // 꺼줌
             else
             {
+               // money_Slot = null;
+
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             }
         }

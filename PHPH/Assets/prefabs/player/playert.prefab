@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4147144535
+  GlobalObjectIdHash: 3481336251
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -494,6 +494,8 @@ MonoBehaviour:
   follow_Slot: {fileID: 3569894914260024582}
   money_T: {fileID: 207408500020173633}
   money: 0
+  money_Slot: {fileID: 0}
+  money_Ob: {fileID: 8235651302514643724, guid: a44d2ce5f735db443a99f22959c4cd78, type: 3}
 --- !u!1 &5116266193173006959
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4901148040332053302, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2087807467
+      value: 3481336251
       objectReference: {fileID: 0}
     - target: {fileID: 5347666049808537963, guid: 4b554c7a71e3817438e981a3109f8d38, type: 3}
       propertyPath: m_Pivot.x
