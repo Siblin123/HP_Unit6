@@ -149,10 +149,6 @@ public class Inven_Slot : Inventory_Manager
                 {
                     print("판매 성공");
                 }
-                else
-                {
-                    print("판매 불가능");
-                }
             }
             else
             {
