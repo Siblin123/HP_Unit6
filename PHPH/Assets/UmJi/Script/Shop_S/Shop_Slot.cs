@@ -5,6 +5,8 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 
 public class Shop_Slot : MonoBehaviour
 {
+    public bool buy_C; //구매했는지 
+
     public Item_Info item;
     public TextMeshProUGUI price_T;
     public TextMeshProUGUI name_T;
@@ -28,26 +30,18 @@ public class Shop_Slot : MonoBehaviour
 
     public void buy_Slot() // 아이템 구매
     {
-         if(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Get_Item(item, item.max_Have_Count))
-         {
-            // 인벤토리 -> 상점 인벤토리 동기화
-            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+        // 구매 가능할때
+        if(buy_C == true)
+        {
+            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
             {
-                Shop_Manager.instance.inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
-
-                if(Shop_Manager.instance.inven_Slot_List[i].item != null)
-                {
-                    // id가 100은 돈
-                    if (Shop_Manager.instance.inven_Slot_List[i].item.id == 100)
-                    {
-                        Shop_Manager.instance.money = Shop_Manager.instance.inven_Slot_List[i].item.have_Count;
-
-                        Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
-                    }
-                }
+                Shop_Manager.instance.Invent_Shop();
+                buy_C = false;
             }
-            print("구매");
-         }
-        
+            else
+            {
+                print("너님 돈 없어요");
+            }
+        }
     }
 }

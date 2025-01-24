@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6304185931291133767}
   - component: {fileID: -6266551031027205811}
   - component: {fileID: -8216069185255041513}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Diamond
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB2E4\uC774\uC544\uBAAC\uB4DC"
+  namee: 
   id: 49
   explan: "\uC800\uB294 \uB2E4\uC774\uC544\uBAAC\uB4DC\uC785\uB2C8\uB2E4."
   price: 100

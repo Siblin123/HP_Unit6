@@ -155,7 +155,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 8274626920715938568}
   count_T: {fileID: 7656361473371727679}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -942,6 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 5761710494730382157}
   name_T: {fileID: 8832133945191829154}
@@ -2487,7 +2487,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 133232025597731516}
   count_T: {fileID: 450439636647594262}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -3220,7 +3219,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 7471021732182655759}
   count_T: {fileID: 7369447580094698169}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -3863,7 +3861,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2657012146209647573}
   count_T: {fileID: 2790268637313094865}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -4021,6 +4018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 2589044908337674189}
   name_T: {fileID: 4252717807341355619}
@@ -4181,7 +4179,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4196278195919614858}
   count_T: {fileID: 5569963153499650098}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -4417,7 +4414,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 1131211271686452540}
   count_T: {fileID: 8671695896901909519}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -5136,7 +5132,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 3134547335419912132}
   count_T: {fileID: 6466211974156695870}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -5719,7 +5714,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 8736358602689665478}
   count_T: {fileID: 8418527192170696753}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -6109,6 +6103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 6369507950037071460}
   name_T: {fileID: 2341052175092358327}
@@ -6251,7 +6246,7 @@ GameObject:
   - component: {fileID: 336790671497594464}
   - component: {fileID: 3296360344064136446}
   - component: {fileID: 9171057802185853301}
-  - component: {fileID: 4901148040332053302}
+  - component: {fileID: 1387521273272630124}
   m_Layer: 5
   m_Name: Inventory_Panel
   m_TagString: Untagged
@@ -6322,7 +6317,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4901148040332053302
+--- !u!114 &1387521273272630124
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6334,7 +6329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 744630783
+  GlobalObjectIdHash: 0
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -7782,7 +7777,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 7663928258565042513}
   count_T: {fileID: 8088712929435814819}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -7943,7 +7937,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4213871529039083366}
   count_T: {fileID: 2907940103056657416}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -8254,7 +8247,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 5391765476550982044}
   count_T: {fileID: 2619590241061427443}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -10471,7 +10463,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4084026821073438169}
   count_T: {fileID: 2828011417399358550}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -10632,7 +10623,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 106884826229522826}
   count_T: {fileID: 6193670931981307601}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -11140,7 +11130,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 6492970270879987215}
   count_T: {fileID: 7115526150016003187}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -11301,7 +11290,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 5609876760637191603}
   count_T: {fileID: 629263867212286056}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -11809,7 +11797,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 8668607487324638475}
   count_T: {fileID: 2186422194633335371}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -12436,7 +12423,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 7664150155928952932}
   count_T: {fileID: 3463355499120733734}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -13305,7 +13291,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 6383942585079278081}
   count_T: {fileID: 1958935938311833229}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -14024,7 +14009,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2448221889468535703}
   count_T: {fileID: 8039418793635437367}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -14185,7 +14169,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 7115816406061047280}
   count_T: {fileID: 4612094150523771154}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -15040,7 +15023,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2842189371725617656}
   count_T: {fileID: 4240056484945202936}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -15337,7 +15319,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2437249046846784234}
   count_T: {fileID: 7745760140323775596}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -15573,7 +15554,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 703078473851295210}
   count_T: {fileID: 3238272861107374359}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -16155,7 +16135,6 @@ MonoBehaviour:
   have_Count: 1
   item_I: {fileID: 8856963379748682042}
   count_T: {fileID: 0}
-  follow_Slot: {fileID: 0}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -16316,7 +16295,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2348071121646847868}
   count_T: {fileID: 5537698962610737327}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -16988,7 +16966,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 9092007304332182451}
   count_T: {fileID: 2432910296823259766}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -17510,7 +17487,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4924444897445637322}
   count_T: {fileID: 8543924450467857716}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -18426,7 +18402,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 5537612218180747152}
   count_T: {fileID: 7132100801040438649}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -18587,7 +18562,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 5827666403789638164}
   count_T: {fileID: 5201961710047112357}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -18748,7 +18722,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 3540710571059860118}
   count_T: {fileID: 102850789720175267}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -19541,7 +19514,6 @@ MonoBehaviour:
   have_Count: 1
   item_I: {fileID: 8904132823417558121}
   count_T: {fileID: 0}
-  follow_Slot: {fileID: 0}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -19987,7 +19959,6 @@ MonoBehaviour:
   have_Count: 1
   item_I: {fileID: 6875043333973603632}
   count_T: {fileID: 0}
-  follow_Slot: {fileID: 0}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -20945,7 +20916,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 6299007602013517452}
   count_T: {fileID: 4248297351404372566}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -21178,6 +21148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 7849209732086987552}
   name_T: {fileID: 6388126014397771212}
@@ -21624,7 +21595,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 6385515464505523975}
   count_T: {fileID: 8821272369557024582}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -21872,6 +21842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 3922763327780954756}
   name_T: {fileID: 4790912435764200385}
@@ -22318,7 +22289,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4847670946085414635}
   count_T: {fileID: 7572660927675954598}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -22541,7 +22511,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 1534311527619712319}
   count_T: {fileID: 1431478848674601937}
-  follow_Slot: {fileID: 0}
   follow_C: 1
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -23424,7 +23393,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 595388315206693011}
   count_T: {fileID: 3095840194394265886}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}
@@ -24002,7 +23970,6 @@ MonoBehaviour:
   have_Count: 1
   item_I: {fileID: 1547550401335814552}
   count_T: {fileID: 0}
-  follow_Slot: {fileID: 0}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -24563,7 +24530,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 2232462932189862293}
   count_T: {fileID: 5169713682678181564}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -24980,6 +24946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7b976b28ce7294cbe96c1cadf35de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buy_C: 0
   item: {fileID: 0}
   price_T: {fileID: 2620738001243262208}
   name_T: {fileID: 8991510945205542341}
@@ -25639,7 +25606,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 4228516065716747112}
   count_T: {fileID: 6023230902790009037}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 0}
@@ -26672,7 +26638,6 @@ MonoBehaviour:
   have_Count: 0
   item_I: {fileID: 902887259652132680}
   count_T: {fileID: 2161951887805676891}
-  follow_Slot: {fileID: 7717766709444285881}
   follow_C: 0
   clikc_S: {fileID: 0}
   price_Ui: {fileID: 8593456737964404749}

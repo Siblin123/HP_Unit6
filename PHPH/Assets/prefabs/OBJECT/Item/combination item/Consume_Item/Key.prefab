@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3494785487742623129}
   - component: {fileID: 6684027831190404849}
   - component: {fileID: -7755337251371309399}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC5F4\uC1E0"
+  namee: 
   id: 21
   explan: "\uB9F5\uC758 \uC7A0\uAE34 \uBB38\uC744 \uC5F4 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
   price: 80

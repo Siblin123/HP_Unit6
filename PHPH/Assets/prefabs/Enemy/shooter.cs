@@ -71,10 +71,7 @@ public class shooter : Enemy
                 }
 
             }
-            else
-            {
-                print("NONONONO");
-            }
+
 
             if (curAttackTime <= attackTime) //공격 충전?시간
             {

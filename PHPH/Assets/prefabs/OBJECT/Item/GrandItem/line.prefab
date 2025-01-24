@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8226906086380710588}
   - component: {fileID: -9027938360359929122}
   - component: {fileID: -758193816480304695}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC2E4"
+  namee: 
   id: 53
   explan: "\uC800\uB294 \uC2E4\uC785\uB2C8\uB2E4."
   price: 64

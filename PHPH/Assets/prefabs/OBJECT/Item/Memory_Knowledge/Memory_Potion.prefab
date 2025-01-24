@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6256439553692036455}
   - component: {fileID: -1195230852457095454}
   - component: {fileID: 805750190185147044}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Potion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uD3EC\uC158\uC758 \uAE30\uC5B5"
+  namee: 
   id: 71
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3066767853505071935}
   - component: {fileID: 1850743953188320391}
   - component: {fileID: -9222777465434686703}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Clothes_Test
   m_TagString: Cloth
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC637"
+  namee: 
   id: 29
   explan: "\uD50C\uB808\uC774\uC5B4\uB97C \uAFB8\uBC00\uC218 \uC788\uB294 \uC637\uC774\uB2E4."
   price: 80

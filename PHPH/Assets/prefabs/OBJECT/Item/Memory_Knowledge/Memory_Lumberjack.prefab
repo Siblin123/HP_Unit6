@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5299309209105745176}
   - component: {fileID: 795027647253403924}
   - component: {fileID: 315168459815604355}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Lumberjack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB098\uBB34\uAFBC\uC758 \uAE30\uC5B5"
+  namee: 
   id: 65
   explan: "\uB3C4\uB07C\uC5D0 \uC775\uC219\uD574\uC9D1\uB2C8\uB2E4."
   price: 1

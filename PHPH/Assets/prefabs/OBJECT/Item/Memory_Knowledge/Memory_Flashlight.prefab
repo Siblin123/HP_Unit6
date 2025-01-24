@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1773679057199551357}
   - component: {fileID: -2522548776456854149}
   - component: {fileID: 593352348257679978}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC88B\uC740 \uC190\uC804\uB4F1\uC758 \uAE30\uC5B5"
+  namee: 
   id: 61
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1

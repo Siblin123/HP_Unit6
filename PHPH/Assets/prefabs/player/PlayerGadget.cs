@@ -2,6 +2,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
 {
@@ -72,7 +73,20 @@ public class PlayerGadget : NetworkBehaviour
             return;
 
         if (curItem != null )
-            curItem.UseItem();
+        {
+
+            if(curItem.curItemType == itemType.combination_Item_Installable)
+            {
+                Obj_Installable(curItem.id);
+            }
+            else
+            {
+                curItem.UseItem();
+            }
+
+         
+        }
+           
     }
 
     public void UseCurItem_Attack()
@@ -82,5 +96,37 @@ public class PlayerGadget : NetworkBehaviour
         if (curItem != null)
             curItem.Attack();
     }
+
+
+
+
+    public void Obj_Installable(int id)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    {
+
+        Obj_Installable_ServerRpc(id, csTable.Instance.gameManager.player.transform.position);
+
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void Obj_Installable_ServerRpc(int id, Vector3 pos)
+    {
+        print("find obj");
+
+        foreach (var spawn_Obj in csTable.Instance.allItem_List)
+        {
+            if (spawn_Obj.id == id)
+            {
+                GameObject obj = Instantiate(spawn_Obj.gameObject, pos, Quaternion.identity);
+                obj.GetComponent<NetworkObject>().Spawn();
+                break;
+            }
+        }
+
+
+
+    }
+    //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+
 
 }

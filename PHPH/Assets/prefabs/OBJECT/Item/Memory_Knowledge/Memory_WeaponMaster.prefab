@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 836838109305018442}
   - component: {fileID: 3302321640753930095}
   - component: {fileID: 3502172246339639465}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_WeaponMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uBB34\uAE30 \uB2EC\uC778\uC758 \uAE30\uC5B5"
+  namee: 
   id: 76
   explan: "\uBB34\uAE30\uC5D0 \uB300\uD55C \uC774\uD574\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 1

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5768949780768803266}
   - component: {fileID: 6261472420379582171}
   - component: {fileID: 6046216927403932511}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Angler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uAC15\uD0DC\uACF5\uC758 \uAE30\uC5B5"
+  namee: 
   id: 57
   explan: "\uC138\uC6D4\uC744 \uB09A\uB294\uB2E4."
   price: 1

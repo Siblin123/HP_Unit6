@@ -34,8 +34,6 @@ public class Item_Info : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner)
-            return;
 
         if (!GetComponent<Rigidbody2D>())
         {
@@ -52,34 +50,12 @@ public class Item_Info : NetworkBehaviour
     }
 
 
-    public void Obj_Installable()//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-    {
-        if (IsServer)
-        {
-            GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
-            obj.GetComponent<NetworkObject>().Spawn();
-        }
-        else
-        {
-            Obj_Installable_ServerRpc();
-        }
-    }
-
-    [ServerRpc]
-    public void Obj_Installable_ServerRpc()
-    {
-
-        if (IsClient)
-            return;
-        GameObject obj = Instantiate(this.gameObject, transform.position, Quaternion.identity);
-        obj.GetComponent<NetworkObject>().Spawn();
-
-    }                  
-                //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
+   
     public virtual void UseItem()//각 아이템의 기능
     {
-        if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
+ 
+
+        if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
 
@@ -96,41 +72,6 @@ public class Item_Info : NetworkBehaviour
         }
     }
 
-   [ServerRpc(RequireOwnership = false)]
-    public void GetItem_ServerRpc()
-    {
-
-        GetItem_ClientRpc();
-
-    }
-
-    [ClientRpc]
-    public void GetItem_ClientRpc( )
-    {
-       
-        gameObject.SetActive(false);
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-       /* if (!collision.transform.GetComponent<NetworkObject>())
-            return;*/
-
-        if (collision.transform.CompareTag("Player"))
-        {
-            //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
-            collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);
-           
-            if (IsServer)
-            {
-                GetItem_ClientRpc();
-            }
-            else
-            {
-                GetItem_ServerRpc();
-            }
-        }
-    }
+   
 
 }

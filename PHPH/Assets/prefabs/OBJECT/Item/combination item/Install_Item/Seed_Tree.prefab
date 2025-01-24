@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7714737124184215343}
   - component: {fileID: 1226707328763373938}
-  - component: {fileID: 3308227866078020346}
+  - component: {fileID: -3539785021458336067}
   - component: {fileID: -7967577487683617084}
   - component: {fileID: -7501514188603035797}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Seed_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3308227866078020346
+--- !u!114 &-3539785021458336067
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,11 +69,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1436667870748247252}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: e8474eeebed311947b8e1911fd0d182d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB098\uBB34 \uC528\uC557"
+  namee: 
   id: 39
   explan: "\uB098\uBB34\uB97C \uBC30\uC5C8\uC744 \uB54C \uD655\uB960\uC801\uC73C\uB85C
     \uB098\uC624\uB294 \uC528\uC557\uC774\uB2E4."
@@ -81,7 +81,7 @@ MonoBehaviour:
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
-  curItemType: 4
+  curItemType: 0
 --- !u!212 &-7967577487683617084
 SpriteRenderer:
   m_ObjectHideFlags: 0

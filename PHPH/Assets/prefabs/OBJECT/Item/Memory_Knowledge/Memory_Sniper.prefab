@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8766111368939040126}
   - component: {fileID: -1481039452945907504}
   - component: {fileID: -8326628039469329747}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC800\uACA9\uC218\uC758 \uAE30\uC5B5"
+  namee: 
   id: 74
   explan: "\uCD1D\uC5D0 \uB300\uD55C \uC774\uD574\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 1

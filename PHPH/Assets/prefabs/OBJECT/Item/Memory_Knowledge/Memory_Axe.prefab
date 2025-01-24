@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6636994807979730014}
   - component: {fileID: 4293254860995893477}
   - component: {fileID: -8873104445381431218}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB3C4\uB07C\uC758 \uAE30\uC5B5"
+  namee: 
   id: 58
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1

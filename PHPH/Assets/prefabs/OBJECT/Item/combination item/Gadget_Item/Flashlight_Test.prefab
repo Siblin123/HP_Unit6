@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -4142071883707618530}
   - component: {fileID: 7363456662194503442}
   - component: {fileID: 8173543932882775200}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Flashlight_Test
   m_TagString: FlashLigth
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC88B\uC740 \uC190\uC804\uB4F1"
+  namee: 
   id: 31
   explan: "\uC5B4\uB450\uC6B8 \uB584\uC758 \uC2DC\uC57C \uBC94\uC704\uB97C \uB354
     \uB113\uAC8C \uB9CC\uB4E4\uC5B4\uC900\uB2E4."
