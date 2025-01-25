@@ -40,7 +40,7 @@ public class JoinManager : NetworkBehaviour
 
         //오브젝트가 생성될 때
         csTable.Instance.gameManager.isStartGame = true;
-
+       
     }
 
 

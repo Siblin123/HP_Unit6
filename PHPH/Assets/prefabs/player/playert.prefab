@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 2909174151205997224}
   - component: {fileID: -7901038586680655187}
   - component: {fileID: 434301953864431923}
+  - component: {fileID: 1036713762530163715}
   m_Layer: 6
   m_Name: playert
   m_TagString: Player
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481336251
+  GlobalObjectIdHash: 4147144535
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -498,6 +499,19 @@ MonoBehaviour:
   money: 0
   money_Slot: {fileID: 0}
   money_Ob: {fileID: 8235651302514643724, guid: a44d2ce5f735db443a99f22959c4cd78, type: 3}
+--- !u!114 &1036713762530163715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980552357415299172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc820cfd586b9449f313bf639b8b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &5116266193173006959
 GameObject:
   m_ObjectHideFlags: 0
