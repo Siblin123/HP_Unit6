@@ -5,8 +5,7 @@ using static UnityEditor.Progress;
 
 public class RPCmanager : NetworkBehaviour
 {
-    [ClientRpc]
-    public bool buy_Slot_ClientRpc(bool buy_C, Item_Info item) // 아이템 구매
+    public bool buy_Slot(bool buy_C, Item_Info item) // 아이템 구매
     {
         // 구매 가능할때
         if (buy_C == true)
@@ -18,8 +17,8 @@ public class RPCmanager : NetworkBehaviour
             }
             else
             {
-                print("너님 돈 없어요");
                 return true;
+                print("너님 돈 없어요");
             }
         }
         else
