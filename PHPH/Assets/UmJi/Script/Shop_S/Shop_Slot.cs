@@ -6,7 +6,7 @@ using Unity.Netcode;
 
 public class Shop_Slot : MonoBehaviour
 {
-    public bool buy_C; //구매했는지 
+    public NetworkVariable<bool> buy_C; //구매했는지 
 
     public Item_Info item;
     public TextMeshProUGUI price_T;
@@ -29,16 +29,15 @@ public class Shop_Slot : MonoBehaviour
         price_T.text = price.ToString();
     }
 
-    [ClientRpc]
-    public void buy_Slot_ClientRpc() // 아이템 구매
+    public void buy_Slot() // 아이템 구매
     {
         // 구매 가능할때
-        if (buy_C == true)
+        if (buy_C.Value == true)
         {
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
             {
                 Shop_Manager.instance.Invent_Shop();
-                buy_C = false;
+                buy_C.Value = false;
             }
             else
             {
