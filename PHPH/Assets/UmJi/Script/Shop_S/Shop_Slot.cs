@@ -30,23 +30,8 @@ public class Shop_Slot : MonoBehaviour
     }
 
 
-
-
-    [ClientRpc]
-    public void buy_Slot_ClientRpc() // 아이템 구매
+    public void Buy_Button()
     {
-        // 구매 가능할때
-        if(buy_C == true)
-        {
-            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
-            {
-                Shop_Manager.instance.Invent_Shop();
-                buy_C = false;
-            }
-            else
-            {
-                print("너님 돈 없어요");
-            }
-        }
+        buy_C = csTable.Instance.rpcManager.buy_Slot(buy_C, item);
     }
 }

@@ -7,6 +7,9 @@ public class csTable : MonoBehaviour
     public static csTable Instance;
     public GameManager gameManager;
     public Transform unitSopn_Pos;
+    public RPCmanager rpcManager;
+
+
     public List<Item_Info> allItem_List;
     [HideInInspector]
     public Player_Inventory Player_Inventory;
