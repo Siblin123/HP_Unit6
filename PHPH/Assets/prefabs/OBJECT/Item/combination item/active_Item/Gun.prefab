@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  namee: 
+  name: "\uCD1D"
   id: 12
   explan: "\uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744 \uD560 \uC218 \uC788\uB2E4."
   price: 192
