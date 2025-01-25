@@ -131,20 +131,21 @@ public class PlayerGadget : NetworkBehaviour
 
     //=================아이템 버리기================
     [ServerRpc]
-    public void Throw_Item_ServerRpc(ulong id, Vector3 pos)
+    public void Throw_Item_ServerRpc(ulong id, Vector3 pos, int have_Count)
     {
         print("서버 실행");
-        Throw_Item_ClientRpc(id,pos);
+        Throw_Item_ClientRpc(id,pos, have_Count);
     }
 
     [ClientRpc]
-    public void Throw_Item_ClientRpc(ulong id,Vector3 pos)
+    public void Throw_Item_ClientRpc(ulong id,Vector3 pos,int have_Count)
     {
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
         {
             print("클라 서버 모두 실행");
             networkObject.transform.gameObject.SetActive(true);
             networkObject.transform.position = pos;
+            networkObject.GetComponent<Item_Info>().have_Count= have_Count;
         }
 
 
