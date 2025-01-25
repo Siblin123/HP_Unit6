@@ -6,7 +6,8 @@ using Unity.Netcode;
 
 public class Shop_Slot : NetworkBehaviour
 {
-    public NetworkVariable<bool> buy_C=new NetworkVariable<bool>(false); //구매했는지 
+    //구매했는지 
+    public NetworkVariable<bool> buy_C = new NetworkVariable<bool>(false); 
 
     public Item_Info item;
     public TextMeshProUGUI price_T;
