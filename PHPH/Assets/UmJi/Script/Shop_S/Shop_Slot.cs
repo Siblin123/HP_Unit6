@@ -30,13 +30,14 @@ public class Shop_Slot : NetworkBehaviour
         price_T.text = price.ToString();
     }
 
-    [ClientRpc]
-    public void buy_Slot_ClientRpc() // 아이템 구매
+  
+    public void buy_Slot() // 아이템 구매
     {
+
         // 구매 가능할때
         if (buy_C == false)
         {
-            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
+            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item, csTable.Instance.gameManager.player.NetworkObjectId , this.NetworkObjectId))
             {
                 Shop_Manager.instance.Invent_Shop();
                 buy_C = true;

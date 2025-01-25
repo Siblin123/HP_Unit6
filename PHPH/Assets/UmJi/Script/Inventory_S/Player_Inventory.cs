@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
 public class Player_Inventory : Inventory_Manager
 {
@@ -35,8 +36,11 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
-    public bool Buy_Item(Item_Info item) // 아이템 구매
+    public bool Buy_Item(Item_Info item,ulong playerId, ulong slotId) // 아이템 구매
     {
+        if (playerId != NetworkObjectId)
+            return false;
+
         // 소지금액이 구매할 아이템의 금액보다 많으면
         if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
         {
@@ -45,6 +49,7 @@ public class Player_Inventory : Inventory_Manager
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
                 money_Slot.Update_Slot(money_Slot.item, money);
+                Slot_Rock_ServerRpc(slotId);
                 return true;
             }
             else // 인벤토리에 칸 없음
@@ -58,6 +63,22 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
+
+    [ServerRpc]
+    public void Slot_Rock_ServerRpc(ulong slotId)
+    {
+        Slot_Rock_ClientRpc(slotId);
+    }
+    [ClientRpc]
+    public void Slot_Rock_ClientRpc(ulong slotId)
+    {
+        print("ASDASDASDASDAASD");
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
+        {
+           Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
+            slot.buy_C = true;
+        }
+    }
 
     public override void Update()
     {
