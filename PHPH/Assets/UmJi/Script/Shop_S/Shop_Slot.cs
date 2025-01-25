@@ -4,9 +4,9 @@ using TMPro;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Unity.Netcode;
 
-public class Shop_Slot : MonoBehaviour
+public class Shop_Slot : NetworkBehaviour
 {
-    public NetworkVariable<bool> buy_C; //구매했는지 
+    public NetworkVariable<bool> buy_C=new NetworkVariable<bool>(false); //구매했는지 
 
     public Item_Info item;
     public TextMeshProUGUI price_T;
@@ -32,12 +32,12 @@ public class Shop_Slot : MonoBehaviour
     public void buy_Slot() // 아이템 구매
     {
         // 구매 가능할때
-        if (buy_C.Value == true)
+        if (buy_C.Value == false)
         {
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
             {
                 Shop_Manager.instance.Invent_Shop();
-                buy_C.Value = false;
+                buy_C.Value = true;
             }
             else
             {
