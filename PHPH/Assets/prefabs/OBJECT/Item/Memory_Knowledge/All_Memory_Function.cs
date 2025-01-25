@@ -10,7 +10,7 @@ public class All_Memory_Function : MonoBehaviour
 
     public void all_Function(Item_Info item)
     {
-        switch (itemMemory)
+        switch (item.name)
         {
             case "총알의 기억":
                 // 총알 관련 로직

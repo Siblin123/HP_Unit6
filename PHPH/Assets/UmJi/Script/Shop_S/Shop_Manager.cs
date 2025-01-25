@@ -110,7 +110,7 @@ public class Shop_Manager : interaction
         {
             inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
 
-            //csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
 
             if (inven_Slot_List[i].item != null)
             {
