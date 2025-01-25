@@ -95,22 +95,6 @@ public class Player_Inventory : Inventory_Manager
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale.x == 0)
             {
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-
-                for (int i = 0; i < slot_List.Count; i++)
-                {
-                    if (slot_List[i].item != null)
-                    {
-                        // id°¡ 100Àº µ·
-                        if (slot_List[i].item.id == 100)
-                        {
-                            money_Slot = slot_List[i];
-
-                            money = slot_List[i].have_Count;
-
-                            money_T.text = slot_List[i].have_Count.ToString("N0");
-                        }
-                    }
-                }
             }
             // ²¨ÁÜ
             else
@@ -118,6 +102,25 @@ public class Player_Inventory : Inventory_Manager
                // money_Slot = null;
 
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
+            }
+        }
+    }
+
+    public void Money_Slot_Find()
+    {
+        for (int i = 0; i < slot_List.Count; i++)
+        {
+            if (slot_List[i].item != null)
+            {
+                // id°¡ 100Àº µ·
+                if (slot_List[i].item.id == 100)
+                {
+                    money_Slot = slot_List[i];
+
+                    money = slot_List[i].have_Count;
+
+                    money_T.text = slot_List[i].have_Count.ToString("N0");
+                }
             }
         }
     }

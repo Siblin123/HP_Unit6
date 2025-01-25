@@ -32,6 +32,6 @@ public class Shop_Slot : MonoBehaviour
 
     public void Buy_Button()
     {
-        buy_C = csTable.Instance.rpcManager.buy_Slot(buy_C, item);
+        buy_C = csTable.Instance.rpcManager.buy_Slot_ClientRpc(buy_C, item);
     }
 }

@@ -97,7 +97,9 @@ public class Shop_Manager : interaction
         // 상점 인벤토리 -> 인벤토리에 적용
         for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
         {
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);     
         }
     }
 
@@ -108,18 +110,7 @@ public class Shop_Manager : interaction
         {
             inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
 
-            if (inven_Slot_List[i].item != null)
-            {
-                // id가 100은 돈
-                if (inven_Slot_List[i].item.id == 100)
-                {
-                    money_Slot = inven_Slot_List[i];
-
-                    money = inven_Slot_List[i].have_Count;
-
-                    money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
-                }
-            }
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         }
     }
 

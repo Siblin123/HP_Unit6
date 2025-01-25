@@ -104,6 +104,7 @@ public class Inven_Slot : Inventory_Manager
 
     public void Click_Slot() // 버튼 클릭했을때
     {
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         // 아무것도 클릭 안했으면 본인을 넣어줌
         if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
         {
