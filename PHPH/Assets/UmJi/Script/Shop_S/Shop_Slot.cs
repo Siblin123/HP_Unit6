@@ -7,7 +7,7 @@ using Unity.Netcode;
 public class Shop_Slot : NetworkBehaviour
 {
     //구매했는지 
-    public NetworkVariable<bool> buy_C = new NetworkVariable<bool>(false); 
+    public bool buy_C; 
 
     public Item_Info item;
     public TextMeshProUGUI price_T;
@@ -30,15 +30,16 @@ public class Shop_Slot : NetworkBehaviour
         price_T.text = price.ToString();
     }
 
-    public void buy_Slot() // 아이템 구매
+    [ClientRpc]
+    public void buy_Slot_ClientRpc() // 아이템 구매
     {
         // 구매 가능할때
-        if (buy_C.Value == false)
+        if (buy_C == false)
         {
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item))
             {
                 Shop_Manager.instance.Invent_Shop();
-                buy_C.Value = true;
+                buy_C = true;
             }
             else
             {
