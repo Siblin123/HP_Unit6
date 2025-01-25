@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using Unity.Netcode;
 
 public class Shop_Slot : MonoBehaviour
 {
@@ -28,7 +29,11 @@ public class Shop_Slot : MonoBehaviour
         price_T.text = price.ToString();
     }
 
-    public void buy_Slot() // 아이템 구매
+
+
+
+    [ClientRpc]
+    public void buy_Slot_ClientRpc() // 아이템 구매
     {
         // 구매 가능할때
         if(buy_C == true)
