@@ -21,27 +21,13 @@ public class Inventory_Button : MonoBehaviour
             //csTable.Instance.gameManager.player.Obj_Installable(slot.item.id);
 
 
-            Throw_Item_ServerRpc(slot.item.NetworkObjectId);
+            csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().Throw_Item_ServerRpc(slot.item.NetworkObjectId, csTable.Instance.gameManager.player.transform.position);
 
             slot.Update_Slot(null, 0);
             slot = null;
         }
     }
 
-    [ServerRpc]
-    public void Throw_Item_ServerRpc(ulong id)
-    {
-        Throw_Item_ClientRpc(id);
-    }
 
-    [ClientRpc]
-    public void Throw_Item_ClientRpc(ulong id)
-    {
-        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
-        {
-            print("클라 서버 모두 실행");
-            networkObject.transform.gameObject.SetActive(true);
-            networkObject.transform.position = csTable.Instance.gameManager.player.transform.position;
-        }
-    }
+    
 }

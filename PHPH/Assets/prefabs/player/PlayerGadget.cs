@@ -30,10 +30,10 @@ public class PlayerGadget : NetworkBehaviour
             return;
         Change_MiniInventory();
 
-        if (behaviourColTimme>=0)
-            behaviourColTimme-= Time.deltaTime;
+        if (behaviourColTimme >= 0)
+            behaviourColTimme -= Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) && behaviourColTimme <= 0 )
+        if (Input.GetMouseButtonDown(0) && behaviourColTimme <= 0)
         {
             UseCurItem();
         }
@@ -72,10 +72,10 @@ public class PlayerGadget : NetworkBehaviour
         if (!IsOwner)
             return;
 
-        if (curItem != null )
+        if (curItem != null)
         {
 
-            if(curItem.curItemType == itemType.combination_Item_Installable)
+            if (curItem.curItemType == itemType.combination_Item_Installable)
             {
                 Obj_Installable(curItem.id);
             }
@@ -84,9 +84,9 @@ public class PlayerGadget : NetworkBehaviour
                 curItem.UseItem();
             }
 
-         
+
         }
-           
+
     }
 
     public void UseCurItem_Attack()
@@ -129,4 +129,24 @@ public class PlayerGadget : NetworkBehaviour
     //오브젝트 설치 ============설치 아이템일 경우 사용 ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
 
+    //=================아이템 버리기================
+    [ServerRpc]
+    public void Throw_Item_ServerRpc(ulong id, Vector3 pos)
+    {
+        print("서버 실행");
+        Throw_Item_ClientRpc(id,pos);
+    }
+
+    [ClientRpc]
+    public void Throw_Item_ClientRpc(ulong id,Vector3 pos)
+    {
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
+        {
+            print("클라 서버 모두 실행");
+            networkObject.transform.gameObject.SetActive(true);
+            networkObject.transform.position = pos;
+        }
+
+
+    }
 }
