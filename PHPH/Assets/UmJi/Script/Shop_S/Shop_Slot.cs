@@ -21,7 +21,7 @@ public class Shop_Slot : NetworkBehaviour
     {
         this.item = item;
         item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-        name_T.text = item.name.ToString();
+        name_T.text = item.item_Name.ToString();
 
         item_Count = item.max_Have_Count;
         count_T.text = item.max_Have_Count.ToString();

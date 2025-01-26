@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEditor.Experimental.GraphView;
@@ -11,6 +13,10 @@ public class PlayerGadget : NetworkBehaviour
     public Arm_Anim arm_Anim;
 
     public float behaviourColTimme;//행동 쿨타임
+
+    [Header("가지고 있는 기억")]
+    public List<string> have_Memory;
+
     public virtual void Start()
     {
         csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();

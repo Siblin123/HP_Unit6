@@ -6,7 +6,7 @@ using static UnityEditor.VersionControl.Asset;
 public class Item_Info : NetworkBehaviour
 {
     Rigidbody2D rb;
-    public string name; // 아이템 이름
+    public string item_Name; // 아이템 이름
     public int id; // 아이템 아이디
     public string explan; // 설명
     public int price; // 가격

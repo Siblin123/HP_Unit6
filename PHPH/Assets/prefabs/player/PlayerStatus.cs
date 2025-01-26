@@ -248,10 +248,11 @@ public class PlayerStatus : PlayerGadget
     [ClientRpc]
     public void GetItem_ClientRpc(ulong id)
     {
-       
+
 
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
         {
+
             networkObject.transform.gameObject.SetActive(false);
 
         }

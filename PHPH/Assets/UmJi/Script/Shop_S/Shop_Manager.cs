@@ -131,7 +131,7 @@ public class Shop_Manager : interaction
     {
         for(int i = 0; i < all_Item_List.Count; i++)
         {
-            if (all_Item_List[i].name == name)
+            if (all_Item_List[i].item_Name == name)
             {
                 return all_Item_List[i];
             }
