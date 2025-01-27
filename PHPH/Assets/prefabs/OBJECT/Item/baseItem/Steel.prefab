@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCCA0"
+  item_Name: "\uCCA0"
   id: 4
   explan: "\uB09C \uCCA0\uC774\uB2E4."
   price: 1

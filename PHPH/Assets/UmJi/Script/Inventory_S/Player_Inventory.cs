@@ -116,6 +116,7 @@ public class Player_Inventory : Inventory_Manager
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale.x == 0)
             {
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                Money_Slot_Find();
             }
             // ≤®¡‹
             else
@@ -134,7 +135,7 @@ public class Player_Inventory : Inventory_Manager
             if (slot_List[i].item != null)
             {
                 // id∞° 100¿∫ µ∑
-                if (slot_List[i].item.id == 100)
+                if (slot_List[i].item.id == 0)
                 {
                     money_Slot = slot_List[i];
 

@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uACE0\uC7A5\uB09C \uC810\uD504\uD329"
-  id: 32
+  item_Name: "\uC810\uD504\uD329"
+  id: 124
   explan: "\uC810\uD504 \uB192\uC774\uAC00 \uC62C\uB77C\uAC04\uB2E4."
   price: 240
   max_Have_Count: 1

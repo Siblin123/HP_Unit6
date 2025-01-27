@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 2498500624398858173}
   unitSopn_Pos: {fileID: 0}
+  rpcManager: {fileID: 0}
   allItem_List:
   - {fileID: 7442297090257906296, guid: 8a39cbe0ac2c02249bdb56087028a8dc, type: 3}
   - {fileID: 3349308753338816067, guid: 67ddb1ab339132745b355d32e5e47811, type: 3}

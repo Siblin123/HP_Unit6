@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6994535800009884239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -3.284709}
+  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,14 +75,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   item_Name: "\uAD11\uBD80\uC758 \uAE30\uC5B5"
-  id: 68
+  id: 1011
   explan: "\uACE1\uAD2D\uC774\uC5D0 \uC775\uC219\uD574\uC9D1\uB2C8\uB2E4."
   price: 1
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
   curItemType: 6
-  all_Memory: []
   max_Memory_Count: 0
 --- !u!212 &7597672119590058845
 SpriteRenderer:

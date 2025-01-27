@@ -37,6 +37,7 @@ public class Shop_Manager : interaction
     private void Awake()
     {
         instance = this;
+        shop_Panel.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -114,8 +115,8 @@ public class Shop_Manager : interaction
 
             if (inven_Slot_List[i].item != null)
             {
-                // id°¡ 100Àº µ·
-                if (inven_Slot_List[i].item.id == 100)
+                // id°¡ 0Àº µ·
+                if (inven_Slot_List[i].item.id == 0)
                 {
                     money_Slot = inven_Slot_List[i];
 

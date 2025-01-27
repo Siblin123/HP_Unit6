@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uACE0\uAE09 \uD3EC\uC158"
-  id: 23
+  item_Name: "\uACE0\uAE09 \uD3EC\uC158"
+  id: 115
   explan: "\uD68C\uBCF5 \uAC00\uB2A5\uD55C \uC544\uC774\uD15C\uC774\uB2E4."
   price: 116
   max_Have_Count: 5
