@@ -37,7 +37,7 @@ public class Shop_Manager : interaction
     private void Awake()
     {
         instance = this;
-        shop_Panel.gameObject.SetActive(false);
+        //shop_Panel.gameObject.SetActive(false);
     }
     private void Start()
     {
