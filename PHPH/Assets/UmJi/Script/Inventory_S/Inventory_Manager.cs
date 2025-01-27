@@ -38,9 +38,9 @@ public class Inventory_Manager : NetworkBehaviour
             if (p_I.slot_List[i].item != null)
             {
                 // 획득한 아이템이 이미 인벤토리에 있으면
-                if (p_I.slot_List[i].item.name == item.name)
+                if (p_I.slot_List[i].item.item_Name == item.item_Name)
                 {
-                    if(item.name == "돈") { csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().money += count; }
+                    if(item.item_Name == "돈") { csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().money += count; }
 
                     // 총 아이템 개수가 최대 소지개수보다 많으면
                     if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)

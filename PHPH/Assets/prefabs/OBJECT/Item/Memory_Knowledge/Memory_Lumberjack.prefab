@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4880675857688812462}
   - component: {fileID: 7621142293340930931}
-  - component: {fileID: 8387900175928882446}
+  - component: {fileID: -8466557936967609537}
   - component: {fileID: 5299309209105745176}
   - component: {fileID: 795027647253403924}
   - component: {fileID: 315168459815604355}
@@ -61,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &8387900175928882446
+--- !u!114 &-8466557936967609537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,11 +70,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6906357983929910784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: 27faf77860a56c34caf4786242993f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB098\uBB34\uAFBC\uC758 \uAE30\uC5B5"
+  item_Name: "\uB098\uBB34\uAFBC\uC758 \uAE30\uC5B5"
   id: 65
   explan: "\uB3C4\uB07C\uC5D0 \uC775\uC219\uD574\uC9D1\uB2C8\uB2E4."
   price: 1
@@ -82,6 +82,8 @@ MonoBehaviour:
   colTime: 0
   have_Count: 0
   curItemType: 6
+  all_Memory: []
+  max_Memory_Count: 0
 --- !u!212 &5299309209105745176
 SpriteRenderer:
   m_ObjectHideFlags: 0

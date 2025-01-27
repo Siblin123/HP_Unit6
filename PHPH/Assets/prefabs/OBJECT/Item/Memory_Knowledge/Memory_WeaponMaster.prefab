@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 909894237718545207}
   - component: {fileID: 1304708144343272073}
-  - component: {fileID: 1824941934153565245}
+  - component: {fileID: -8674288299912235585}
   - component: {fileID: 836838109305018442}
   - component: {fileID: 3302321640753930095}
   - component: {fileID: 3502172246339639465}
@@ -61,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &1824941934153565245
+--- !u!114 &-8674288299912235585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,11 +70,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1040960081191058024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: 27faf77860a56c34caf4786242993f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uBB34\uAE30 \uB2EC\uC778\uC758 \uAE30\uC5B5"
+  item_Name: "\uBB34\uAE30 \uB2EC\uC778\uC758 \uAE30\uC5B5"
   id: 76
   explan: "\uBB34\uAE30\uC5D0 \uB300\uD55C \uC774\uD574\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   price: 1
@@ -82,6 +82,8 @@ MonoBehaviour:
   colTime: 0
   have_Count: 0
   curItemType: 6
+  all_Memory: []
+  max_Memory_Count: 0
 --- !u!212 &836838109305018442
 SpriteRenderer:
   m_ObjectHideFlags: 0
