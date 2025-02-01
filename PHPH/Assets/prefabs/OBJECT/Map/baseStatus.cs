@@ -61,7 +61,7 @@ public class baseStatus : interaction
 
 
         //아이템 생성
-
+        SpawnItem();
 
         GetComponent<NetworkObject>().Despawn(true);
 
