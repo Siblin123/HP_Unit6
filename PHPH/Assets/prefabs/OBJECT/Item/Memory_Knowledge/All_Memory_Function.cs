@@ -42,6 +42,14 @@ public class All_Memory_Function : Item_Info
 
     public void all_Function(string itemName)
     {
+
+        //리턴
+        /*
+         bool
+        바로 적용
+         특정 기능 사용시 실행
+         */
+
         switch (itemName)
         {
             case "총알의 기억":
