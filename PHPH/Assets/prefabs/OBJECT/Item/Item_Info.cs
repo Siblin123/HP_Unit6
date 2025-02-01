@@ -54,7 +54,6 @@ public class Item_Info : NetworkBehaviour
     public virtual void UseItem()//∞¢ æ∆¿Ã≈€¿« ±‚¥…
     {
  
-
         if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
@@ -68,6 +67,19 @@ public class Item_Info : NetworkBehaviour
         if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme = colTime;
+
+            switch(id)
+            {
+                case  100:
+                    //µµ≥¢
+                    csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.ax_memory_Value;
+                    break;            
+                case  106:
+                    //∞Ó±™¿Ã
+                    csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.pick_memory_Value;
+                    break;
+            }
+
             return;
         }
     }
