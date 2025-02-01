@@ -133,8 +133,11 @@ MonoBehaviour:
     m_InternalValue: 100
   health:
     m_InternalValue: 0
+  damege: 0
   tagType: 1
   reward_Item: {fileID: 8006149208204479723, guid: 18e8500c880a95e4aabf4e000b7ce78e, type: 3}
+  reward_memory_Item_Per: 1
+  reward_memory_Item: {fileID: 4767011868046986693, guid: cc92298465c245b418f8c543ac9638eb, type: 3}
 --- !u!50 &3394504369477193326
 Rigidbody2D:
   serializedVersion: 5

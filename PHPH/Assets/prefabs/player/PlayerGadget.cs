@@ -17,6 +17,12 @@ public class PlayerGadget : NetworkBehaviour
     [Header("가지고 있는 기억")]
     public List<string> have_Memory;
 
+    [Header("기억으로 인한 쿨타임 감소")]
+    public float ax_memory_Value;//도끼 쿨타임
+    public float pick_memory_Value;//곡괭이 쿨타임
+    public float longAttackDamegeUp_Value;//원거리공격력 증가량
+    public float shortAttackDamageUp_Value;//근거리 공격력 증가량
+
     public virtual void Start()
     {
         csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();
