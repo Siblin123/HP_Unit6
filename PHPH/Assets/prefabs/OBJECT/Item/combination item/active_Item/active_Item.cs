@@ -21,7 +21,8 @@ public class active_Item : combination_item
     {
         base.Update();
 
-        Debug.DrawRay(csTable.Instance.gameManager.player.transform.localPosition + offset , csTable.Instance.gameManager.player.rayDirection  * attack_rage, Color.blue, 0.5f);
+        if(csTable.Instance.gameManager.player!=null)
+            Debug.DrawRay(csTable.Instance.gameManager.player.transform.localPosition + offset , csTable.Instance.gameManager.player.rayDirection  * attack_rage, Color.blue, 0.5f);
     }
 
     public override void Attack()

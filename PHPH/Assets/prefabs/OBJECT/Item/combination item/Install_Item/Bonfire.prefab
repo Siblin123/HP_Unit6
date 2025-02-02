@@ -169,6 +169,10 @@ MonoBehaviour:
   Light: {fileID: 7890831278623211633}
   light_magnitude_Size: {x: 5, y: 8}
   speed: 3
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  previousEnemies: []
 --- !u!212 &-90481070799669932
 SpriteRenderer:
   m_ObjectHideFlags: 0

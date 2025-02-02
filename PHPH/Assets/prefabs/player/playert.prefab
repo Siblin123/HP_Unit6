@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481336251
+  GlobalObjectIdHash: 4147144535
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -309,10 +309,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  curItem: {fileID: 1035882852594267128, guid: c03733f2fd77f3a42bdd43b28eb74652, type: 3}
+  curItem: {fileID: -2170975511241727335, guid: 0ac0bf67613057a41a53b75c3ab664ea, type: 3}
   arm_Anim: {fileID: 8881582589962923554}
   behaviourColTimme: 0
   have_Memory: []
+  ax_memory_Value: 0
+  pick_memory_Value: 0
+  longAttackDamegeUp_Value: 0
+  shortAttackDamageUp_Value: 0
   player_light: {fileID: 9026596277976412956}
   mousePos: {x: 0, y: 0, z: 0}
   AttackPos: {fileID: 9022638514675875189}

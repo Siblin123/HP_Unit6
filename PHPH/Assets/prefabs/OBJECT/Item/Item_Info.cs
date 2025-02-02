@@ -57,8 +57,8 @@ public class Item_Info : NetworkBehaviour
         if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
-
-            return;
+            gatgot_Coltime();
+            
         }
     }
 
@@ -68,22 +68,25 @@ public class Item_Info : NetworkBehaviour
         {
             csTable.Instance.gameManager.player.behaviourColTimme = colTime;
 
-            switch(id)
-            {
-                case  100:
-                    //µµ³¢
-                    csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.ax_memory_Value;
-                    break;            
-                case  106:
-                    //°î±ªÀÌ
-                    csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.pick_memory_Value;
-                    break;
-            }
+            gatgot_Coltime();
 
-            return;
+            
         }
     }
 
    
-
+    public void gatgot_Coltime()
+    {
+        switch (id)
+        {
+            case 100:
+                //µµ³¢
+                csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.ax_memory_Value;
+                break;
+            case 106:
+                //°î±ªÀÌ
+                csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.pick_memory_Value;
+                break;
+        }
+    }
 }

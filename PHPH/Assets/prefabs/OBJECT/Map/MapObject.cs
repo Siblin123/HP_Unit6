@@ -7,7 +7,9 @@ public class MapObject : baseStatus
 
     public override void interact()
     {
-        Destroy(gameObject);
+
+
+        objDestory_ServerRpc();
     }
     
 }
