@@ -4,6 +4,7 @@ using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Playables;
 using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
@@ -23,6 +24,14 @@ public class PlayerGadget : NetworkBehaviour
     public float longAttackDamegeUp_Value;//원거리공격력 증가량
     public float shortAttackDamageUp_Value;//근거리 공격력 증가량
 
+    [Header("채집으로 인한 특수 아이템을 획득확률")]
+    public float get_gethering_Item_Per;
+    [Header("광질로 인한 특수 아이템 획득확률")]
+    public float get_mining_Item_Per;
+    [Header("낚시로 인한 특수 아이템 획득확률")]
+    public float get_fishing_Item_Per;
+    [Header("사냥으로 인한 특수 아이템 획득 확률")]
+    public float get_hunting_Item_Per;
     public virtual void Start()
     {
         csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();

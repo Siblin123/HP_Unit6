@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class baseStatus : interaction
 {
-    public NetworkVariable<int> maxHealth = new NetworkVariable<int>(100);
-    public NetworkVariable<int> health;
+    public NetworkVariable<float> maxHealth = new NetworkVariable<float>(100);
+    public NetworkVariable<float> health;
 
     public float damege;
 
@@ -14,6 +14,8 @@ public class baseStatus : interaction
     public int reward_memory_Item_Per;
     public List<Item_Info> reward_memory_Item; //지식의 기억으로 얻는 아이템
 
+    //생성해줄 아이템
+    Item_Info spawnItem;
     public enum tag_Type
     {
         Enemy,
@@ -30,7 +32,7 @@ public class baseStatus : interaction
 
     // Update is called once per frame
 
-    public void TakeDamage(int damege)
+    public void TakeDamage(float damege)
     {
         print("TakeDamage");
         if (IsServer)
@@ -46,7 +48,7 @@ public class baseStatus : interaction
         }
     }
     [ServerRpc(RequireOwnership = false)]
-    public void TakeDamage_ServerRpc(int damege)
+    public void TakeDamage_ServerRpc(float damege)
     {
         health.Value -= damege;
     }
@@ -66,7 +68,37 @@ public class baseStatus : interaction
         GetComponent<NetworkObject>().Despawn(true);
 
     }
+    float reward_memory_SpawnPer()
+    {
+        int randomNum = Random.Range(1, reward_memory_Item.Count);//특수 아이템중 랜덤으로 뽑기
+        spawnItem = reward_memory_Item[randomNum];
+        switch (spawnItem.id)
+        {
+            //광질로 인한 특수 아이템
 
+            case 9://다이아몬드
+                return csTable.Instance.gameManager.player.get_mining_Item_Per;
+
+
+            //낚시로 인한 특수 아이템
+            case 14://상어 
+                return csTable.Instance.gameManager.player.get_fishing_Item_Per;
+
+
+            //채집으로 인한 특수 아이템
+            case 15://산삼
+                return csTable.Instance.gameManager.player.get_gethering_Item_Per;
+
+
+            //사냥으로 인한 특수 아이템
+            /*case 16://토끼
+                return csTable.Instance.gameManager.player.get_hunting_Item_Per;*/
+
+            default:
+                return 0;
+        }
+
+    }
 
     public void SpawnItem()
     {
@@ -74,11 +106,11 @@ public class baseStatus : interaction
         {
 
             // ===================  특수 아이템 드랍 ==========================
-            int randomNum = Random.Range(1, reward_memory_Item.Count);
 
-            if(randomNum>reward_memory_Item_Per)
+            int randomNum = Random.Range(1, 101);//랜덤으로 특수 아이템이 뜰 확률
+            if (randomNum<= reward_memory_SpawnPer())
             {
-                GameObject itemm = Instantiate(reward_memory_Item[randomNum].gameObject, transform.position, Quaternion.identity);
+                GameObject itemm = Instantiate(spawnItem.gameObject, transform.position, Quaternion.identity);
 
                 var networkObjectt = itemm.GetComponent<NetworkObject>();
                 if (networkObjectt != null)

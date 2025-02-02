@@ -155,21 +155,25 @@ public class All_Memory_Function : Item_Info
             case "심마니의 기억":
                 // 심마니 관련 로직
                 Debug.Log("중첩으로 먹을 수 없으며, 먹을 시 채집에서 낮은 확률로 산삼을 발견할 수 있다.");
+                csTable.Instance.gameManager.player.get_gethering_Item_Per += 0.1f;
                 break;
 
             case "강태공의 기억":
                 // 강태공 관련 로직
                 Debug.Log("중첩으로 먹을 수 없으며, 먹을 시 낚시에서 낮은 확률로 상어를 낚을 수 있다.");
+                csTable.Instance.gameManager.player.get_fishing_Item_Per += 0.1f;
                 break;
 
             case "스티브의 기억":
                 // 스티브 관련 로직
                 Debug.Log("중첩으로 먹을 수 없으며, 먹을 시 광질에서 낮은 확률로 다이아몬드를 캘 수 있다.");
+                csTable.Instance.gameManager.player.get_mining_Item_Per += 0.1f;
                 break;
 
             case "헌터의 기억":
                 // 헌터 관련 로직
                 Debug.Log("중첩으로 먹을 수 없으며, 먹을 시 몬스터를 잡으면 보통의 확률로 값어치 1인 재료가 나오며, 매우 낮은 확률로 값어치가 100 미만인 아이템이 나온다.");
+                csTable.Instance.gameManager.player.get_hunting_Item_Per += 0.1f;
                 break;
         }
     }

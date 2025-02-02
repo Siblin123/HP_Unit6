@@ -80,7 +80,7 @@ MonoBehaviour:
   price: 80
   max_Have_Count: 1
   colTime: 0
-  have_Count: 0
+  have_Count: 1
   curItemType: 1
 --- !u!212 &-5224351017369622383
 SpriteRenderer:
