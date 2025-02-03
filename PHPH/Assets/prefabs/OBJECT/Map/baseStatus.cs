@@ -68,7 +68,7 @@ public class baseStatus : interaction
         GetComponent<NetworkObject>().Despawn(true);
 
     }
-    float reward_memory_SpawnPer()
+    float reward_memory_SpawnPer()//특수 아이템드랍 확률
     {
         int randomNum = Random.Range(1, reward_memory_Item.Count);//특수 아이템중 랜덤으로 뽑기
         spawnItem = reward_memory_Item[randomNum];
@@ -108,7 +108,7 @@ public class baseStatus : interaction
             // ===================  특수 아이템 드랍 ==========================
 
             int randomNum = Random.Range(1, 101);//랜덤으로 특수 아이템이 뜰 확률
-            if (randomNum<= reward_memory_SpawnPer())
+            if (randomNum<= reward_memory_SpawnPer())//특수아이템 정해주면서 확률 리턴
             {
                 GameObject itemm = Instantiate(spawnItem.gameObject, transform.position, Quaternion.identity);
 
