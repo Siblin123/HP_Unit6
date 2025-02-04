@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6959348775448870944}
   - component: {fileID: -5833591439899422276}
   - component: {fileID: -8857483360108087771}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Potion_Basic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,13 +127,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCD08\uAE09 \uD3EC\uC158"
-  id: 24
+  item_Name: "\uCD08\uAE09 \uD3EC\uC158"
+  id: 116
   explan: "\uD68C\uBCF5 \uAC00\uB2A5\uD55C \uC544\uC774\uD15C\uC774\uB2E4."
   price: 64
   max_Have_Count: 5
   colTime: 0
-  have_Count: 0
+  have_Count: 1
   curItemType: 5
   hp_value: 5
   stamina_value: 0

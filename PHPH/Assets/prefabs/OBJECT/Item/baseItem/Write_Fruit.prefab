@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1457758255672986991}
   - component: {fileID: 4768627505822608919}
   - component: {fileID: 2993700365954081638}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Write_Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC4F4 \uC5F4\uB9E4"
+  item_Name: "\uC4F4 \uC5F4\uB9E4"
   id: 7
   explan: "\uC4F0\uB2E4."
   price: 1

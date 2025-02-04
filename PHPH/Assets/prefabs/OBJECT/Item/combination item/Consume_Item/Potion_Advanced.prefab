@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3299571915327593616}
   - component: {fileID: 1677387888953835163}
   - component: {fileID: -8526353753145010494}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Potion_Advanced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uACE0\uAE09 \uD3EC\uC158"
-  id: 23
+  item_Name: "\uACE0\uAE09 \uD3EC\uC158"
+  id: 115
   explan: "\uD68C\uBCF5 \uAC00\uB2A5\uD55C \uC544\uC774\uD15C\uC774\uB2E4."
   price: 116
   max_Have_Count: 5

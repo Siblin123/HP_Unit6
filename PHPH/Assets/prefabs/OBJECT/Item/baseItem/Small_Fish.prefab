@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7311994434534103794}
   - component: {fileID: 4715344252579804767}
   - component: {fileID: 7343822500616533154}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Small_Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC791\uC740 \uBB3C\uACE0\uAE30"
+  item_Name: "\uC791\uC740 \uBB3C\uACE0\uAE30"
   id: 3
   explan: "\uBB3C\uACE0\uAE30\uB2E4"
   price: 1

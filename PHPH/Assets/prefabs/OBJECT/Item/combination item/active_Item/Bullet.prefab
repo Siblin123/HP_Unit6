@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2068433606622607026}
   - component: {fileID: -5497434656106028489}
   - component: {fileID: 1886947727962074490}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCD1D\uC54C"
-  id: 10
+  item_Name: "\uCD1D\uC54C"
+  id: 102
   explan: "\uCD1D\uACFC \uAC19\uC774 \uC0AC\uC6A9\uB41C\uB2E4."
   price: 176
   max_Have_Count: 2

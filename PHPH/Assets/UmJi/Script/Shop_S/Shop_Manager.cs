@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using Unity.Netcode;
+using static UnityEditor.Progress;
 
 public class Shop_Manager : interaction
 {
@@ -25,26 +26,20 @@ public class Shop_Manager : interaction
     [Header("모든 아이템 리스트")]
     public List<Item_Info> all_Item_List;
 
-    //public NetworkList<int> select_Item_List; // 상점에서 판매할 아이템 리스트
-
     // 돈 표시 UI
-    public GameObject money_View;
+    public Inven_Slot money_Slot;
+    public TextMeshProUGUI money_T;
     public int money;
+
+    public GameObject bar_Reset;
 
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
-
     private void Awake()
     {
-       /* if (IsServer)
-        {
-            select_Item_List = new NetworkList<int>();
-        }*/
-      
         instance = this;
     }
-
     private void Start()
     {
         for (int i = 0; i < shop_Slot_Ob.transform.childCount; i++)
@@ -69,39 +64,16 @@ public class Shop_Manager : interaction
         {
             On_Off();
         }
-        else if (Input.GetKeyDown(KeyCode.D)) // 상점 판매 아이템 리롤
+        else if (Input.GetKeyDown(KeyCode.K)) // 상점 판매 아이템 리롤
         {
-
             Update_Slot();
         }
-    }
 
-    private void OnEnable()
-    {
-        // 인벤토리 -> 상점 인벤토리 동기화
-        for (int i = 0; i < slot_List.Count; i++)
+        if (Input.GetKeyDown(KeyCode.O)) // 상점 온오프
         {
-            inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, Player_Inventory.instance.slot_List[i].have_Count);
-
-            // id가 100은 돈
-            if (inven_Slot_List[i].item.id == 100)
-            {
-                money = inven_Slot_List[i].item.have_Count;
-
-                money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = inven_Slot_List[i].have_Count.ToString("N0");
-            }
+            bar_Reset.GetComponent<Scrollbar>().value = 0.5f;
         }
     }
-
-    private void OnDisable()
-    {
-        // 상점 인벤토리 -> 인벤토리 동기화
-        for (int i = 0; i < slot_List.Count; i++)
-        {
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
-        }
-    }
-
     public void All_Off()
     {
         price_Ui.SetActive(false);
@@ -110,24 +82,55 @@ public class Shop_Manager : interaction
     public void On_Off() // 상점 끄고 켜기
     {
         // 인벤토리 끄기
-        if (shop_Panel.activeSelf == true)
+        if (shop_Panel.GetComponent<RectTransform>().localScale.x == 1)
         {
-            // 상점에서 판매 또는 구매한걸 인벤토리에 적용
-            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
-            {
-                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
-            }
+            // 상점 인벤토리 -> 인벤토리에 적용
+            Shop_Invent();
 
-            shop_Panel.SetActive(false);
+            money_Slot = null;
+            shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         }
-        else if (shop_Panel.activeSelf == false) // 켜기
+        else // 커기
         {
-            shop_Panel.SetActive(true);
+            shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            bar_Reset.GetComponent<Scrollbar>().value = 1;
 
-            // 인벤토리를 상점 인벤토리에 적용
-            for (int i = 0; i < inven_Slot_List.Count; i++)
+            // 인벤토리 -> 상점 인벤토리에 적용
+            Invent_Shop();
+        }
+    }
+
+    public void Shop_Invent()
+    {
+        // 상점 인벤토리 -> 인벤토리에 적용
+        for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+        {
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);     
+        }
+    }
+
+    public void Invent_Shop()
+    {
+        // 인벤토리 -> 상점 인벤토리에 적용
+        for (int i = 0; i < inven_Slot_List.Count; i++)
+        {
+            inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+
+            if (inven_Slot_List[i].item != null)
             {
-                inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+                // id가 0은 돈
+                if (inven_Slot_List[i].item.id == 0)
+                {
+                    money_Slot = inven_Slot_List[i];
+
+                    money = inven_Slot_List[i].have_Count;
+
+                    money_T.text = inven_Slot_List[i].have_Count.ToString("N0");
+                }
             }
         }
     }
@@ -136,7 +139,7 @@ public class Shop_Manager : interaction
     {
         for(int i = 0; i < all_Item_List.Count; i++)
         {
-            if (all_Item_List[i].name == name)
+            if (all_Item_List[i].item_Name == name)
             {
                 return all_Item_List[i];
             }
@@ -144,20 +147,8 @@ public class Shop_Manager : interaction
         return null;
     }
 
-
-
-    //============================ 상점 물품 동기화 ============================
-
-
     public void Update_Slot() // 판매할 아이템 표시
     {
-        if (!IsServer)
-        {
-            return;
-        }
-
-        //select_Item_List.Clear();
-
         // 기본 이아팀, 완성 아이템
         int base_N = 0, combi_N = 0;
 
@@ -169,58 +160,44 @@ public class Shop_Manager : interaction
             {
                 select_N = CheckDuplicate(combination_Item_List, select_N);
                 slot_List[i].Update_Slot(combination_Item_List[select_N]);
+                Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
                 combi_N++;
             }
             else if (base_N < 2)
             {
                 select_N = CheckDuplicate(base_Item_List, select_N);
                 slot_List[i].Update_Slot(base_Item_List[select_N]);
+                Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
                 base_N++;
             }
             else
             {
                 select_N = CheckDuplicate(all_Item_List, select_N);
                 slot_List[i].Update_Slot(all_Item_List[select_N]);
+                Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
             }
-           // select_Item_List.Add(slot_List[i].item.id);
-         //   print(select_Item_List);
         }
-
-        Update_Slot_ClientRpc();
     }
 
-    // 서버 -> 클라이언트한테 보내주는거인데 서버도 실행이 됨
     [ClientRpc]
-    public void Update_Slot_ClientRpc()
+    void Update_Slot_ClientRpc(int id, int index) // 아이템 서버, 클라이언트 동기화
     {
         if (IsServer)
             return;
-        
 
-        print("클라실행");
-     //   List<int> item_ID = new List<int>();
+        print("클라만");
 
-       /* // 판매할 아이템 품목 개수만큼 반복
-        for (int i = 0; i < slot_List.Count; i++)
+
+        for (int j = 0; j < all_Item_List.Count; j++)
         {
-            // 전체 품목중 비교
-            foreach (var item in all_Item_List)
+            if (all_Item_List[j].id == id)
             {
-                // 서버에서 선정한 판매할 아이템 찾기
-                foreach (var selet_ID in select_Item_List)
-                {
-                    if (item.id == selet_ID)
-                    {
-                        GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[i].Update_Slot(all_Item_List[selet_ID]);
-                        break;
-                    }
-                }
+                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].Update_Slot(all_Item_List[j]);
                 break;
             }
-        }*/
+        }
     }
 
-    //===========================================================================
     public int CheckDuplicate(List<Item_Info> list, int select_N) // 중복 체크
     {
         int checkDuplicate = Random.Range(0, list.Count);
@@ -232,7 +209,7 @@ public class Shop_Manager : interaction
         {
             if (slot.item != null)
             {
-                if (slot.item.name == list[checkDuplicate].name)
+                if (slot.item.id == list[checkDuplicate].id)
                 {
                     isDuplicate = true; // 중복 발견
                     break;
@@ -252,7 +229,7 @@ public class Shop_Manager : interaction
         }
         else
         {
-            return 0;
+           return CheckDuplicate(list, select_N);
         }
     }
 }

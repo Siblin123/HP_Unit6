@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3697646448809571075}
   - component: {fileID: 5766678913082805891}
-  - component: {fileID: 7946712763738247473}
+  - component: {fileID: 2124463570422076553}
   - component: {fileID: 3299055211095139101}
   - component: {fileID: -4571917305731181106}
   - component: {fileID: 3701398202236168316}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_ReturnStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3940311165531375576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -3.284709}
+  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &7946712763738247473
+--- !u!114 &2124463570422076553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,18 +70,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3940311165531375576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: 27faf77860a56c34caf4786242993f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uADC0\uD658\uC11D\uC758 \uAE30\uC5B5"
-  id: 72
+  item_Name: "\uADC0\uD658\uC11D\uC758 \uAE30\uC5B5"
+  id: 1015
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
   curItemType: 6
+  max_Memory_Count: 0
 --- !u!212 &3299055211095139101
 SpriteRenderer:
   m_ObjectHideFlags: 0

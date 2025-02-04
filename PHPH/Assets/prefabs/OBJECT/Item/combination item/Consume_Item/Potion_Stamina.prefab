@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2553670828296806142}
   - component: {fileID: -9139507904987912911}
   - component: {fileID: 3343359683763685426}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Potion_Stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uAE30\uB825 \uD68C\uBCF5 \uD3EC\uC158"
-  id: 26
+  item_Name: "\uAE30\uB825 \uD68C\uBCF5 \uD3EC\uC158"
+  id: 118
   explan: "\uAE30\uB825\uC744 \uD68C\uBCF5\uD560 \uC218 \uC788\uB294 \uC544\uC774\uD15C\uC774\uB2E4."
   price: 80
   max_Have_Count: 5

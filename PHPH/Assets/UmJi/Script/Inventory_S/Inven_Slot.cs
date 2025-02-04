@@ -4,14 +4,19 @@ using TMPro;
 
 public class Inven_Slot : Inventory_Manager
 {
+    // 미리 인벤토리
+    public bool miri_C; // 미리 인벤토리면 체크
+
+    [Header("미리 인벤토리는 각 슬롯 번호가 있음")]
+    public KeyCode slot_Count;
+    // -----------------------------------------------
+
     public Item_Info item; // 소지한 아이템
     public int have_Count; // 소지한 아이템 개수
 
     public Image item_I;
     public TextMeshProUGUI count_T;
 
-    // 마우스 따라다니는 슬롯 관련
-    public GameObject follow_Slot; // 마우스를 따라다닐 오브젝트
 
     private RectTransform rectTransform;
     public bool follow_C;
@@ -27,7 +32,6 @@ public class Inven_Slot : Inventory_Manager
 
     private void Start()
     {
-        follow_Slot = GameObject.Find("Follow_Slot"); // 카메라 따라다닐 오브젝트
         rectTransform = GetComponent<RectTransform>();
 
         Update_Slot(item, have_Count);
@@ -36,7 +40,7 @@ public class Inven_Slot : Inventory_Manager
     public override void Update()
     {
         base.Update();
-        if (follow_C)
+        if (follow_C) // 인벤토리 아이템 이동시 마우스를 따라다니는 이미지
         {
             Vector2 mousePosition = Input.mousePosition;
 
@@ -44,7 +48,7 @@ public class Inven_Slot : Inventory_Manager
             rectTransform.position = new Vector2(mousePosition.x + 50f, mousePosition.y + 30f);
         }
 
-        if (click_C)
+        if (click_C) // 아이템 판매 더블클릭 체크
         {
             if(doubleC <= 0)
             {
@@ -54,6 +58,15 @@ public class Inven_Slot : Inventory_Manager
             else
             {
                 doubleC -= Time.deltaTime;
+            }
+        }
+
+        if (miri_C == true) // 미리 인벤토리면
+        {
+            if (Input.GetKeyDown(slot_Count))
+            {
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Controll(System.Convert.ToInt32(gameObject.name));
+
             }
         }
     }
@@ -102,19 +115,21 @@ public class Inven_Slot : Inventory_Manager
         }
     }
 
+
     public void Click_Slot() // 버튼 클릭했을때
     {
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         // 아무것도 클릭 안했으면 본인을 넣어줌
-        if (follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
+        if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
         {
             if(item != null) // 아이템이 있을때
             {
                 Inventory_Button.slot = this;
 
-                follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
 
-                follow_Slot.GetComponent<Image>().enabled = true;
-                follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
                 item_I.enabled = false;
                 count_T.enabled = false;
@@ -123,11 +138,11 @@ public class Inven_Slot : Inventory_Manager
         // 이미 선택한게 있으면 서로 위치 교환
         else
         {
-            Change_Slot(follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
-            follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
+            Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
             Inventory_Button.slot = null;
 
-            follow_Slot.GetComponent<Image>().enabled = false;
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
         }
     }
 
@@ -147,11 +162,9 @@ public class Inven_Slot : Inventory_Manager
             {
                 if (Sell_Item(this))
                 {
+                    Shop_Manager.instance.Shop_Invent();
+                    Shop_Manager.instance.Invent_Shop();
                     print("판매 성공");
-                }
-                else
-                {
-                    print("판매 불가능");
                 }
             }
             else

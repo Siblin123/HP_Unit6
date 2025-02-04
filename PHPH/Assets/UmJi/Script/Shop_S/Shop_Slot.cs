@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+using Unity.Netcode;
 
-public class Shop_Slot : MonoBehaviour
+public class Shop_Slot : NetworkBehaviour
 {
+    //구매했는지 
+    public bool buy_C; 
+
     public Item_Info item;
     public TextMeshProUGUI price_T;
     public TextMeshProUGUI name_T;
@@ -17,7 +21,7 @@ public class Shop_Slot : MonoBehaviour
     {
         this.item = item;
         item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-        name_T.text = item.name.ToString();
+        name_T.text = item.item_Name.ToString();
 
         item_Count = item.max_Have_Count;
         count_T.text = item.max_Have_Count.ToString();
@@ -26,25 +30,22 @@ public class Shop_Slot : MonoBehaviour
         price_T.text = price.ToString();
     }
 
+  
     public void buy_Slot() // 아이템 구매
     {
-         if(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Get_Item(item, item.max_Have_Count))
-         {
-            // 인벤토리 -> 상점 인벤토리 동기화
-            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+
+        // 구매 가능할때
+        if (buy_C == false)
+        {
+            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item, csTable.Instance.gameManager.player.NetworkObjectId , this.NetworkObjectId))
             {
-                Shop_Manager.instance.inven_Slot_List[i].Update_Slot(Player_Inventory.instance.slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
-
-                // id가 100은 돈
-                if (Shop_Manager.instance.inven_Slot_List[i].item.id == 100)
-                {
-                    Shop_Manager.instance.money = Shop_Manager.instance.inven_Slot_List[i].item.have_Count;
-
-                    Shop_Manager.instance.money_View.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = Shop_Manager.instance.inven_Slot_List[i].have_Count.ToString("N0");
-                }
+                Shop_Manager.instance.Invent_Shop();
+                buy_C = true;
             }
-            print("구매");
-         }
-        
+            else
+            {
+                print("너님 돈 없어요");
+            }
+        }
     }
 }

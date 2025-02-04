@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -9144204275946049888}
   - component: {fileID: 2513598170053586797}
   - component: {fileID: -5396130896790715482}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Universal_Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB9CC\uB2A5\uD0A4"
-  id: 27
+  item_Name: "\uB9CC\uB2A5\uD0A4"
+  id: 119
   explan: "\uC5F4\uC1E0\uC640 \uAC19\uC740 \uAE30\uB2A5\uC744 \uAC00\uC9C0\uACE0
     \uC788\uB2E4. \uB2E8, \uC5F4\uC1E0\uBCF4\uB2E4 \uAC8C\uC784 \uB09C\uC774\uB3C4\uAC00
     \uB354 \uC26C\uC6CC\uC9C4\uB2E4"

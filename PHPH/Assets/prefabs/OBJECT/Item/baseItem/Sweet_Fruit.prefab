@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1339508639754261778}
   - component: {fileID: -1326646933558796832}
   - component: {fileID: 7255361507612745745}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Sweet_Fruit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB2E8 \uC5F4\uB9E4"
+  item_Name: "\uB2E8 \uC5F4\uB9E4"
   id: 5
   explan: "\uB2EC\uB2E4."
   price: 1

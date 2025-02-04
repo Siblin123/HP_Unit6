@@ -17,9 +17,17 @@ public class Inventory_Manager : NetworkBehaviour
 
     }
 
-    // 아이템 습득 및 구매
+
+
+    // 아이템 습득
     public bool Get_Item(Item_Info item, int count)
     {
+        if(item.have_Count != 0) // 버린 아이템일경우 have_Count가 있음
+        {
+            count = item.have_Count;
+            item.have_Count = 0; // 다시 0으로 초기화
+        }
+
         Player_Inventory p_I = GetComponent<Player_Inventory>();
 
         int i = 0;
@@ -30,8 +38,10 @@ public class Inventory_Manager : NetworkBehaviour
             if (p_I.slot_List[i].item != null)
             {
                 // 획득한 아이템이 이미 인벤토리에 있으면
-                if (p_I.slot_List[i].item.name == item.name)
+                if (p_I.slot_List[i].item.id == item.id)
                 {
+                    if(item.id == 0) { csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().money += count; }
+
                     // 총 아이템 개수가 최대 소지개수보다 많으면
                     if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)
                     {
@@ -82,7 +92,18 @@ public class Inventory_Manager : NetworkBehaviour
         {
             // 판매 가격
             int price = slot.item.price * slot.have_Count;
+
             // 금액 증가 코드 작성
+            Player_Inventory.instance.money += price;
+            if(Player_Inventory.instance.money_Slot == null)
+            {
+                Get_Item(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
+            }
+            else
+            {
+                Player_Inventory.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+                Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+            }
 
             slot.Update_Slot(null, 0);
             return true;
@@ -156,13 +177,5 @@ public class Inventory_Manager : NetworkBehaviour
     {
         slot1.Update_Slot(slot1.item, slot1.have_Count);
         slot2.Update_Slot(slot2.item, slot2.have_Count);
-    }
-
-    // 아이템 버리기
-    public void Throw_Slot(Inven_Slot slot)
-    {
-        // 버린 아이템 플레이어 위치에 떨어짐
-
-        slot.Update_Slot(null, 0); // 슬롯 비우기
     }
 }

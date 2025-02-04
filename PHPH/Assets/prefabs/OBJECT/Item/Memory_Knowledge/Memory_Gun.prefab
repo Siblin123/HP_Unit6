@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4262549118609591185}
   - component: {fileID: 9221846126940577289}
-  - component: {fileID: 5885675747742823476}
+  - component: {fileID: 2492919464987607892}
   - component: {fileID: 8880098827873382144}
   - component: {fileID: -1827369190640861396}
   - component: {fileID: -3067845251250284712}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2585843569566271454}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -3.284709}
+  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &5885675747742823476
+--- !u!114 &2492919464987607892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,18 +70,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2585843569566271454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: 27faf77860a56c34caf4786242993f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uCD1D\uC758 \uAE30\uC5B5"
-  id: 62
+  item_Name: "\uCD1D\uC758 \uAE30\uC5B5"
+  id: 1005
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
   curItemType: 6
+  max_Memory_Count: 0
 --- !u!212 &8880098827873382144
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8771035467404658043}
   - component: {fileID: -3559936177535387639}
-  - component: {fileID: 3090178369632577644}
+  - component: {fileID: -2319245069964425678}
   - component: {fileID: 4679115543699582821}
   - component: {fileID: 3532851383033119191}
   - component: {fileID: 2902547260873918312}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Memory_JumpPack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 6274595266652787790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -3.284709}
+  m_LocalPosition: {x: 993.2635, y: 552.64575, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61,7 +61,7 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &3090178369632577644
+--- !u!114 &-2319245069964425678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70,18 +70,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 6274595266652787790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
+  m_Script: {fileID: 11500000, guid: 27faf77860a56c34caf4786242993f51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC810\uD504\uD329\uC758 \uAE30\uC5B5"
-  id: 64
+  item_Name: "\uC810\uD504\uD329\uC758 \uAE30\uC5B5"
+  id: 1008
   explan: "\uB9CC\uB4E4 \uC218 \uC788\uB2E4."
   price: 1
   max_Have_Count: 1
   colTime: 0
   have_Count: 0
   curItemType: 6
+  max_Memory_Count: 0
 --- !u!212 &4679115543699582821
 SpriteRenderer:
   m_ObjectHideFlags: 0

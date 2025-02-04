@@ -11,6 +11,11 @@ public class active_Item : combination_item
     public baseStatus target;
     public Vector3 offset;
 
+    [Header("근거리 공격형 이면 체크")]
+    public bool shortAttackType;
+
+    [Header("원거리 공격형 이면 체크")]
+    public bool longAttackType;
     public override void UseItem()
     {
         base.UseItem();
@@ -21,7 +26,8 @@ public class active_Item : combination_item
     {
         base.Update();
 
-        Debug.DrawRay(csTable.Instance.gameManager.player.transform.localPosition + offset , csTable.Instance.gameManager.player.rayDirection  * attack_rage, Color.blue, 0.5f);
+        if(csTable.Instance.gameManager.player!=null)
+            Debug.DrawRay(csTable.Instance.gameManager.player.transform.localPosition + offset , csTable.Instance.gameManager.player.rayDirection  * attack_rage, Color.blue, 0.5f);
     }
 
     public override void Attack()
@@ -48,7 +54,17 @@ public class active_Item : combination_item
 
             if(target != null)
             {
-                target.TakeDamage(damege);
+                if (shortAttackType)
+                {
+                    target.TakeDamage(damege + csTable.Instance.gameManager.player.shortAttackDamageUp_Value);
+                }
+                else if (longAttackType)
+                {
+                    target.TakeDamage(damege + csTable.Instance.gameManager.player.longAttackDamegeUp_Value);
+                }
+
+
+               
             }
         }
 

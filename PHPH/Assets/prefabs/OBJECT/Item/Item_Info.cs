@@ -6,7 +6,7 @@ using static UnityEditor.VersionControl.Asset;
 public class Item_Info : NetworkBehaviour
 {
     Rigidbody2D rb;
-    public string name; // 아이템 이름
+    public string item_Name; // 아이템 이름
     public int id; // 아이템 아이디
     public string explan; // 설명
     public int price; // 가격
@@ -34,8 +34,6 @@ public class Item_Info : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner)
-            return;
 
         if (!GetComponent<Rigidbody2D>())
         {
@@ -52,13 +50,15 @@ public class Item_Info : NetworkBehaviour
     }
 
 
+   
     public virtual void UseItem()//각 아이템의 기능
     {
-        if(csTable.Instance.gameManager.player.behaviourColTimme <= 0)
+ 
+        if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme= colTime;
-
-            return;
+            gatgot_Coltime();
+            
         }
     }
 
@@ -67,44 +67,26 @@ public class Item_Info : NetworkBehaviour
         if (csTable.Instance.gameManager.player.behaviourColTimme <= 0)
         {
             csTable.Instance.gameManager.player.behaviourColTimme = colTime;
-            return;
+
+            gatgot_Coltime();
+
+            
         }
     }
 
-   [ServerRpc(RequireOwnership = false)]
-    public void GetItem_ServerRpc()
+   
+    public void gatgot_Coltime()
     {
-
-        GetItem_ClientRpc();
-
-    }
-
-    [ClientRpc]
-    public void GetItem_ClientRpc( )
-    {
-       
-        gameObject.SetActive(false);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-       /* if (!collision.transform.GetComponent<NetworkObject>())
-            return;*/
-
-        if (collision.transform.CompareTag("Player"))
+        switch (id)
         {
-            //var playerNetworkObject = collision.transform.GetComponent<NetworkObject>();
-            collision.transform.GetComponent<Player_Inventory>().Get_Item(this, 1);
-           
-            if (IsServer)
-            {
-                GetItem_ClientRpc();
-            }
-            else
-            {
-                GetItem_ServerRpc();
-            }
+            case 100:
+                //도끼
+                csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.ax_memory_Value;
+                break;
+            case 106:
+                //곡괭이
+                csTable.Instance.gameManager.player.behaviourColTimme -= csTable.Instance.gameManager.player.pick_memory_Value;
+                break;
         }
     }
-
 }

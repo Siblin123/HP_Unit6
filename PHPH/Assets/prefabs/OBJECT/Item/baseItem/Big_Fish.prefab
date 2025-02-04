@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1274849363283361047}
   - component: {fileID: -1837353227732952668}
   - component: {fileID: -8127948052122793619}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Big_Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uD070 \uBB3C\uACE0\uAE30"
+  item_Name: "\uD070 \uBB3C\uACE0\uAE30"
   id: 1
   explan: "\uC870\uAE08 \uB354 \uD06C\uB2E4."
   price: 1

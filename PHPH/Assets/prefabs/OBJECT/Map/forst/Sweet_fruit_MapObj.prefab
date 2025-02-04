@@ -133,8 +133,12 @@ MonoBehaviour:
     m_InternalValue: 100
   health:
     m_InternalValue: 0
+  damege: 0
+  reward_memory_Item_Per: 1
+  reward_memory_Item:
+  - {fileID: 8429358086097254568, guid: 737dcdb65b27852499a1343bde76b37d, type: 3}
+  - {fileID: 4767011868046986693, guid: cc92298465c245b418f8c543ac9638eb, type: 3}
   tagType: 1
-  reward_Item: {fileID: 8429358086097254568, guid: 737dcdb65b27852499a1343bde76b37d, type: 3}
 --- !u!50 &1863922234977978497
 Rigidbody2D:
   serializedVersion: 5
@@ -161,7 +165,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 7
 --- !u!61 &3630217328461557532
 BoxCollider2D:
   m_ObjectHideFlags: 0

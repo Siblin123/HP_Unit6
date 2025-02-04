@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -7987603256799575681}
   - component: {fileID: 1832357426260458000}
   - component: {fileID: 4230887486018301981}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Dye_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uBE68\uAC04 \uC5FC\uC0C9\uC57D"
-  id: 18
+  item_Name: "\uBE68\uAC04 \uC5FC\uC0C9\uC57D"
+  id: 110
   explan: "\uBE68\uAC04 \uC5FC\uC0C9\uC57D"
   price: 50
   max_Have_Count: 1

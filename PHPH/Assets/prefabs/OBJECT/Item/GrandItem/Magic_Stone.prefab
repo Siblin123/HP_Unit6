@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4871649294117765032}
   - component: {fileID: -676942509489012822}
   - component: {fileID: -5609857089969645973}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Magic_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uB9C8\uBC95\uC11D"
-  id: 54
+  item_Name: "\uB9C8\uBC95\uC11D"
+  id: 13
   explan: "\uC800\uB294 \uB9C8\uBC95\uC11D\uC785\uB2C8\uB2E4."
   price: 128
   max_Have_Count: 1

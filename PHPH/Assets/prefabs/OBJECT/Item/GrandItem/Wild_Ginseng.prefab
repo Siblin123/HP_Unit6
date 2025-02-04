@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1705681962708513251}
   - component: {fileID: 7769016318597843094}
   - component: {fileID: -1453177922383068211}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wild_Ginseng
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC0B0\uC0BC"
-  id: 56
+  item_Name: "\uC0B0\uC0BC"
+  id: 15
   explan: "\uC800\uB294 \uC0B0\uC0BC\uC785\uB2C8\uB2E4."
   price: 100
   max_Have_Count: 1

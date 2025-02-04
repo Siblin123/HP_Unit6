@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 602224392020591326}
   - component: {fileID: -3235178557650929680}
   - component: {fileID: -4669158904703267216}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Potion_Adrenaline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uC544\uB4DC\uB808\uB0A0\uB9B0"
-  id: 22
+  item_Name: "\uC544\uB4DC\uB808\uB0A0\uB9B0"
+  id: 114
   explan: "\uCCB4\uB825\uC774 \uC904\uACE0 \uAE30\uB825\uC774 \uC99D\uAC00\uD558\uB294
     \uC544\uC774\uD15C\uC774\uB2E4."
   price: 148

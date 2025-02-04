@@ -71,10 +71,7 @@ public class shooter : Enemy
                 }
 
             }
-            else
-            {
-                print("NONONONO");
-            }
+
 
             if (curAttackTime <= attackTime) //공격 충전?시간
             {
@@ -124,21 +121,25 @@ public class shooter : Enemy
             shooter_obj.transform.rotation = Quaternion.Euler(0, 0, angle);
 
             RaycastHit2D rayHit = Physics2D.Raycast(shooter_obj.transform.position, dir, 100f, ~LayerMask.GetMask("enemy"));
-            Debug.DrawRay(shooter_obj.transform.position, dir * 100f, Color.red);
+            
 
 
-            if (rayHit)
+            if (IsServer)
             {
-                //레이케스트 구간
-                //애니메이션으로 공격을 하면 해당 rayHit유닛에게 데미지를 준다
+                // Raycast로 공격 대상 감지
+                if (rayHit.collider != null)
+                {
+                    NetworkObject targetNetObj = rayHit.collider.GetComponent<NetworkObject>();
 
-                attack_tartget = rayHit.transform.gameObject;
+                    if (targetNetObj != null)
+                    {
+                        // 클라이언트에게 공격 대상 정보 동기화
+                        NotifyAttackTargetClientRpc(targetNetObj.NetworkObjectId);
+                    }
+                }
+            }
 
-            }
-            else
-            {
-                attack_tartget = null;
-            }
+
 
 
 
@@ -151,10 +152,9 @@ public class shooter : Enemy
                 if (tart_player != null)
                 {
                     // 레이가 충돌한 지점까지 라인 그리기
-                    lineRenderer.SetPosition(1, tart_player.transform.position);
+                    lineRenderer.SetPosition(1, attack_tartget.transform.position);
+                    Debug.DrawRay(shooter_obj.transform.position, (attack_tartget.transform.position  - shooter_obj.transform.position ).normalized* 100f, Color.red);
                 }
-
-
             }
 
 
@@ -173,6 +173,20 @@ public class shooter : Enemy
 
         }
 
+    }
+
+    [ClientRpc]
+    private void NotifyAttackTargetClientRpc(ulong targetNetworkId)
+    {
+        print("zzzzzzzzz");
+        // 모든 클라이언트가 동일한 대상 설정
+        NetworkObject target = NetworkManager.Singleton.SpawnManager.SpawnedObjects[targetNetworkId];
+        if (target != null)
+        {
+            attack_tartget = target.gameObject;
+            Debug.Log("Attack Target Synced: " + target.name);
+            // 원하는 로직 처리
+        }
     }
 
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5514809167655951105}
   - component: {fileID: 9216894221691007595}
   - component: {fileID: 6066712021181978367}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Dye_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,9 +72,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  name: "\uD30C\uB780 \uC5FC\uC0C9\uC57D"
-  id: 16
-  explan: "\uD30C\uB780\uC5FC\uC0C9\uC57D"
+  item_Name: "\uD30C\uB780 \uC5FC\uC0C9\uC57D"
+  id: 108
+  explan: "\uD30C\uB780 \uC5FC\uC0C9\uC57D"
   price: 50
   max_Have_Count: 1
   colTime: 0
