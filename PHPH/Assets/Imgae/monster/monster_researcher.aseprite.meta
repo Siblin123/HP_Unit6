@@ -124,7 +124,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: monster_researcher
     originalName: 
-    pivot: {x: 0.4402174, y: -0.23880598}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,8 +132,8 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 92
-      height: 67
+      width: 111
+      height: 105
     spriteID: 2ecb93ffd0b657f4d84ca606102cbdb8
     spriteBone: []
     spriteOutline: []
@@ -156,10 +156,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 15
-        y: 16
-        width: 92
-        height: 67
+        x: 0
+        y: 0
+        width: 111
+        height: 105
       spriteId: 2ecb93ffd0b657f4d84ca606102cbdb8
     linkedCells: []
     parentIndex: -1
