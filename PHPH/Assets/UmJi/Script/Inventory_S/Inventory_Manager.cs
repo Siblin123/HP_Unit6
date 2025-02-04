@@ -95,15 +95,15 @@ public class Inventory_Manager : NetworkBehaviour
 
             // 금액 증가 코드 작성
             Player_Inventory.instance.money += price;
-            if(Player_Inventory.instance.money_Slot = null)
+            if(Player_Inventory.instance.money_Slot == null)
             {
                 Get_Item(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
             }
             else
             {
                 Player_Inventory.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+                Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
             }
-
 
             slot.Update_Slot(null, 0);
             return true;

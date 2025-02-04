@@ -134,5 +134,5 @@ MonoBehaviour:
   price: 272
   max_Have_Count: 1
   colTime: 0
-  have_Count: 1
+  have_Count: 0
   curItemType: 5

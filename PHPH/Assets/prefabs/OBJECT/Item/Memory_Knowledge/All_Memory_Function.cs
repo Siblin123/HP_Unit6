@@ -28,6 +28,8 @@ public class All_Memory_Function : Item_Info
 
             csTable.Instance.gameManager.player.have_Memory.Add(item_Name);
             all_Function(item_Name);
+
+
             GetComponent<NetworkObject>().Despawn();
 
         }
