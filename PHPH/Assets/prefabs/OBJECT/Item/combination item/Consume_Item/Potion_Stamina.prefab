@@ -133,7 +133,7 @@ MonoBehaviour:
   price: 80
   max_Have_Count: 5
   colTime: 0
-  have_Count: 1
+  have_Count: 0
   curItemType: 5
   hp_value: 0
   stamina_value: 50

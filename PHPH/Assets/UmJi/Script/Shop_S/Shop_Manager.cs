@@ -31,13 +31,14 @@ public class Shop_Manager : interaction
     public TextMeshProUGUI money_T;
     public int money;
 
+    public GameObject bar_Reset;
+
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
     private void Awake()
     {
         instance = this;
-        //shop_Panel.gameObject.SetActive(false);
     }
     private void Start()
     {
@@ -67,6 +68,11 @@ public class Shop_Manager : interaction
         {
             Update_Slot();
         }
+
+        if (Input.GetKeyDown(KeyCode.O)) // 상점 온오프
+        {
+            bar_Reset.GetComponent<Scrollbar>().value = 0.5f;
+        }
     }
     public void All_Off()
     {
@@ -76,17 +82,18 @@ public class Shop_Manager : interaction
     public void On_Off() // 상점 끄고 켜기
     {
         // 인벤토리 끄기
-        if (shop_Panel.activeSelf == true)
+        if (shop_Panel.GetComponent<RectTransform>().localScale.x == 1)
         {
             // 상점 인벤토리 -> 인벤토리에 적용
             Shop_Invent();
 
             money_Slot = null;
-            shop_Panel.SetActive(false);
+            shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         }
-        else if (shop_Panel.activeSelf == false) // 켜기
+        else // 커기
         {
-            shop_Panel.SetActive(true);
+            shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            bar_Reset.GetComponent<Scrollbar>().value = 1;
 
             // 인벤토리 -> 상점 인벤토리에 적용
             Invent_Shop();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+using static UnityEditor.Progress;
 
 public class Player_Inventory : Inventory_Manager
 {
@@ -11,9 +12,11 @@ public class Player_Inventory : Inventory_Manager
     [Header("인벤토리")]
     public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
     public GameObject godGet_Ob; // 장비 슬롯 부모
+    public GameObject miri_Ob; // 미리보기 인벤토리 부모
 
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
+    public List<Inven_Slot> miri_List;
 
     public GameObject follow_Slot;
 
@@ -22,6 +25,10 @@ public class Player_Inventory : Inventory_Manager
 
     public Inven_Slot money_Slot;
     public GameObject money_Ob;
+
+    // Miri_Inven_Controll() // 미리인벤토리 관련
+    public int currentSlot = 0; // 현재 선택된 슬롯 (1~6)
+    private int maxSlots = 5; // 총 슬롯 개수
 
     private void Start()
     {
@@ -34,9 +41,13 @@ public class Player_Inventory : Inventory_Manager
         {
             godGet_List.Add(godGet_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
         }
+        for (int i = 0; i < miri_Ob.transform.childCount; i++)
+        {
+            miri_List.Add(miri_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
     }
 
-    public bool Buy_Item(Item_Info item,ulong playerId, ulong slotId) // 아이템 구매
+    public bool Buy_Item(Item_Info item, ulong playerId, ulong slotId) // 아이템 구매
     {
         if (playerId != NetworkObjectId)
             return false;
@@ -44,7 +55,7 @@ public class Player_Inventory : Inventory_Manager
         // 소지금액이 구매할 아이템의 금액보다 많으면
         if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
         {
-            if(Get_Item(item, item.max_Have_Count))
+            if (Get_Item(item, item.max_Have_Count))
             {
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
@@ -75,7 +86,7 @@ public class Player_Inventory : Inventory_Manager
         print("ASDASDASDASDAASD");
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
-           Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
+            Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
             slot.buy_C = true;
         }
     }
@@ -87,29 +98,69 @@ public class Player_Inventory : Inventory_Manager
             return;
         }
 
-     
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (Input.GetKeyDown(KeyCode.Alpha7))
         {
             print("1");
             Get_Item(test_L[0], 1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
             print("2");
             Get_Item(test_L[1], 1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
             print("3");
             Get_Item(test_L[2], 1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             print("4");
             Get_Item(test_L[3], 100);
         }
 
 
+        Inventory_On_Off();
+        Miri_Inven_Controll();
+    }
+
+    public void Miri_Inven_Controll(int num = 7)
+    {
+        // -> 이 호출은 미리 슬롯에서 불러오는 거임
+        if(num != 7){
+            currentSlot = num;
+            if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
+            else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+        }
+        else
+        {
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+            print(scroll);
+
+            if (scroll > 0f) // 휠을 위로 올릴 때 (왼쪽으로 이동)
+            {
+                currentSlot--;
+                if (currentSlot < 0) currentSlot = maxSlots;
+            }
+            else if (scroll < 0f) // 휠을 아래로 내릴 때 (오른쪽으로 이동)
+            {
+                currentSlot++;
+                if (currentSlot > maxSlots) currentSlot = 0;
+            }
+
+            // 스크롤을 움직이고 있을 때
+            if (scroll != 0)
+            {
+                if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
+                else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+            }
+        }
+    }
+
+    public void Inventory_On_Off()
+    {
         if (Input.GetKeyDown(KeyCode.I))
         {
             // 인벤토리 켜줌
@@ -121,7 +172,7 @@ public class Player_Inventory : Inventory_Manager
             // 꺼줌
             else
             {
-               // money_Slot = null;
+                // money_Slot = null;
 
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().inventory.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
             }
@@ -147,9 +198,3 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 }
-
-
-
-
-
-

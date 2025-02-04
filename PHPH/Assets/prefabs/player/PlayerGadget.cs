@@ -9,8 +9,7 @@ using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
 {
-
-    public Item_Info curItem;
+    public Item_Info curItem; // 선택한 아이템
     public Arm_Anim arm_Anim;
 
     public float behaviourColTimme;//행동 쿨타임
@@ -32,6 +31,7 @@ public class PlayerGadget : NetworkBehaviour
     public float get_fishing_Item_Per;
     [Header("사냥으로 인한 특수 아이템 획득 확률")]
     public float get_hunting_Item_Per;
+
     public virtual void Start()
     {
         csTable.Instance.Player_Inventory = GetComponent<Player_Inventory>();
@@ -67,7 +67,7 @@ public class PlayerGadget : NetworkBehaviour
 
     public void Change_MiniInventory()
     {
-        if (!IsOwner)
+/*        if (!IsOwner)
             return;
         if (Input.GetKeyDown(KeyCode.Alpha1))
             print("1");
@@ -80,7 +80,7 @@ public class PlayerGadget : NetworkBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha5))
             print("5");
         else if (Input.GetKeyDown(KeyCode.Alpha6))
-            print("6");
+            print("6");*/
 
 
 
@@ -104,6 +104,9 @@ public class PlayerGadget : NetworkBehaviour
             {
                 curItem.UseItem();
             }
+
+            if(curItem.curItemType != itemType.combination_Item_active)
+               GetComponent<Player_Inventory>().miri_List[GetComponent<Player_Inventory>().currentSlot].Update_Slot(curItem, curItem.have_Count - 1);
 
 
         }

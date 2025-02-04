@@ -82,7 +82,7 @@ MonoBehaviour:
   colTime: 0
   have_Count: 0
   curItemType: 6
-  max_Memory_Count: 0
+  max_Memory_Count: 1
 --- !u!212 &-6636994807979730014
 SpriteRenderer:
   m_ObjectHideFlags: 0
