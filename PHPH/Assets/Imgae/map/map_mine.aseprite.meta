@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 59b5a0ea9d76ae24a9a530007cccf7fb
+guid: b85689a5724cfda46915c310230f968d
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,9 +122,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: barricade_wood
+  - name: map_mine
     originalName: 
-    pivot: {x: 0.16666667, y: 0}
+    pivot: {x: 0.499002, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 27
-      height: 49
-    spriteID: b139d8655d699474281648e7b3d5822f
+      width: 1002
+      height: 2581
+    spriteID: a3b65b43b3af00746b18a0242e9e6fd8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -143,114 +143,24 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
-    originalName: 
-    pivot: {x: 0.16666667, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 39
-      y: 4
-      width: 27
-      height: 49
-    spriteID: 37fc28ba69e36524f9c8c855016f0354
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 39, y: 4}
-  - name: Frame_2
-    originalName: 
-    pivot: {x: 0.16666667, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 74
-      y: 4
-      width: 27
-      height: 49
-    spriteID: e6560f67497c0a74da59e0b4d7d0fec5
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 74, y: 4}
-  - name: Frame_3
-    originalName: 
-    pivot: {x: 0.16666667, y: 0}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    customData: 
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 61
-      width: 27
-      height: 49
-    spriteID: f446fb7dbe5fb3a409f5d9a373b9d3af
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 61}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -1169100315
-    name: barricade_wood
+    guid: 1184611446
+    name: map_mine
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: map_mine
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 33
+        x: 0
         y: 0
-        width: 27
-        height: 49
-      spriteId: b139d8655d699474281648e7b3d5822f
-    - name: Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 33
-        y: 0
-        width: 27
-        height: 49
-      spriteId: 37fc28ba69e36524f9c8c855016f0354
-    - name: Frame_2
-      frameIndex: 2
-      additiveSortOrder: 0
-      cellRect:
-        x: 33
-        y: 0
-        width: 27
-        height: 49
-      spriteId: e6560f67497c0a74da59e0b4d7d0fec5
-    - name: Frame_3
-      frameIndex: 3
-      additiveSortOrder: 0
-      cellRect:
-        x: 33
-        y: 0
-        width: 27
-        height: 49
-      spriteId: f446fb7dbe5fb3a409f5d9a373b9d3af
+        width: 1002
+        height: 2581
+      spriteId: a3b65b43b3af00746b18a0242e9e6fd8
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -269,4 +179,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 75, y: 64}
+  canvasSize: {x: 1000, y: 2581}

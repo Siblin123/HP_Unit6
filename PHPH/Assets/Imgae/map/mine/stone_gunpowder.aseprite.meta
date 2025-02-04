@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7a9b09a8911dbcd46b6344372219ca41
+guid: d3c8fca0ed8f8104ea203955a7f1fa34
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,9 +122,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: mine_entrance
+  - name: stone_gunpowder
     originalName: 
-    pivot: {x: 0.4827586, y: -0.04347826}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 174
-      height: 92
-    spriteID: c69c303ecff58ff4ab0cffbcc70b7eca
+      width: 30
+      height: 17
+    spriteID: 32bc8446654cece449fd1ed2ad2808b6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,21 +146,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 2091825872
-    name: mine_entrance
+    guid: -1505693517
+    name: stone_gunpowder
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: mine_entrance
+    - name: stone_gunpowder
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 12
-        y: 4
-        width: 174
-        height: 92
-      spriteId: c69c303ecff58ff4ab0cffbcc70b7eca
+        x: 1
+        y: 0
+        width: 30
+        height: 17
+      spriteId: 32bc8446654cece449fd1ed2ad2808b6
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -179,4 +179,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 192, y: 96}
+  canvasSize: {x: 32, y: 32}
