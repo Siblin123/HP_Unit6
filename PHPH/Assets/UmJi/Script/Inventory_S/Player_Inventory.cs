@@ -47,6 +47,24 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
+    public override bool Get_Item(Item_Info item, int count) // 재정의
+    {
+        if(base.Get_Item(item, count)) 
+        {
+            Miri_Inven_Update();
+            return true;
+        }
+        else { return false; }
+    }
+    
+    public void Miri_Inven_Update()
+    {
+        for (int i = 0; i < miri_List.Count; i++)
+        {
+            miri_List[i].Update_Slot(slot_List[i].item, slot_List[i].have_Count);
+        }
+    }
+
     public bool Buy_Item(Item_Info item, ulong playerId, ulong slotId) // 아이템 구매
     {
         if (playerId != NetworkObjectId)

@@ -31,7 +31,7 @@ public class Shop_Manager : interaction
     public TextMeshProUGUI money_T;
     public int money;
 
-    public GameObject bar_Reset;
+    //public GameObject bar_Reset;
 
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
@@ -69,10 +69,10 @@ public class Shop_Manager : interaction
             Update_Slot();
         }
 
-        if (Input.GetKeyDown(KeyCode.O)) // 상점 온오프
+      /*  if (Input.GetKeyDown(KeyCode.O)) // 상점 온오프
         {
             bar_Reset.GetComponent<Scrollbar>().value = 0.5f;
-        }
+        }*/
     }
     public void All_Off()
     {
@@ -93,7 +93,7 @@ public class Shop_Manager : interaction
         else // 커기
         {
             shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            bar_Reset.GetComponent<Scrollbar>().value = 1;
+            //bar_Reset.GetComponent<Scrollbar>().value = 1;
 
             // 인벤토리 -> 상점 인벤토리에 적용
             Invent_Shop();
@@ -109,6 +109,8 @@ public class Shop_Manager : interaction
 
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);     
         }
+
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
     }
 
     public void Invent_Shop()
@@ -133,6 +135,8 @@ public class Shop_Manager : interaction
                 }
             }
         }
+
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
     }
 
     public Item_Info find_Item(string name)
