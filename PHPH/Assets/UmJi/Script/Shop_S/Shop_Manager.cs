@@ -68,12 +68,8 @@ public class Shop_Manager : interaction
         {
             Update_Slot();
         }
-
-      /*  if (Input.GetKeyDown(KeyCode.O)) // 상점 온오프
-        {
-            bar_Reset.GetComponent<Scrollbar>().value = 0.5f;
-        }*/
     }
+
     public void All_Off()
     {
         price_Ui.SetActive(false);
@@ -88,12 +84,12 @@ public class Shop_Manager : interaction
             Shop_Invent();
 
             money_Slot = null;
+            All_Off();
             shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(0, 0, 0);
         }
-        else // 커기
+        else // 켜기
         {
             shop_Panel.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            //bar_Reset.GetComponent<Scrollbar>().value = 1;
 
             // 인벤토리 -> 상점 인벤토리에 적용
             Invent_Shop();
@@ -105,22 +101,21 @@ public class Shop_Manager : interaction
         // 상점 인벤토리 -> 인벤토리에 적용
         for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
         {
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
-
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);     
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(inven_Slot_List[i].item, inven_Slot_List[i].have_Count);
         }
 
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
     }
 
     public void Invent_Shop()
     {
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+
         // 인벤토리 -> 상점 인벤토리에 적용
         for (int i = 0; i < inven_Slot_List.Count; i++)
         {
             inven_Slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
-
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
 
             if (inven_Slot_List[i].item != null)
             {
@@ -135,7 +130,7 @@ public class Shop_Manager : interaction
                 }
             }
         }
-
+        
         csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
     }
 
@@ -234,6 +229,19 @@ public class Shop_Manager : interaction
         else
         {
            return CheckDuplicate(list, select_N);
+        }
+    }
+
+    public void Money_Up(Item_Info item, int price)
+    {
+        for (int i = 0; i < inven_Slot_List.Count; i++)
+        {
+            if (inven_Slot_List[i].item == null)
+            {
+                inven_Slot_List[i].Update_Slot(item, price);
+                money_Slot = inven_Slot_List[i];
+                break;
+            }
         }
     }
 }

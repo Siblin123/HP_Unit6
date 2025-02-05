@@ -26,8 +26,7 @@ public class Inventory_Manager : NetworkBehaviour
             count = item.have_Count;
             item.have_Count = 0; // 다시 0으로 초기화
         }
-
-        Player_Inventory p_I = GetComponent<Player_Inventory>();
+        Player_Inventory p_I = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>();
 
         int i = 0;
         int j = 0;
@@ -69,7 +68,6 @@ public class Inventory_Manager : NetworkBehaviour
                 {
                     p_I.slot_List[j].Update_Slot(item, count);
                     return true;
-                    //break;
                 }
             }
         }
@@ -87,24 +85,35 @@ public class Inventory_Manager : NetworkBehaviour
     public bool Sell_Item(Inven_Slot slot)
     {
         // 최대 소지 개수여야 판매가 가능하게 합니다.
-        if(slot.have_Count == slot.item.max_Have_Count)
+        if (slot.have_Count == slot.item.max_Have_Count)
         {
             // 판매 가격
             int price = slot.item.price * slot.have_Count;
+            Shop_Manager.instance.money += price;
+
+            slot.Update_Slot(null, 0);
 
             // 금액 증가 코드 작성
-            Player_Inventory.instance.money += price;
-            if(Player_Inventory.instance.money_Slot == null)
+            if(Shop_Manager.instance.money_Slot!= null)
             {
-                Get_Item(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
+                Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Shop_Manager.instance.money);
             }
             else
             {
-                Player_Inventory.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
-                Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+                Shop_Manager.instance.Money_Up(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
             }
 
-            slot.Update_Slot(null, 0);
+            /* Player_Inventory.instance.money += price;
+             if (Player_Inventory.instance.money_Slot == null)
+             {
+                 Get_Item(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
+             }
+             else
+             {
+                 Player_Inventory.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+                 Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
+             }*/
+
             return true;
         }
         return false;
