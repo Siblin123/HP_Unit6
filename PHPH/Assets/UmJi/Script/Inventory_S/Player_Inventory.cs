@@ -28,6 +28,8 @@ public class Player_Inventory : Inventory_Manager
 
     // Miri_Inven_Controll() // 미리인벤토리 관련
     public int currentSlot = 0; // 현재 선택된 슬롯 (1~6)
+    public GameObject frame_Ob; // 선택한 슬롯 표시
+
     private int maxSlots = 5; // 총 슬롯 개수
 
     private void Start()
@@ -150,6 +152,7 @@ public class Player_Inventory : Inventory_Manager
             currentSlot = num;
             if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
             else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+            frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
         }
         else
         {
@@ -173,6 +176,7 @@ public class Player_Inventory : Inventory_Manager
             {
                 if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
                 else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+                frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
             }
         }
     }

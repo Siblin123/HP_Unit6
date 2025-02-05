@@ -64,9 +64,8 @@ public class Inven_Slot : Inventory_Manager
         if (miri_C == true) // 미리 인벤토리면
         {
             if (Input.GetKeyDown(slot_Count))
-            {
+            {                                                                       // 내 이름 -> 슬롯 번호로 변환해서 할당
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Controll(System.Convert.ToInt32(gameObject.name));
-
             }
         }
     }
