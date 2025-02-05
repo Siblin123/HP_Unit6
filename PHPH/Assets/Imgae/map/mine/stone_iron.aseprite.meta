@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: de11b31b07f71b146bf6f5ae07730b27
+guid: 6e733863f9337ce40884da829fac0293
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -122,9 +122,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: background_2
+  - name: stone_iron
     originalName: 
-    pivot: {x: 0.499002, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -132,9 +132,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 1002
-      height: 2581
-    spriteID: 649287611e7622b4a8cc1cdc85dafb5f
+      width: 30
+      height: 23
+    spriteID: db3b585cb27bbb1429b1e4d59b914bed
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -146,21 +146,21 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 657978743
-    name: background_2
+    guid: 1403861262
+    name: stone_iron
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: background_2
+    - name: stone_iron
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
+        x: 1
         y: 0
-        width: 1002
-        height: 2581
-      spriteId: 649287611e7622b4a8cc1cdc85dafb5f
+        width: 30
+        height: 23
+      spriteId: db3b585cb27bbb1429b1e4d59b914bed
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -179,4 +179,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 1000, y: 2581}
+  canvasSize: {x: 32, y: 32}
