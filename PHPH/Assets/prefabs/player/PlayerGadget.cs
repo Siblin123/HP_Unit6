@@ -49,7 +49,6 @@ public class PlayerGadget : NetworkBehaviour
     {
         if (!IsOwner)
             return;
-        Change_MiniInventory();
 
         if (behaviourColTimme >= 0)
             behaviourColTimme -= Time.deltaTime;
@@ -65,28 +64,7 @@ public class PlayerGadget : NetworkBehaviour
 
     }
 
-    public void Change_MiniInventory()
-    {
-/*        if (!IsOwner)
-            return;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            print("1");
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            print("2");
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-            print("3");
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-            print("4");
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-            print("5");
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-            print("6");*/
 
-
-
-
-
-    }
 
     public void UseCurItem()
     {
