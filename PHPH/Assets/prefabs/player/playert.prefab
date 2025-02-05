@@ -388,8 +388,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 51
-  item: {fileID: 3682912535583906087, guid: 41708a02d49c9434a8f1d3c824efa52e, type: 3}
-  have_Count: 1
+  item: {fileID: 0}
+  have_Count: 0
   item_I: {fileID: 60569010075508971}
   count_T: {fileID: 4358623043983344349}
   follow_C: 0
@@ -1193,8 +1193,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 53
-  item: {fileID: 3891820892960593901, guid: a94c96e8523ccf649bd57018d5247393, type: 3}
-  have_Count: 1
+  item: {fileID: 0}
+  have_Count: 0
   item_I: {fileID: 7438066125586779870}
   count_T: {fileID: 3858989155530001785}
   follow_C: 0
@@ -1942,8 +1942,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 49
-  item: {fileID: 3349308753338816067, guid: 67ddb1ab339132745b355d32e5e47811, type: 3}
-  have_Count: 5
+  item: {fileID: 0}
+  have_Count: 0
   item_I: {fileID: 1309006998156770296}
   count_T: {fileID: 2655693759642242799}
   follow_C: 0
@@ -2853,8 +2853,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 50
-  item: {fileID: 1832357426260458000, guid: 727da2f70cd556c429e28e9b9b566306, type: 3}
-  have_Count: 1
+  item: {fileID: 0}
+  have_Count: 0
   item_I: {fileID: 2540341114490974085}
   count_T: {fileID: 2772298403558757149}
   follow_C: 0
@@ -3217,8 +3217,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 52
-  item: {fileID: 3923620479907480404, guid: 321f0411320c80f468245709cd5c062e, type: 3}
-  have_Count: 1
+  item: {fileID: 0}
+  have_Count: 0
   item_I: {fileID: 1433435598172177116}
   count_T: {fileID: 795556953805437811}
   follow_C: 0
