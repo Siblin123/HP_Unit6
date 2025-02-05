@@ -5,6 +5,7 @@ using Unity.Netcode.Components;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
+using static Arm_Anim;
 using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
@@ -49,6 +50,7 @@ public class PlayerGadget : NetworkBehaviour
     {
         if (!IsOwner)
             return;
+
 
         if (behaviourColTimme >= 0)
             behaviourColTimme -= Time.deltaTime;
