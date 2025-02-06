@@ -153,8 +153,6 @@ public class Player_Inventory : Inventory_Manager
         // -> 이 호출은 미리 슬롯에서 불러오는 거임
         if(num != 7){
             currentSlot = num;
-            if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
-            else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
             frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
 
             csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
@@ -179,12 +177,13 @@ public class Player_Inventory : Inventory_Manager
             // 스크롤을 움직이고 있을 때
             if (scroll != 0)
             {
-                if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
-                else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
                 frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
                 csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
             }
         }
+
+        if (miri_List[currentSlot].item == null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+        else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
     }
 
     public void Inventory_On_Off()

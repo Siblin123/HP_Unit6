@@ -143,6 +143,7 @@ public class Inven_Slot : Inventory_Manager
             {
                 Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
+
                 Inventory_Button.slot = null;
 
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
@@ -150,6 +151,7 @@ public class Inven_Slot : Inventory_Manager
 
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+            
         }
     }
 
