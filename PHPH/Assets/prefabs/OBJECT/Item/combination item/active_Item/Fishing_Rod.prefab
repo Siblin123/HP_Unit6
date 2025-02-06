@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3366028037192990926}
   - component: {fileID: -3719629819987477539}
   - component: {fileID: 4460739503410209482}
-  - component: {fileID: 8568143852502949164}
+  - component: {fileID: -8196130251661430372}
   - component: {fileID: -3914162969153846921}
   m_Layer: 15
   m_Name: Fishing_Rod
@@ -115,7 +115,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8568143852502949164
+--- !u!114 &-8196130251661430372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2340297583841686563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7758c75b2a84aec4e82eb939fd9014fd, type: 3}
+  m_Script: {fileID: 11500000, guid: fb68d83be4a9bd54bb5c2258cc4351a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
@@ -135,20 +135,21 @@ MonoBehaviour:
   price: 112
   max_Have_Count: 1
   colTime: 0
+  hand_Item_Sprite: {fileID: 0}
   have_Count: 0
-  curItemType: 3
+  curItemType: 5
   anim: {fileID: 0}
   clip: {fileID: 0}
-  ArmType: 0
+  ArmType: 6
   damege: 0
   attack_rage: 0
   CrowdControl_Time: 0
   active_rayMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
-  shortAttackType: 1
+  shortAttackType: 0
   longAttackType: 0
 --- !u!50 &-3914162969153846921
 Rigidbody2D:
