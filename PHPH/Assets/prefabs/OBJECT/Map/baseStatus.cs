@@ -118,7 +118,7 @@ public class baseStatus : interaction
                     if (networkObjectt != null)
                     {
                         networkObjectt.Spawn(); // 네트워크 객체로 생성
-
+                        networkObjectt.GetComponent<Item_Info>().have_Count = 1;
                         // 서버에서 AddForce 호출 후 클라이언트 동기화
                         Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
                         ApplyForce_ClientRpc(networkObjectt.NetworkObjectId, force);
@@ -139,7 +139,7 @@ public class baseStatus : interaction
             if (networkObject != null)
             {
                 networkObject.Spawn(); // 네트워크 객체로 생성
-
+                networkObject.GetComponent<Item_Info>().have_Count = 1;
                 // 서버에서 AddForce 호출 후 클라이언트 동기화
                 Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
                 ApplyForce_ClientRpc(networkObject.NetworkObjectId, force);

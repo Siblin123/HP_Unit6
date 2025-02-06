@@ -18,7 +18,7 @@ public class PlayerGadget : NetworkBehaviour
         set
         {
             _curItem = value;
-            UseCurItem();
+            Change_CurItem();
         }
     }
 
@@ -85,7 +85,7 @@ public class PlayerGadget : NetworkBehaviour
 
             if (curItem != null)
             {
-                arm_Anim.GetComponent<SpriteRenderer>().sprite = curItem.GetComponent<SpriteRenderer>().sprite;
+                arm_Anim.GetComponent<SpriteRenderer>().sprite = curItem.GetComponent<Item_Info>().hand_Item_Sprite;
                 arm_Anim.GetComponent<SpriteRenderer>().enabled = true;
             }
             else
