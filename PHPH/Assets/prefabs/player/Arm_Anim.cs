@@ -41,7 +41,7 @@ public class Arm_Anim : NetworkBehaviour
     {
         if(!IsOwner)
             return;
-        //player = csTable.Instance.gameManager.player.GetComponent<PlayerControl>();
+        player = csTable.Instance.gameManager.player.GetComponent<PlayerControl>();
     }
     public ArmType Anim
     {
@@ -120,5 +120,6 @@ public class Arm_Anim : NetworkBehaviour
         if(!IsOwner)
             return;
        
+
     }
 }

@@ -2,9 +2,11 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
+using static Arm_Anim;
 using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
@@ -49,7 +51,29 @@ public class PlayerGadget : NetworkBehaviour
     {
         if (!IsOwner)
             return;
-        Change_MiniInventory();
+
+
+        if (arm_Anim._anim == ArmType.empty_P)
+        {
+            arm_Anim.GetComponent<Animator>().enabled = false;
+
+            if (curItem != null)
+            {
+                arm_Anim.GetComponent<SpriteRenderer>().sprite = curItem.GetComponent<SpriteRenderer>().sprite;
+                arm_Anim.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                arm_Anim.GetComponent<SpriteRenderer>().enabled = false;
+            }
+               
+
+        }
+        else
+        {
+            arm_Anim.GetComponent<Animator>().enabled = true;
+        }
+
 
         if (behaviourColTimme >= 0)
             behaviourColTimme -= Time.deltaTime;
@@ -65,28 +89,7 @@ public class PlayerGadget : NetworkBehaviour
 
     }
 
-    public void Change_MiniInventory()
-    {
-/*        if (!IsOwner)
-            return;
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            print("1");
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            print("2");
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-            print("3");
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-            print("4");
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-            print("5");
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-            print("6");*/
 
-
-
-
-
-    }
 
     public void UseCurItem()
     {

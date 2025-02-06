@@ -107,22 +107,26 @@ public class baseStatus : interaction
 
             // ===================  특수 아이템 드랍 ==========================
 
-            int randomNum = Random.Range(1, 101);//랜덤으로 특수 아이템이 뜰 확률
-            if (randomNum<= reward_memory_SpawnPer())//특수아이템 정해주면서 확률 리턴
+            if (reward_memory_Item.Count > 1)
             {
-                GameObject itemm = Instantiate(spawnItem.gameObject, transform.position, Quaternion.identity);
-
-                var networkObjectt = itemm.GetComponent<NetworkObject>();
-                if (networkObjectt != null)
+                int randomNum = Random.Range(1, 101);//랜덤으로 특수 아이템이 뜰 확률
+                if (randomNum <= reward_memory_SpawnPer())//특수아이템 정해주면서 확률 리턴
                 {
-                    networkObjectt.Spawn(); // 네트워크 객체로 생성
+                    GameObject itemm = Instantiate(spawnItem.gameObject, transform.position, Quaternion.identity);
 
-                    // 서버에서 AddForce 호출 후 클라이언트 동기화
-                    Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
-                    ApplyForce_ClientRpc(networkObjectt.NetworkObjectId, force);
+                    var networkObjectt = itemm.GetComponent<NetworkObject>();
+                    if (networkObjectt != null)
+                    {
+                        networkObjectt.Spawn(); // 네트워크 객체로 생성
 
+                        // 서버에서 AddForce 호출 후 클라이언트 동기화
+                        Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
+                        ApplyForce_ClientRpc(networkObjectt.NetworkObjectId, force);
+
+                    }
                 }
             }
+
 
 
 

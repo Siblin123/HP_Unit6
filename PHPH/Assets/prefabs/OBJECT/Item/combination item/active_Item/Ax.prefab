@@ -147,6 +147,8 @@ MonoBehaviour:
     m_Bits: 2560
   target: {fileID: 0}
   offset: {x: 0, y: 0.1, z: 0}
+  shortAttackType: 1
+  longAttackType: 0
 --- !u!50 &-4017183474275262269
 Rigidbody2D:
   serializedVersion: 5

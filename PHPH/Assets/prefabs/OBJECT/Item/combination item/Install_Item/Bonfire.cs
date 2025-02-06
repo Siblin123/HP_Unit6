@@ -20,7 +20,6 @@ public class Bonfire : Item_Info
     {
         base.Update();
         light_magnitude();
-        print(Light.pointLightOuterRadius);
     }
 
     public void light_magnitude()

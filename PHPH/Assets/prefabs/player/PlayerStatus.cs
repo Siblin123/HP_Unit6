@@ -98,10 +98,10 @@ public class PlayerStatus : PlayerGadget
             return;
 
         Move();
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+/*        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             csTable.Instance.gameManager.SendSound(transform.position);
-        }
+        }*/
     }
 
     public override void Update()
