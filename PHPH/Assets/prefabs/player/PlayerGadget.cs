@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.Netcode.Components;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -50,6 +51,28 @@ public class PlayerGadget : NetworkBehaviour
     {
         if (!IsOwner)
             return;
+
+
+        if (arm_Anim._anim == ArmType.empty_P)
+        {
+            arm_Anim.GetComponent<Animator>().enabled = false;
+
+            if (curItem != null)
+            {
+                arm_Anim.GetComponent<SpriteRenderer>().sprite = curItem.GetComponent<SpriteRenderer>().sprite;
+                arm_Anim.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                arm_Anim.GetComponent<SpriteRenderer>().enabled = false;
+            }
+               
+
+        }
+        else
+        {
+            arm_Anim.GetComponent<Animator>().enabled = true;
+        }
 
 
         if (behaviourColTimme >= 0)

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.Netcode;
 using static UnityEditor.Progress;
+using static Arm_Anim;
 
 public class Player_Inventory : Inventory_Manager
 {
@@ -153,6 +154,8 @@ public class Player_Inventory : Inventory_Manager
             if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
             else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
             frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
+
+            csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
         }
         else
         {
@@ -177,6 +180,7 @@ public class Player_Inventory : Inventory_Manager
                 if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
                 else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
                 frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
+                csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
             }
         }
     }
