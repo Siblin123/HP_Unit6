@@ -146,6 +146,17 @@ public class Shop_Manager : interaction
         return null;
     }
 
+    public void UnRock_Slot() // 연설가의 기억으로 슬롯 해제
+    {
+        for(int i = 0; i < slot_List.Count; i++)
+        {
+            if (slot_List[i].gameObject.activeSelf == false)
+            {
+                slot_List[i].gameObject.SetActive(true);
+            }
+        }
+    }
+
     public void Update_Slot() // 판매할 아이템 표시
     {
         // 기본 이아팀, 완성 아이템
@@ -155,25 +166,39 @@ public class Shop_Manager : interaction
 
         for (int i = 0; i < slot_List.Count; i++)
         {
-            if (combi_N < 2) // 각 두개씩 나옴
+            if (slot_List[i].gameObject.activeSelf == true)
             {
-                select_N = CheckDuplicate(combination_Item_List, select_N);
-                slot_List[i].Update_Slot(combination_Item_List[select_N]);
-                Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
-                combi_N++;
-            }
-            else if (base_N < 2)
-            {
-                select_N = CheckDuplicate(base_Item_List, select_N);
-                slot_List[i].Update_Slot(base_Item_List[select_N]);
-                Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
-                base_N++;
-            }
-            else
-            {
-                select_N = CheckDuplicate(all_Item_List, select_N);
-                slot_List[i].Update_Slot(all_Item_List[select_N]);
-                Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
+                if(i < 6)
+                {
+                    if (combi_N < 2) // 각 두개씩 나옴
+                    {
+                        select_N = CheckDuplicate(combination_Item_List, select_N);
+                        slot_List[i].Update_Slot(combination_Item_List[select_N]);
+                        Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
+                        combi_N++;
+                    }
+                    else if (base_N < 2)
+                    {
+                        select_N = CheckDuplicate(base_Item_List, select_N);
+                        slot_List[i].Update_Slot(base_Item_List[select_N]);
+                        Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
+                        base_N++;
+                    }
+                    else
+                    {
+                        //int rand = Random.Range(0, all_Item_List.Count);
+                        select_N = CheckDuplicate(all_Item_List, select_N);
+                        slot_List[i].Update_Slot(all_Item_List[select_N]);
+                        Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
+                    }
+                }
+                else // 여기부턴 연설가의 기억으로 해제된 구역으로 서버 동기화 X
+                {
+                    int rand = Random.Range(0, all_Item_List.Count);
+                    //select_N = CheckDuplicate(all_Item_List, select_N);
+                    slot_List[i].Update_Slot(all_Item_List[rand]);
+                    //Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
+                }
             }
         }
     }

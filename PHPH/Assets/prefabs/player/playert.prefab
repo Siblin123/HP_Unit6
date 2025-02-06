@@ -388,6 +388,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 51
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 60569010075508971}
@@ -568,6 +569,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 54
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 8474184271231995797}
@@ -718,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4147144535
+  GlobalObjectIdHash: 3481336251
   InScenePlacedSourceGlobalObjectIdHash: 4147144535
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1194,6 +1196,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 53
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 7438066125586779870}
@@ -1944,6 +1947,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 49
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 1309006998156770296}
@@ -2855,6 +2859,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 50
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 2540341114490974085}
@@ -3294,6 +3299,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   miri_C: 1
   slot_Count: 52
+  unRock_C: 0
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 1433435598172177116}
@@ -3451,9 +3457,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3211353327670863738}
     m_Modifications:
+    - target: {fileID: 54836879737827910, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 300444161117651807, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 837803228573334563, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1786069272225890059, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: m_Name
       value: InventoryCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2293461649209520859, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629003031339474572, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3891690329431605717, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3538,6 +3564,34 @@ PrefabInstance:
     - target: {fileID: 4120245156773797240, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202366273681588080, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4335198440841642576, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928311324600347385, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139245243317624278, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7767186959955353153, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7974219827306210503, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586977803529886366, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

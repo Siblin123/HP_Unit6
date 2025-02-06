@@ -30,7 +30,7 @@ public class Inventory_Manager : NetworkBehaviour
 
         int i = 0;
         int j = 0;
-        for (i = 0; i < p_I.slot_List.Count; i++)
+        for (i = 0; i < p_I.unRock_SlotCount; i++)
         {
             // 비교할 아이템이 있으면 -> 인벤토리에 아이템이 있으면
             if (p_I.slot_List[i].item != null)
@@ -60,9 +60,9 @@ public class Inventory_Manager : NetworkBehaviour
         }
 
         //획득한 아이템이 인벤토리에 없을 때
-        if(i == p_I.slot_List.Count)
+        if(i == p_I.unRock_SlotCount)
         {
-            for (j = 0; j < p_I.slot_List.Count; j++) // 새로 넣어줌
+            for (j = 0; j < p_I.unRock_SlotCount; j++) // 새로 넣어줌
             {
                 if (p_I.slot_List[j].item == null)
                 {
@@ -73,7 +73,7 @@ public class Inventory_Manager : NetworkBehaviour
         }
 
         // 인벤토리가 꽉 찼을 때
-        if(j == p_I.slot_List.Count)
+        if(j == p_I.unRock_SlotCount)
         {
             print("그만먹어 돼지얌");
             return false;
@@ -102,17 +102,6 @@ public class Inventory_Manager : NetworkBehaviour
             {
                 Shop_Manager.instance.Money_Up(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
             }
-
-            /* Player_Inventory.instance.money += price;
-             if (Player_Inventory.instance.money_Slot == null)
-             {
-                 Get_Item(Player_Inventory.instance.money_Ob.GetComponent<Item_Info>(), price);
-             }
-             else
-             {
-                 Player_Inventory.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
-                 Shop_Manager.instance.money_Slot.Update_Slot(Player_Inventory.instance.money_Slot.item, Player_Inventory.instance.money);
-             }*/
 
             return true;
         }

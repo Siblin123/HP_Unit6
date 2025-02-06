@@ -15,6 +15,8 @@ public class Player_Inventory : Inventory_Manager
     public GameObject godGet_Ob; // 장비 슬롯 부모
     public GameObject miri_Ob; // 미리보기 인벤토리 부모
 
+    public int unRock_SlotCount = 6; // 잠금 해제인 인벤토리 개수
+
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
     public List<Inven_Slot> miri_List;
