@@ -80,6 +80,7 @@ MonoBehaviour:
   price: 100
   max_Have_Count: 1
   colTime: 0
+  hand_Item_Sprite: {fileID: -8461374925850514170, guid: 166cb68ed573252479e18dbbcf601bf7, type: 3}
   have_Count: 0
   curItemType: 1
 --- !u!212 &-1705681962708513251
@@ -126,7 +127,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4386003518613867073, guid: 48be4ba36889e5c43a3414c4cee89cb3, type: 3}
+  m_Sprite: {fileID: 5299678798601162032, guid: 48be4ba36889e5c43a3414c4cee89cb3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

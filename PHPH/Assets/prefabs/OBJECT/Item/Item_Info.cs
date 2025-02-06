@@ -12,6 +12,7 @@ public class Item_Info : NetworkBehaviour
     public int price; // 가격
     public int max_Have_Count; // 최대 소지 개수
     public float colTime;
+    public Sprite hand_Item_Sprite; // 손에 들었을때 이미지
 
     public int have_Count; // 현재 소지 개수
 
