@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1850743953188320391}
   - component: {fileID: -9222777465434686703}
   m_Layer: 15
-  m_Name: Clothes_Test
+  m_Name: Clothes_Old
   m_TagString: Cloth
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

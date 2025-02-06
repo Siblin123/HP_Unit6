@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2790600003
+  GlobalObjectIdHash: 4209849627
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  item_Name: "\uAE30\uBCF8 \uC190\uC804\uB4F1"
-  id: 122
+  item_Name: "\uC88B\uC740 \uC190\uC804\uB4F1"
+  id: 123
   explan: "\uC5B4\uB450\uC6B8 \uB584\uC758 \uC2DC\uC57C \uBC94\uC704\uB97C \uB354
     \uB113\uAC8C \uB9CC\uB4E4\uC5B4\uC900\uB2E4."
   price: 192
@@ -125,7 +125,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3424145443497021601, guid: 78c94a923ad58584bbb83c93c79dd775, type: 3}
+  m_Sprite: {fileID: 2007061120321642954, guid: 78c94a923ad58584bbb83c93c79dd775, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
