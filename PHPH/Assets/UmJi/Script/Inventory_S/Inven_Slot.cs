@@ -134,8 +134,12 @@ public class Inven_Slot : Inventory_Manager
                     csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
                     csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
-                    item_I.enabled = false;
-                    count_T.enabled = false;
+                    if(item_I!=null && count_T!=null)
+                    {
+                        item_I.enabled = false;
+                        count_T.enabled = false;
+                    }
+                   
                 }
             }
             // 이미 선택한게 있으면 서로 위치 교환

@@ -153,6 +153,7 @@ public class Shop_Manager : interaction
             if (slot_List[i].gameObject.activeSelf == false)
             {
                 slot_List[i].gameObject.SetActive(true);
+                break;
             }
         }
     }
@@ -166,8 +167,7 @@ public class Shop_Manager : interaction
 
         for (int i = 0; i < slot_List.Count; i++)
         {
-            if (slot_List[i].gameObject.activeSelf == true)
-            {
+
                 if(i < 6)
                 {
                     if (combi_N < 2) // 각 두개씩 나옴
@@ -201,7 +201,7 @@ public class Shop_Manager : interaction
                 }
             }
         }
-    }
+    
 
     [ClientRpc]
     void Update_Slot_ClientRpc(int id, int index) // 아이템 서버, 클라이언트 동기화

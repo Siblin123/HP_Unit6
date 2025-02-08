@@ -21,7 +21,7 @@ public class Inventory_Button : MonoBehaviour
             //csTable.Instance.gameManager.player.Obj_Installable(slot.item.id);
 
 
-            csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().Throw_Item_ServerRpc(slot.item.NetworkObjectId, csTable.Instance.gameManager.player.transform.position, slot.have_Count);
+            csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().Throw_Item_ServerRpc((ulong)slot.item.id, csTable.Instance.gameManager.player.transform.position, slot.have_Count);
 
             slot.Update_Slot(null, 0);
             slot = null;

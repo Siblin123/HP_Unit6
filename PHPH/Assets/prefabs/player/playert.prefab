@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  curItem: {fileID: -2170975511241727335, guid: 0ac0bf67613057a41a53b75c3ab664ea, type: 3}
+  _curItem: {fileID: 0}
   arm_Anim: {fileID: 8881582589962923554}
   behaviourColTimme: 0
   have_Memory: []
@@ -939,6 +939,7 @@ MonoBehaviour:
   inven_Slot_Ob: {fileID: 8189338369434487482}
   godGet_Ob: {fileID: 4022946061488036690}
   miri_Ob: {fileID: 7277326697330993436}
+  unRock_SlotCount: 6
   slot_List: []
   godGet_List: []
   miri_List: []
@@ -3473,6 +3474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1964720097591465316, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2293461649209520859, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1
@@ -3480,6 +3485,10 @@ PrefabInstance:
     - target: {fileID: 2629003031339474572, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861218357112269225, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3891690329431605717, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3581,6 +3590,10 @@ PrefabInstance:
       propertyPath: unRock_C
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7656430354600563482, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7767186959955353153, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 0
@@ -3590,6 +3603,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8586977803529886366, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: unRock_C
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9108016506394250227, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1
       objectReference: {fileID: 0}

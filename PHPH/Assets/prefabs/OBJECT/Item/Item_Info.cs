@@ -36,7 +36,7 @@ public class Item_Info : NetworkBehaviour
     private void Start()
     {
 
-        if (!GetComponent<Rigidbody2D>())
+        if (GetComponent<Rigidbody2D>())
         {
             rb = GetComponent<Rigidbody2D>();
             rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse);
@@ -44,6 +44,23 @@ public class Item_Info : NetworkBehaviour
         f_ItemPos = transform.position;
       
     }
+
+    //====================================↑네트워크 오브젝트 추가===========================================================
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        NetworkSpawnManager.RegisterSpawn(NetworkObject);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        NetworkSpawnManager.RegisterDespawn(NetworkObject);
+    }
+
+
+    //====================================↑네트워크 오브젝트 추가===========================================================
 
     public virtual void Update()
     {

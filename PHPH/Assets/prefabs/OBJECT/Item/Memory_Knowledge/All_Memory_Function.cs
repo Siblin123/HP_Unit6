@@ -133,6 +133,7 @@ public class All_Memory_Function : Item_Info
             case "연설가의 기억":
                 // 연설가 관련 로직
                 Debug.Log("중첩으로 먹을 수 있으며, 먹을 때마다 상점의 판매 개수가 증가한다.    상점 판매 개수+1 최대치=6");
+                csTable.Instance.shop_Manager.UnRock_Slot();
                 break;
 
             case "저격수의 기억":

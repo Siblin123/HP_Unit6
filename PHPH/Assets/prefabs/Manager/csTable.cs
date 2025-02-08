@@ -7,7 +7,8 @@ public class csTable : MonoBehaviour
     public static csTable Instance;
     public GameManager gameManager;
     public Transform unitSopn_Pos;
-    public RPCmanager rpcManager;
+    public Shop_Manager shop_Manager;
+    public NetworkSpawnManager NetworkSpawnManager; 
 
 
     public List<Item_Info> allItem_List;
@@ -16,5 +17,6 @@ public class csTable : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
     }
 }

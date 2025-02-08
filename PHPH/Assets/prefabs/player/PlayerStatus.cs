@@ -249,7 +249,8 @@ public class PlayerStatus : PlayerGadget
     public void GetItem_ClientRpc(ulong id)
     {
 
-
+        /*       NetworkObject netobj= csTable.Instance.NetworkSpawnManager.Find_NetworkObject(id);
+               netobj.gameObject.SetActive(false);*/
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
         {
 
