@@ -162,8 +162,7 @@ public class PlayerGadget : NetworkBehaviour
     public void Throw_Item_ClientRpc(ulong id, Vector3 pos, int have_Count)
     {
 
-
-/*        NetworkObject netobj = csTable.Instance.NetworkSpawnManager.Find_NetworkObject(id);
+        /*NetworkObject netobj = csTable.Instance.NetworkSpawnManager.Find_NetworkObject(id);
        
         if(netobj!=null)
         {
