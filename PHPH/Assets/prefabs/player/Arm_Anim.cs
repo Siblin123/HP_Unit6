@@ -36,7 +36,7 @@ public class Arm_Anim : NetworkBehaviour
 
     PlayerControl player;
 
-
+   
     private void Start()
     {
         if(!IsOwner)

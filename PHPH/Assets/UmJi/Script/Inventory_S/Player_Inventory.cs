@@ -106,11 +106,20 @@ public class Player_Inventory : Inventory_Manager
     [ClientRpc]
     public void Slot_Rock_ClientRpc(ulong slotId)
     {
-        print("ASDASDASDASDAASD");
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
             Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
             slot.buy_C = true;
+
+
+
+            if (!IsServer)//생성은 서버 에서만
+                return;
+            Item_Info item = slot.item;
+
+            GameObject slotItem = Instantiate(item.gameObject);
+
+            slotItem.GetComponent<NetworkObject>().Spawn();
         }
     }
 

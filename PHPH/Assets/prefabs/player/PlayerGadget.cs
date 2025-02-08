@@ -11,7 +11,7 @@ using static Item_Info;
 
 public class PlayerGadget : NetworkBehaviour
 {
-    private Item_Info _curItem; // 선택한 아이템
+    public Item_Info _curItem; // 선택한 아이템
     public Item_Info curItem
     {
         get => _curItem;
