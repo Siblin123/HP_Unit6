@@ -160,31 +160,7 @@ public class PlayerGadget : NetworkBehaviour
 
     [ClientRpc]
     public void Throw_Item_ClientRpc(ulong id, Vector3 pos, int have_Count)
-    {
-
-        /*NetworkObject netobj = csTable.Instance.NetworkSpawnManager.Find_NetworkObject(id);
-       
-        if(netobj!=null)
-        {
-           netobj.transform.gameObject.SetActive(true);
-           netobj.transform.position = pos;
-            netobj.GetComponent<Item_Info>().have_Count = have_Count;
-        }
-        else
-        {
-            foreach (var spawn_Obj in csTable.Instance.allItem_List)
-            {
-                if (spawn_Obj.id == (int)id)
-                {
-                    GameObject item = Instantiate(spawn_Obj.gameObject);
-                    item.GetComponent<NetworkObject>().Spawn();
-                    item.transform.position = pos;
-                    item.GetComponent<Item_Info>().have_Count = have_Count;
-                    break;
-                }
-            }
-        }*/
-        
+    {   
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(id, out NetworkObject networkObject))
         {
             print("클라 서버 모두 실행");
