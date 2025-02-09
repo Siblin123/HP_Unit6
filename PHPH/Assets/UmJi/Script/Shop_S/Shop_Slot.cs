@@ -40,6 +40,7 @@ public class Shop_Slot : NetworkBehaviour
         {
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item, csTable.Instance.gameManager.player.NetworkObjectId , this.NetworkObjectId))
             {
+                print("111111111111111111111111111111");
                 Shop_Manager.instance.Invent_Shop();
                 buy_C = true;
             }
