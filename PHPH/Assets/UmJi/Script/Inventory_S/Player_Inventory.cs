@@ -125,13 +125,18 @@ public class Player_Inventory : Inventory_Manager
         {
             Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
             slot.buy_C = true;
-           
-            if(NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerId, out NetworkObject networkObject_))
+
+
+
+            if (csTable.Instance.gameManager.player.GetComponent<NetworkObject>().IsOwnedByServer == false)
+                return;//서버에서만 생성
+
+
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerId, out NetworkObject networkObject_))
             {
                 if (networkObject_.GetComponent<NetworkObject>().IsOwnedByServer)//생성은 서버 에서만
                 {
-                    if (csTable.Instance.gameManager.player.GetComponent<NetworkObject>().IsOwnedByServer == false)
-                        return;//서버에서만 생성
+                    
 
 
                     Item_Info item = null;
