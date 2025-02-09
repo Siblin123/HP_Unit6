@@ -52,14 +52,16 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
-    public override bool Get_Item(Item_Info item, int count) // 재정의
+    public override void Get_Item(Item_Info item, int count) // 재정의
     {
-        if(base.Get_Item(item, count)) 
+        base.Get_Item(item, count);
+        Miri_Inven_Update();
+       /* if(base.Get_Item(item, count)) 
         {
             Miri_Inven_Update();
             return true;
         }
-        else { return false; }
+        else { return false; }*/
     }
     
     public void Miri_Inven_Update()
@@ -78,8 +80,10 @@ public class Player_Inventory : Inventory_Manager
         // 소지금액이 구매할 아이템의 금액보다 많으면
         if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
         {
-            if (Get_Item(item, item.max_Have_Count))
+            if (Get_Item_OK(item, item.max_Have_Count)) // 인벤토리에 아이템을 넣 을 수 있는지 확인
             {
+                Get_Item(item, item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
                 money_Slot.Update_Slot(money_Slot.item, money);
