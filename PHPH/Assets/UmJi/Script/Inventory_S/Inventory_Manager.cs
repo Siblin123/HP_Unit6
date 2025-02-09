@@ -15,7 +15,7 @@ public class Inventory_Manager : NetworkBehaviour
 
     public virtual void Update()
     {
-
+        
     }
 
     public virtual bool Get_Item_OK(Item_Info item, int count) // 인벤토리에 아이템을 넣을 수 있는지 확인

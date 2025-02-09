@@ -13,12 +13,11 @@ public class Inventory_Button : MonoBehaviour
         if (slot != null)
         {
             print("아무거나");
+
             // 버릴때 개수를 넣어줌
             slot.item.have_Count = slot.have_Count;
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
-
-            //csTable.Instance.gameManager.player.Obj_Installable(slot.item.id);
 
 
             if(slot.item.GetComponent<NetworkObject>().IsSpawned==true)
@@ -33,9 +32,7 @@ public class Inventory_Button : MonoBehaviour
 
             slot.Update_Slot(null, 0);
             slot = null;
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
         }
     }
-
-
-    
 }

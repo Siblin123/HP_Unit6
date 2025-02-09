@@ -127,6 +127,8 @@ public class Player_Inventory : Inventory_Manager
 
     public override void Update()
     {
+        base.Update();
+
         if (!IsOwner)
         {
             return;
