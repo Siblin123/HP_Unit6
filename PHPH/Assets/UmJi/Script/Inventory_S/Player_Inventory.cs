@@ -125,7 +125,7 @@ public class Player_Inventory : Inventory_Manager
            
             if(NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerId, out NetworkObject networkObject_))
             {
-                if (networkObject_.GetComponent<NetworkBehaviour>().IsServer)//생성은 서버 에서만
+                if (networkObject_.GetComponent<NetworkObject>().IsOwnedByServer)//생성은 서버 에서만
                 {
                     Item_Info item = null;
 
