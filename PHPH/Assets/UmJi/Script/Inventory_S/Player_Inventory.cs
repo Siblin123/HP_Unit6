@@ -5,6 +5,7 @@ using TMPro;
 using Unity.Netcode;
 using static UnityEditor.Progress;
 using static Arm_Anim;
+using NUnit.Framework.Interfaces;
 
 public class Player_Inventory : Inventory_Manager
 {
@@ -157,8 +158,25 @@ public class Player_Inventory : Inventory_Manager
 
                 if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerID, out NetworkObject networkObject))
                 {
-                    networkObject.GetComponent<Player_Inventory>().Get_Item(item_.GetComponent<Item_Info>(), item_.GetComponent<Item_Info>().max_Have_Count);
+                    Spawn_Item_ClientRpc(item_.GetComponent<NetworkObject>().NetworkObjectId, playerID);
+                    break;
                 }
+
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void Spawn_Item_ClientRpc(ulong itemid, ulong playerID)
+    {
+        if (csTable.Instance.gameManager.player.NetworkObjectId != playerID)
+            return;
+
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerID, out NetworkObject networkObject))
+        {
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(itemid, out NetworkObject item))
+            { 
+                networkObject.GetComponent<Player_Inventory>().Get_Item(item.GetComponent<Item_Info>(), item.GetComponent<Item_Info>().max_Have_Count);
 
             }
         }
