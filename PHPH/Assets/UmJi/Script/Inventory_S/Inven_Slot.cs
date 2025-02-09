@@ -42,12 +42,12 @@ public class Inven_Slot : Inventory_Manager
 
     public override void Update()
     {
-        base.Update();
+       // base.Update();
 
-        if (!IsOwner)
+       /* if (!IsOwner)
         {
             return;
-        }
+        }*/
 
         if (follow_C) // 인벤토리 아이템 이동시 마우스를 따라다니는 이미지
         {
@@ -72,8 +72,11 @@ public class Inven_Slot : Inventory_Manager
 
         if (miri_C == true) // 미리 인벤토리면
         {
+            print(name);
             if (Input.GetKeyDown(slot_Count))
-            {                                                                       // 내 이름 -> 슬롯 번호로 변환해서 할당
+            {              
+                
+                                                                                            // 내 이름 -> 슬롯 번호로 변환해서 할당
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Controll(System.Convert.ToInt32(gameObject.name));
             }
         }
