@@ -939,6 +939,7 @@ MonoBehaviour:
   inven_Slot_Ob: {fileID: 8189338369434487482}
   godGet_Ob: {fileID: 4022946061488036690}
   miri_Ob: {fileID: 7277326697330993436}
+  miri_Panel: {fileID: 2542155343628494549}
   unRock_SlotCount: 6
   slot_List: []
   godGet_List: []
@@ -962,7 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64cc820cfd586b9449f313bf639b8b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
+  spawnobj: 
 --- !u!1 &2021118437215748222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4679146251488317246
 RectTransform:
   m_ObjectHideFlags: 0

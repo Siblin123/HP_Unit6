@@ -14,6 +14,7 @@ public class Player_Inventory : Inventory_Manager
     public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
     public GameObject godGet_Ob; // 장비 슬롯 부모
     public GameObject miri_Ob; // 미리보기 인벤토리 부모
+    public GameObject miri_Panel; // 미리보기 판넬
 
     public int unRock_SlotCount = 6; // 잠금 해제인 인벤토리 개수
 
@@ -37,7 +38,13 @@ public class Player_Inventory : Inventory_Manager
 
     private void Start()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         instance = this;
+        miri_Panel.SetActive(true);
+
         for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
         {
             slot_List.Add(inven_Slot_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
