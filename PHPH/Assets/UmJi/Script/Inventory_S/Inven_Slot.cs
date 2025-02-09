@@ -43,6 +43,12 @@ public class Inven_Slot : Inventory_Manager
     public override void Update()
     {
         base.Update();
+
+        if (!IsOwner)
+        {
+            return;
+        }
+
         if (follow_C) // 인벤토리 아이템 이동시 마우스를 따라다니는 이미지
         {
             Vector2 mousePosition = Input.mousePosition;
