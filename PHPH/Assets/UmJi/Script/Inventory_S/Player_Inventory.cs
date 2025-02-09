@@ -127,11 +127,28 @@ public class Player_Inventory : Inventory_Manager
 
                 slotItem.GetComponent<NetworkObject>().Spawn();
             }
+            else
+            {
+                Spawn_Item_ServerRpc(slot.item.id);
+            }
 
             Get_Item(item, item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
         }
     }
 
+    [ServerRpc]
+    public void Spawn_Item_ServerRpc(int id)
+    {
+        foreach(Item_Info item in csTable.Instance.allItem_List)
+        {
+            if(id== item.id)
+            {
+                GameObject slotItem = Instantiate(item.gameObject);
+
+                slotItem.GetComponent<NetworkObject>().Spawn();
+            }
+        }
+    }
     public override void Update()
     {
         base.Update();
