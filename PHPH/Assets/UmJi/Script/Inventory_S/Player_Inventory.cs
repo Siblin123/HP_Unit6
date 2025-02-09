@@ -56,12 +56,6 @@ public class Player_Inventory : Inventory_Manager
     {
         base.Get_Item(item, count);
         Miri_Inven_Update();
-       /* if(base.Get_Item(item, count)) 
-        {
-            Miri_Inven_Update();
-            return true;
-        }
-        else { return false; }*/
     }
     
     public void Miri_Inven_Update()
@@ -82,7 +76,7 @@ public class Player_Inventory : Inventory_Manager
         {
             if (Get_Item_OK(item, item.max_Have_Count)) // 인벤토리에 아이템을 넣 을 수 있는지 확인
             {
-                Get_Item(item, item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+                
 
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
@@ -110,39 +104,24 @@ public class Player_Inventory : Inventory_Manager
     [ClientRpc]
     public void Slot_Rock_ClientRpc(ulong slotId)
     {
-        /*NetworkObject netobj=  csTable.Instance.NetworkSpawnManager.Find_NetworkObject(slotId);
-
-         if (netobj!=null)
-         {
-             Shop_Slot slot = netobj.GetComponent<Shop_Slot>();
-             slot.buy_C = true;
-
-
-
-             if (!IsServer)//생성은 서버 에서만
-                 return;
-             Item_Info item = slot.item;
-
-             GameObject slotItem = Instantiate(item.gameObject);
-
-             slotItem.GetComponent<NetworkObject>().Spawn();
-         }*/
-
-
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
             Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
             slot.buy_C = true;
 
 
+            Item_Info item = null;
 
-            if (!IsServer)//생성은 서버 에서만
-                return;
-            Item_Info item = slot.item;
+            if (IsServer)//생성은 서버 에서만
+            {
+                item = slot.item;
 
-            GameObject slotItem = Instantiate(item.gameObject);
+                GameObject slotItem = Instantiate(item.gameObject);
 
-            slotItem.GetComponent<NetworkObject>().Spawn();
+                slotItem.GetComponent<NetworkObject>().Spawn();
+            }
+
+            Get_Item(item, item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
         }
     }
 
