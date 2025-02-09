@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.Netcode;
 using Unity.VisualScripting;
+using static UnityEditor.Progress;
 
 public class Inventory_Manager : NetworkBehaviour
 {
@@ -17,9 +18,61 @@ public class Inventory_Manager : NetworkBehaviour
 
     }
 
+    public virtual bool Get_Item_OK(Item_Info item, int count) // 인벤토리에 아이템을 넣을 수 있는지 확인
+    {
+        if (item.have_Count != 0) // 버린 아이템일경우 have_Count가 있음
+        {
+            count = item.have_Count;
+        }
+        Player_Inventory p_I = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>();
+
+        int i = 0;
+        int j = 0;
+        for (i = 0; i < p_I.unRock_SlotCount; i++)
+        {
+            // 비교할 아이템이 있으면 -> 인벤토리에 아이템이 있으면
+            if (p_I.slot_List[i].item != null)
+            {
+                // 획득한 아이템이 이미 인벤토리에 있으면
+                if (p_I.slot_List[i].item.id == item.id)
+                {
+                    // 총 아이템 개수가 최대 소지개수보다 많으면
+                    if (p_I.slot_List[i].have_Count + count > p_I.slot_List[i].item.max_Have_Count)
+                    {
+                        count += p_I.slot_List[i].have_Count;
+                        count -= p_I.slot_List[i].item.max_Have_Count;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        //획득한 아이템이 인벤토리에 없을 때
+        if (i == p_I.unRock_SlotCount)
+        {
+            for (j = 0; j < p_I.unRock_SlotCount; j++) // 새로 넣어줌
+            {
+                if (p_I.slot_List[j].item == null)
+                {
+                    return true;
+                }
+            }
+        }
+
+        // 인벤토리가 꽉 찼을 때
+        if (j == p_I.unRock_SlotCount)
+        {
+            print("그만먹어 돼지얌");
+            return false;
+        }
+        return false;
+    }
 
     // 아이템 습득
-    public virtual bool Get_Item(Item_Info item, int count)
+    public virtual void Get_Item(Item_Info item, int count)  // 인벤토리에 아이템 할당
     {
         if(item.have_Count != 0) // 버린 아이템일경우 have_Count가 있음
         {
@@ -52,8 +105,8 @@ public class Inventory_Manager : NetworkBehaviour
                     else
                     {
                         p_I.slot_List[i].Pluse_Item(count);
-                        return true;
-                        //break;
+                        //return true;
+                        break;
                     }
                 }
             }
@@ -67,7 +120,8 @@ public class Inventory_Manager : NetworkBehaviour
                 if (p_I.slot_List[j].item == null)
                 {
                     p_I.slot_List[j].Update_Slot(item, count);
-                    return true;
+                    break;
+                    //return true;
                 }
             }
         }
@@ -76,9 +130,9 @@ public class Inventory_Manager : NetworkBehaviour
         if(j == p_I.unRock_SlotCount)
         {
             print("그만먹어 돼지얌");
-            return false;
+            //return false;
         }
-        return false;
+        //return false;
     }
 
     // 아이템 판매
