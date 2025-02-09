@@ -75,6 +75,11 @@ public class Player_Inventory : Inventory_Manager
 
     public bool Buy_Item(Item_Info item, ulong playerId, ulong slotId) // 아이템 구매
     {
+        if (!IsOwner)
+        {
+            return false;
+        }
+
         if (playerId != NetworkObjectId)
             return false;
 
@@ -88,7 +93,7 @@ public class Player_Inventory : Inventory_Manager
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
                 money_Slot.Update_Slot(money_Slot.item, money);
-                Slot_Rock_ServerRpc(slotId);
+                Slot_Rock_ServerRpc(slotId, playerId);
                 return true;
             }
             else // 인벤토리에 칸 없음
@@ -104,12 +109,12 @@ public class Player_Inventory : Inventory_Manager
 
 
     [ServerRpc]
-    public void Slot_Rock_ServerRpc(ulong slotId)
+    public void Slot_Rock_ServerRpc(ulong slotId, ulong playerId)
     {
-        Slot_Rock_ClientRpc(slotId);
+        Slot_Rock_ClientRpc(slotId, playerId);
     }
     [ClientRpc]
-    public void Slot_Rock_ClientRpc(ulong slotId)
+    public void Slot_Rock_ClientRpc(ulong slotId, ulong playerId)
     {
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
@@ -117,10 +122,12 @@ public class Player_Inventory : Inventory_Manager
             slot.buy_C = true;
 
 
-            Item_Info item = null;
+           
 
             if (IsServer)//생성은 서버 에서만
             {
+                Item_Info item = null;
+
                 item = slot.item;
 
                 GameObject slotItem = Instantiate(item.gameObject);
@@ -130,24 +137,29 @@ public class Player_Inventory : Inventory_Manager
             }
             else
             {
-                Spawn_Item_ServerRpc(slot.item.id);
+                Spawn_Item_ServerRpc(slot.item.id, playerId);
             }
 
           
         }
     }
 
-    [ServerRpc]
-    public void Spawn_Item_ServerRpc(int id)
+    [ServerRpc(RequireOwnership = false)]
+    public void Spawn_Item_ServerRpc(int id, ulong playerID)
     {
         foreach(Item_Info item in csTable.Instance.allItem_List)
         {
             if(id== item.id)
             {
-                GameObject slotItem = Instantiate(item.gameObject);
+                GameObject item_ = Instantiate(item.gameObject);
 
-                slotItem.GetComponent<NetworkObject>().Spawn();
-                Get_Item(slotItem.GetComponent<Item_Info>(), item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+                item_.GetComponent<NetworkObject>().Spawn();
+
+                if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerID, out NetworkObject networkObject))
+                {
+                    networkObject.GetComponent<Player_Inventory>().Get_Item(item_.GetComponent<Item_Info>(), item_.GetComponent<Item_Info>().max_Have_Count);
+                }
+
             }
         }
     }
