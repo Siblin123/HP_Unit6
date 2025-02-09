@@ -128,6 +128,10 @@ public class Player_Inventory : Inventory_Manager
             {
                 if (networkObject_.GetComponent<NetworkObject>().IsOwnedByServer)//생성은 서버 에서만
                 {
+                    if (csTable.Instance.gameManager.player.GetComponent<NetworkObject>().IsOwnedByServer == false)
+                        return;//서버에서만 생성
+
+
                     Item_Info item = null;
 
                     item = slot.item;
