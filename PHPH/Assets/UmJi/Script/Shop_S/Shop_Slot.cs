@@ -34,6 +34,7 @@ public class Shop_Slot : NetworkBehaviour
     public void buy_Slot() // 아이템 구매
     {
 
+
         // 구매 가능할때
         if (buy_C == false)
         {
