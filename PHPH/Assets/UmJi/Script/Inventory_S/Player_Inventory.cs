@@ -123,24 +123,24 @@ public class Player_Inventory : Inventory_Manager
 
 
            
-
-            if (IsServer)//생성은 서버 에서만
+            if(NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerId, out NetworkObject networkObject_))
             {
-                Item_Info item = null;
+                if (networkObject_.GetComponent<NetworkBehaviour>().IsServer)//생성은 서버 에서만
+                {
+                    Item_Info item = null;
 
-                item = slot.item;
+                    item = slot.item;
 
-                GameObject slotItem = Instantiate(item.gameObject);
+                    GameObject slotItem = Instantiate(item.gameObject);
 
-                slotItem.GetComponent<NetworkObject>().Spawn();
-                Get_Item(slotItem.GetComponent<Item_Info>(), item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+                    slotItem.GetComponent<NetworkObject>().Spawn();
+                    Get_Item(slotItem.GetComponent<Item_Info>(), item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+                }
+                else
+                {
+                    Spawn_Item_ServerRpc(slot.item.id, playerId);
+                }
             }
-            else
-            {
-                Spawn_Item_ServerRpc(slot.item.id, playerId);
-            }
-
-          
         }
     }
 
