@@ -181,8 +181,6 @@ public class Player_Inventory : Inventory_Manager
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-            print(scroll);
-
             if (scroll > 0f) // 휠을 위로 올릴 때 (왼쪽으로 이동)
             {
                 currentSlot--;
