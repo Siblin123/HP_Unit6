@@ -21,32 +21,34 @@ public class PlayerStatus : PlayerGadget
 
     // status
     public float maxHp;
-    public float hp;
+    public float curhp;
     public float maxStamina;
-    public float stamina;
+    public float curstamina;
     public float stamina_RegenSpeed;
     public float stamina_useSpeed;
 
     public int stamina_percent;
-
-
-    [Header("장비 장착으로 인한 추가 능력치")]
-    public float addHp;
-    public float addStamina;
-    public float addSpeed;
-    public float addJumpPower;
-    public float adadLightRage;
-
-
-
-    [HideInInspector]public float horizontalInput;
-    float VerticalInput;
 
     // Move()
     public float moveSpeed = 5f;
     public float runSpeed = 5f;
     public float jumpPower = 5f;
     public float curSpeed;
+    public float curlightRage;
+
+    [Header("장비 장착으로 인한 추가 능력치")]
+    public float addHp;
+    public float addStamina;
+    public float addSpeed;
+    public float addJumpPower;
+    public float addLightRage;
+
+
+
+    [HideInInspector]public float horizontalInput;
+    float VerticalInput;
+
+
 
     public Vector3 movedir;
     Vector2 enterStairPos;
@@ -132,8 +134,8 @@ public class PlayerStatus : PlayerGadget
     public override void init()
     {
         base.init();
-        hp = maxHp;
-        stamina = maxStamina;
+        curhp = maxHp;
+        curstamina = maxStamina;
 
         hpBar.maxValue = maxHp;
         staminaBar.maxValue = maxStamina;
@@ -143,8 +145,8 @@ public class PlayerStatus : PlayerGadget
     {
         if (IsOwner) 
         {
-            hpBar.value = hp;
-            staminaBar.value = stamina;
+            hpBar.value = curhp;
+            staminaBar.value = curstamina;
         }
 
     }
@@ -159,19 +161,19 @@ public class PlayerStatus : PlayerGadget
             return;
 
 
-        if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && stamina > 1)
+        if (Input.GetKey(KeyCode.LeftShift) && horizontalInput != 0 && curstamina > 1)
         {
             if (rb.linearVelocityY == 0 && (AnimationState != AnimationType.jump_up || AnimationState != AnimationType.jump_down))
             {
                 ChangeAnim(AnimationType.run);
             }
             curSpeed = runSpeed;
-            stamina -= stamina_useSpeed * Time.deltaTime;
+            curstamina -= stamina_useSpeed * Time.deltaTime;
         }
         else
         {
-            if (stamina <= maxStamina)
-                stamina += stamina_RegenSpeed * Time.deltaTime;
+            if (curstamina <= maxStamina)
+                curstamina += stamina_RegenSpeed * Time.deltaTime;
 
             if (horizontalInput != 0)
             {
@@ -292,9 +294,9 @@ public class PlayerStatus : PlayerGadget
         int layer = LayerMask.NameToLayer("Player_NoneCol");
         gameObject.layer = layer;
 
-        hp -= value;
+        curhp -= value;
         ChangeAnim(AnimationType.get_damage);
-        if (hp <= 0)
+        if (curhp <= 0)
         {
             // 플레이어 사망 처리
         }
@@ -335,39 +337,37 @@ public class PlayerStatus : PlayerGadget
 
 
 
-    public void Change_GadgetItem(GatgetItem item)//장비 아이템 장착, 해제시 사용
+    public void Change_GadgetItem()//장비 아이템 장착, 해제시 사용
     {
         if (!IsOwner)
             return;
 
+        addHp = 0;
+        addSpeed = 0;
+        addStamina = 0;
+        addJumpPower = 0;
+        addLightRage = 0;
 
 
-        if(item.addHp!=0)
+
+        for (int i = 0; i < csTable.Instance.Player_Inventory.godGet_List.Count; i++)
         {
-            addHp = item.addHp;
+            if (csTable.Instance.Player_Inventory.godGet_List[i].item != null)
+            {
+                GatgetItem slotItem = csTable.Instance.Player_Inventory.godGet_List[i].item.GetComponent<GatgetItem>();
+
+                addHp += slotItem.addHp;
+                addSpeed += slotItem.addSpeed;
+                addStamina += slotItem.addstamina;
+                addJumpPower += slotItem.addJumpPower;
+                addLightRage += slotItem.addLightRage;
+            }
         }
 
-        if(item.adstamina != 0)
-        {
-            addStamina = item.adstamina;
-        }
 
-        if(item.addSpeed != 0)
-        {
-            addSpeed = item.addSpeed;
-        }
-
-        if(item.addJumpPower !=0)
-        {
-            addJumpPower=item.addJumpPower;
-        }
-
-        if(item.adadLightRage !=0)
-        {
-            adadLightRage = item.adadLightRage;
-        }
-     
     }
+
+
     public void LookMouse()
     {
         if(!IsOwner)
