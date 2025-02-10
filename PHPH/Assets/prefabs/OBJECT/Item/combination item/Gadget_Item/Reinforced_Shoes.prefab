@@ -136,3 +136,8 @@ MonoBehaviour:
   hand_Item_Sprite: {fileID: 0}
   have_Count: 0
   curItemType: 2
+  addHp: 0
+  addstamina: 0
+  addSpeed: 0
+  addJumpPower: 0
+  addLightRage: 0

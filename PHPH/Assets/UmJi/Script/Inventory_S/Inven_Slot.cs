@@ -93,10 +93,7 @@ public class Inven_Slot : Inventory_Manager
                 item_I.enabled = false;
             }
 
-            if (getGet_C)
-            {
-                csTable.Instance.gameManager.player.Change_GadgetItem(null);
-            }
+          
         }
         else
         {
@@ -114,11 +111,14 @@ public class Inven_Slot : Inventory_Manager
                 item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             }
 
-            if (getGet_C)
-            {
-                csTable.Instance.gameManager.player.Change_GadgetItem(item.GetComponent<GatgetItem>());
-            }
+          
         }
+
+        if (getGet_C)//장비 능력치 적용
+        {
+            csTable.Instance.gameManager.player.Change_GadgetItem();
+        }
+
     }
 
     public void Pluse_Item(int num)
