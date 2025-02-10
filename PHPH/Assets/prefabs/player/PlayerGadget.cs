@@ -128,6 +128,24 @@ public class PlayerGadget : NetworkBehaviour
             curItem.Attack();
     }
 
+
+    public void Change_GadgetItem()//장비 아이템 장착, 해제시 사용
+    {
+        if (!IsOwner)
+            return;
+
+        
+
+
+    }
+
+
+
+
+
+
+
+
     public void Obj_Installable(int id)//오브젝트 설치 ============설치 아이템일 경우 사용 ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
     {
         Obj_Installable_ServerRpc(id, csTable.Instance.gameManager.player.transform.position);

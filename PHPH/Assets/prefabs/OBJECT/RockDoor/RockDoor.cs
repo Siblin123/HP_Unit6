@@ -27,9 +27,21 @@ public class RockDoor : baseStatus
         }
        
     }
-    // Update is called once per frame
-    void Update()
+
+
+    [ServerRpc]
+    public void open_Door_ServerRpc(ulong networkId)
     {
-        
+        open_Door_ClientRpc(networkId);
+    }
+
+    [ClientRpc]
+    public void open_Door_ClientRpc(ulong networkId)
+    {
+
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(networkId, out NetworkObject door))
+        {
+            door.GetComponent<Collider2D>().isTrigger = true;
+        }
     }
 }

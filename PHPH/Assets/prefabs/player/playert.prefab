@@ -3476,6 +3476,10 @@ PrefabInstance:
       value: InventoryCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 1964720097591465316, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: -8275777467435045516, guid: 4f6f7a485fba41e498cecfc98ba776d6, type: 3}
+    - target: {fileID: 1964720097591465316, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1
       objectReference: {fileID: 0}
@@ -3487,6 +3491,10 @@ PrefabInstance:
       propertyPath: unRock_C
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3861218357112269225, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: -7985810979296012418, guid: 8e78988d8c598d44596405c78924ae65, type: 3}
     - target: {fileID: 3861218357112269225, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1
@@ -3592,6 +3600,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7656430354600563482, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 7641710359184631094, guid: 1776a4638537d0140a4b5cbc4b3f2c19, type: 3}
+    - target: {fileID: 7656430354600563482, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1
       objectReference: {fileID: 0}
@@ -3607,6 +3619,10 @@ PrefabInstance:
       propertyPath: unRock_C
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9108016506394250227, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 5025614630257268011, guid: 6c42d80db7bd32f4cb221f47cf05bb8f, type: 3}
     - target: {fileID: 9108016506394250227, guid: 9a04cd94c350ead439f9a3cc743b85a8, type: 3}
       propertyPath: unRock_C
       value: 1

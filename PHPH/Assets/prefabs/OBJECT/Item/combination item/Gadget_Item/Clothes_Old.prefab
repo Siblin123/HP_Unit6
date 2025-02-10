@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3945068926915331048}
   - component: {fileID: 3066767853505071935}
-  - component: {fileID: 1850743953188320391}
   - component: {fileID: -9222777465434686703}
+  - component: {fileID: 5025614630257268011}
   m_Layer: 15
   m_Name: Clothes_Old
   m_TagString: Cloth
@@ -59,27 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &1850743953188320391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4320147391297693229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  item_Name: "\uD5CC\uC637"
-  id: 121
-  explan: "\uD50C\uB808\uC774\uC5B4\uB97C \uAFB8\uBC00\uC218 \uC788\uB294 \uC637\uC774\uB2E4."
-  price: 80
-  max_Have_Count: 1
-  colTime: 0
-  have_Count: 0
-  curItemType: 2
 --- !u!212 &-9222777465434686703
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135,3 +114,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5025614630257268011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320147391297693229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dbcf6358382b54e8954ead716ff0b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  item_Name: "\uD5CC\uC637"
+  id: 121
+  explan: "\uD50C\uB808\uC774\uC5B4\uB97C \uAFB8\uBC00\uC218 \uC788\uB294 \uC637\uC774\uB2E4."
+  price: 80
+  max_Have_Count: 1
+  colTime: 0
+  hand_Item_Sprite: {fileID: 0}
+  have_Count: 0
+  curItemType: 2

@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class Timing_Game : MonoBehaviour
@@ -40,7 +41,7 @@ public class Timing_Game : MonoBehaviour
     {
 
         if (!isGameStarted)
-            return;
+            return; 
 
         pointAngle += currentPointSpeed * Time.deltaTime;
 
@@ -66,7 +67,7 @@ public class Timing_Game : MonoBehaviour
             }
             else
             {
-                Rewrold();
+                print("fail");
               
             }
         }
@@ -78,7 +79,7 @@ public class Timing_Game : MonoBehaviour
         switch (curObj.name)
         {
             case "RockDoor":
-                curObj.GetComponent<Collider2D>().isTrigger = true;
+                curObj.GetComponent<RockDoor>().open_Door_ServerRpc(curObj.GetComponent<NetworkObject>().NetworkObjectId);
                 break;
 
 

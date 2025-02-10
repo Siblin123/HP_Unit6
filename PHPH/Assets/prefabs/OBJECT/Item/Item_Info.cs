@@ -45,6 +45,7 @@ public class Item_Info : NetworkBehaviour
       
     }
 
+
     //====================================↑네트워크 오브젝트 추가===========================================================
 
     public override void OnNetworkSpawn()

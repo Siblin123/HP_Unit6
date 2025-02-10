@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 903312644586922029}
   - component: {fileID: -4142071883707618530}
-  - component: {fileID: 7363456662194503442}
   - component: {fileID: 8173543932882775200}
+  - component: {fileID: 3014190774860724192}
   m_Layer: 15
   m_Name: Flashlight_base
   m_TagString: FlashLigth
@@ -59,28 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &7363456662194503442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3599605343477943944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  item_Name: "\uAE30\uBCF8 \uC190\uC804\uB4F1"
-  id: 122
-  explan: "\uC5B4\uB450\uC6B8 \uB584\uC758 \uC2DC\uC57C \uBC94\uC704\uB97C \uB354
-    \uB113\uAC8C \uB9CC\uB4E4\uC5B4\uC900\uB2E4."
-  price: 192
-  max_Have_Count: 1
-  colTime: 0
-  have_Count: 0
-  curItemType: 2
 --- !u!212 &8173543932882775200
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -136,3 +114,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3014190774860724192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3599605343477943944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dbcf6358382b54e8954ead716ff0b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  item_Name: "\uAE30\uBCF8 \uC190\uC804\uB4F1"
+  id: 122
+  explan: "\uC5B4\uB450\uC6B8 \uB584\uC758 \uC2DC\uC57C \uBC94\uC704\uB97C \uB354
+    \uB113\uAC8C \uB9CC\uB4E4\uC5B4\uC900\uB2E4."
+  price: 192
+  max_Have_Count: 1
+  colTime: 0
+  hand_Item_Sprite: {fileID: 0}
+  have_Count: 0
+  curItemType: 2

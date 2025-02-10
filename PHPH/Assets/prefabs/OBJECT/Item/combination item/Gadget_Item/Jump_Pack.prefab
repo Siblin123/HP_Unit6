@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 800798247651057382}
   - component: {fileID: -8070454335569921481}
-  - component: {fileID: 4907574719751264335}
   - component: {fileID: -589547527627991159}
+  - component: {fileID: -2389187284310536334}
   m_Layer: 15
   m_Name: Jump_Pack
   m_TagString: JumpPack
@@ -59,27 +59,6 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
---- !u!114 &4907574719751264335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73545527902552995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a92ba8e818be1842a4ba94f0f57bedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
-  item_Name: "\uC810\uD504\uD329"
-  id: 124
-  explan: "\uC810\uD504 \uB192\uC774\uAC00 \uC62C\uB77C\uAC04\uB2E4."
-  price: 240
-  max_Have_Count: 1
-  colTime: 0
-  have_Count: 0
-  curItemType: 2
 --- !u!212 &-589547527627991159
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135,3 +114,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2389187284310536334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73545527902552995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04dbcf6358382b54e8954ead716ff0b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  item_Name: "\uC810\uD504\uD329"
+  id: 124
+  explan: "\uC810\uD504 \uB192\uC774\uAC00 \uC62C\uB77C\uAC04\uB2E4."
+  price: 240
+  max_Have_Count: 1
+  colTime: 0
+  hand_Item_Sprite: {fileID: 0}
+  have_Count: 0
+  curItemType: 2
