@@ -14,12 +14,14 @@ public class Inven_Slot : Inventory_Manager
     [Header("잠겨있는 슬롯 사용 불가능 = false")]
     public bool unRock_C;
 
+    [Header("장비칸이면 체크")]
+    public bool getGet_C; // 장비 인벤토리면 체크
+
     public Item_Info item; // 소지한 아이템
     public int have_Count; // 소지한 아이템 개수
 
     public Image item_I;
     public TextMeshProUGUI count_T;
-
 
     private RectTransform rectTransform;
     public bool follow_C;
@@ -90,6 +92,11 @@ public class Inven_Slot : Inventory_Manager
             {
                 item_I.enabled = false;
             }
+
+            if (getGet_C)
+            {
+                csTable.Instance.gameManager.player.Change_GadgetItem(null);
+            }
         }
         else
         {
@@ -105,6 +112,11 @@ public class Inven_Slot : Inventory_Manager
             {
                 item_I.enabled = true;
                 item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+            }
+
+            if (getGet_C)
+            {
+                csTable.Instance.gameManager.player.Change_GadgetItem(item.GetComponent<GatgetItem>());
             }
         }
     }
