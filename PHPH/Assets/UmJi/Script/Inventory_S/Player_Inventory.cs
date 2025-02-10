@@ -76,7 +76,6 @@ public class Player_Inventory : Inventory_Manager
 
     public bool Buy_Item(Item_Info item, ulong playerId, ulong slotId) // 아이템 구매
     {
-        print("222222222222222222222222222222");
         if (!IsOwner)
         {
             return false;
@@ -85,13 +84,11 @@ public class Player_Inventory : Inventory_Manager
         if (playerId != NetworkObjectId)
             return false;
 
-        print("3333333333333333333333333");
         // 소지금액이 구매할 아이템의 금액보다 많으면
         if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
         {
             if (Get_Item_OK(item, item.max_Have_Count)) // 인벤토리에 아이템을 넣 을 수 있는지 확인
             {
-                print("4444444444444444444444444444444");
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
                 money_Slot.Update_Slot(money_Slot.item, money);
@@ -114,13 +111,11 @@ public class Player_Inventory : Inventory_Manager
     [ServerRpc]
     public void Slot_Rock_ServerRpc(ulong slotId, ulong playerId)
     {
-        print("5555555555555555555555");
         Slot_Rock_ClientRpc(slotId, playerId);
     }
     [ClientRpc]
     public void Slot_Rock_ClientRpc(ulong slotId, ulong playerId)
     {
-        print("+66666666666666666666666666");
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
             Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
@@ -146,12 +141,10 @@ public class Player_Inventory : Inventory_Manager
                     GameObject slotItem = Instantiate(item.gameObject);
 
                     slotItem.GetComponent<NetworkObject>().Spawn();
-                    print("7777777777777777777777777777_S");
                     Get_Item(slotItem.GetComponent<Item_Info>(), item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
                 }
                 else
                 {
-                    print("777777777777777777777777777777_C");
                     Spawn_Item_ServerRpc(slot.item.id, playerId);
                 }
             }
@@ -161,7 +154,6 @@ public class Player_Inventory : Inventory_Manager
     [ServerRpc(RequireOwnership = false)]
     public void Spawn_Item_ServerRpc(int id, ulong playerID)
     {
-        print("888888888888888888888888888888" + playerID);
         foreach(Item_Info item in csTable.Instance.allItem_List)
         {
             if(id== item.id)
@@ -173,7 +165,6 @@ public class Player_Inventory : Inventory_Manager
                     GameObject item_ = Instantiate(item.gameObject);
 
                     item_.GetComponent<NetworkObject>().Spawn();
-                    print("9999999999999999999999999999");
 
                     Spawn_Item_ClientRpc(item_.GetComponent<NetworkObject>().NetworkObjectId, playerID);
                     break;

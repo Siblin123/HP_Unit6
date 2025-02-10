@@ -203,7 +203,7 @@ public class Inventory_Manager : NetworkBehaviour
             else
             {
                 // 이동 가능한 슬롯일때
-                if (slot1.item.gameObject.CompareTag(slot2.gameObject.tag))
+                if (slot1.item.gameObject.CompareTag(slot2.gameObject.tag)) // 장비 칸 이동
                 {
                     Change_Slots(slot1, slot2);
                 }
@@ -222,8 +222,6 @@ public class Inventory_Manager : NetworkBehaviour
         temp.Update_Slot(slot1.item, slot1.have_Count);
         slot1.Update_Slot(slot2.item, slot2.have_Count);
         slot2.Update_Slot(temp.item, temp.have_Count);
-
-
     }
 
     private void Update_Slot(Inven_Slot slot1, Inven_Slot slot2)
