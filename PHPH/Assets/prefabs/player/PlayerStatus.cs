@@ -29,6 +29,16 @@ public class PlayerStatus : PlayerGadget
 
     public int stamina_percent;
 
+
+    [Header("장비 장착으로 인한 추가 능력치")]
+    public float addHp;
+    public float addStamina;
+    public float addSpeed;
+    public float addJumpPower;
+    public float adadLightRage;
+
+
+
     [HideInInspector]public float horizontalInput;
     float VerticalInput;
 
@@ -325,8 +335,39 @@ public class PlayerStatus : PlayerGadget
 
 
 
+    public void Change_GadgetItem(GatgetItem item)//장비 아이템 장착, 해제시 사용
+    {
+        if (!IsOwner)
+            return;
 
 
+
+        if(item.addHp!=0)
+        {
+            addHp = item.addHp;
+        }
+
+        if(item.adstamina != 0)
+        {
+            addStamina = item.adstamina;
+        }
+
+        if(item.addSpeed != 0)
+        {
+            addSpeed = item.addSpeed;
+        }
+
+        if(item.addJumpPower !=0)
+        {
+            addJumpPower=item.addJumpPower;
+        }
+
+        if(item.adadLightRage !=0)
+        {
+            adadLightRage = item.adadLightRage;
+        }
+     
+    }
     public void LookMouse()
     {
         if(!IsOwner)

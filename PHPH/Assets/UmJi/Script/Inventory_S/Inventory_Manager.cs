@@ -222,6 +222,8 @@ public class Inventory_Manager : NetworkBehaviour
         temp.Update_Slot(slot1.item, slot1.have_Count);
         slot1.Update_Slot(slot2.item, slot2.have_Count);
         slot2.Update_Slot(temp.item, temp.have_Count);
+
+
     }
 
     private void Update_Slot(Inven_Slot slot1, Inven_Slot slot2)

@@ -35,6 +35,9 @@ public class PlayerGadget : NetworkBehaviour
     public float longAttackDamegeUp_Value;//원거리공격력 증가량
     public float shortAttackDamageUp_Value;//근거리 공격력 증가량
 
+    
+
+
     [Header("채집으로 인한 특수 아이템을 획득확률")]
     public float get_gethering_Item_Per;
     [Header("광질로 인한 특수 아이템 획득확률")]
@@ -129,15 +132,6 @@ public class PlayerGadget : NetworkBehaviour
     }
 
 
-    public void Change_GadgetItem()//장비 아이템 장착, 해제시 사용
-    {
-        if (!IsOwner)
-            return;
-
-        
-
-
-    }
 
 
 
