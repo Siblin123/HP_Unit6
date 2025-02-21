@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 using Unity.Netcode;
 using System.Collections;
+
 using static System.TimeZoneInfo;
 public class GameManager : NetworkBehaviour
 {
@@ -22,6 +23,15 @@ public class GameManager : NetworkBehaviour
     public  NetworkVariable<int> survivalDay = new NetworkVariable<int>(0);
     public List<Enemy> all_SpawnMonster;
 
+    [Header("작물 및 오브젝트 생성을 위한 변수")]
+    public GameObject Map_Grid;
+    public List<Map_ObjectCreateManager> map_ObjectCreateManagers;
+
+    private void Start()
+    {
+        //Map_Grid의 자식중에 Map_ObjectCreateManager를 찾아서 리스트에 추가
+        map_ObjectCreateManagers.AddRange(Map_Grid.GetComponentsInChildren<Map_ObjectCreateManager>());
+    }
 
     private void Update()
     {
@@ -66,7 +76,13 @@ public class GameManager : NetworkBehaviour
         if (curTime >= 24)
         {
             survivalDay.Value++;
-            curTime = 0;
+            curTime = 0;          
+
+            // 모든 개체에 대해 Create_mapObject() 실행
+            foreach (var manager in map_ObjectCreateManagers)
+            {
+                manager.Create_mapObject();
+            }
         }
     }
 

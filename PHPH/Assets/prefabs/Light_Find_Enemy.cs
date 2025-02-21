@@ -15,8 +15,12 @@ public class Light_Find_Enemy : NetworkBehaviour
 
     public List<Enemy> checkEnemy; // 발견된 적들을 저장할 리스트
     public List<Enemy> lastCheckEnemy; // 발견된 적들을 저장할 리스트
+    public List<Enemy> allcheckedEnemy; // 발견됬던 적을 저장할 리스트
+
     public bool isE;
 
+    [Header("체크 되어있으면 밤")]
+    public bool isNight;
 
     private void Start()
     {
@@ -48,6 +52,9 @@ public class Light_Find_Enemy : NetworkBehaviour
 
     void FindEnemy()
     {
+
+        if (night_light2D.GetComponent<Light2D>().enabled == false)
+            return;
 
         Vector2 lightPosition = light2D.transform.position;
         float outerRadius = light2D.pointLightOuterRadius;
@@ -90,6 +97,16 @@ public class Light_Find_Enemy : NetworkBehaviour
                     isE = true;
 
                 }
+
+
+
+
+
+                //감지된 모든적을 저장 <- 낮이 되면 감지되있던 모든 적들의 모습을 보이게 하기 위함
+                if (enemy != null && !allcheckedEnemy.Contains(enemy))
+                {
+                    allcheckedEnemy.Add(enemy);
+                }
             }
 
         }
@@ -121,10 +138,19 @@ public class Light_Find_Enemy : NetworkBehaviour
         if (isSun)//낮일때
         {
             night_light2D.GetComponent<Light2D>().enabled = false;
+            isNight=false;
+
+            //낮이 되면 감지되 모든 적들의 모습을 보이게 해야함
+            foreach (Enemy e in allcheckedEnemy)
+            {
+                e.GetComponent<SpriteRenderer>().enabled = true; // 현재 적 활성화
+            }
+            allcheckedEnemy.Clear();
         }
         else
         {
             night_light2D.GetComponent<Light2D>().enabled = true;
+            isNight = true;
         }
 
 
