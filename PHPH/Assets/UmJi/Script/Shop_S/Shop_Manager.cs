@@ -179,7 +179,7 @@ public class Shop_Manager : interaction
 
         foreach (Item_Info item in csTable.Instance.allItem_List)
         {
-            if(item == csTable.Instance.allItem_List[item_Id])
+            if(item.id == item_Id)
             {
                 slot_List[num].Update_Slot(item);
             }
