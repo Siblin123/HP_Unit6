@@ -68,7 +68,7 @@ public class Inven_Slot : Inventory_Manager
 
         if (miri_C == true) // 미리 인벤토리면
         {
-            print(name);
+            //print(name);
             if (Input.GetKeyDown(slot_Count))
             {              
                 

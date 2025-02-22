@@ -38,19 +38,19 @@ public class NetworkSpawnManager : MonoBehaviour
         // 이미 리스트에 존재하는지 확인
         if (!spawnedObjectsss.Contains(obj.NetworkObjectId))
         {
-            Debug.Log($"{obj.name}이(가) Spawn됨!");
+           // Debug.Log($"{obj.name}이(가) Spawn됨!");
             OnSpawned?.Invoke(obj);
             spawnedObjectsss.Add(obj.NetworkObjectId);
         }
         else
         {
-            Debug.Log($"{obj.name}은 이미 Spawn된 상태입니다.");
+            //Debug.Log($"{obj.name}은 이미 Spawn된 상태입니다.");
         }
     }
 
     public static void RegisterDespawn(NetworkObject obj)
     {
-        Debug.Log($"{obj.name}이(가) Despawn됨!");
+       // Debug.Log($"{obj.name}이(가) Despawn됨!");
 
         // 리스트에서 오브젝트 제거
         if (spawnedObjectsss.Contains(obj.NetworkObjectId))
