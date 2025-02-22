@@ -294,6 +294,8 @@ public class Player_Inventory : Inventory_Manager
                     money_Slot = slot_List[i];
 
                     money = slot_List[i].have_Count;
+
+                    break;
                 }
             }
         }
@@ -304,6 +306,6 @@ public class Player_Inventory : Inventory_Manager
 
             money = 0;
         }
-        money_T.text = slot_List[i].have_Count.ToString("N0");
+        money_T.text = money.ToString("N0");
     }
 }
