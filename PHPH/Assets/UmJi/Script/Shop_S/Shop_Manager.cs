@@ -159,7 +159,7 @@ public class Shop_Manager : interaction
     }
 
     [ServerRpc]
-    public void List_Bring()
+    public void List_Bring_ServerRpc()
     {
         List_Bring_ClientRpc();
     }

@@ -43,7 +43,7 @@ public class PlayerControl : PlayerStatus
             Camera.main.GetComponent<CinemachineBrain>().IsLive(virtualCamera);
             csTable.Instance.gameManager.player = this;
             csTable.Instance.gameManager.CheckLight();//현제 시간에 맞게 라이트 조정
-            Shop_Manager.instance.List_Bring();
+            Shop_Manager.instance.List_Bring_ServerRpc();
         }
 
     }
