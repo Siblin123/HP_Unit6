@@ -168,39 +168,40 @@ public class Shop_Manager : interaction
         for (int i = 0; i < slot_List.Count; i++)
         {
 
-                if(i < 6)
+            if (i < 6)
+            {
+                if (combi_N < 2) // 각 두개씩 나옴
                 {
-                    if (combi_N < 2) // 각 두개씩 나옴
-                    {
-                        select_N = CheckDuplicate(combination_Item_List, select_N);
-                        slot_List[i].Update_Slot(combination_Item_List[select_N]);
-                        Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
-                        combi_N++;
-                    }
-                    else if (base_N < 2)
-                    {
-                        select_N = CheckDuplicate(base_Item_List, select_N);
-                        slot_List[i].Update_Slot(base_Item_List[select_N]);
-                        Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
-                        base_N++;
-                    }
-                    else
-                    {
-                        //int rand = Random.Range(0, all_Item_List.Count);
-                        select_N = CheckDuplicate(all_Item_List, select_N);
-                        slot_List[i].Update_Slot(all_Item_List[select_N]);
-                        Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
-                    }
+                    select_N = CheckDuplicate(combination_Item_List, select_N);
+                    slot_List[i].Update_Slot(combination_Item_List[select_N]);
+                    slot_List[i].buy_C = false;
+                    Update_Slot_ClientRpc(combination_Item_List[select_N].id, i);
+                    combi_N++;
                 }
-                else // 여기부턴 연설가의 기억으로 해제된 구역으로 서버 동기화 X
+                else if (base_N < 2)
                 {
-                    int rand = Random.Range(0, all_Item_List.Count);
-                    //select_N = CheckDuplicate(all_Item_List, select_N);
-                    slot_List[i].Update_Slot(all_Item_List[rand]);
-                    //Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
+                    select_N = CheckDuplicate(base_Item_List, select_N);
+                    slot_List[i].Update_Slot(base_Item_List[select_N]);
+                    slot_List[i].buy_C = false;
+                    Update_Slot_ClientRpc(base_Item_List[select_N].id, i);
+                    base_N++;
+                }
+                else
+                {
+                    select_N = CheckDuplicate(all_Item_List, select_N);
+                    slot_List[i].Update_Slot(all_Item_List[select_N]);
+                    slot_List[i].buy_C = false;
+                    Update_Slot_ClientRpc(all_Item_List[select_N].id, i);
                 }
             }
+            else // 여기부턴 연설가의 기억으로 해제된 구역으로 서버 동기화 X
+            {
+                int rand = Random.Range(0, all_Item_List.Count);
+                slot_List[i].Update_Slot(all_Item_List[rand]);
+                slot_List[i].buy_C = false;
+            }
         }
+    }
     
 
     [ClientRpc]
@@ -217,6 +218,7 @@ public class Shop_Manager : interaction
             if (all_Item_List[j].id == id)
             {
                 GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].Update_Slot(all_Item_List[j]);
+                GameObject.Find("Shop_Manager").GetComponent<Shop_Manager>().slot_List[index].buy_C = false;
                 break;
             }
         }

@@ -283,7 +283,8 @@ public class Player_Inventory : Inventory_Manager
 
     public void Money_Slot_Find()
     {
-        for (int i = 0; i < slot_List.Count; i++)
+        int i = 0;
+        for (i = 0; i < slot_List.Count; i++)
         {
             if (slot_List[i].item != null)
             {
@@ -293,10 +294,16 @@ public class Player_Inventory : Inventory_Manager
                     money_Slot = slot_List[i];
 
                     money = slot_List[i].have_Count;
-
-                    money_T.text = slot_List[i].have_Count.ToString("N0");
                 }
             }
         }
+
+        if (i == slot_List.Count)
+        {
+            money_Slot = null;
+
+            money = 0;
+        }
+        money_T.text = slot_List[i].have_Count.ToString("N0");
     }
 }
