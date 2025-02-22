@@ -105,7 +105,6 @@ public class Inventory_Manager : NetworkBehaviour
                     else
                     {
                         p_I.slot_List[i].Pluse_Item(count);
-                        //return true;
                         break;
                     }
                 }
@@ -121,7 +120,6 @@ public class Inventory_Manager : NetworkBehaviour
                 {
                     p_I.slot_List[j].Update_Slot(item, count);
                     break;
-                    //return true;
                 }
             }
         }
@@ -130,11 +128,9 @@ public class Inventory_Manager : NetworkBehaviour
         if(j == p_I.unRock_SlotCount)
         {
             print("±×¸¸¸Ô¾î µÅÁö¾ä");
-            //return false;
         }
 
         csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
-        //return false;
     }
 
     // ¾ÆÀÌÅÛ ÆÇ¸Å
