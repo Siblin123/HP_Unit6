@@ -120,6 +120,19 @@ public class GameManager : NetworkBehaviour
     }
 
 
+    public void CheckLight()
+    {
+        if (is_afterNoonNight.Value == 0)
+        {  // 5½Ã~6½Ã: Á¡Á¡ ¹à¾ÆÁü
+            sun.intensity =1;
+        }
+        else
+        {
+            // 18½Ã~19½Ã: Á¡Á¡ ¾îµÎ¿öÁü
+
+            sun.intensity = 0.2f;
+        }
+    }
 
     void CheckGameRes()
     {
