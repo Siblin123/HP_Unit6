@@ -32,7 +32,6 @@ public class PlayerControl : PlayerStatus
         {
             Listener.enabled = false;
             player_light.enabled = false;
-           
         }
         else
         {
@@ -45,11 +44,12 @@ public class PlayerControl : PlayerStatus
             csTable.Instance.gameManager.player = this;
             csTable.Instance.gameManager.CheckLight();//현제 시간에 맞게 라이트 조정
 
-          
+           
         }
 
         if (IsServer)
             Shop_Manager.instance.List_Bring_ServerRpc();
+
     }
 
     public override void Update()

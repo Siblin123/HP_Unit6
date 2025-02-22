@@ -161,19 +161,32 @@ public class Shop_Manager : interaction
     [ServerRpc]
     public void List_Bring_ServerRpc()
     {
+        if (!IsServer) return;
         print("서버");
-        List_Bring_ClientRpc();
+        for (int i = 0; i < slot_List.Count; i++)
+        {
+            if (slot_List[i].item != null)
+            {
+                List_Bring_ClientRpc(slot_List[i].item.id, i);
+            }
+        }
     }
 
     [ClientRpc]
-    public void List_Bring_ClientRpc()
+    public void List_Bring_ClientRpc(int item_Id, int num)
     {
         print("클라");
-        for(int i = 0; i < slot_List.Count; i++)
-        {
-            if(slot_List[i].item!=null)
-                print(slot_List[i].item.name);
 
+        foreach(Item_Info item in csTable.Instance.allItem_List)
+        {
+            if(item.id == item_Id)
+            {
+                for(int i = 0; i < slot_List.Count; i++)
+                {
+                    slot_List[num].Update_Slot(item);
+                    break;
+                }
+            }
         }
     }
 
