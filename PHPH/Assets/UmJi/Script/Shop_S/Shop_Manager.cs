@@ -31,8 +31,6 @@ public class Shop_Manager : interaction
     public TextMeshProUGUI money_T;
     public int money;
 
-    //public GameObject bar_Reset;
-
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
@@ -40,6 +38,7 @@ public class Shop_Manager : interaction
     {
         instance = this;
     }
+
     private void Start()
     {
         for (int i = 0; i < shop_Slot_Ob.transform.childCount; i++)
