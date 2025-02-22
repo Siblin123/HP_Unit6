@@ -5,6 +5,7 @@ using TMPro;
 using Unity.Netcode;
 using static UnityEditor.Progress;
 using static Arm_Anim;
+using NUnit.Framework.Interfaces;
 
 public class Player_Inventory : Inventory_Manager
 {
@@ -14,6 +15,9 @@ public class Player_Inventory : Inventory_Manager
     public GameObject inven_Slot_Ob; // 인벤토리 슬롯 부모
     public GameObject godGet_Ob; // 장비 슬롯 부모
     public GameObject miri_Ob; // 미리보기 인벤토리 부모
+    public GameObject miri_Panel; // 미리보기 판넬
+
+    public int unRock_SlotCount = 6; // 잠금 해제인 인벤토리 개수
 
     public List<Inven_Slot> slot_List;
     public List<Inven_Slot> godGet_List;
@@ -35,7 +39,13 @@ public class Player_Inventory : Inventory_Manager
 
     private void Start()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         instance = this;
+        miri_Panel.SetActive(true);
+
         for (int i = 0; i < inven_Slot_Ob.transform.childCount; i++)
         {
             slot_List.Add(inven_Slot_Ob.transform.GetChild(i).GetComponent<Inven_Slot>());
@@ -50,14 +60,10 @@ public class Player_Inventory : Inventory_Manager
         }
     }
 
-    public override bool Get_Item(Item_Info item, int count) // 재정의
+    public override void Get_Item(Item_Info item, int count) // 재정의
     {
-        if(base.Get_Item(item, count)) 
-        {
-            Miri_Inven_Update();
-            return true;
-        }
-        else { return false; }
+        base.Get_Item(item, count);
+        Miri_Inven_Update();
     }
     
     public void Miri_Inven_Update()
@@ -70,18 +76,24 @@ public class Player_Inventory : Inventory_Manager
 
     public bool Buy_Item(Item_Info item, ulong playerId, ulong slotId) // 아이템 구매
     {
+        if (!IsOwner)
+        {
+            return false;
+        }
+
         if (playerId != NetworkObjectId)
             return false;
 
         // 소지금액이 구매할 아이템의 금액보다 많으면
         if (Shop_Manager.instance.money >= item.max_Have_Count * item.price)
         {
-            if (Get_Item(item, item.max_Have_Count))
+            if (Get_Item_OK(item, item.max_Have_Count)) // 인벤토리에 아이템을 넣 을 수 있는지 확인
             {
                 money -= item.max_Have_Count * item.price;
                 money_T.text = money.ToString();
                 money_Slot.Update_Slot(money_Slot.item, money);
-                Slot_Rock_ServerRpc(slotId);
+                Slot_Rock_ServerRpc(slotId, playerId);
+         
                 return true;
             }
             else // 인벤토리에 칸 없음
@@ -97,23 +109,90 @@ public class Player_Inventory : Inventory_Manager
 
 
     [ServerRpc]
-    public void Slot_Rock_ServerRpc(ulong slotId)
+    public void Slot_Rock_ServerRpc(ulong slotId, ulong playerId)
     {
-        Slot_Rock_ClientRpc(slotId);
+        Slot_Rock_ClientRpc(slotId, playerId);
     }
     [ClientRpc]
-    public void Slot_Rock_ClientRpc(ulong slotId)
+    public void Slot_Rock_ClientRpc(ulong slotId, ulong playerId)
     {
-        print("ASDASDASDASDAASD");
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(slotId, out NetworkObject networkObject))
         {
             Shop_Slot slot = networkObject.GetComponent<Shop_Slot>();
             slot.buy_C = true;
+
+
+
+            if (csTable.Instance.gameManager.player.GetComponent<NetworkObject>().IsOwnedByServer == false)
+                return;//서버에서만 생성
+
+
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerId, out NetworkObject networkObject_))
+            {
+                if (networkObject_.GetComponent<NetworkObject>().IsOwnedByServer)//생성은 서버 에서만
+                {
+                    
+
+
+                    Item_Info item = null;
+
+                    item = slot.item;
+
+                    GameObject slotItem = Instantiate(item.gameObject);
+
+                    slotItem.GetComponent<NetworkObject>().Spawn();
+                    Get_Item(slotItem.GetComponent<Item_Info>(), item.max_Have_Count); //-> 실제로 인벤토리에 아이템 할당 해주는 함수
+                }
+                else
+                {
+                    Spawn_Item_ServerRpc(slot.item.id, playerId);
+                }
+            }
         }
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    public void Spawn_Item_ServerRpc(int id, ulong playerID)
+    {
+        foreach(Item_Info item in csTable.Instance.allItem_List)
+        {
+            if(id== item.id)
+            {
+               
+
+                if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerID, out NetworkObject networkObject))
+                {
+                    GameObject item_ = Instantiate(item.gameObject);
+
+                    item_.GetComponent<NetworkObject>().Spawn();
+
+                    Spawn_Item_ClientRpc(item_.GetComponent<NetworkObject>().NetworkObjectId, playerID);
+                    break;
+                }
+
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void Spawn_Item_ClientRpc(ulong itemid, ulong playerID)
+    {
+        if (csTable.Instance.gameManager.player.NetworkObjectId != playerID)
+            return;
+
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(playerID, out NetworkObject networkObject))
+        {
+            if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(itemid, out NetworkObject item))
+            { 
+                networkObject.GetComponent<Player_Inventory>().Get_Item(item.GetComponent<Item_Info>(), item.GetComponent<Item_Info>().max_Have_Count);
+
+            }
+        }
+    }
     public override void Update()
     {
+        base.Update();
+
         if (!IsOwner)
         {
             return;
@@ -151,8 +230,6 @@ public class Player_Inventory : Inventory_Manager
         // -> 이 호출은 미리 슬롯에서 불러오는 거임
         if(num != 7){
             currentSlot = num;
-            if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
-            else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
             frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
 
             csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
@@ -160,8 +237,6 @@ public class Player_Inventory : Inventory_Manager
         else
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-            print(scroll);
 
             if (scroll > 0f) // 휠을 위로 올릴 때 (왼쪽으로 이동)
             {
@@ -177,12 +252,13 @@ public class Player_Inventory : Inventory_Manager
             // 스크롤을 움직이고 있을 때
             if (scroll != 0)
             {
-                if (miri_List[currentSlot].item != null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
-                else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
                 frame_Ob.transform.position = miri_List[currentSlot].gameObject.transform.position;
                 csTable.Instance.gameManager.player.arm_Anim._anim = ArmType.empty_P;
             }
         }
+
+        if (miri_List[currentSlot].item == null) { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = null; }
+        else { csTable.Instance.gameManager.player.GetComponent<PlayerGadget>().curItem = miri_List[currentSlot].item; }
     }
 
     public void Inventory_On_Off()

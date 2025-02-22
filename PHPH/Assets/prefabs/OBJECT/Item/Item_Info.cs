@@ -12,6 +12,7 @@ public class Item_Info : NetworkBehaviour
     public int price; // 가격
     public int max_Have_Count; // 최대 소지 개수
     public float colTime;
+    public Sprite hand_Item_Sprite; // 손에 들었을때 이미지
 
     public int have_Count; // 현재 소지 개수
 
@@ -35,7 +36,7 @@ public class Item_Info : NetworkBehaviour
     private void Start()
     {
 
-        if (!GetComponent<Rigidbody2D>())
+        if (GetComponent<Rigidbody2D>())
         {
             rb = GetComponent<Rigidbody2D>();
             rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse);
@@ -43,6 +44,24 @@ public class Item_Info : NetworkBehaviour
         f_ItemPos = transform.position;
       
     }
+
+
+    //====================================↑네트워크 오브젝트 추가===========================================================
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        NetworkSpawnManager.RegisterSpawn(NetworkObject);
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+        NetworkSpawnManager.RegisterDespawn(NetworkObject);
+    }
+
+
+    //====================================↑네트워크 오브젝트 추가===========================================================
 
     public virtual void Update()
     {

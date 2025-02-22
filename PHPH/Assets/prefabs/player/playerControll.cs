@@ -42,7 +42,6 @@ public class PlayerControl : PlayerStatus
             virtualCamera.Follow = transform;
             Camera.main.GetComponent<CinemachineBrain>().IsLive(virtualCamera);
             csTable.Instance.gameManager.player = this;
-            csTable.Instance.rpcManager = GetComponent<RPCmanager>();
         }
 
     }

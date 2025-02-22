@@ -80,9 +80,10 @@ MonoBehaviour:
   price: 1
   max_Have_Count: 1
   colTime: 0
+  hand_Item_Sprite: {fileID: 0}
   have_Count: 0
   curItemType: 6
-  max_Memory_Count: 0
+  max_Memory_Count: 12
 --- !u!212 &2987270933964891869
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -11,12 +11,17 @@ public class Inven_Slot : Inventory_Manager
     public KeyCode slot_Count;
     // -----------------------------------------------
 
+    [Header("잠겨있는 슬롯 사용 불가능 = false")]
+    public bool unRock_C;
+
+    [Header("장비칸이면 체크")]
+    public bool getGet_C; // 장비 인벤토리면 체크
+
     public Item_Info item; // 소지한 아이템
     public int have_Count; // 소지한 아이템 개수
 
     public Image item_I;
     public TextMeshProUGUI count_T;
-
 
     private RectTransform rectTransform;
     public bool follow_C;
@@ -39,7 +44,7 @@ public class Inven_Slot : Inventory_Manager
 
     public override void Update()
     {
-        base.Update();
+
         if (follow_C) // 인벤토리 아이템 이동시 마우스를 따라다니는 이미지
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -63,8 +68,11 @@ public class Inven_Slot : Inventory_Manager
 
         if (miri_C == true) // 미리 인벤토리면
         {
+            print(name);
             if (Input.GetKeyDown(slot_Count))
-            {                                                                       // 내 이름 -> 슬롯 번호로 변환해서 할당
+            {              
+                
+                                                                                            // 내 이름 -> 슬롯 번호로 변환해서 할당
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Controll(System.Convert.ToInt32(gameObject.name));
             }
         }
@@ -84,6 +92,8 @@ public class Inven_Slot : Inventory_Manager
             {
                 item_I.enabled = false;
             }
+
+          
         }
         else
         {
@@ -100,7 +110,15 @@ public class Inven_Slot : Inventory_Manager
                 item_I.enabled = true;
                 item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             }
+
+          
         }
+
+        if (getGet_C)//장비 능력치 적용
+        {
+            csTable.Instance.gameManager.player.Change_GadgetItem();
+        }
+
     }
 
     public void Pluse_Item(int num)
@@ -117,60 +135,72 @@ public class Inven_Slot : Inventory_Manager
 
     public void Click_Slot() // 버튼 클릭했을때
     {
-        // 아무것도 클릭 안했으면 본인을 넣어줌
-        if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S == null) 
+        if (unRock_C) // 잠금이 아니면
         {
-            if(item != null) // 아이템이 있을때
+            // 아무것도 클릭 안했으면 본인을 넣어줌
+            if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S == null)
             {
-                Inventory_Button.slot = this;
+                if (item != null) // 아이템이 있을때
+                {
+                    Inventory_Button.slot = this;
 
-                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
+                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
 
-                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
-                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
+                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
 
-                item_I.enabled = false;
-                count_T.enabled = false;
+                    if(item_I!=null && count_T!=null)
+                    {
+                        item_I.enabled = false;
+                        count_T.enabled = false;
+                    }
+                   
+                }
             }
-        }
-        // 이미 선택한게 있으면 서로 위치 교환
-        else
-        {
-            Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
-            Inventory_Button.slot = null;
+            // 이미 선택한게 있으면 서로 위치 교환
+            else
+            {
+                Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
 
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
-        }
+                Inventory_Button.slot = null;
 
-        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
-        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
+            }
+
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+            
+        }
     }
 
     public void Show_Price() // 가격 보여주는 함수
     {
-        Shop_Manager.instance.All_Off();
-
-        // 아이템이 있을때만 보여줌
-        if (item != null)
+        if (unRock_C)
         {
-            price_Ui.SetActive(true);
-            price_Ui.GetComponent<RectTransform>().position = new Vector2(transform.position.x, transform.position.y + 100f);
+            Shop_Manager.instance.All_Off();
 
-            price_T.GetComponent<TextMeshProUGUI>().text = (have_Count * item.price).ToString();
-
-            if (click_C) // 더블클릭하면 판매
+            // 아이템이 있을때만 보여줌
+            if (item != null)
             {
-                if (Sell_Item(this))
+                price_Ui.SetActive(true);
+                price_Ui.GetComponent<RectTransform>().position = new Vector2(transform.position.x, transform.position.y + 100f);
+
+                price_T.GetComponent<TextMeshProUGUI>().text = (have_Count * item.price).ToString();
+
+                if (click_C) // 더블클릭하면 판매
                 {
-                    Shop_Manager.instance.Shop_Invent();
-                    Shop_Manager.instance.Invent_Shop();
-                    print("판매 성공");
+                    if (Sell_Item(this))
+                    {
+                        Shop_Manager.instance.Shop_Invent();
+                        Shop_Manager.instance.Invent_Shop();
+                        print("판매 성공");
+                    }
                 }
-            }
-            else
-            {
-                click_C = true;
+                else
+                {
+                    click_C = true;
+                }
             }
         }
     }

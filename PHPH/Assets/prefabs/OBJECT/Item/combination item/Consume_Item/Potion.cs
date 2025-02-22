@@ -19,17 +19,17 @@ public class Potion : Item_Info
 
     public void Potion_F()
     {
-        csTable.Instance.gameManager.player.hp += hp_value;
-        csTable.Instance.gameManager.player.stamina += stamina_value;
+        csTable.Instance.gameManager.player.curhp += hp_value;
+        csTable.Instance.gameManager.player.curstamina += stamina_value;
 
-        if (csTable.Instance.gameManager.player.hp >= csTable.Instance.gameManager.player.maxHp)
+        if (csTable.Instance.gameManager.player.curhp >= csTable.Instance.gameManager.player.maxHp)
         {
-            csTable.Instance.gameManager.player.hp = csTable.Instance.gameManager.player.maxHp;
+            csTable.Instance.gameManager.player.curhp = csTable.Instance.gameManager.player.maxHp;
         }
 
-        if(csTable.Instance.gameManager.player.stamina >= csTable.Instance.gameManager.player.maxStamina)
+        if(csTable.Instance.gameManager.player.curstamina >= csTable.Instance.gameManager.player.maxStamina)
         {
-            csTable.Instance.gameManager.player.stamina = csTable.Instance.gameManager.player.maxStamina;
+            csTable.Instance.gameManager.player.curstamina = csTable.Instance.gameManager.player.maxStamina;
         }
 
         colTime = potoin_colTime;
