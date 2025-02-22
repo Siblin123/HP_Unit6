@@ -48,6 +48,7 @@ public class PlayerControl : PlayerStatus
         }
 
         if (IsServer)
+            Shop_Manager.instance.Update_Slot();
             Shop_Manager.instance.List_Bring_ServerRpc();
 
     }
