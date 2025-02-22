@@ -158,6 +158,23 @@ public class Shop_Manager : interaction
         }
     }
 
+    [ServerRpc]
+    public void List_Bring_ServerRpc()
+    {
+        print("서버");
+        List_Bring_ClientRpc();
+    }
+
+    [ClientRpc]
+    public void List_Bring_ClientRpc()
+    {
+        print("클라");
+        for(int i = 0; i < slot_List.Count; i++)
+        {
+            print(slot_List[i].name);
+        }
+    }
+
     public void Update_Slot() // 판매할 아이템 표시
     {
         // 기본 이아팀, 완성 아이템
