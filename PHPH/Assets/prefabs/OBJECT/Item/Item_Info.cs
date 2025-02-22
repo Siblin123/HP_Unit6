@@ -36,11 +36,11 @@ public class Item_Info : NetworkBehaviour
     private void Start()
     {
 
-        if (GetComponent<Rigidbody2D>())
+        /*if (GetComponent<Rigidbody2D>())
         {
             rb = GetComponent<Rigidbody2D>();
             rb.AddForce(new Vector2(0, 2), ForceMode2D.Impulse);
-        }
+        }*/
         f_ItemPos = transform.position;
       
     }
