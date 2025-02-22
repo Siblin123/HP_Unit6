@@ -118,7 +118,6 @@ public class baseStatus : interaction
                     if (networkObjectt != null)
                     {
                         networkObjectt.Spawn(); // 네트워크 객체로 생성
-                        networkObjectt.GetComponent<Item_Info>().have_Count = 1;
                         // 서버에서 AddForce 호출 후 클라이언트 동기화
                         Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
                         ApplyForce_ClientRpc(networkObjectt.NetworkObjectId, force);
@@ -139,7 +138,6 @@ public class baseStatus : interaction
             if (networkObject != null)
             {
                 networkObject.Spawn(); // 네트워크 객체로 생성
-                networkObject.GetComponent<Item_Info>().have_Count = 1;
                 // 서버에서 AddForce 호출 후 클라이언트 동기화
                 Vector2 force = Vector2.up * 5; // 서버에서 정의된 force
                 ApplyForce_ClientRpc(networkObject.NetworkObjectId, force);
@@ -155,8 +153,12 @@ public class baseStatus : interaction
     [ClientRpc]
     public void ApplyForce_ClientRpc(ulong networkObjectId, Vector2 force)
     {
+      
+
         // 네트워크 객체를 클라이언트에서 찾아서 AddForce 적용
         NetworkObject networkObject = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId];
+        networkObject.GetComponent<Item_Info>().have_Count = 1;//아이템 갯수 초기화
+
         if (networkObject != null && networkObject.TryGetComponent<Rigidbody2D>(out var rb))
         {
             rb.AddForce(force, ForceMode2D.Impulse);

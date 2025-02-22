@@ -29,6 +29,7 @@ public class GameManager : NetworkBehaviour
 
     private void Start()
     {
+       
         //Map_Grid의 자식중에 Map_ObjectCreateManager를 찾아서 리스트에 추가
         map_ObjectCreateManagers.AddRange(Map_Grid.GetComponentsInChildren<Map_ObjectCreateManager>());
     }
@@ -53,7 +54,6 @@ public class GameManager : NetworkBehaviour
             if (is_afterNoonNight.Value == 0)
             {
                 is_afterNoonNight.Value = 1;
-                All_Stair_trimEdge_RESET(is_afterNoonNight.Value);
                 ChageSun_ClientRpc();
 
             }
@@ -65,7 +65,6 @@ public class GameManager : NetworkBehaviour
             if (is_afterNoonNight.Value == 1)
             {
                 is_afterNoonNight.Value = 0;
-                All_Stair_trimEdge_RESET(is_afterNoonNight.Value);
                 ChageSun_ClientRpc();
             }
 
@@ -89,13 +88,12 @@ public class GameManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    void ChageSun_ClientRpc()
+    public void ChageSun_ClientRpc()
     {
         StartCoroutine(ChageSun());
     }
     IEnumerator ChageSun()
     {
-
         float transitionTime = 0;
         while (true)
         {
@@ -121,6 +119,8 @@ public class GameManager : NetworkBehaviour
 
     }
 
+
+
     void CheckGameRes()
     {
         //현재 가지고 있는 돈보다 작으면 게임오버
@@ -141,29 +141,6 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    void All_Stair_trimEdge_RESET(int isAfterNoon_Night)//밤낮이 바뀔때 계단의 trimEdge를 초기화
-    {
-        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
-
-        foreach (GameObject wall in walls)
-        {
-            ShadowCaster2D shadowCaster = wall.GetComponent<ShadowCaster2D>();
-            if (shadowCaster != null)
-            {
-
-                if(isAfterNoon_Night==0)
-                {
-                    shadowCaster.trimEdge = 1f;
-                }
-                else if (isAfterNoon_Night == 1)
-                {
-                    shadowCaster.trimEdge = 0f;
-                }
-
-
-               
-            }
-        }
-    }
+   
 
 }
