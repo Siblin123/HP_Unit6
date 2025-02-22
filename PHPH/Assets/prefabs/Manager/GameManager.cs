@@ -76,6 +76,9 @@ public class GameManager : NetworkBehaviour
         {
             CheckGameRes();
 
+            if(IsServer&&(survivalDay.Value % 2==0 || survivalDay.Value ==0))
+                Shop_Manager.instance.Update_Slot();
+
             survivalDay.Value++;
             curTime = 0;
 

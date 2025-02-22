@@ -31,8 +31,6 @@ public class Shop_Manager : interaction
     public TextMeshProUGUI money_T;
     public int money;
 
-    //public GameObject bar_Reset;
-
     // 전부 꺼줄 이미지
     public GameObject price_Ui;
 
@@ -40,6 +38,7 @@ public class Shop_Manager : interaction
     {
         instance = this;
     }
+
     private void Start()
     {
         for (int i = 0; i < shop_Slot_Ob.transform.childCount; i++)
@@ -161,32 +160,19 @@ public class Shop_Manager : interaction
     [ServerRpc]
     public void List_Bring_ServerRpc()
     {
-        if (!IsServer) return;
         print("서버");
-        for (int i = 0; i < slot_List.Count; i++)
-        {
-            if (slot_List[i].item != null)
-            {
-                List_Bring_ClientRpc(slot_List[i].item.id, i);
-            }
-        }
+        List_Bring_ClientRpc();
     }
 
     [ClientRpc]
-    public void List_Bring_ClientRpc(int item_Id, int num)
+    public void List_Bring_ClientRpc()
     {
         print("클라");
-
-        foreach(Item_Info item in csTable.Instance.allItem_List)
+        for(int i = 0; i < slot_List.Count; i++)
         {
-            if(item.id == item_Id)
-            {
-                for(int i = 0; i < slot_List.Count; i++)
-                {
-                    slot_List[num].Update_Slot(item);
-                    break;
-                }
-            }
+            if(slot_List[i].item!=null)
+                print(slot_List[i].item.);
+
         }
     }
 
