@@ -171,7 +171,9 @@ public class Shop_Manager : interaction
         print("Å¬¶ó");
         for(int i = 0; i < slot_List.Count; i++)
         {
-            print(slot_List[i].name);
+            if(slot_List[i].item!=null)
+                print(slot_List[i].item.name);
+
         }
     }
 
