@@ -33,15 +33,12 @@ public class Shop_Slot : NetworkBehaviour
   
     public void buy_Slot() // 아이템 구매
     {
-
-
         // 구매 가능할때
         if (buy_C == false)
         {
             if (csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Buy_Item(item, csTable.Instance.gameManager.player.NetworkObjectId , this.NetworkObjectId))
             {
-                print("111111111111111111111111111111");
-                Shop_Manager.instance.Invent_Shop();
+               
                 buy_C = true;
             }
             else

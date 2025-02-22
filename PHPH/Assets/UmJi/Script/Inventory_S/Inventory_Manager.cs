@@ -79,7 +79,7 @@ public class Inventory_Manager : NetworkBehaviour
             count = item.have_Count;
             item.have_Count = 0; // 다시 0으로 초기화
         }
-        Player_Inventory p_I = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>();
+       Player_Inventory p_I = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>();
 
         int i = 0;
         int j = 0;
@@ -131,6 +131,7 @@ public class Inventory_Manager : NetworkBehaviour
         }
 
         csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+        Shop_Manager.instance.Invent_Shop();
     }
 
     // 아이템 판매
