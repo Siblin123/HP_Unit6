@@ -14522,6 +14522,8 @@ MonoBehaviour:
   all_SpawnMonster:
   - {fileID: 1677662395}
   - {fileID: 1284968520}
+  Map_Grid: {fileID: 0}
+  map_ObjectCreateManagers: []
 --- !u!114 &1792497979
 MonoBehaviour:
   m_ObjectHideFlags: 0

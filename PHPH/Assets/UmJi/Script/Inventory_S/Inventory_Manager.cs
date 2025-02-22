@@ -132,6 +132,8 @@ public class Inventory_Manager : NetworkBehaviour
             print("±×¸¸¸Ô¾î µÅÁö¾ä");
             //return false;
         }
+
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         //return false;
     }
 

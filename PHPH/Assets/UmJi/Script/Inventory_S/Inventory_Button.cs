@@ -9,7 +9,6 @@ public class Inventory_Button : MonoBehaviour
 
     public void Throw_Button() // 아이템 버리기
     {
-
         if (slot != null)
         {
             print("아무거나");
@@ -33,6 +32,7 @@ public class Inventory_Button : MonoBehaviour
             slot.Update_Slot(null, 0);
             slot = null;
             csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
         }
     }
 }
