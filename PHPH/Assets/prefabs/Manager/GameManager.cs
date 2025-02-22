@@ -9,7 +9,7 @@ using static System.TimeZoneInfo;
 public class GameManager : NetworkBehaviour
 {
     public PlayerControl player;
-    public bool isStartGame=false;
+    public bool isStartGame = false;
 
 
     //라이트
@@ -20,7 +20,7 @@ public class GameManager : NetworkBehaviour
     public float daySpeed;//하루 시간의 속도
 
 
-    public  NetworkVariable<int> survivalDay = new NetworkVariable<int>(0);
+    public NetworkVariable<int> survivalDay = new NetworkVariable<int>(0);
     public List<Enemy> all_SpawnMonster;
 
     [Header("작물 및 오브젝트 생성을 위한 변수")]
@@ -35,7 +35,7 @@ public class GameManager : NetworkBehaviour
 
     private void Update()
     {
-        if(isStartGame)
+        if (isStartGame)
         {
             Day();
 
@@ -45,19 +45,19 @@ public class GameManager : NetworkBehaviour
 
     public void Day()
     {
-        if(IsServer)
+        if (IsServer)
             curTime += Time.deltaTime * daySpeed;
 
         if (curTime > 18 && curTime <= 19)
         {
             if (is_afterNoonNight.Value == 0)
             {
-                is_afterNoonNight.Value = 1; 
+                is_afterNoonNight.Value = 1;
                 All_Stair_trimEdge_RESET(is_afterNoonNight.Value);
                 ChageSun_ClientRpc();
 
             }
-               
+
 
         }
         else if (curTime >= 5 && curTime < 6)
@@ -68,15 +68,17 @@ public class GameManager : NetworkBehaviour
                 All_Stair_trimEdge_RESET(is_afterNoonNight.Value);
                 ChageSun_ClientRpc();
             }
-                
-           
+
+
         }
 
         // 하루가 끝나면 초기화
         if (curTime >= 24)
         {
+            CheckGameRes();
+
             survivalDay.Value++;
-            curTime = 0;          
+            curTime = 0;
 
             // 모든 개체에 대해 Create_mapObject() 실행
             foreach (var manager in map_ObjectCreateManagers)
@@ -97,7 +99,7 @@ public class GameManager : NetworkBehaviour
         float transitionTime = 0;
         while (true)
         {
-            transitionTime+=Time.deltaTime;
+            transitionTime += Time.deltaTime;
             yield return new WaitForSeconds(0.02f);
             if (is_afterNoonNight.Value == 0)
             {  // 5시~6시: 점점 밝아짐
@@ -110,16 +112,25 @@ public class GameManager : NetworkBehaviour
                 sun.intensity = Mathf.Lerp(1f, 0.02f, transitionTime);
             }
 
-            if(transitionTime>=1)
+            if (transitionTime >= 1)
             {
                 break;
             }
         }
 
-         
+
     }
 
-    public void SendSound(Vector3 soundPos)
+    void CheckGameRes()
+    {
+        //현재 가지고 있는 돈보다 작으면 게임오버
+
+    }
+
+
+    //=============================================아래 부턴 매니저를 필요로 하는 오브젝트들의 함수=============================================
+
+    public void SendSound(Vector3 soundPos)//사운드를 듣는 모든 몬스터에게 사운드를 전달
     {
         foreach (Enemy enemy in all_SpawnMonster)
         {
