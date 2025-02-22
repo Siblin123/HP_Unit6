@@ -229,6 +229,8 @@ public class PlayerStatus : PlayerGadget
                 if (info.curItemType == itemType.combination_Item_Installable)
                     return;
 
+                if (!transform.GetComponent<Player_Inventory>().Get_Item_OK(info, info.have_Count))
+                    return;
 
                 transform.GetComponent<Player_Inventory>().Get_Item(info, info.have_Count);
 

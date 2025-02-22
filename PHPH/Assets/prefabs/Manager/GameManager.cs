@@ -130,7 +130,7 @@ public class GameManager : NetworkBehaviour
         {
             // 18시~19시: 점점 어두워짐
 
-            sun.intensity = 0.2f;
+            sun.intensity = 0.02f;
         }
     }
 
