@@ -158,6 +158,18 @@ public class Shop_Manager : interaction
         }
     }
 
+    [ServerRpc]
+    public void List_Bring()
+    {
+        List_Bring_ClientRpc();
+    }
+
+    [ClientRpc]
+    public List<Shop_Slot> List_Bring_ClientRpc()
+    {
+        return slot_List;
+    }
+
     public void Update_Slot() // 판매할 아이템 표시
     {
         // 기본 이아팀, 완성 아이템
