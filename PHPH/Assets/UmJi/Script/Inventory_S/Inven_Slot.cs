@@ -17,6 +17,9 @@ public class Inven_Slot : Inventory_Manager
     [Header("장비칸이면 체크")]
     public bool getGet_C; // 장비 인벤토리면 체크
 
+    [Header("창고면 체크")]
+
+
     public Item_Info item; // 소지한 아이템
     public int have_Count; // 소지한 아이템 개수
 
