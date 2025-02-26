@@ -402,8 +402,8 @@ public class PlayerStatus : PlayerGadget
     // 클라이언트에서 호출되는 메서드
     void ChangeAnim(AnimationType newanim)
     {
-        if (!IsOwner)
-            return;
+       /* if (!IsOwner)
+            return;*/
 
         if (IsClient)
         {
@@ -435,8 +435,8 @@ public class PlayerStatus : PlayerGadget
     [ClientRpc]
     public void ChangeAnim_ClientRpc(AnimationType newanim)
     {
-        if (!IsOwner)
-            return;
+       /* if (!IsOwner)
+            return;*/
 
         if (AnimationState == AnimationType.get_damage)
             return;

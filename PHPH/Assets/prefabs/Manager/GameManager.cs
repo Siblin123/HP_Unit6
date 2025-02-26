@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 using Unity.Netcode;
 using System.Collections;
-
+using TMPro;
 using static System.TimeZoneInfo;
 public class GameManager : NetworkBehaviour
 {
@@ -26,6 +26,11 @@ public class GameManager : NetworkBehaviour
     [Header("작물 및 오브젝트 생성을 위한 변수")]
     public GameObject Map_Grid;
     public List<Map_ObjectCreateManager> map_ObjectCreateManagers;
+
+
+    [Header("텍스트 모음")]
+    public TextMeshProUGUI survivalDayText;
+
 
     private void Start()
     {
@@ -95,7 +100,7 @@ public class GameManager : NetworkBehaviour
     {
         StartCoroutine(ChageSun());
     }
-    IEnumerator ChageSun()
+    IEnumerator ChageSun()//다음날이 되는 부분
     {
         float transitionTime = 0;
         while (true)
@@ -105,16 +110,19 @@ public class GameManager : NetworkBehaviour
             if (is_afterNoonNight.Value == 0)
             {  // 5시~6시: 점점 밝아짐
                 sun.intensity = Mathf.Lerp(0.02f, 1f, transitionTime);
+                survivalDayText.gameObject.SetActive(true);
             }
             else
             {
                 // 18시~19시: 점점 어두워짐
 
                 sun.intensity = Mathf.Lerp(1f, 0.02f, transitionTime);
+
             }
 
             if (transitionTime >= 1)
             {
+                survivalDayText.gameObject.SetActive(false);
                 break;
             }
         }

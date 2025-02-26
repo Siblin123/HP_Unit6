@@ -16,7 +16,6 @@ public class Item_Crafting_Data : MonoBehaviour
         public int price;            // 가격
     }
 
-    [SerializeField] private ItemDatabase itemDatabase; // 🔹 ScriptableObject 연결
     [SerializeField] private List<ItemData> itemList = new List<ItemData>(); // 🔹 인스펙터에서 보기
 
     void Start()
