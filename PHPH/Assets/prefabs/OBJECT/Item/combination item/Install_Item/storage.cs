@@ -6,6 +6,28 @@ using System.Collections.Generic;
 public class Storage : Item_Info
 {
     public List<Item_Info> items = new List<Item_Info>();
+    public List<Inven_Slot> slots = new List<Inven_Slot>();
+
+    private void OnEnable()
+    {
+        for(int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+        {
+            //slots[i] = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i];
+            slots[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+        {
+          //  csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i] = slots[i];
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(slots[i].item, slots[i].have_Count);
+        }
+
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void AddItemServerRpc(int id)
