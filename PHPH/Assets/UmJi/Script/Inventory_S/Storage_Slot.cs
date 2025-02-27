@@ -23,8 +23,9 @@ public class Storage_Slot : Inven_Slot
         }
         else
         {
-            AddItemServerRpc(Inventory_Button.slot.item.id);
-            //AddItemServerRpc(item.id);
+            base.Click_Slot();
+
+            AddItemServerRpc(item.id, have_Count);
             transform.parent.root.GetComponent<Storage>().Bring_Slot(1);
         }
 
@@ -37,19 +38,19 @@ public class Storage_Slot : Inven_Slot
 
     // -------------------------- <<동기화 구간>> -----------------------------
     [ServerRpc(RequireOwnership = false)]// 아이템 넣는거
-    public void AddItemServerRpc(int id)
+    public void AddItemServerRpc(int id, int have_Count)
     {
         if (!csTable.Instance.gameManager.player.IsServer)
             return;
         
-        SyncItemsClientRpc(id);
+        SyncItemsClientRpc(id, have_Count);
         Update_ItemUI();
     }
 
     [ClientRpc]
-    private void SyncItemsClientRpc(int id)
+    private void SyncItemsClientRpc(int id, int have_Count)
     {
-        base.Click_Slot();
+        Update_Slot(Find_Item(id), have_Count);
     }
 
 
