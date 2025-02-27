@@ -23,7 +23,8 @@ public class Storage_Slot : Inven_Slot
         }
         else
         {
-            AddItemServerRpc(item.id);
+            AddItemServerRpc(Inventory_Button.slot.item.id);
+            //AddItemServerRpc(item.id);
             transform.parent.root.GetComponent<Storage>().Bring_Slot(1);
         }
 
