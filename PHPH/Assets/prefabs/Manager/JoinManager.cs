@@ -5,6 +5,8 @@ using UnityEngine.Rendering.Universal;
 public class JoinManager : NetworkBehaviour
 {
     public GameObject MainMenuCanvas;
+    public GameObject NetworkSpawnManager;
+
     void Start()
     {
         if (NetworkManager.Singleton != null)
@@ -19,6 +21,7 @@ public class JoinManager : NetworkBehaviour
     {
         Debug.Log($"클라이언트 {clientId} 접속");
         MainMenuCanvas.SetActive(false);
+        NetworkSpawnManager.SetActive(true);
     }
 
 
