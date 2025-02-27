@@ -127,7 +127,7 @@ public class PlayerControl : PlayerStatus
     public void interact_Object()
     {
         // 레이를 쏴서 내 앞에 있는 오브젝트를 찾아줌
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + interactableOffset, rayDirection, 1, interaction_Layer);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + interactableOffset, rayDirection, 0.15f, interaction_Layer);
 
         // 레이가 오브젝트에 맞았는지 확인
         if (hit.collider != null)

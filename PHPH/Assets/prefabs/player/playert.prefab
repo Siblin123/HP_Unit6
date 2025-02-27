@@ -390,6 +390,8 @@ MonoBehaviour:
   slot_Count: 51
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 60569010075508971}
@@ -572,6 +574,8 @@ MonoBehaviour:
   slot_Count: 54
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 8474184271231995797}
@@ -939,7 +943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   test_L:
-  - {fileID: 5670736612730456296, guid: 02d35e875104a264b882b213927f6c3f, type: 3}
+  - {fileID: -8196130251661430372, guid: f56d409cf24a84b4fbd02a8e7d70f848, type: 3}
   - {fileID: -2170975511241727335, guid: 0ac0bf67613057a41a53b75c3ab664ea, type: 3}
   - {fileID: -7575485880243655474, guid: e217eb83ebfb2df48a64020c4e907cb2, type: 3}
   - {fileID: 3343359683763685426, guid: a44d2ce5f735db443a99f22959c4cd78, type: 3}
@@ -1208,6 +1212,8 @@ MonoBehaviour:
   slot_Count: 53
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 7438066125586779870}
@@ -1960,6 +1966,8 @@ MonoBehaviour:
   slot_Count: 49
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 1309006998156770296}
@@ -2873,6 +2881,8 @@ MonoBehaviour:
   slot_Count: 50
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 2540341114490974085}
@@ -3316,6 +3326,8 @@ MonoBehaviour:
   slot_Count: 52
   unRock_C: 0
   getGet_C: 0
+  storage_C: 0
+  follow_Slot: {fileID: 0}
   item: {fileID: 0}
   have_Count: 0
   item_I: {fileID: 1433435598172177116}
