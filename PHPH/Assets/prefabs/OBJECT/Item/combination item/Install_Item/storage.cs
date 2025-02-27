@@ -2,34 +2,79 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
 using System.Collections.Generic;
+using TMPro;
 
 public class Storage : Item_Info
 {
     public List<Item_Info> items = new List<Item_Info>();
-    public List<Inven_Slot> slots = new List<Inven_Slot>();
+    public List<Inven_Slot> slot_List = new List<Inven_Slot>(); // 인벤토리
+
+    public TextMeshProUGUI money_T;
+    public Inven_Slot money_Slot;
+    public int money;
 
     private void OnEnable()
     {
-        for(int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
-        {
-            //slots[i] = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i];
-            slots[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
-        }
+        Bring_Slot(0);
     }
 
     private void OnDisable()
     {
-        for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
-        {
-          //  csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i] = slots[i];
-            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(slots[i].item, slots[i].have_Count);
-        }
-
-        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
-        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+        Bring_Slot(1);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    public void Bring_Slot(int num) // 슬롯 초기화
+    {
+        if(num == 0) // 인벤토리 값 가져오기
+        {
+            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+            {
+                slot_List[i].Update_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].item, csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].have_Count);
+            }
+
+            Money_Slot_Find();
+            money_T.text = money.ToString();
+        }
+        else // 인벤토리에 값 할당하기
+        {
+            for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
+            {
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List[i].Update_Slot(slot_List[i].item, slot_List[i].have_Count);
+            }
+
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Money_Slot_Find();
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+        }
+    }
+    public void Money_Slot_Find()
+    {
+        int i = 0;
+        for (i = 0; i < slot_List.Count; i++)
+        {
+            if (slot_List[i].item != null)
+            {
+                // id가 100은 돈
+                if (slot_List[i].item.id == 0)
+                {
+                    money_Slot = slot_List[i];
+
+                    money = slot_List[i].have_Count;
+
+                    break;
+                }
+            }
+        }
+
+        if (i == slot_List.Count)
+        {
+            money_Slot = null;
+
+            money = 0;
+        }
+        money_T.text = money.ToString("N0");
+    }
+
+    [ServerRpc(RequireOwnership = false)]// 아이템 넣는거
     public void AddItemServerRpc(int id)
     {
         if (!csTable.Instance.gameManager.player.IsServer)
@@ -87,9 +132,6 @@ public class Storage : Item_Info
     }
 
     public override void Update()
-
-
-
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

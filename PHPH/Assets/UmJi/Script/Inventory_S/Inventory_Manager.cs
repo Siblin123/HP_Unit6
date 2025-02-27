@@ -218,9 +218,41 @@ public class Inventory_Manager : NetworkBehaviour
     {
         Inven_Slot temp = new Inven_Slot();
 
-        temp.Update_Slot(slot1.item, slot1.have_Count);
-        slot1.Update_Slot(slot2.item, slot2.have_Count);
-        slot2.Update_Slot(temp.item, temp.have_Count);
+        if (slot1 == slot2) // 제자리 클릭
+        {
+            slot2.Update_Slot(slot1.item, slot1.have_Count);
+        }
+        else // 제자리 클릭 아닐때
+        {
+            if (slot1.item != null && slot2.item != null) 
+            {
+                if (slot1.item.id == slot2.item.id) // 같은 아이템일때
+                {
+                    if (slot2.item.max_Have_Count < slot2.have_Count + slot1.have_Count) // 합치기
+                    {
+                        slot1.Update_Slot(slot1.item, slot1.have_Count + slot2.have_Count - slot1.item.max_Have_Count);
+                        slot2.Update_Slot(slot2.item, slot2.item.max_Have_Count);
+                    }
+                    else
+                    {
+                        slot2.Update_Slot(slot1.item, slot1.have_Count + slot2.have_Count);
+                        slot1.Update_Slot(null, 0);
+                    }
+                }
+                else
+                {
+                    temp.Update_Slot(slot1.item, slot1.have_Count);
+                    slot1.Update_Slot(slot2.item, slot2.have_Count);
+                    slot2.Update_Slot(temp.item, temp.have_Count);
+                }
+            }
+            else
+            {
+                temp.Update_Slot(slot1.item, slot1.have_Count);
+                slot1.Update_Slot(slot2.item, slot2.have_Count);
+                slot2.Update_Slot(temp.item, temp.have_Count);
+            }
+        }
     }
 
     private void Update_Slot(Inven_Slot slot1, Inven_Slot slot2)

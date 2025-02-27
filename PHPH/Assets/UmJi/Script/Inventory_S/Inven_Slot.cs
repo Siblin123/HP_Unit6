@@ -10,7 +10,7 @@ public class Inven_Slot : Inventory_Manager
     [Header("미리 인벤토리는 각 슬롯 번호가 있음")]
     public KeyCode slot_Count;
     // -----------------------------------------------
-
+    
     [Header("잠겨있는 슬롯 사용 불가능 = false")]
     public bool unRock_C;
 
@@ -20,7 +20,8 @@ public class Inven_Slot : Inventory_Manager
     [Header("창고면 체크")]
     public bool storage_C;
     public GameObject follow_Slot;
-    
+    public TextMeshProUGUI money_T;
+
     public Item_Info item; // 소지한 아이템
     public int have_Count; // 소지한 아이템 개수
 
@@ -137,7 +138,7 @@ public class Inven_Slot : Inventory_Manager
     }
 
 
-    public void Click_Slot() // 버튼 클릭했을때
+    public virtual void Click_Slot() // 버튼 클릭했을때
     {
         if (unRock_C) // 잠금이 아니면
         {
@@ -148,17 +149,15 @@ public class Inven_Slot : Inventory_Manager
                 {
                     Inventory_Button.slot = this;
                     csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = this;
+
+                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
+                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+                    
                     if (storage_C)
                     {
                         follow_Slot.GetComponent<Image>().enabled = true;
                         follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
                     }
-                    else
-                    {
-                        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = true;
-                        csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-                    }
-
 
                     if (item_I!=null && count_T!=null)
                     {
@@ -173,15 +172,9 @@ public class Inven_Slot : Inventory_Manager
             {
                 Change_Slot(csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S, this);
                 Inventory_Button.slot = null;
-                if (storage_C)
-                {
+               if (storage_C){ follow_Slot.GetComponent<Image>().enabled = false; }
 
-                    follow_Slot.GetComponent<Image>().enabled = false;
-                }
-                else
-                {
-                    csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
-                }
+                csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Image>().enabled = false;
                 csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().follow_Slot.GetComponent<Inven_Slot>().clikc_S = null;
             }
          
