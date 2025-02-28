@@ -14,6 +14,8 @@ public class Storage : baseStatus
     public Inven_Slot money_Slot;
     public int money;
 
+    public Canvas canvas;
+
     [Header("slot의 부모 넣어주세요 == Slot_List")]
     public GameObject slot_Parent;
 
@@ -28,16 +30,6 @@ public class Storage : baseStatus
         }
     }
 
-    private void OnEnable()
-    {
-        Bring_Slot(0);
-    }
-
-    private void OnDisable()
-    {
-        Bring_Slot(1);
-    }
-
     //UI 활성화
     public override void interact()
     {
@@ -46,10 +38,12 @@ public class Storage : baseStatus
         if (storage_Canvas.GetComponent<Canvas>().enabled == true)
         {
             storage_Canvas.GetComponent<Canvas>().enabled = false;
+            Bring_Slot(1);
         }
         else
         {
-            storage_Canvas.GetComponent<Canvas>().enabled = true; 
+            storage_Canvas.GetComponent<Canvas>().enabled = true;
+            Bring_Slot(0);
         }
 
     }
@@ -166,34 +160,6 @@ public class Storage : baseStatus
 
      public void Update()
      {
-        /*         if (Input.GetKeyDown(KeyCode.Alpha1))
-                 {
-                     if (IsServer)
-                     {
-                         print("S");
-                         AddItemServerRpc(1); 
-                     }
-                     if (!IsServer)
-                     {
-                         print("C");
-                         AddItemServerRpc(2); 
-                     }
-
-                 }
-                 else if (Input.GetKeyDown(KeyCode.Alpha2))
-                 {
-                     if (IsServer)
-                     {
-                         print("SS");
-                         RemoveItemServerRpc(1); 
-                     }
-                     if (!IsServer)
-                     {
-                         print("CC");
-                         RemoveItemServerRpc(2);
-                     }
-                 }*/
-
         if(storage_Canvas.GetComponent<Canvas>().enabled == true)
         {
             //상자와 거리가 멀어지면 UI 비활성화 || ESC 누르면 UI 비활성화
