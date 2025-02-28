@@ -6,7 +6,6 @@ using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.Netcode;
 using Unity.VisualScripting;
-using static UnityEditor.Progress;
 
 public class Inventory_Manager : NetworkBehaviour
 {

@@ -3,7 +3,6 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class All_Memory_Function : Item_Info
 {

@@ -1,7 +1,6 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
 
 public class Item_Info : NetworkBehaviour
 {

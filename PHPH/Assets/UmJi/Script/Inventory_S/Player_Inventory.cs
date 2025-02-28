@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
-using static UnityEditor.Progress;
 using static Arm_Anim;
 using NUnit.Framework.Interfaces;
 
