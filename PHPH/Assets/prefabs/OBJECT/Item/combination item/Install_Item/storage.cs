@@ -3,8 +3,9 @@ using UnityEngine.UI;
 using Unity.Netcode;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 
-public class Storage : Item_Info
+public class Storage : baseStatus
 {
     public List<Item_Info> items = new List<Item_Info>();
     public List<Inven_Slot> slot_List = new List<Inven_Slot>(); // 인벤토리
@@ -12,6 +13,20 @@ public class Storage : Item_Info
     public TextMeshProUGUI money_T;
     public Inven_Slot money_Slot;
     public int money;
+
+    [Header("slot의 부모 넣어주세요 == Slot_List")]
+    public GameObject slot_Parent;
+
+    [Header("UI 캔버스")]
+    public GameObject storage_Canvas;
+
+    public override void Start()
+    {
+        for (int i = 0; i < slot_Parent.transform.childCount; i++)
+        {
+            slot_List.Add(slot_Parent.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }
+    }
 
     private void OnEnable()
     {
@@ -23,8 +38,26 @@ public class Storage : Item_Info
         Bring_Slot(1);
     }
 
+    //UI 활성화
+    public override void interact()
+    {
+        base.interact();
+
+        if (storage_Canvas.GetComponent<Canvas>().enabled == true)
+        {
+            storage_Canvas.GetComponent<Canvas>().enabled = false;
+        }
+        else
+        {
+            storage_Canvas.GetComponent<Canvas>().enabled = true; 
+        }
+
+    }
     public void Bring_Slot(int num) // 슬롯 초기화
     {
+        if (csTable.Instance.gameManager.player == null)
+            return;
+
         if(num == 0) // 인벤토리 값 가져오기
         {
             for (int i = 0; i < csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().slot_List.Count; i++)
@@ -131,35 +164,45 @@ public class Storage : Item_Info
         return null;
     }
 
-    public override void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (IsServer)
-            {
-                print("S");
-                AddItemServerRpc(1); 
-            }
-            if (!IsServer)
-            {
-                print("C");
-                AddItemServerRpc(2); 
-            }
+     public void Update()
+     {
+        /*         if (Input.GetKeyDown(KeyCode.Alpha1))
+                 {
+                     if (IsServer)
+                     {
+                         print("S");
+                         AddItemServerRpc(1); 
+                     }
+                     if (!IsServer)
+                     {
+                         print("C");
+                         AddItemServerRpc(2); 
+                     }
 
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (IsServer)
-            {
-                print("SS");
-                RemoveItemServerRpc(1); 
-            }
-            if (!IsServer)
-            {
-                print("CC");
-                RemoveItemServerRpc(2);
-            }
-        }
+                 }
+                 else if (Input.GetKeyDown(KeyCode.Alpha2))
+                 {
+                     if (IsServer)
+                     {
+                         print("SS");
+                         RemoveItemServerRpc(1); 
+                     }
+                     if (!IsServer)
+                     {
+                         print("CC");
+                         RemoveItemServerRpc(2);
+                     }
+                 }*/
 
+        if(storage_Canvas.GetComponent<Canvas>().enabled == true)
+        {
+            //상자와 거리가 멀어지면 UI 비활성화 || ESC 누르면 UI 비활성화
+            if (Vector2.Distance(transform.position, csTable.Instance.gameManager.player.transform.position) > 2 ||
+                Input.GetKeyDown(KeyCode.Escape))
+            {
+                storage_Canvas.GetComponent<Canvas>().enabled = false;
+            }
+        }
+      
     }
 }

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using TMPro;
 using System.Linq;
 using Unity.Netcode;
-using static UnityEditor.Progress;
 
 public class Shop_Manager : interaction
 {

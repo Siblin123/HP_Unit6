@@ -1,11 +1,8 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 public class Map_stairCreaterManager : NetworkBehaviour
 {
