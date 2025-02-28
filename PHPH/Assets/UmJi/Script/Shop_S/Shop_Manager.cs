@@ -6,6 +6,7 @@ using TMPro;
 using System.Linq;
 using Unity.Netcode;
 
+
 public class Shop_Manager : interaction
 {
     public static Shop_Manager instance;

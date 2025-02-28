@@ -115,7 +115,12 @@ public class Light_Find_Enemy : NetworkBehaviour
         {
             foreach (Enemy e in checkEnemy)
             {
-                e.GetComponent<SpriteRenderer>().enabled = false; // 현재 적 활성화
+                if(e!=null)
+                {
+                    e.GetComponent<SpriteRenderer>().enabled = false; // 현재 적 활성화
+
+                }
+
             }
 
             checkEnemy.Clear();
