@@ -16,7 +16,7 @@ public class Item_Crafting_Data : MonoBehaviour
         public int price;            // 가격
     }
 
-    [SerializeField] private List<ItemData> itemList = new List<ItemData>(); // 🔹 인스펙터에서 보기
+    [SerializeField] public List<ItemData> itemList = new List<ItemData>(); // 🔹 인스펙터에서 보기
 
     void Start()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class interaction : NetworkBehaviour
 {
-    public void Awake()
+    public virtual void Awake()
     {
        
         
