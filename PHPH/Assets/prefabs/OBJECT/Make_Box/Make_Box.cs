@@ -19,6 +19,8 @@ public class Make_Box : baseStatus
     public TextMeshProUGUI item_T;
     public Image item_I;
 
+    //현재 제작중인 아이템
+    
     public override void Awake()
     {
         instance = this;
@@ -116,4 +118,7 @@ public class Make_Box : baseStatus
         base.interact();
         //상호작용을 하면 제작UI 열려야함
     }
+
+    //=====================공용 아이템 제작 함수=====================
+
 }
