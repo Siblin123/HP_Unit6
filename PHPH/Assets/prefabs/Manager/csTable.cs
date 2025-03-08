@@ -8,8 +8,8 @@ public class csTable : MonoBehaviour
     public GameManager gameManager;
     public Transform unitSopn_Pos;
     public Shop_Manager shop_Manager;
-    public NetworkSpawnManager NetworkSpawnManager; 
-
+    public NetworkSpawnManager NetworkSpawnManager;
+    public Item_Crafting_Data Item_Crafting_Data;
 
     public List<Item_Info> allItem_List;
     [HideInInspector]

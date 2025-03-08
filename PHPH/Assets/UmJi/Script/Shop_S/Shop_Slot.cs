@@ -21,14 +21,18 @@ public class Shop_Slot : NetworkBehaviour
         this.item = item;
         item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
         name_T.text = item.item_Name.ToString();
-
-        item_Count = item.max_Have_Count;
-        count_T.text = item.max_Have_Count.ToString();
-
-        price = item_Count * item.price;
-        price_T.text = price.ToString();
+       
+        if(count_T != null) 
+        {
+            item_Count = item.max_Have_Count;
+            count_T.text = item.max_Have_Count.ToString(); 
+        }
+        if(price_T != null)
+        { 
+            price = item_Count * item.price;
+            price_T.text = price.ToString(); 
+        }
     }
-
   
     public void buy_Slot() // 아이템 구매
     {
