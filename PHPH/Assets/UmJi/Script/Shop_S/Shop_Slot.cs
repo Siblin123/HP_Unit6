@@ -13,27 +13,42 @@ public class Shop_Slot : NetworkBehaviour
     public TextMeshProUGUI name_T;
     public TextMeshProUGUI count_T;
     public Image item_I;
-    private int item_Count;
+    public int item_Count;
     private int price;
 
-    public void Update_Slot(Item_Info item)
+    public void Update_Slot(Item_Info item, int count = 0)
     {
-        this.item = item;
-        item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
-        name_T.text = item.item_Name.ToString();
-       
-        if(count_T != null) 
+        if(item == null)
         {
-            item_Count = item.max_Have_Count;
-            count_T.text = item.max_Have_Count.ToString(); 
+            this.item = null;
+            item_Count = 0;
+            price = 0;
         }
-        if(price_T != null)
-        { 
-            price = item_Count * item.price;
-            price_T.text = price.ToString(); 
+        else
+        {
+            this.item = item;
+            item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+            name_T.text = item.item_Name.ToString();
+
+            if (count_T != null)
+            {
+                item_Count = item.max_Have_Count;
+                count_T.text = item.max_Have_Count.ToString();
+            }
+            if (price_T != null)
+            {
+                price = item_Count * item.price;
+                price_T.text = price.ToString();
+            }
+            if (count != 0)
+            {
+                item_Count = count;
+                count_T.text = item_Count.ToString();
+            }
         }
     }
-  
+ 
+
     public void buy_Slot() // 아이템 구매
     {
         // 구매 가능할때
