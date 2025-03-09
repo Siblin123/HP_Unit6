@@ -9,6 +9,7 @@ public class Storage : baseStatus
 {
     public List<Item_Info> items = new List<Item_Info>();
     public List<Inven_Slot> slot_List = new List<Inven_Slot>(); // 인벤토리
+    public List<Storage_Slot> storage_Slot = new List<Storage_Slot>(); // 창고인벤토리
 
     public TextMeshProUGUI money_T;
     public Inven_Slot money_Slot;
@@ -17,7 +18,9 @@ public class Storage : baseStatus
     public Canvas canvas;
 
     [Header("slot의 부모 넣어주세요 == Slot_List")]
-    public GameObject slot_Parent;
+    public GameObject slot_Parent;   
+    [Header("Storage_Slot 부모 넣어주세요 == Stroge_View")]
+    public GameObject storage_Slot_Parent;
 
     [Header("UI 캔버스")]
     public GameObject storage_Canvas;
@@ -27,7 +30,46 @@ public class Storage : baseStatus
         for (int i = 0; i < slot_Parent.transform.childCount; i++)
         {
             slot_List.Add(slot_Parent.transform.GetChild(i).GetComponent<Inven_Slot>());
+        }      
+        
+        for (int i = 0; i < storage_Slot_Parent.transform.childCount; i++)
+        {
+            storage_Slot.Add(storage_Slot_Parent.transform.GetChild(i).GetComponent<Storage_Slot>());
         }
+
+        if (IsServer) // 서버에서만 클라이언트 접속 감지
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
+        }
+    }
+
+    private void OnClientConnected(ulong clientId)
+    {
+        Debug.Log($"클라이언트 {clientId} 접속 감지! 창고 정보 동기화 실행");
+        SetStorageInfo_ServerRpc(); 
+    }
+
+    //새로 들어온 플레이어에게 창고 정보 주기
+    [ServerRpc(RequireOwnership = false)]// 아이템 정보 동기화
+    public void SetStorageInfo_ServerRpc()
+    {
+        for (int i = 0; i < storage_Slot.Count; i++)//서버의 창고 정보를 클라이언트에게 전달
+        {
+            SetStorageInfo_ClientRpc(storage_Slot[i].item.id, slot_List[i].have_Count);
+        }
+        print("ehdrlghk tlfgod~");
+    }
+
+    [ClientRpc]
+    public void SetStorageInfo_ClientRpc(int item_Id,int item_Num)//서버에서 받은 창고의 정보를 
+    {
+        for (int i = 0; i < storage_Slot.Count; i++)//클라이언트 창고에 정보 동기화
+        {
+
+            Item_Info curItem = Find_Item(item_Id);
+            storage_Slot[i].Update_Slot(curItem, item_Num);
+        }
+        print("ehdrlghk tjdrhd!");
     }
 
     //UI 활성화
