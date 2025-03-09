@@ -216,7 +216,7 @@ public class Player_Inventory : Inventory_Manager
         else if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             print("4");
-            Get_Item(test_L[3], 100);
+            Get_Item(test_L[3], 1);
         }
 
 
@@ -306,5 +306,23 @@ public class Player_Inventory : Inventory_Manager
             money = 0;
         }
         money_T.text = money.ToString("N0");
+    }
+
+    public Inven_Slot Find_Item(Item_Info item, int count = 0) // 인벤토리에 아이템이 있는지 확인
+    {
+        for(int i = 0; i < slot_List.Count; i++)
+        {
+            if(slot_List[i].item != null)
+            {
+                if (item.id == slot_List[i].item.id)
+                {
+                    if (slot_List[i].have_Count >= count)
+                    {
+                        return slot_List[i];
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

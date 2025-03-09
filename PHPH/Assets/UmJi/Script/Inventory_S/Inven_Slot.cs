@@ -85,7 +85,7 @@ public class Inven_Slot : Inventory_Manager
 
     public void Update_Slot(Item_Info item, int count) // 슬롯 초기화
     {
-        if (item == null) // 슬롯 초기화
+        if (item == null || count <= 0) // 슬롯 초기화
         {
             this.item = null;
             have_Count = 0;
@@ -97,8 +97,6 @@ public class Inven_Slot : Inventory_Manager
             {
                 item_I.enabled = false;
             }
-
-          
         }
         else
         {
@@ -115,15 +113,12 @@ public class Inven_Slot : Inventory_Manager
                 item_I.enabled = true;
                 item_I.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
             }
-
-          
         }
 
         if (getGet_C)//장비 능력치 적용
         {
             csTable.Instance.gameManager.player.Change_GadgetItem();
         }
-
     }
 
     public void Pluse_Item(int num)

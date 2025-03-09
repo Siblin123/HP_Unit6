@@ -11,7 +11,9 @@ public class Make_Box : baseStatus
 
     [Header("여기부터 시작")]
     public GameObject make_View;
-    public List<GameObject> make_Slot_List;
+    public List<GameObject> Recipe_Slot_List;
+    public List<Make_Slot> make_Slot_List;
+    public Item_Info select_Item;
 
     //재료 이미지
     public List<GameObject> ingredient_List;
@@ -27,7 +29,7 @@ public class Make_Box : baseStatus
 
         for (int i = 0; i < make_View.transform.childCount; i++)
         {
-            make_Slot_List.Add(make_View.transform.GetChild(i).gameObject);
+            Recipe_Slot_List.Add(make_View.transform.GetChild(i).gameObject);
         }
        
     }
@@ -39,21 +41,52 @@ public class Make_Box : baseStatus
         information_T.text = shop_Slot.item.explan;
 
         Item_Crafting_Data data = csTable.Instance.Item_Crafting_Data;
-        for(int i = 0; i < ingredient_List.Count; i++)
+        select_Item = shop_Slot.item;
+
+        for (int i = 0; i < ingredient_List.Count; i++)
         {
+            ingredient_List[i].GetComponent<Shop_Slot>().Update_Slot(null);
+            ingredient_List[i].GetComponent<Shop_Slot>().count_T.color = Color.black;
             ingredient_List[i].SetActive(false);
         }
 
         for (int i = 0; i < data.itemList.Count; i++) // 모든 레시피의 개수
         {
             // 레시피와 지금 내가 가지고 있는 아이템이 같을때 즉 같은 레시피일때
-            if(data.itemList[i].itemName == shop_Slot.item.item_Name)
+            if (data.itemList[i].itemName == shop_Slot.item.item_Name)
             {
                 // 재료 만큼 반복
                 for (int j = 0; j < data.itemList[i].materials.Count; j++)
                 {
-                    ingredient_List[j].SetActive(true);
-                    ingredient_List[j].GetComponent<Shop_Slot>().Update_Slot(Shop_Manager.instance.find_Item(data.itemList[i].materials[j]));
+                    for (int a = 0; a < data.itemList[i].materials.Count; a++)
+                    {
+                        if(ingredient_List[a].activeSelf == false)
+                        {
+                            ingredient_List[a].SetActive(true);
+                            ingredient_List[a].GetComponent<Shop_Slot>().Update_Slot(Shop_Manager.instance.find_Item(data.itemList[i].materials[j]), 1);
+
+                            if (!csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Find_Item(Shop_Manager.instance.find_Item(data.itemList[i].materials[j]), 1))
+                            {
+                                ingredient_List[a].GetComponent<Shop_Slot>().count_T.color = Color.red;
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            if (ingredient_List[a].GetComponent<Shop_Slot>().item.item_Name == data.itemList[i].materials[j])
+                            {
+                                ingredient_List[a].GetComponent<Shop_Slot>().Update_Slot(Shop_Manager.instance.find_Item(data.itemList[i].materials[j]), ++ingredient_List[a].GetComponent<Shop_Slot>().item_Count);
+
+                              
+                                if(!csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Find_Item(Shop_Manager.instance.find_Item(data.itemList[i].materials[j]), ingredient_List[a].GetComponent<Shop_Slot>().item_Count))
+                                {
+                                    ingredient_List[a].GetComponent<Shop_Slot>().count_T.color = Color.red;
+                                }
+
+                                break;
+                            }
+                        }
+                    }
                 }
                 break;
             }
@@ -89,11 +122,11 @@ public class Make_Box : baseStatus
     public void Setting(int num)
     {
         // 초기화
-        for (int i = 0; i < make_Slot_List.Count; i++)
-            make_Slot_List[i].SetActive(false);
+        for (int i = 0; i < Recipe_Slot_List.Count; i++)
+            Recipe_Slot_List[i].SetActive(false);
 
         int j = -1;
-        for (int i = 0; i < make_Slot_List.Count; i++)
+        for (int i = 0; i < Recipe_Slot_List.Count; i++)
         {
             // 값 할당
             for (; j < csTable.Instance.Item_Crafting_Data.itemList.Count -1;)
@@ -104,14 +137,62 @@ public class Make_Box : baseStatus
                     Item_Info curItem = Shop_Manager.instance.find_Item(csTable.Instance.Item_Crafting_Data.itemList[j].itemName);
                     if (curItem != null)
                     {
-                        make_Slot_List[i].SetActive(true);
-                        make_Slot_List[i].GetComponent<Shop_Slot>().Update_Slot(curItem);
+                        Recipe_Slot_List[i].SetActive(true);
+                        Recipe_Slot_List[i].GetComponent<Shop_Slot>().Update_Slot(curItem);
                         break;
                     }
                 }
             }
         }
     }
+
+    public void Make_Button()
+    {
+        int i = 0;
+        for (; i < ingredient_List.Count; i++)
+        {
+            if (ingredient_List[i].activeSelf != false)
+            {
+                if (!csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Find_Item(ingredient_List[i].GetComponent<Shop_Slot>().item, ingredient_List[i].GetComponent<Shop_Slot>().item_Count))
+                {
+                    print("너님 재료 없어요");
+                    break;
+                }
+            }
+        }
+
+        if (i == ingredient_List.Count)
+        {
+            for (int j = 0; j < ingredient_List.Count; j++)
+            {
+                if (ingredient_List[j].activeSelf != false)
+                {
+                    Inven_Slot slot = csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Find_Item(ingredient_List[j].GetComponent<Shop_Slot>().item, ingredient_List[j].GetComponent<Shop_Slot>().item_Count);
+                    if (slot != null)
+                    {
+                        slot.Update_Slot(ingredient_List[j].GetComponent<Shop_Slot>().item, slot.have_Count - ingredient_List[j].GetComponent<Shop_Slot>().item_Count);
+
+                        if (!csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Find_Item(ingredient_List[j].GetComponent<Shop_Slot>().item, ingredient_List[j].GetComponent<Shop_Slot>().item_Count))
+                        {
+                            ingredient_List[j].GetComponent<Shop_Slot>().count_T.color = Color.red;
+                        }
+                    }
+                }
+            }
+            csTable.Instance.gameManager.player.GetComponent<Player_Inventory>().Miri_Inven_Update();
+
+            // 비어있는 제작 슬롯에 할당
+            for (int j = 0; j < make_Slot_List.Count; j++)
+            {
+                if (make_Slot_List[j].item == null)
+                {
+                    make_Slot_List[j].Update_Slot(select_Item);
+                    break;
+                }
+            }
+        }
+    }
+    
 
     public override void interact()
     {
