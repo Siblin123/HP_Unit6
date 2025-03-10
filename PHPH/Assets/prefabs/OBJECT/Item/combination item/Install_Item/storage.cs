@@ -4,6 +4,7 @@ using Unity.Netcode;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using NPOI.OpenXmlFormats.Spreadsheet;
 
 public class Storage : baseStatus
 {
@@ -27,26 +28,21 @@ public class Storage : baseStatus
 
     public override void Start()
     {
+        csTable.Instance.installed_Storage.Add(this);
+
         for (int i = 0; i < slot_Parent.transform.childCount; i++)
         {
             slot_List.Add(slot_Parent.transform.GetChild(i).GetComponent<Inven_Slot>());
-        }      
-        
+        }
+
         for (int i = 0; i < storage_Slot_Parent.transform.childCount; i++)
         {
             storage_Slot.Add(storage_Slot_Parent.transform.GetChild(i).GetComponent<Storage_Slot>());
         }
 
-        if (IsServer) // 서버에서만 클라이언트 접속 감지
-        {
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
-        }
-    }
 
-    private void OnClientConnected(ulong clientId)
-    {
-        Debug.Log($"클라이언트 {clientId} 접속 감지! 창고 정보 동기화 실행");
-        SetStorageInfo_ServerRpc(); 
+    
+
     }
 
     //새로 들어온 플레이어에게 창고 정보 주기
@@ -55,19 +51,25 @@ public class Storage : baseStatus
     {
         for (int i = 0; i < storage_Slot.Count; i++)//서버의 창고 정보를 클라이언트에게 전달
         {
-            SetStorageInfo_ClientRpc(storage_Slot[i].item.id, slot_List[i].have_Count);
+            if (storage_Slot[i].item!=null)
+                SetStorageInfo_ClientRpc(storage_Slot[i].item.id, storage_Slot[i].have_Count,i);
+            else
+                SetStorageInfo_ClientRpc(-99, storage_Slot[i].have_Count, i);
         }
         print("ehdrlghk tlfgod~");
     }
 
     [ClientRpc]
-    public void SetStorageInfo_ClientRpc(int item_Id,int item_Num)//서버에서 받은 창고의 정보를 
+    public void SetStorageInfo_ClientRpc(int item_Id, int item_Num, int cur_i)//서버에서 받은 창고의 정보를 
     {
-        for (int i = 0; i < storage_Slot.Count; i++)//클라이언트 창고에 정보 동기화
+        if (item_Id == -99)
         {
-
+            storage_Slot[cur_i].Update_Slot(null, 0);
+        }
+        else
+        {
             Item_Info curItem = Find_Item(item_Id);
-            storage_Slot[i].Update_Slot(curItem, item_Num);
+            storage_Slot[cur_i].Update_Slot(curItem, item_Num);
         }
         print("ehdrlghk tjdrhd!");
     }
@@ -201,8 +203,8 @@ public class Storage : baseStatus
     }
 
      public void Update()
-     {
-        if(storage_Canvas.GetComponent<Canvas>().enabled == true)
+    {
+        if (storage_Canvas.GetComponent<Canvas>().enabled == true)
         {
             //상자와 거리가 멀어지면 UI 비활성화 || ESC 누르면 UI 비활성화
             if (Vector2.Distance(transform.position, csTable.Instance.gameManager.player.transform.position) > 2 ||
@@ -211,6 +213,12 @@ public class Storage : baseStatus
                 storage_Canvas.GetComponent<Canvas>().enabled = false;
             }
         }
-      
+
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetStorageInfo_ServerRpc();
+        }
+
     }
 }

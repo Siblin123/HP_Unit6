@@ -14,6 +14,8 @@ public class csTable : MonoBehaviour
     public List<Item_Info> allItem_List;
     [HideInInspector]
     public Player_Inventory Player_Inventory;
+
+    public List<Storage> installed_Storage; 
     private void Awake()
     {
         Instance = this;
